@@ -1,0 +1,89 @@
+[
+  {
+    "label": "Electronics",
+    "children": [
+      {
+        "label": "Mobiles",
+        "children": [
+          {
+            "label": "Samsung"
+          },
+          {
+            "label": "Apple"
+          },
+          {
+            "label": "Motorola"
+          }
+        ]
+      },
+      {
+        "label": "Air Conditioners",
+        "children": [
+          {
+            "label": "Voltas"
+          },
+          {
+            "label": "Carrier"
+          }
+        ]
+      },
+      {
+        "label": "Justice",
+        "children": [
+          {
+            "label": "Baylor University"
+          },
+          {
+            "label": "Massachusetts College of Art"
+          },
+          {
+            "label": "Universidad Técnica Latinoamericana"
+          },
+          {
+            "label": "Saint Louis College"
+          },
+          {
+            "label": "Scott Christian University"
+          }
+        ]
+      },
+      {
+        "label": "Utilization Review",
+        "children": [
+          {
+            "label": "University of Minnesota - Twin Cities Campus"
+          },
+          {
+            "label": "Moldova State Agricultural University"
+          },
+          {
+            "label": "Andrews University"
+          },
+          {
+            "label": "Usmanu Danfodiyo University Sokoto"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Footwear",
+    "children": [
+      {
+        "label": "Sports",
+        "children": [
+          {
+            "label": "Nike"
+          },
+          {
+            "label": "Bata"
+          }      
+        ]
+      },
+      {
+        "label": "Casual"
+      }
+    
+    ]
+  }
+]
