@@ -23,7 +23,7 @@ class AddProduct extends Component{
             imageurl:"",
             Brand:"",
             image:null,
-            
+            producturl:""
         }
     }
 
@@ -35,7 +35,7 @@ class AddProduct extends Component{
     onSubmit=(e)=>{
         console.log("hogya submit re")
         e.preventDefault();
-        const {Name, Description, Expiry, Price, Category, Brand,Offer,imageurl}=this.state;
+        const {Name, Description, Expiry, Price, Category, Brand,Offer,imageurl,producturl}=this.state;
         this.ref.add({
             Name,
             Brand,
@@ -45,6 +45,7 @@ class AddProduct extends Component{
             Category,
             Offer,
             imageurl,
+            producturl,
         }).then((docRef)=>{
             this.setState({
             Name:'',
@@ -55,6 +56,7 @@ class AddProduct extends Component{
             Category:"",
             Offer:"",
             imageurl:"",
+            producturl:"",
 
         });
         this.props.history.push("/productownerhome")
@@ -93,7 +95,7 @@ class AddProduct extends Component{
 
 
     render(){
-        const {Name, Description, Expiry, Price, Category,Brand, Offer}=this.state;
+        const {Name, Description, Expiry, Price, Category,Brand, Offer, producturl}=this.state;
         
         const divStyle = {
             margin: '40px'
@@ -156,9 +158,17 @@ class AddProduct extends Component{
                     </div>
                     <div>
                         <div class="form-group row"></div>
-                        {/* <label for="Category">Category</label> */}
+                        {/* <label for="Offer">Offer</label> */}
                         <div class="col-sm-9">
                         <textArea class="form-control" name="Offer" onChange={this.onChange} placeholder="Offer">{Offer}</textArea>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-group row"></div>
+                        {/* <label for="producturl">producturl</label> */}
+                        <div class="col-sm-9">
+                        <textArea class="form-control" name="producturl" onChange={this.onChange} placeholder="URL to buy this product">{producturl}</textArea>
                         </div>
                     </div>
 

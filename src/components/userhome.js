@@ -1,6 +1,6 @@
 
 import React,{Component} from 'react';
-import Sidebar from "./sidebar.js"
+// import Sidebar from "./sidebar.js"
 import firebase from "./Config";
 import history from './../history';
 
@@ -71,7 +71,7 @@ class userhome extends Component{
 		const offers=[];
 
 		querySnapshot.forEach((doc)=>{
-			const {Name, Description, Price, Expiry, category, Offer,imageurl}=doc.data();
+			const {Name, Description, Price, Expiry, category, Offer,imageurl, producturl}=doc.data();
 			offers.push({
 				key:doc.id,
 				doc,
@@ -82,6 +82,7 @@ class userhome extends Component{
 				Expiry,
 				Offer,
 				imageurl,
+				producturl,
 				
 			});
 		});
@@ -166,11 +167,11 @@ class userhome extends Component{
 							<div className="card-post__author d-flex">
 								<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
 						Offer: {offer.Offer} </a>
-						<div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{offer.Price}</span><small className="text-muted"> Offer expires {offer.Expiry}</small></div></div><div className="my-auto ml-auto"><button className="btn btn-white btn-sm"><i className="far fa-bookmark mr-1"></i> Save</button></div></div></div>
+						<div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{offer.Price}</span><small className="text-muted"> Offer expires {offer.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={offer.producturl}> BUY NOW</a></div></div></div>
 					)
 				}
 	</div>
-	<Sidebar/>
+	{/* <Sidebar/> */}
 
 	  </div>
 
