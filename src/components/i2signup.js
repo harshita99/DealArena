@@ -15,61 +15,76 @@ class i2signup extends Component{
     }
   }
 
-
-
   onInput=(e)=>{
     const state=this.state;
     state[e.target.name]=e.target.value;
     this.setState(state);
   }
-
-  
+ 
   onSubmit=(e)=>{
-
     
     const name=document.getElementById("name").value
     const brand=document.getElementById("brand").value
 
+    const email = this.state.Email;
+    const password = this.state.Password;
     e.preventDefault();
-    const { Name,Email,Password,BrandName }=this.state;
-    this.ref.add({
-      Name,Email,Password,BrandName
-    }).then((docRef)=>{
-        this.setState({
+    // const { Name,Email,Password,BrandName }=this.state;
+
+    // this.ref.add({
+    //   Name,Email,Password,BrandName
+    // }).then((docRef)=>{
+    //     this.setState({
         
-          Name:"",
-          Email:"",
-          Password:"",
-          BrandName:""
+    //       Name:"",
+    //       Email:"",
+    //       Password:"",
+    //       BrandName:""
 
-    });
-      console.log("success");
-    })
-    .catch((error)=>{
-      console.error("Error adding document:",error);
-    });
-    firebase.auth().createUserWithEmailAndPassword(this.state.Email,this.state.Password).then((u)=>{
+    // });
+    //   console.log("success");
+    // })
+    // .catch((error)=>{
+    //   console.error("Error adding document:",error);
+    // });
 
-      if (firebase.auth().currentUser){
-        firebase.firestore().collection("productOwnerDetails").doc(firebase.auth().currentUser.uid).set({
-          name:name,
-          brand:brand,
-        });
-        history.push("/productownerhome");
-
+    firebase.firestore().collection("productOwnerDetails").where("BrandName","==",this.state.BrandName)
+    .get()
+    .then(function(querySnapshot){ 
+      if(querySnapshot.docs.length>0){
+        console.log("old");
+        alert('Brand already exists!');
+        return;
       }
-
-
-
-
-
-      }).catch((err)=>{
-      console.log(err);
+      else{
+        console.log("new");
+        firebase.firestore().collection("productOwnerDetails").add({
+          Name:name,
+          Email:email,
+          Password:password,
+          BrandName:brand
+        });
+        firebase.auth().createUserWithEmailAndPassword(email,password).then((u)=>{
+          if (firebase.auth().currentUser){
+            firebase.firestore().collection("productOwnerDetails").doc(firebase.auth().currentUser.uid).set({
+              name:name,
+              brand:brand,
+            });
+            history.push("/productownerhome");
+          }
+          else{
+            console.log("helllooooo");
+          }
+        })
+        .catch((err)=>{
+          console.log(err);
+        }); 
+      }
     })
-
-    history.push("/productownerhome");
-
-
+    .catch(function(error){
+      console.log("error getting documents:", error);
+    })
+    // history.push("/productownerhome");
   }
     render(){
         return(

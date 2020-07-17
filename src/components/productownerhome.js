@@ -38,7 +38,7 @@ class productownerhome extends Component{
 				})
 				.catch(function(error){
 				  console.log("Error getting document:", error);
-				  console.log(productowner.id)
+				  console.log(productowner.uid)
 				})
 			}
 		}
@@ -86,15 +86,13 @@ class productownerhome extends Component{
 			console.log("Successfully logged out");
 			history.push("/");
 		}
-
-
 	}
 
 	logout(){
 		firebase.auth().signOut()
 		.then(function(){
 			localStorage.removeItem('usersession');
-			console.log("zzzzzzzzz");
+			console.log("successfully logged out");
 			history.push("/");
 		})
 		.catch(function(error){

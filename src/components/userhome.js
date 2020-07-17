@@ -3,14 +3,18 @@ import React,{Component} from 'react';
 // import Sidebar from "./sidebar.js"
 import firebase from "./Config";
 import history from './../history';
+import TreeCheck from './treecheck';
 
 
-var db=firebase.firestore()
+const offers=[];
+const offersand=[];
+
+// var db=firebase.firestore()
 class userhome extends Component{
 	
 	constructor(props){
 		super(props);
-		this.ref=db.collection("offerDetails")
+		// this.ref=db.collection("offerDetails")
 		this.unsubscribe=null;
 		this.state={
 			offers:[],
@@ -28,7 +32,7 @@ class userhome extends Component{
 		  .get()
 		  .then((querySnapshot) => {
 			const data = querySnapshot.docs.map((doc) => doc.data());
-			this.setState({ offers: data }); // array 
+			this.setState({ offers: data });
 		  })
 		  .catch((err) => console.log(err));
 
@@ -40,23 +44,29 @@ class userhome extends Component{
 				.get()
 				.then((doc)=> {
 				  console.log("Document data:", doc.data().name);
-				  console.log("Document data:", doc.data().interests[0],doc.data().interests[1],doc.data().interests[2]);
-				  document.getElementById("username").innerHTML = doc.data().name ;
-				  document.getElementById("interest1").innerHTML = doc.data().interests[0] ;
-				  document.getElementById("interest2").innerHTML = doc.data().interests[1] ;
-				  document.getElementById("interest3").innerHTML = doc.data().interests[2] ;
-				  this.setState({interest1 : doc.data().interests[0]})
-				  this.setState({interest2 : doc.data().interests[1]})
-				  this.setState({interest3 : doc.data().interests[2]})
+				  console.log("Document data:", doc.data().interests);
+				//   console.log("Document data:", doc.data().interests[0],doc.data().interests[1],doc.data().interests[2]);
+				  document.getElementById("username").innerHTML = doc.data().name ;				  
+				  document.getElementById("interest1").innerHTML = doc.data().interests ;
+				//   document.getElementById("interest1").innerHTML = doc.data().interests[0] ;
+				//   document.getElementById("interest2").innerHTML = doc.data().interests[1] ;
+				//   document.getElementById("interest3").innerHTML = doc.data().interests[2] ;
+				  this.setState({interests : doc.data().interests})
+				//   this.setState({interest1 : doc.data().interests[0]})
+				//   this.setState({interest2 : doc.data().interests[1]})
+				//   this.setState({interest3 : doc.data().interests[2]})
 
-
-
-				  // Getting value from firebase
 				}).then(()=>{
-					this.ref=firebase.firestore().collection("offerDetails").where("Category","in",[this.state.interest1,this.state.interest2,this.state.interest3]);
+					// this.ref=firebase.firestore().collection("offerDetails").where("Category","in",[this.state.interest1,this.state.interest2,this.state.interest3]);
+					this.ref1=firebase.firestore().collection("offerDetails").where("Brand","in",this.state.interests);
+					this.ref1.onSnapshot(this.onCollectionUpdate);
+
+					this.ref=firebase.firestore().collection("offerDetails").where("Category","in",this.state.interests);
+					console.log(this.state.interests);
+					
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-
-
+					this.ref2=firebase.firestore().collection("offerDetails").where("Category","in",this.state.interests).where("Brand","in",this.state.interests);
+					this.ref1.onSnapshot(this.onCollectionUpdate2);
 				})
 				.catch(function(error) {
 				
@@ -67,8 +77,33 @@ class userhome extends Component{
 				})
 			}})
 	}
+
+	onCollectionUpdate2=(querySnapshot)=>{
+		querySnapshot.forEach((doc)=>{
+			const {Name, Description, Price, Expiry, category, Offer,imageurl, producturl}=doc.data();
+			offersand.push({
+				key:doc.id,
+				doc,
+				Name,
+				Description,
+				Price,
+				category,
+				Expiry,
+				Offer,
+				imageurl,
+				producturl,
+				
+			});
+		});
+
+		this.setState({offersand});
+		this.setState({offers: this.state.offers-this.state.offersand});
+
+		console.log(this.state.offers);
+	}
+
 	onCollectionUpdate=(querySnapshot)=>{
-		const offers=[];
+		// const offers=[];
 
 		querySnapshot.forEach((doc)=>{
 			const {Name, Description, Price, Expiry, category, Offer,imageurl, producturl}=doc.data();
@@ -88,6 +123,7 @@ class userhome extends Component{
 		});
 
 		this.setState({offers});
+		console.log(this.state.offers);
 	}
 
 	checkAuth(){
@@ -133,12 +169,11 @@ class userhome extends Component{
 
 			  <p>Your interests:</p>
 			  <p id="interest1"></p>
-			  <p id="interest2"></p>
-			  <p id="interest3"></p>
+			  {/* <p id="interest2"></p>
+			  <p id="interest3"></p> */}
 
-
+				{<TreeCheck />}
             
-
 				<button onClick={this.logout} class="mb-2 btn btn-outline-primary btn-sm btn-pill">
                    <i class="material-icons mr-1">LogOut</i> </button>
                    
