@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import 'antd/dist/antd.css';
 import { TreeSelect } from 'antd';
 import firebase from "./Config";
@@ -8,72 +8,92 @@ import firebase from "./Config";
 const { SHOW_PARENT } = TreeSelect;
 
 const treeData = [
-    {
-      title: "Electronics",
-      value: "Electronics",
-      key: "0-0",
-      children: [
-        {
-          title: "Mobile",
-          value: "Mobile",
-          key: "0-0-0",
-          children: [
-            { title: "Samsung", value: "Samsung", key: "0-0-0-0" },
-            { title: "Apple", value: "Apple", key: "0-0-0-1" }
-          ]
-        }
-      ]
-    },
-    {
-      title: "Flights",
-      value: "Flights",
-      key: "0-1",
-      children: [
-        {
-          title: "Indigo",
-          value: "Indigo",
-          key: "0-1-0"
-        }
-      ]
-    },
-    {
-      title: "Footwear",
-      value: "Footwear",
-      key: "0-2",
-      children: [
-        {
-          title: "Bata",
-          value: "Bata",
-          key: "0-2-0"
-        },
-        {
-          title: "Adidas",
-          value: "Adidas",
-          key: "0-2-1"
-        },
-        {
-          title: "Nike",
-          value: "Nike",
-          key: "0-2-2"
-        }
-      ]
-    }
-  ];
+  {
+    title: "Electronics",
+    value: "Electronics",
+    children: [
+      {
+        title: "Apple",
+        value: "Apple",
+        children: [
+          { title: "Laptops", value: "Laptops" },
+          { title: "Earphones", value: "Earphones" }
+        ]
+      },
+      {
+        title: "Samsung",
+        value: "Samsung",
+        
+        children: [
+          { title: "Mobiles", value: "Mobiles"},
+          { title: "AirConditioner", value: "AirConditioner" }
+        ]
+      },
+    ]
+  },
+  {
+    title: "Flights",
+    value: "Flights",
+    children: [
+      {
+        title: "Indigo",
+        value: "Indigo",
+        children: [
+          { title: "DEL-BLR Flights", value: "DEL-BLR Flights"},
+          { title: "DEL-MUM Flights", value: "DEL-MUM Flights" }
+        ]
+      },
+      {
+        title: "Spicejet",
+        value: "Spicejet",
+      }
+    ]
+  },
+  {
+    title: "Footwear",
+    value: "Footwear",
+    children: [
+      {
+        title: "Bata",
+        value: "Bata",
+        children: [
+          {
+            title: "FormalFootwear",
+            value: "FormalFootwear",
+          },
+          {
+            title: "CasualFootwear",
+            value: "CasualFootwear",
+          }
+        ]
+      },
+      {
+        title: "Adidas",
+        value: "Adidas",
+        children: [
+          {
+            title: "SportsFootwear",
+            value: "SportsFootwear",
+          }
+        ]
+      }
+    ]
+  }
+];
   
 
-export default class TreeCheck extends React.Component {
+class TreeCheck extends Component {
 
-  state = {
-    value: [],
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+       value:[] ,
+    };
+  }
 
   saveButton=value=>{
-
-    window.location.reload(true); 
-
- 
-    
-    }
+    window.location.reload(true);   
+  }
 
 
   onChange = value => {
@@ -83,14 +103,15 @@ export default class TreeCheck extends React.Component {
     if (firebase.auth().currentUser){
         firebase.firestore().collection("userDetails").doc(firebase.auth().currentUser.uid).update({
           interests: value
-        }
-    
-        )};
-
-
+        })
+    }
   };
   
-
+  componentDidUpdate(prev){
+    if (this.props.propinterest !== prev.propinterest) {
+      this.setState({value: this.props.propinterest})
+    }
+  }
 
   render() {
     const tProps = {
@@ -99,19 +120,21 @@ export default class TreeCheck extends React.Component {
       onChange: this.onChange,
       treeCheckable: true,
       showCheckedStrategy: SHOW_PARENT,
+      defaultChecked:"Footwear",
       placeholder: 'Please select your interests',
       style: {
         width: "80%"
-      }
-     
+      }    
     };
     return( 
-        <div>
-            <TreeSelect {...tProps} />
-            <button onClick={this.saveButton} class="mb-2 btn btn-outline-primary btn-sm btn-pill">
-                   <i class="material-icons mr-1">Save</i> </button>
-        </div>
+      <div>
+        <TreeSelect {...tProps} />
+        <button onClick={this.saveButton} class="mb-2 btn btn-outline-primary btn-sm btn-pill">
+          <i class="material-icons mr-1">Save</i> 
+        </button>
+      </div>
     )
-    }
+  }
 }
 
+export default TreeCheck;

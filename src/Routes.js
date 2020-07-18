@@ -10,6 +10,8 @@ import i2form from "./components/i2form";
 import userhome from "./components/userhome";
 import productownerhome from "./components/productownerhome";
 import addoffer from "./components/AddOffer";
+import addproduct from "./components/AddProduct";
+import showproduct from "./components/ShowProduct";
 import updateoffer from "./components/UpdateOffer";
 
 import history from './history';
@@ -28,6 +30,8 @@ export default class Routes extends Component {
                     <Route path="/userhome" component={userhome}/>
                     <Route path="/productownerhome" component={productownerhome}/>
                     <Route path="/addoffer" component={addoffer}/>
+                    <Route path="/addproduct" component={addproduct}/>                  
+                    <Route path="/showproduct" component={showproduct}/>
                     <Route path="/updateoffer" component={updateoffer}/>
                 </Switch>
             </Router>

@@ -32,8 +32,6 @@ class productownerhome extends Component{
 				}).then((doc)=>{
 					this.ref=firebase.firestore().collection("offerDetails").where("Brand","==",this.state.brand);
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-
-
 				})
 				.catch(function(error){
 				  console.log("Error getting document:", error);
@@ -133,6 +131,8 @@ render() {
 				   <i className="material-icons mr-1">Add offer</i> </button>
 				   <button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
 				   <i className="material-icons mr-1">Add product</i> </button>	
+				   <button onClick={() => history.push('/showproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+				   <i className="material-icons mr-1">Show products</i> </button>	
 				</div>
 
 				   <button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">

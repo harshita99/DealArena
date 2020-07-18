@@ -1,20 +1,16 @@
-
 import React,{Component} from 'react';
 // import Sidebar from "./sidebar.js"
 import firebase from "./Config";
 import history from './../history';
 import TreeCheck from './treecheck';
 
-
 const offers=[];
-const offersand=[];
+// const offersand=[];
 
-// var db=firebase.firestore()
 class userhome extends Component{
 	
 	constructor(props){
 		super(props);
-		// this.ref=db.collection("offerDetails")
 		this.unsubscribe=null;
 		this.state={
 			offers:[],
@@ -23,18 +19,18 @@ class userhome extends Component{
   
 	componentDidMount(){
 		this.checkAuth();
-		const params = new URLSearchParams(this.props.location.search);
+		// const params = new URLSearchParams(this.props.location.search);
 
-		const category = params.get("category");
-		var offers = firebase.firestore().collection("offerDetails");
-		if (category) offers = offers.where("Category", "==", category);
-		offers
-		  .get()
-		  .then((querySnapshot) => {
-			const data = querySnapshot.docs.map((doc) => doc.data());
-			this.setState({ offers: data });
-		  })
-		  .catch((err) => console.log(err));
+		// const category = params.get("category");
+		// var offers = firebase.firestore().collection("offerDetails");
+		// if (category) offers = offers.where("Category", "==", category);
+		// offers
+		//   .get()
+		//   .then((querySnapshot) => {
+		// 	const data = querySnapshot.docs.map((doc) => doc.data());
+		// 	this.setState({ offers: data });
+		//   })
+		//   .catch((err) => console.log(err));
 
 
 		  firebase.auth().onAuthStateChanged((user)=> {
@@ -61,46 +57,49 @@ class userhome extends Component{
 					this.ref1=firebase.firestore().collection("offerDetails").where("Brand","in",this.state.interests);
 					this.ref1.onSnapshot(this.onCollectionUpdate);
 
+					this.ref2=firebase.firestore().collection("offerDetails").where("SubCategory","in",this.state.interests);
+					this.ref2.onSnapshot(this.onCollectionUpdate);
+
 					this.ref=firebase.firestore().collection("offerDetails").where("Category","in",this.state.interests);
-					console.log(this.state.interests);
+					// console.log(this.state.interests);
 					
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-					this.ref2=firebase.firestore().collection("offerDetails").where("Category","in",this.state.interests).where("Brand","in",this.state.interests);
-					this.ref1.onSnapshot(this.onCollectionUpdate2);
+					// this.ref2=firebase.firestore().collection("offerDetails").where("Category","in",this.state.interests).where("Brand","in",this.state.interests);
+					// this.ref1.onSnapshot(this.onCollectionUpdate2);
 				})
 				.catch(function(error) {
 				
 					history.push("/userhome");
 
 				  console.log("Error getting document:", error);
-				  console.log(user.id)
+				  console.log(user.uid)
 				})
 			}})
 	}
 
-	onCollectionUpdate2=(querySnapshot)=>{
-		querySnapshot.forEach((doc)=>{
-			const {Name, Description, Price, Expiry, category, Offer,imageurl, producturl}=doc.data();
-			offersand.push({
-				key:doc.id,
-				doc,
-				Name,
-				Description,
-				Price,
-				category,
-				Expiry,
-				Offer,
-				imageurl,
-				producturl,
+	// onCollectionUpdate2=(querySnapshot)=>{
+	// 	querySnapshot.forEach((doc)=>{
+	// 		const {Name, Description, Price, Expiry, category, Offer,imageurl, producturl}=doc.data();
+	// 		offersand.push({
+	// 			key:doc.id,
+	// 			doc,
+	// 			Name,
+	// 			Description,
+	// 			Price,
+	// 			category,
+	// 			Expiry,
+	// 			Offer,
+	// 			imageurl,
+	// 			producturl,
 				
-			});
-		});
+	// 		});
+	// 	});
 
-		this.setState({offersand});
-		this.setState({offers: this.state.offers-this.state.offersand});
+	// 	this.setState({offersand});
+	// 	this.setState({offers: this.state.offers-this.state.offersand});
 
-		console.log(this.state.offers);
-	}
+	// 	console.log(this.state.offers);
+	// }
 
 	onCollectionUpdate=(querySnapshot)=>{
 		// const offers=[];
@@ -172,7 +171,8 @@ class userhome extends Component{
 			  {/* <p id="interest2"></p>
 			  <p id="interest3"></p> */}
 
-				{<TreeCheck />}
+				{/* {<TreeCheck />} */}
+				{<TreeCheck propinterest={this.state.interests}  />}
             
 				<button onClick={this.logout} class="mb-2 btn btn-outline-primary btn-sm btn-pill">
                    <i class="material-icons mr-1">LogOut</i> </button>
