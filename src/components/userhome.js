@@ -29,29 +29,28 @@ class userhome extends Component{
 		var offers = firebase.firestore().collection("offerDetails");
 		if (category) offers = offers.where("Category", "==", category);
 		offers
-		  .get()
-		  .then((querySnapshot) => {
-			const data = querySnapshot.docs.map((doc) => doc.data());
-			this.setState({ offers: data });
-		  })
+			.get()
+			.then((querySnapshot) => {
+				const data = querySnapshot.docs.map((doc) => doc.data());
+				this.setState({ offers: data });
+		  	})
 		  .catch((err) => console.log(err));
 
-
-		  firebase.auth().onAuthStateChanged((user)=> {
+		firebase.auth().onAuthStateChanged((user)=> {
 			if (user) {
 			  console.log(user.uid);
 			  firebase.firestore().collection("userDetails").doc(user.uid)
 				.get()
 				.then((doc)=> {
-				  console.log("Document data:", doc.data().name);
-				  console.log("Document data:", doc.data().interests);
+					console.log("Document data:", doc.data().name);
+					console.log("Document data:", doc.data().interests);
 				//   console.log("Document data:", doc.data().interests[0],doc.data().interests[1],doc.data().interests[2]);
-				  document.getElementById("username").innerHTML = doc.data().name ;				  
-				  document.getElementById("interest1").innerHTML = doc.data().interests ;
+					document.getElementById("username").innerHTML = doc.data().name ;				  
+					document.getElementById("interest1").innerHTML = doc.data().interests ;
 				//   document.getElementById("interest1").innerHTML = doc.data().interests[0] ;
 				//   document.getElementById("interest2").innerHTML = doc.data().interests[1] ;
 				//   document.getElementById("interest3").innerHTML = doc.data().interests[2] ;
-				  this.setState({interests : doc.data().interests})
+					this.setState({interests : doc.data().interests})
 				//   this.setState({interest1 : doc.data().interests[0]})
 				//   this.setState({interest2 : doc.data().interests[1]})
 				//   this.setState({interest3 : doc.data().interests[2]})
@@ -69,13 +68,12 @@ class userhome extends Component{
 					this.ref1.onSnapshot(this.onCollectionUpdate2);
 				})
 				.catch(function(error) {
-				
 					history.push("/userhome");
-
-				  console.log("Error getting document:", error);
-				  console.log(user.id)
+					console.log("Error getting document:", error);
+					console.log(user.id)
 				})
-			}})
+			}
+		})
 	}
 
 	onCollectionUpdate2=(querySnapshot)=>{
@@ -92,7 +90,6 @@ class userhome extends Component{
 				Offer,
 				imageurl,
 				producturl,
-				
 			});
 		});
 
@@ -118,7 +115,6 @@ class userhome extends Component{
 				Offer,
 				imageurl,
 				producturl,
-				
 			});
 		});
 
@@ -133,15 +129,12 @@ class userhome extends Component{
 		}
 		else if(user){
 			localStorage.setItem('usersession', user);
-			console.log("User "+user.uid+" is logged in with");
-
-		
+			console.log("User "+user.uid+" is logged in with");	
 		}
 		else{
 			console.log("Successfully logged out");
 			history.push("/");
 		}
-
 	}
   
   	logout(){
@@ -155,68 +148,61 @@ class userhome extends Component{
 	}
 
     render(){
-  	return (
-    <div className="App">
-        <div><br></br></div>
+  		return (
+    		<div className="App">
+      			<div><br></br></div>
 
-        <div class="row">
+       			<div class="row">
         
-        <div class="col-lg-3"><div class="mb-4 pt-3 card card-small">
-          <div class="border-bottom text-center card-header">
+       				<div class="col-lg-3"><div class="mb-4 pt-3 card card-small">
+         			<div class="border-bottom text-center card-header">
               
-	  <h4 class="mb-0" id="username">Name of User </h4>
-              <br></br>
+	 					<h4 class="mb-0" id="username">Name of User </h4>
+            			<br></br>
 
-			  <p>Your interests:</p>
-			  <p id="interest1"></p>
-			  {/* <p id="interest2"></p>
-			  <p id="interest3"></p> */}
+			  			<p>Your interests:</p>
+						<p id="interest1"></p>
+			  			{/* <p id="interest2"></p>
+			  			<p id="interest3"></p> */}
 
-				{<TreeCheck />}
+						{<TreeCheck />}
             
-				<button onClick={this.logout} class="mb-2 btn btn-outline-primary btn-sm btn-pill">
-                   <i class="material-icons mr-1">LogOut</i> </button>
+						<button onClick={this.logout} class="mb-2 btn btn-outline-primary btn-sm btn-pill">
+                   			<i class="material-icons mr-1">LogOut</i> </button>
                    
-                   </div><ul class="list-group list-group-flush"></ul></div></div>
-                   <div className="col-lg-8">
-	 <div className="row">
+                	</div><ul class="list-group list-group-flush"></ul></div></div>
+                	
+					<div className="col-lg-8">
+					<div className="row">
+						<div className="col-sm-5">
+							{this.state.offers.map(offer=>
+								<div className="card-post mb-4 card card-small">
+								<div className="card-body">
+									<h5 className="card-title">
+										{offer.Name}
+									</h5>
+									<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
+									<h5 className="card-title"> {offer.Description}</h5>					
 
-	  <div className="col-sm-5">
-			  
-			  
-				{this.state.offers.map(offer=>
-						  <div className="card-post mb-4 card card-small">
+									<h5 className="card-title">Category: {offer.category}</h5>
+								</div>
 
-					<div className="card-body">
-						<h5 className="card-title">
-							{offer.Name}
-						</h5>
-						<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
-					<h5 className="card-title"> {offer.Description}</h5>					
-
-					<h5 className="card-title">Category: {offer.category}</h5>
-
+								<div className="border-top d-flex card-footer">
+								<div className="card-post__author d-flex">
+									<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
+										Offer: {offer.Offer} </a>
+								<div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{offer.Price}</span><small className="text-muted"> Offer expires {offer.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={offer.producturl}> BUY NOW</a></div></div></div>
+							)}
 						</div>
+						{/* <Sidebar/> */}
 
-						<div className="border-top d-flex card-footer">
-							<div className="card-post__author d-flex">
-								<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
-						Offer: {offer.Offer} </a>
-						<div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{offer.Price}</span><small className="text-muted"> Offer expires {offer.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={offer.producturl}> BUY NOW</a></div></div></div>
-					)
-				}
-	</div>
-	{/* <Sidebar/> */}
+	  				</div>
+	 				</div>
+    			</div>
 
-	  </div>
-
-	  </div>
-      </div>
-
-</div>
-  );
-
+			</div>
+  		);
     }
-  }
+}
 
 export default userhome;

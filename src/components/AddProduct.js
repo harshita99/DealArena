@@ -22,8 +22,9 @@ class AddProduct extends Component{
             Offer:"",
             imageurl:"",
             Brand:"",
-            image:null,
-            producturl:""
+            image:null, 
+            producturl:"",
+            time:""
         }
     }
 
@@ -32,10 +33,12 @@ class AddProduct extends Component{
         state[e.target.name]=e.target.value;
         this.setState(state);
     }
+
     onSubmit=(e)=>{
         console.log("hogya submit re")
         e.preventDefault();
-        const {Name, Description, Expiry, Price, Category, Brand,Offer,imageurl,producturl}=this.state;
+        const {Name, Description, Expiry, Price, Category, Brand,Offer,imageurl,producturl, time}=this.state;
+
         this.ref.add({
             Name,
             Brand,
@@ -46,53 +49,63 @@ class AddProduct extends Component{
             Offer,
             imageurl,
             producturl,
+            time: firebase.firestore.Timestamp.fromDate(new Date()).toDate()
         }).then((docRef)=>{
+            // const offer = docRef.data();
+            // const notification = {
+            //     content: 'A new offer added.',
+            //     offer: `${offer.Brand} ${offer.Category} ${offer.Offer}`,
+            //     time: `${offer.time}`
+            // }
+            // this.ref1=firebase.firestore().collection("notifications");
+            // this.ref1.add(notification).then(docRef => console.log('notification added', docRef));
+            
             this.setState({
-            Name:'',
-            Brand:"",
-            Description:"",
-            Expiry:"",
-            Price:"",
-            Category:"",
-            Offer:"",
-            imageurl:"",
-            producturl:"",
+                Name:'',
+                Brand:"",
+                Description:"",
+                Expiry:"",
+                Price:"",
+                Category:"",
+                Offer:"",
+                imageurl:"",
+                producturl:"",
+                time:""
+            });
 
+            this.props.history.push("/productownerhome")
+        })
+        .catch((error)=>{
+            console.error("Error adding document:",error);
         });
-        this.props.history.push("/productownerhome")
-    })
-    .catch((error)=>{
-        console.error("Error adding document:",error);
-    });
-
-    }
     
+        console.log("notif chala?")
+        firebase.firestore().collection("notifications").add({
+            content: 'A new offer added.',
+            offer: `${Brand} ${Category} ${Offer}`,
+            time: firebase.firestore.Timestamp.fromDate(new Date()).toDate()
+        });
+        console.log("check kro chala?")
+    }
 
     handleChange = (e) => {
-
         if (e.target.files[0]) {
-           
-        this.setState({
-            image:e.target.files[0]
-        });
-
-      };
-      console.log(e.target.files[0])
-      };
+            this.setState({
+                image:e.target.files[0]
+            });
+        };
+        console.log(e.target.files[0])
+    };
 
     handleUpload=(e)=>{
-          const {image}=this.state;
-          const uploadTask=firebase.storage().ref(`image/${image.name}`).put(this.state.image)
-          uploadTask.on("state_changed",(snapshot)=>{console.log("snapshot")},
-          (error)=>{console.log("error");},
-          ()=>{
-              firebase.storage().ref("image").child(image.name).getDownloadURL().then(imageurl=>this.setState({imageurl}))
-          })
-
-
-
+        const {image}=this.state;
+        const uploadTask=firebase.storage().ref(`image/${image.name}`).put(this.state.image)
+        uploadTask.on("state_changed",(snapshot)=>{console.log("snapshot")},
+        (error)=>{console.log("error");},
+        ()=>{
+            firebase.storage().ref("image").child(image.name).getDownloadURL().then(imageurl=>this.setState({imageurl}))
+        })   
     }
-
 
     render(){
         const {Name, Description, Expiry, Price, Category,Brand, Offer, producturl}=this.state;
@@ -100,9 +113,11 @@ class AddProduct extends Component{
         const divStyle = {
             margin: '40px'
         };
+        
         const bottomStyle = {
             margin: '20px'
         };
+
         return(
             <div style={divStyle}>
                 {/* <Card class="col-sm-9"> */}
