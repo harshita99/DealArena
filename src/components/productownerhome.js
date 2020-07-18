@@ -92,64 +92,91 @@ class productownerhome extends Component{
 		});
 	}
 
+	update(u){
+		var offerId = u;
+		localStorage.setItem('offersession', offerId);
+		history.push("/updateoffer");
+	}
+
+	delete(u){
+		firebase.firestore().collection('offerDetails').doc(u).delete().then(function(){
+			console.log("Document deleted successfully!");
+		}).catch(function(error){
+			console.log("Error deleting document: ", error);
+		});
+	}
+
 	render() {
-		return (
+  		return (
 			<div>
 				<div className="row">
 		
 					<div className="col-lg-3"><div className="mb-4 pt-3 card card-small">
 					<div className="border-bottom text-center card-header">
-					<div className="mb-3 mx-auto">
-						<img className="rounded-circle" src="" alt="" width="80"/>
-					</div>
-			 			<h4 className="mb-0" id="brand">{this.state.brand}</h4>
-			 			<br></br>
-			  
-						<button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-							<i className="material-icons mr-1">Add product</i> </button>	
+						<div className="mb-3 mx-auto">
+							<img className="rounded-circle" src="" alt="" width="80"/>
+						</div>
+						<h4 className="mb-0" id="brand">{this.state.brand}</h4>
+						<br></br>
+
+						<div>
+							<button onClick={() => history.push('/addoffer')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+								<i className="material-icons mr-1">Add offer</i> </button>
+							<button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+								<i className="material-icons mr-1">Add product</i> </button>	
+							<button onClick={() => history.push('/showproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+								<i className="material-icons mr-1">Show products</i> </button>	
+						</div>
 
 						<button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
 							<i className="material-icons mr-1">LogOut</i> </button>				
+								
+					</div>
+					</div>
+					</div>
 					
-					</div>
-					</div>
-					</div>
-		
-    				<div className="col-lg-8">
-					<div className="row">
-					<div className="col-sm-5">
+					<div className="col-lg-8">
+					<div className="row">	  
+					<div className="col-sm-5">			  
 						{this.state.offers.map(offer=>
 							<div className="card-post mb-4 card card-small">
-							<div className="card-body">
-								<h5 className="card-title">
-									{offer.Name}
-								</h5>
-								<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
-								<h5 className="card-title"> {offer.Description}</h5>					
-								<h5 className="card-title">Category: {offer.Category}</h5>
 
-							</div>
+								<div className="card-body">
+									<h5 className="card-title">
+										{offer.Name}
+									</h5>
+									<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
+									<h5 className="card-title"> {offer.Description}</h5>					
 
-							<div className="border-top d-flex card-footer">
-							<div className="card-post__author d-flex">
-								<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >Offer: {offer.Offer} </a>
-								<div className="d-flex flex-column justify-content-center ml-3">
-									<span className="card-post__author-name">Rs.{offer.Price}</span>
-									<small className="text-muted"> Offer expires {offer.Expiry}</small>
+									</div>
+
+									<div className="border-top d-flex card-footer">
+									<div className="card-post__author d-flex">
+										<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >Offer: {offer.Offer} </a>
+										<div className="d-flex flex-column justify-content-center ml-3">
+											<span className="card-post__author-name">Rs.{offer.Price}</span>
+											<small className="text-muted"> Offer expires {offer.Expiry}</small>
+										</div>
+									</div>
+									<div className="card-post__author d-flex">
+										<a href={offer.producturl} className="card-post__author-avatar card-post__author-avatar--small" > BUY NOW </a>
+									</div>
 								</div>
-							</div>
-							<div className="card-post__author d-flex">
-								<a href={offer.producturl} className="card-post__author-avatar card-post__author-avatar--small" > BUY NOW </a>
-							</div>
-							</div>
+
+								<div>
+									<button onClick={()=>this.update(offer.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
+									<i className="material-icons mr-1">Update offer</i> </button>
+
+									<button onClick={()=>this.delete(offer.key)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
+									<i className="material-icons mr-1">Delete offer</i> </button>
+								</div>
 							</div>
 						)};
 					</div>
 					</div>
 					</div>
-
 				</div>
-			</div>
+			</div>	
   		)
 	}
 }

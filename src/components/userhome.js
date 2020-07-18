@@ -4,10 +4,14 @@ import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
 import TreeCheck from './treecheck';
+import moment from 'moment';
 
 
 const offers=[];
-const offersand=[];
+const notifs=[];
+//const offersand=[];
+
+const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
 
 // var db=firebase.firestore()
 class userhome extends Component{
@@ -18,23 +22,24 @@ class userhome extends Component{
 		this.unsubscribe=null;
 		this.state={
 			offers:[],
+			notifs:[]
 		};
 	}
   
 	componentDidMount(){
 		this.checkAuth();
-		const params = new URLSearchParams(this.props.location.search);
+		// const params = new URLSearchParams(this.props.location.search);
 
-		const category = params.get("category");
-		var offers = firebase.firestore().collection("offerDetails");
-		if (category) offers = offers.where("Category", "==", category);
-		offers
-			.get()
-			.then((querySnapshot) => {
-				const data = querySnapshot.docs.map((doc) => doc.data());
-				this.setState({ offers: data });
-		  	})
-		  .catch((err) => console.log(err));
+		// const category = params.get("category");
+		// var offers = firebase.firestore().collection("offerDetails");
+		// if (category) offers = offers.where("Category", "==", category);
+		// offers
+		// 	.get()
+		// 	.then((querySnapshot) => {
+		// 		const data = querySnapshot.docs.map((doc) => doc.data());
+		// 		this.setState({ offers: data });
+		//   	})
+		// .catch((err) => console.log(err));
 
 		firebase.auth().onAuthStateChanged((user)=> {
 			if (user) {
@@ -60,12 +65,15 @@ class userhome extends Component{
 					this.ref1=firebase.firestore().collection("offerDetails").where("Brand","in",this.state.interests);
 					this.ref1.onSnapshot(this.onCollectionUpdate);
 
+					this.ref2=firebase.firestore().collection("offerDetails").where("SubCategory","in",this.state.interests);
+					this.ref2.onSnapshot(this.onCollectionUpdate);
+
 					this.ref=firebase.firestore().collection("offerDetails").where("Category","in",this.state.interests);
 					console.log(this.state.interests);
 					
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-					this.ref2=firebase.firestore().collection("offerDetails").where("Category","in",this.state.interests).where("Brand","in",this.state.interests);
-					this.ref1.onSnapshot(this.onCollectionUpdate2);
+					// this.ref2=firebase.firestore().collection("offerDetails").where("Category","in",this.state.interests).where("Brand","in",this.state.interests);
+					// this.ref1.onSnapshot(this.onCollectionUpdate2);
 				})
 				.catch(function(error) {
 					history.push("/userhome");
@@ -76,50 +84,61 @@ class userhome extends Component{
 		})
 	}
 
-	onCollectionUpdate2=(querySnapshot)=>{
-		querySnapshot.forEach((doc)=>{
-			const {Name, Description, Price, Expiry, category, Offer,imageurl, producturl}=doc.data();
-			offersand.push({
-				key:doc.id,
-				doc,
-				Name,
-				Description,
-				Price,
-				category,
-				Expiry,
-				Offer,
-				imageurl,
-				producturl,
-			});
-		});
+	// onCollectionUpdate2=(querySnapshot)=>{
+	// 	querySnapshot.forEach((doc)=>{
+	// 		const {Name, Description, Price, Expiry, category, Offer,imageurl, producturl}=doc.data();
+	// 		offersand.push({
+	// 			key:doc.id,
+	// 			doc,
+	// 			Name,
+	// 			Description,
+	// 			Price,
+	// 			category,
+	// 			Expiry,
+	// 			Offer,
+	// 			imageurl,
+	// 			producturl,
+	// 		});
+	// 	});
 
-		this.setState({offersand});
-		this.setState({offers: this.state.offers-this.state.offersand});
+	// 	this.setState({offersand});
+	// 	this.setState({offers: this.state.offers-this.state.offersand});
 
-		console.log(this.state.offers);
-	}
+	// 	console.log(this.state.offers);
+	// }
 
 	onCollectionUpdate=(querySnapshot)=>{
 		// const offers=[];
 
 		querySnapshot.forEach((doc)=>{
-			const {Name, Description, Price, Expiry, category, Offer,imageurl, producturl}=doc.data();
+			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time}=doc.data();
 			offers.push({
 				key:doc.id,
 				doc,
 				Name,
 				Description,
 				Price,
-				category,
+				Category,
 				Expiry,
 				Offer,
 				imageurl,
+				producturl
+			});
+
+			notifs.push({
+				key:doc.id,
+				doc,
 				producturl,
+				content: 'New Offer: ',
+            	offerD: `${Brand} ${Category} ${Offer}`,
+            	time: time
 			});
 		});
 
 		this.setState({offers});
 		console.log(this.state.offers);
+		this.setState({notifs});
+		console.log(this.state.notifs);
 	}
 
 	checkAuth(){
@@ -155,22 +174,43 @@ class userhome extends Component{
        			<div class="row">
         
        				<div class="col-lg-3"><div class="mb-4 pt-3 card card-small">
-         			<div class="border-bottom text-center card-header">
-              
-	 					<h4 class="mb-0" id="username">Name of User </h4>
-            			<br></br>
+						<div class="border-bottom text-center card-header">
+				
+							<h4 class="mb-0" id="username">Name of User </h4>
+							<br></br>
 
-			  			<p>Your interests:</p>
-						<p id="interest1"></p>
-			  			{/* <p id="interest2"></p>
-			  			<p id="interest3"></p> */}
+							<p>Your interests:</p>
+							<p id="interest1"></p>
+							{/* <p id="interest2"></p>
+							<p id="interest3"></p> */}
 
-						{<TreeCheck />}
-            
-						<button onClick={this.logout} class="mb-2 btn btn-outline-primary btn-sm btn-pill">
-                   			<i class="material-icons mr-1">LogOut</i> </button>
-                   
-                	</div><ul class="list-group list-group-flush"></ul></div></div>
+							{/* {<TreeCheck />} */}
+							{<TreeCheck propinterest={this.state.interests}  />}
+				
+							<button onClick={this.logout} class="mb-2 btn btn-outline-primary btn-sm btn-pill">
+								<i class="material-icons mr-1">LogOut</i> </button>
+					
+						</div><ul class="list-group list-group-flush"></ul></div>
+						
+						<div class="mb-4 pt-3 card card-small">
+							<div class="border-bottom text-center card-header">
+								<h5 class="mb-0">Notifications</h5>
+								<ul className="notifications">
+									{ this.state.notifs.map(notif=>
+										<li key={notif.id}>
+											<span> {notif.content } </span>
+											<span className="pink-text">{notif.offerD} </span>
+											<div className="grey-text note-date">
+												{moment(notif.time).fromNow()}
+											</div>
+											<a href={notif.producturl}> BUY NOW</a>	
+										</li>
+									)}
+								</ul>	
+								<br></br>
+							</div>
+						</div>
+					</div>
                 	
 					<div className="col-lg-8">
 					<div className="row">
