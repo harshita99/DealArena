@@ -19,7 +19,6 @@ class productownerhome extends Component{
 		this.checkAuth();
 		firebase.auth().onAuthStateChanged((productowner)=> {
 
-
 			if (productowner) {
 			
 			  console.log(productowner.uid);
@@ -50,6 +49,7 @@ class productownerhome extends Component{
 	onCollectionUpdate=(querySnapshot)=>{
 		const offers=[];
 		querySnapshot.forEach((doc)=>{
+			// console.log(doc.id);
 			const {Name, Description,Brand, Price, Expiry, Category, Offer,imageurl, producturl}=doc.data();
 		offers.push({
 			key:doc.id,
@@ -100,6 +100,20 @@ class productownerhome extends Component{
 		});
 	}
 
+	update(u){
+		var offerId = u;
+		localStorage.setItem('offersession', offerId);
+		history.push("/updateoffer");
+	}
+
+	delete(u){
+		firebase.firestore().collection('offerDetails').doc(u).delete().then(function(){
+			console.log("Document deleted successfully!");
+		}).catch(function(error){
+			console.log("Error deleting document: ", error);
+		});
+	}
+
 render() {
   return (
 		<div>
@@ -113,9 +127,13 @@ render() {
 			  </div>
 			  <h4 className="mb-0" id="brand">{this.state.brand}</h4>
 			  <br></br>
-			  
-					<button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+
+			  	<div>
+					<button onClick={() => history.push('/addoffer')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+				   <i className="material-icons mr-1">Add offer</i> </button>
+				   <button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
 				   <i className="material-icons mr-1">Add product</i> </button>	
+				</div>
 
 				   <button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
 				   <i className="material-icons mr-1">LogOut</i> </button>				
@@ -124,14 +142,9 @@ render() {
 				   </div>
 				</div>
 		
-     <div className="col-lg-8">
-	 <div className="row">
-
-
-	  
-	  <div className="col-sm-5">
-			  
-			  
+			<div className="col-lg-8">
+			<div className="row">	  
+			<div className="col-sm-5">			  
 				{this.state.offers.map(offer=>
 					<div className="card-post mb-4 card card-small">
 
@@ -158,9 +171,15 @@ render() {
 								<a href={offer.producturl} className="card-post__author-avatar card-post__author-avatar--small" > BUY NOW </a>
 							</div>
 						</div>
+
+						<div>
+							<button onClick={()=>this.update(offer.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
+				   			<i className="material-icons mr-1">Update offer</i> </button>
+
+							<button onClick={()=>this.delete(offer.key)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
+				   			<i className="material-icons mr-1">Delete offer</i> </button>
+						</div>
 					</div>
-
-
 					)
 				};
 	</div>
