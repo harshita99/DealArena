@@ -129,8 +129,8 @@ class TreeCheck extends Component {
     return( 
       <div>
         <TreeSelect {...tProps} />
-        <button onClick={this.saveButton} class="mb-2 btn btn-outline-primary btn-sm btn-pill">
-          <i class="material-icons mr-1">Save</i> 
+        <button onClick={this.saveButton} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+          <i className="material-icons mr-1">Save</i> 
         </button>
       </div>
     )

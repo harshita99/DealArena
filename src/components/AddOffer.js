@@ -12,7 +12,6 @@ import history from '../history';
 class AddOffer extends Component{
     constructor(props){
         super(props);
-        this.ref=firebase.firestore().collection("offerDetails");
         this.state={
             Name:"",
             Description:"",
@@ -27,6 +26,26 @@ class AddOffer extends Component{
         }
     }
 
+    componentDidMount(){
+        var productId = localStorage.getItem('productsession');
+		firebase.firestore().collection("productDetails").doc(productId).get().then((doc)=>{
+            if(doc.exists){
+                this.setState({
+                    Name: doc.data().Name,
+                    Brand : doc.data().Brand,
+                    Description: doc.data().Description,
+                    Price: doc.data().Price,
+                    Category: doc.data().Category,
+                    imageurl: doc.data().imageurl,
+                    producturl: doc.data().producturl
+                });
+            }
+            else{
+                console.log("No such document is here!");
+            }
+		})
+    }
+
     onChange=(e)=>{
         const state=this.state;
         state[e.target.name]=e.target.value;
@@ -36,7 +55,7 @@ class AddOffer extends Component{
         console.log("hogya submit re")
         e.preventDefault();
         const {Name, Description, Expiry, Price, Category, Brand,Offer,imageurl,producturl}=this.state;
-        this.ref.add({
+        firebase.firestore().collection("offerDetails").add({
             Name,
             Brand,
             Description,
@@ -109,63 +128,63 @@ class AddOffer extends Component{
                     </Link> */}
                 {/* </Card> */}
                 <div id="formbutton" className="Buttons" style={bottomStyle}>
-                    <button type="submit" class="btn btn-primary" onClick={() => history.push('/productownerhome')}> Show Offers </button>
+                    <button type="submit" className="btn btn-primary" onClick={() => history.push('/productownerhome')}> Show Offers </button>
                 </div>
 
                 <div>
                     <div>
-                        <div class="form-group row"></div>
+                        <div className="form-group row"></div>
                         {/* <label class="sol-sm-3" for="Name">Name</label> */}
-                        <div class="col-sm-9">
+                        <div className="col-sm-9">
                       
-                            <input type="text" class="form-control" name="Name" value ={Name} onChange={this.onChange} placeholder="Name"></input>
+                            <input type="text" className="form-control" name="Name" value ={Name} onChange={this.onChange} placeholder="Name"></input>
                         </div>
-                        <div class="col-sm-9">
+                        <div className="col-sm-9">
                       
-                        <input type="text" class="form-control" name="Brand" value ={Brand} onChange={this.onChange} placeholder="Brand"></input>
+                        <input type="text" className="form-control" name="Brand" value ={Brand} onChange={this.onChange} placeholder="Brand"></input>
                     </div>
                     </div>
                     <div>
-                        <div class="form-group row"></div>
+                        <div className="form-group row"></div>
                         {/* <label for="Description">Description:</label> */}
-                        <div class="col-sm-9">
-                        <textArea class="form-control" name="Description"  onChange={this.onChange} placeholder="Description">{Description}</textArea>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Description"  onChange={this.onChange} placeholder="Description">{Description}</textArea>
                         </div>
                     </div>
                     <div>
-                        <div class="form-group row"></div>
+                        <div className="form-group row"></div>
                         {/* <label for="description">Price</label> */}
-                        <div class="col-sm-9">
-                        <textArea class="form-control" name="Price" onChange={this.onChange} placeholder="Price">{Price}</textArea>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Price" onChange={this.onChange} placeholder="Price">{Price}</textArea>
                         </div>
                     </div>
                     <div>
-                        <div class="form-group row"></div>
+                        <div className="form-group row"></div>
                         {/* <label for="Expiry">Expiry</label> */}
-                        <div class="col-sm-9">
-                        <textArea class="form-control" name="Expiry" onChange={this.onChange} placeholder="Expiry">{Expiry}</textArea>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Expiry" onChange={this.onChange} placeholder="Expiry">{Expiry}</textArea>
                         </div>
                     </div>
                     <div>
-                        <div class="form-group row"></div>
+                        <div className="form-group row"></div>
                         {/* <label for="Category">Category</label> */}
-                        <div class="col-sm-9">
-                        <textArea class="form-control" name="Category" onChange={this.onChange} placeholder="Category">{Category}</textArea>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Category" onChange={this.onChange} placeholder="Category">{Category}</textArea>
                         </div>
                     </div>
                     <div>
-                        <div class="form-group row"></div>
+                        <div className="form-group row"></div>
                         {/* <label for="Offer">Offer</label> */}
-                        <div class="col-sm-9">
-                        <textArea class="form-control" name="Offer" onChange={this.onChange} placeholder="Offer">{Offer}</textArea>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Offer" onChange={this.onChange} placeholder="Offer">{Offer}</textArea>
                         </div>
                     </div>
 
                     <div>
-                        <div class="form-group row"></div>
+                        <div className="form-group row"></div>
                         {/* <label for="producturl">producturl</label> */}
-                        <div class="col-sm-9">
-                        <textArea class="form-control" name="producturl" onChange={this.onChange} placeholder="URL to buy this product">{producturl}</textArea>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="producturl" onChange={this.onChange} placeholder="URL to buy this product">{producturl}</textArea>
                         </div>
                     </div>
 
@@ -176,9 +195,9 @@ class AddOffer extends Component{
                     </div>
                 </div> 
 
-                <div id="formbutton" className="Buttons" class="justify-content-between" style={bottomStyle}>
-                    <button type="submit" class="btn btn-primary" onClick={this.handleUpload}> Upload photo first </button>
-                    <button type="submit" class="btn btn-primary" onClick={this.onSubmit}> Save all </button>
+                <div id="formbutton" className="Buttons justify-content-between" style={bottomStyle}>
+                    <button type="submit" className="btn btn-primary" onClick={this.handleUpload}> Upload photo first </button>
+                    <button type="submit" className="btn btn-primary" onClick={this.onSubmit}> Save all </button>
 
                 </div>
             </div>
