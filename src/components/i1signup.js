@@ -41,7 +41,6 @@ class i1signup extends Component{
       Name,Email,Password,Age,Gender,MaritalStatus,Occupation,Nationality
     }).then((docRef)=>{
         this.setState({
-        
           Name:"",
           Email:"",
           Password:"",
@@ -50,8 +49,7 @@ class i1signup extends Component{
           MaritalStatus:"",
           Occupation:"",
           Nationality:"",
-
-    });
+        });
     })
     .catch((error)=>{
         console.error("Error adding document:",error);
@@ -61,16 +59,16 @@ class i1signup extends Component{
       console.log(u);
 
       if (firebase.auth().currentUser){
-      firebase.firestore().collection("userDetails").doc(firebase.auth().currentUser.uid).set({
-        name:x,
-        interests:[elec,
-        footwear,
-        flights]
-  
-      });}
-
+        firebase.firestore().collection("userDetails").doc(firebase.auth().currentUser.uid).set({
+          name:x,
+          lastLogTime: firebase.firestore.FieldValue.serverTimestamp(),
+          interests:[elec,
+          footwear,
+          flights]
+        });
+      }
     }).catch((err)=>{
-      console.log(err);
+       console.log(err);
     })
   }
 

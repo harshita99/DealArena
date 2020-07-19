@@ -5,6 +5,7 @@ import firebase from "./Config";
 import history from './../history';
 import TreeCheck from './treecheck';
 import moment from 'moment';
+//import { findAllByPlaceholderText } from '@testing-library/react';
 
 
 const offers=[];
@@ -144,6 +145,7 @@ class userhome extends Component{
 
 	checkAuth(){
 		var user = firebase.auth().currentUser;
+		//console.log("User "+user.uid+" is logged in with");	
 		if(localStorage.getItem('usersession')){
 
 		}
@@ -158,17 +160,31 @@ class userhome extends Component{
 	}
   
   	logout(){
+		var user = firebase.auth().currentUser;
+		//if (user!=null) {
+		const db = firebase.firestore();
+		const uid = user.uid;
+		console.log("user is "+uid);
+		// const docRef = db.collection('userDetails').doc(uid);
+		// docRef.update({
+		db.collection('userDetails').doc(uid).update({	
+			lastLogTime: firebase.firestore.FieldValue.serverTimestamp()
+		}).then(() => {
+			console.log('Profile Successfully Edited!');
+		}).catch((error) => {
+			console.log('Error updating the document:', error);
+		})
+		//}
+		
 		firebase.auth().signOut().then((u)=>{
 			localStorage.removeItem('usersession');
 			history.push("/"); 
 		})
-		.catch((err)=>{
+		.then(() => {
+			console.log("User"+uid+"logged out successfully");
+		}).catch((err)=>{
 			console.log(err);
 		});
-
-		firebase.firestore().collection("userDetails").add({
-            lastLogTime: firebase.firestore.FieldValue.serverTimestamp()
-        });
 	}
 
     render(){

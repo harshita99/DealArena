@@ -22,7 +22,8 @@ class AddOffer extends Component{
             imageurl:"",
             Brand:"",
             image:null,
-            producturl:""
+            producturl:"",
+            time:""
         }
     }
 
@@ -65,6 +66,7 @@ class AddOffer extends Component{
             Offer,
             imageurl,
             producturl,
+            time: firebase.firestore.FieldValue.serverTimestamp()
         }).then((docRef)=>{
             this.setState({
                 Name:'',
