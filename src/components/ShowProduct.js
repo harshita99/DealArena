@@ -93,6 +93,12 @@ class ShowProduct extends Component{
 		});
 	}
 
+	addoffer(u){
+		var productId = u;
+		localStorage.setItem('productsession', productId);
+		history.push("/addoffer");
+	}
+
 	update(u){
 		var productId = u;
 		localStorage.setItem('productsession', productId);
@@ -167,7 +173,7 @@ render() {
 						</div>
 
 						<div>
-							<button onClick={() => history.push('/addoffer')} className="mb-2 btn btn-outline-success btn-sm btn-pill">
+							<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
 				   			<i className="material-icons mr-1">Add offer</i> </button>
 
 							<button onClick={()=>this.update(product.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">

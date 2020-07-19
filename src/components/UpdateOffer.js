@@ -112,51 +112,51 @@ class UpdateOffer extends Component{
             <div>
                 <div>
                     <div>
-                        <div class="form-group row"></div>
-                        <div class="col-sm-9">                
-                            <textArea class="form-control" name="Name" onChange={this.onChange} placeholder="Name">{Name}</textArea>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">                
+                            <textArea className="form-control" name="Name" onChange={this.onChange} placeholder="Name">{Name}</textArea>
                         </div>
                     </div>
                     <div>
-                        <div class="form-group row"></div>
-                        <div class="col-sm-9">                
-                            <textArea class="form-control" name="Brand" onChange={this.onChange} placeholder="Brand">{Brand}</textArea>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">                
+                            <textArea className="form-control" name="Brand" onChange={this.onChange} placeholder="Brand">{Brand}</textArea>
                         </div>
                     </div>
                     <div>
-                        <div class="form-group row"></div>
-                        <div class="col-sm-9">
-                            <textArea class="form-control" name="Description" onChange={this.onChange} placeholder="Description">{Description}</textArea>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                            <textArea className="form-control" name="Description" onChange={this.onChange} placeholder="Description">{Description}</textArea>
                         </div>
                     </div>
                     <div>
-                        <div class="form-group row"></div>
-                        <div class="col-sm-9">
-                        <textArea class="form-control" name="Price" onChange={this.onChange} placeholder="Price">{Price}</textArea>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Price" onChange={this.onChange} placeholder="Price">{Price}</textArea>
                         </div>
                     </div>
                     <div>
-                        <div class="form-group row"></div>
-                        <div class="col-sm-9">
-                        <textArea class="form-control" name="Expiry" onChange={this.onChange} placeholder="Expiry">{Expiry}</textArea>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Expiry" onChange={this.onChange} placeholder="Expiry">{Expiry}</textArea>
                         </div>
                     </div>
                     <div>
-                        <div class="form-group row"></div>
-                        <div class="col-sm-9">
-                        <textArea class="form-control" name="Category" onChange={this.onChange} placeholder="Category">{Category}</textArea>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Category" onChange={this.onChange} placeholder="Category">{Category}</textArea>
                         </div>
                     </div>
                     <div>
-                        <div class="form-group row"></div>
-                        <div class="col-sm-9">
-                        <textArea class="form-control" name="Offer" onChange={this.onChange} placeholder="Offer">{Offer}</textArea>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Offer" onChange={this.onChange} placeholder="Offer">{Offer}</textArea>
                         </div>
                     </div>
                     <div>
-                        <div class="form-group row"></div>
-                        <div class="col-sm-9">
-                        <textArea class="form-control" name="producturl" onChange={this.onChange} placeholder="URL to buy this product">{producturl}</textArea>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="producturl" onChange={this.onChange} placeholder="URL to buy this product">{producturl}</textArea>
                         </div>
                     </div>
 
@@ -166,9 +166,9 @@ class UpdateOffer extends Component{
                     </div>
                 </div> 
 
-                <div id="formbutton" className="Buttons" class="justify-content-between" style={bottomStyle}>
-                    <button type="submit" class="btn btn-primary" onClick={this.handleUpload}> Upload photo first </button>
-                    <button type="submit" class="btn btn-primary" onClick={this.onSubmit}> Save all </button>
+                <div id="formbutton" className="Buttons justify-content-between" style={bottomStyle}>
+                    <button type="submit" className="btn btn-primary" onClick={this.handleUpload}> Upload photo first </button>
+                    <button type="submit" className="btn btn-primary" onClick={this.onSubmit}> Save all </button>
                 </div>
             </div>
         )

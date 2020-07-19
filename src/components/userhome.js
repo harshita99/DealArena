@@ -173,10 +173,10 @@ class userhome extends Component{
     		<div className="App">
       			<div><br></br></div>
 
-       			<div class="row">
+       			<div className="row">
         
-       				<div class="col-lg-3"><div class="mb-4 pt-3 card card-small">
-						<div class="border-bottom text-center card-header">
+       				<div className="col-lg-3"><div className="mb-4 pt-3 card card-small">
+						<div className="border-bottom text-center card-header">
 				
 							{/* <h4 class="mb-0" id="username">Name of User </h4> */}
 							<h4>Welcome, {this.state.name} </h4>
@@ -191,14 +191,14 @@ class userhome extends Component{
 							{/* {<TreeCheck />} */}
 							{<TreeCheck propinterest={this.state.interests}  />}
 				
-							<button onClick={this.logout} class="mb-2 btn btn-outline-primary btn-sm btn-pill">
-								<i class="material-icons mr-1">LogOut</i> </button>
+							<button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+								<i className="material-icons mr-1">LogOut</i> </button>
 					
-						</div><ul class="list-group list-group-flush"></ul></div>
+						</div><ul className="list-group list-group-flush"></ul></div>
 						
-						<div class="mb-4 pt-3 card card-small">
-							<div class="border-bottom text-center card-header">
-								<h5 class="mb-0">Notifications</h5>
+						<div className="mb-4 pt-3 card card-small">
+							<div className="border-bottom text-center card-header">
+								<h5 className="mb-0">Notifications</h5>
 								<ul className="notifications">
 									{ this.state.notifs.map(notif=>
 										<li key={notif.id}>
