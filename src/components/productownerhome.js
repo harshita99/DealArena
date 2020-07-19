@@ -120,8 +120,8 @@ class productownerhome extends Component{
 						<br></br>
 
 						<div>
-							<button onClick={() => history.push('/addoffer')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-								<i className="material-icons mr-1">Add offer</i> </button>
+							{/* <button onClick={() => history.push('/addoffer')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+								<i className="material-icons mr-1">Add offer</i> </button> */}
 							<button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
 								<i className="material-icons mr-1">Add product</i> </button>	
 							<button onClick={() => history.push('/showproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">

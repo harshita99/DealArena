@@ -94,9 +94,9 @@ class ShowProduct extends Component{
 	}
 
 	update(u){
-		var offerId = u;
-		localStorage.setItem('offersession', offerId);
-		history.push("/updateoffer");
+		var productId = u;
+		localStorage.setItem('productsession', productId);
+		history.push("/updateproduct");
 	}
 
 	delete(u){
@@ -124,8 +124,10 @@ render() {
                     <div>
                         <button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
                         <i className="material-icons mr-1">Add product</i> </button>	
-                        
-
+                        <button onClick={() => history.push('/productownerhome')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+                        <i className="material-icons mr-1">Back to home</i> </button>
+					</div>
+					<div>
                         <button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
                         <i className="material-icons mr-1">LogOut</i> </button>				
                     </div>
@@ -136,40 +138,43 @@ render() {
 			<div className="col-lg-8">
 			<div className="row">	  
 			<div className="col-sm-5">			  
-				{this.state.products.map(offer=>
+				{this.state.products.map(product=>
 					<div className="card-post mb-4 card card-small">
 
 						<div className="card-body">
 							<h5 className="card-title">
-								{offer.Name}
+								{product.Name}
 							</h5>
-							<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
-                            <h5 className="card-title"> {offer.Brand}</h5>
-							<h5 className="card-title"> {offer.Description}</h5>					
+							<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
+                            <h5 className="card-title"> {product.Brand}</h5>
+							<h5 className="card-title"> {product.Description}</h5>					
 
-							<h5 className="card-title">Category: {offer.Category}</h5>
+							<h5 className="card-title">Category: {product.Category}</h5>
 
 						</div>
 
 						<div className="border-top d-flex card-footer">
 							<div className="card-post__author d-flex col-sm-10">
 								<div className="d-flex flex-column justify-content-center ml-3">
-									<span className="card-post__author-name">Rs.{offer.Price}</span>
+									<span className="card-post__author-name">Rs.{product.Price}</span>
 								</div>
 							</div>
                             <div>
                                 <div className="card-post__author d-flex col-sm-10">
-                                    <a href={offer.producturl} className="card-post__author-avatar card-post__author-avatar--small" > BUY NOW </a>
+                                    <a href={product.producturl} className="card-post__author-avatar card-post__author-avatar--small" > BUY NOW </a>
                                 </div>
                             </div>
 						</div>
 
 						<div>
-							<button onClick={()=>this.update(offer.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
-				   			<i className="material-icons mr-1">Edit</i> </button>
+							<button onClick={() => history.push('/addoffer')} className="mb-2 btn btn-outline-success btn-sm btn-pill">
+				   			<i className="material-icons mr-1">Add offer</i> </button>
 
-							<button onClick={()=>this.delete(offer.key)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
-				   			<i className="material-icons mr-1">Delete</i> </button>
+							<button onClick={()=>this.update(product.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
+				   			<i className="material-icons mr-1">Edit product</i> </button>
+
+							<button onClick={()=>this.delete(product.key)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
+				   			<i className="material-icons mr-1">Delete product</i> </button>
 						</div>
 					</div>
 					)

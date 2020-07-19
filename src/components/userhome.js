@@ -50,11 +50,12 @@ class userhome extends Component{
 					console.log("Document data:", doc.data().name);
 					console.log("Document data:", doc.data().interests);
 				//   console.log("Document data:", doc.data().interests[0],doc.data().interests[1],doc.data().interests[2]);
-					document.getElementById("username").innerHTML = doc.data().name ;				  
-					document.getElementById("interest1").innerHTML = doc.data().interests ;
+				//	document.getElementById("username").innerHTML = doc.data().name ;				  
+				//	document.getElementById("interest1").innerHTML = doc.data().interests ;
 				//   document.getElementById("interest1").innerHTML = doc.data().interests[0] ;
 				//   document.getElementById("interest2").innerHTML = doc.data().interests[1] ;
 				//   document.getElementById("interest3").innerHTML = doc.data().interests[2] ;
+					this.setState({name : doc.data().name})
 					this.setState({interests : doc.data().interests})
 				//   this.setState({interest1 : doc.data().interests[0]})
 				//   this.setState({interest2 : doc.data().interests[1]})
@@ -78,7 +79,7 @@ class userhome extends Component{
 				.catch(function(error) {
 					history.push("/userhome");
 					console.log("Error getting document:", error);
-					console.log(user.id)
+					console.log(user.uid)
 				})
 			}
 		})
@@ -115,6 +116,7 @@ class userhome extends Component{
 			offers.push({
 				key:doc.id,
 				doc,
+				Brand,
 				Name,
 				Description,
 				Price,
@@ -176,14 +178,16 @@ class userhome extends Component{
        				<div class="col-lg-3"><div class="mb-4 pt-3 card card-small">
 						<div class="border-bottom text-center card-header">
 				
-							<h4 class="mb-0" id="username">Name of User </h4>
+							{/* <h4 class="mb-0" id="username">Name of User </h4> */}
+							<h4>Welcome, {this.state.name} </h4>
 							<br></br>
 
-							<p>Your interests:</p>
+							<p>Your current interests are:</p>
 							<p id="interest1"></p>
 							{/* <p id="interest2"></p>
 							<p id="interest3"></p> */}
-
+							<br></br>
+			  				<p>Manage your interests: </p>
 							{/* {<TreeCheck />} */}
 							{<TreeCheck propinterest={this.state.interests}  />}
 				
@@ -215,6 +219,7 @@ class userhome extends Component{
 					<div className="col-lg-8">
 					<div className="row">
 						<div className="col-sm-5">
+							<h5>Here are offers from your interests: </h5>
 							{this.state.offers.map(offer=>
 								<div className="card-post mb-4 card card-small">
 								<div className="card-body">
