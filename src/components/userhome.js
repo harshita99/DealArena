@@ -11,7 +11,7 @@ const offers=[];
 const notifs=[];
 //const offersand=[];
 
-const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
+// const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
 
 // var db=firebase.firestore()
 class userhome extends Component{
