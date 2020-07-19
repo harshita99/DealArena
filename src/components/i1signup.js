@@ -20,9 +20,7 @@ class i1signup extends Component{
         Nationality:"",
     }
   }
-
-
-
+  
   onInput=(e)=>{
     const state=this.state;
     state[e.target.name]=e.target.value;

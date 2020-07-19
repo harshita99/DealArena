@@ -5,17 +5,18 @@ import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput} from 'mdb
 import firebase from "./Config";
 
 class Home extends Component{
+  
   constructor(props)
-    {
-        super(props);
-        this.login1 = this.login1.bind(this);
-        this.login2 = this.login2.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.state={
-            Email : "",
-            Password : ""
-        }
-    }
+  {
+      super(props);
+      this.login1 = this.login1.bind(this);
+      this.login2 = this.login2.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+      this.state={
+          Email : "",
+          Password : ""
+      }
+  }
 
     login2(e){
       e.preventDefault();
@@ -91,8 +92,6 @@ class Home extends Component{
                 </MDBCol>
               </MDBRow>
             </MDBContainer>
-
-           
         );
     }
 }

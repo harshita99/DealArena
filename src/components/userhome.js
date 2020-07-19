@@ -10,8 +10,7 @@ import moment from 'moment';
 const offers=[];
 const notifs=[];
 //const offersand=[];
-
-// const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
+const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
 
 // var db=firebase.firestore()
 class userhome extends Component{
@@ -161,11 +160,15 @@ class userhome extends Component{
   	logout(){
 		firebase.auth().signOut().then((u)=>{
 			localStorage.removeItem('usersession');
-			history.push("/");
+			history.push("/"); 
 		})
 		.catch((err)=>{
 			console.log(err);
 		});
+
+		firebase.firestore().collection("userDetails").add({
+            lastLogTime: firebase.firestore.FieldValue.serverTimestamp()
+        });
 	}
 
     render(){
