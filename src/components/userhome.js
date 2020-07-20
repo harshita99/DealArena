@@ -224,7 +224,7 @@ class userhome extends Component{
 											<span> {notif.content } </span>
 											<span className="pink-text">{notif.offerD} </span>
 											<div className="grey-text note-date">
-												{moment(notif.time).fromNow()}
+												{moment(notif.time.toDate()).fromNow()}
 											</div>
 											<a href={notif.producturl}> BUY NOW</a>	
 										</li>
@@ -248,7 +248,7 @@ class userhome extends Component{
 									<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
 									<h5 className="card-title"> {offer.Description}</h5>					
 
-									<h5 className="card-title">Category: {offer.category}</h5>
+									<h5 className="card-title">Category: {offer.Category}</h5>
 								</div>
 
 								<div className="border-top d-flex card-footer">
