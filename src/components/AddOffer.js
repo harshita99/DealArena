@@ -18,6 +18,7 @@ class AddOffer extends Component{
             Expiry:"",
             Price:"",
             Category:"",
+            SubCategory:"",
             Offer:"",
             imageurl:"",
             Brand:"",
@@ -37,6 +38,7 @@ class AddOffer extends Component{
                     Description: doc.data().Description,
                     Price: doc.data().Price,
                     Category: doc.data().Category,
+                    SubCategory: doc.data().SubCategory,
                     imageurl: doc.data().imageurl,
                     producturl: doc.data().producturl
                 });
@@ -55,7 +57,7 @@ class AddOffer extends Component{
     onSubmit=(e)=>{
         console.log("hogya submit re")
         e.preventDefault();
-        const {Name, Description, Expiry, Price, Category, Brand,Offer,imageurl,producturl}=this.state;
+        const {Name, Description, Expiry, Price, Category, SubCategory, Brand,Offer,imageurl,producturl}=this.state;
         firebase.firestore().collection("offerDetails").add({
             Name,
             Brand,
@@ -63,18 +65,20 @@ class AddOffer extends Component{
             Expiry,
             Price,
             Category,
+            SubCategory,
             Offer,
             imageurl,
             producturl,
             time: firebase.firestore.FieldValue.serverTimestamp()
         }).then((docRef)=>{
             this.setState({
-                Name:'',
+                Name:"",
                 Brand:"",
                 Description:"",
                 Expiry:"",
                 Price:"",
                 Category:"",
+                SubCategory:"",
                 Offer:"",
                 imageurl:"",
                 producturl:"",
@@ -114,7 +118,7 @@ class AddOffer extends Component{
     }
 
     render(){
-        const {Name, Description, Expiry, Price, Category,Brand, Offer, producturl}=this.state;
+        const {Name, Description, Expiry, Price, Category, SubCategory, Brand, Offer, producturl}=this.state;
         
         const divStyle = {
             margin: '40px'
@@ -172,6 +176,13 @@ class AddOffer extends Component{
                         {/* <label for="Category">Category</label> */}
                         <div className="col-sm-9">
                         <textArea className="form-control" name="Category" onChange={this.onChange} placeholder="Category">{Category}</textArea>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="form-group row"></div>
+                        {/* <label for="Category">Category</label> */}
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="SubCategory" onChange={this.onChange} placeholder="SubCategory">{SubCategory}</textArea>
                         </div>
                     </div>
                     <div>

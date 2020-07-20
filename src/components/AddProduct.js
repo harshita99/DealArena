@@ -10,6 +10,7 @@ class AddProduct extends Component{
             Description:"",
             Price:"",
             Category:"",
+            SubCategory:"",
             imageurl:"",
             Brand:"",
             image:null,
@@ -25,12 +26,13 @@ class AddProduct extends Component{
 
     onSubmit=(e)=>{
         e.preventDefault();
-        const {Name, Description, Price, Category, Brand,imageurl,producturl}=this.state;
+        const {Name, Description, Price, Category, SubCategory, Brand,imageurl,producturl}=this.state;
         firebase.firestore().collection("productDetails").add({
             Name,
             Brand,
             Description,
             Price,
+            SubCategory,
             Category,
             imageurl,
             producturl
@@ -41,6 +43,7 @@ class AddProduct extends Component{
                 Description:"",
                 Price:"",
                 Category:"",
+                SubCategory:"",
                 imageurl:"",
                 producturl:""
             });
@@ -72,7 +75,7 @@ class AddProduct extends Component{
     }
 
     render() {
-        const {Name, Description, Price, Category,Brand, producturl}=this.state;
+        const {Name, Description, Price, Category, SubCategory, Brand, producturl}=this.state;
         
         const divStyle = {
             margin: '40px'
@@ -118,7 +121,12 @@ class AddProduct extends Component{
                         <textArea className="form-control" name="Category" onChange={this.onChange} placeholder="Category">{Category}</textArea>
                         </div>
                     </div>
-
+                    <div>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="SubCategory" onChange={this.onChange} placeholder="SubCategory">{SubCategory}</textArea>
+                        </div>
+                    </div>
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">

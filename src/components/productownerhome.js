@@ -136,8 +136,9 @@ class productownerhome extends Component{
 					</div>
 					
 					<div className="col-lg-8">
-					<div className="row">	  
-					<div className="col-sm-5">			  
+					<div className="row">
+					<div className="col-sm-5">		  
+						<h5>Your Offers:</h5>		  
 						{this.state.offers.map(offer=>
 							<div className="card-post mb-4 card card-small">
 
