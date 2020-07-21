@@ -167,7 +167,7 @@ render() {
 							</div>
                             <div>
                                 <div className="card-post__author d-flex col-sm-10">
-                                    <a href={product.producturl} className="card-post__author-avatar card-post__author-avatar--small" > BUY NOW </a>
+                                    <a href={product.producturl} className="card-post__author-avatar card-post__author-avatar--small" > URL </a>
                                 </div>
                             </div>
 						</div>
