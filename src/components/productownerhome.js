@@ -160,7 +160,7 @@ class productownerhome extends Component{
 										</div>
 									</div>
 									<div className="card-post__author d-flex">
-										<a href={offer.producturl} className="card-post__author-avatar card-post__author-avatar--small" > BUY NOW </a>
+										<a href={offer.producturl} className="card-post__author-avatar card-post__author-avatar--small" > URL </a>
 									</div>
 								</div>
 
