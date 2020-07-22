@@ -57,6 +57,7 @@ class userhome extends Component{
 				//   document.getElementById("interest3").innerHTML = doc.data().interests[2] ;
 					this.setState({name : doc.data().name})
 					this.setState({interests : doc.data().interests})
+					sessionStorage.setItem('logTime', (doc.data().lastLogTime.toDate()).valueOf())
 				//   this.setState({interest1 : doc.data().interests[0]})
 				//   this.setState({interest2 : doc.data().interests[1]})
 				//   this.setState({interest3 : doc.data().interests[2]})
@@ -113,6 +114,8 @@ class userhome extends Component{
 
 		querySnapshot.forEach((doc)=>{
 			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time}=doc.data();
+			var logTime = (sessionStorage.getItem('logTime'));
+
 			offers.push({
 				key:doc.id,
 				doc,
@@ -133,7 +136,8 @@ class userhome extends Component{
 				producturl,
 				content: 'New Offer: ',
             	offerD: `${Brand} ${Category} ${Offer}`,
-            	time: time
+            	time: time.toDate(),
+				logTime,
 			});
 		});
 
@@ -217,18 +221,30 @@ class userhome extends Component{
 						
 						<div className="mb-4 pt-3 card card-small">
 							<div className="border-bottom text-center card-header">
-								<h5 className="mb-0">Notifications</h5>
+								<h5 className="mb-0">New Offers From Your Interests</h5>
 								<ul className="notifications">
-									{ this.state.notifs.map(notif=>
-										<li key={notif.id}>
-											<span> {notif.content } </span>
-											<span className="pink-text">{notif.offerD} </span>
-											<div className="grey-text note-date">
-												{moment(notif.time.toDate()).fromNow()}
-											</div>
-											<a href={notif.producturl}> BUY NOW</a>	
-										</li>
-									)}
+									{ this.state.notifs.map(notif=> {
+
+										const elapsedTime = ((notif.time).valueOf() - notif.logTime)
+										console.log("OfferTime is "+ (notif.time).valueOf() + " and LogTime is "+notif.logTime)
+										console.log ("Elapsed time is "+ elapsedTime)
+										
+										return (
+											(notif.logTime <= (notif.time).valueOf()) ? 
+											(	
+												<li key={notif.id}>
+													<span> {notif.content } </span>
+													<span className="pink-text">{notif.offerD} </span>
+													<div className="grey-text note-date">
+														{moment(notif.time).fromNow()}
+													</div>
+													<a href={notif.producturl}> BUY NOW</a>	
+												</li>
+											) : ( 
+												<span> { "" } </span>
+											)	
+										)
+									})}
 								</ul>	
 								<br></br>
 							</div>
