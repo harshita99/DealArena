@@ -5,9 +5,9 @@ import { Tabs } from "antd";
 const { TabPane } = Tabs;
 
 class ThreeTabs extends React.Component {
-  constructor(props){
-    super(props);
-  }
+  // constructor(props){
+  //   super(props);
+  // }
   render() {
     return (
       <div>
@@ -28,7 +28,7 @@ class ThreeTabs extends React.Component {
 									<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
 									<h5 className="card-title"> {offer.Description}</h5>					
 
-									<h5 className="card-title">Category: {offer.category}</h5>
+									<h5 className="card-title">Category: {offer.Category}</h5>
 								</div>
 
 								<div className="border-top d-flex card-footer">
