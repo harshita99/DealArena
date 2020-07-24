@@ -219,7 +219,7 @@ class userhome extends Component{
 							<br></br>
 
 							<p>Your current interests are:</p>
-							<p>{this.state.interests}</p>
+							<p>{this.state.interests+"  "}</p>
 							{/* <p id="interest1"></p>
 							<p id="interest2"></p>
 							<p id="interest3"></p> */}

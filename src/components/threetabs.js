@@ -14,7 +14,7 @@ class ThreeTabs extends React.Component {
       <div>
         <Tabs tabPosition="left">
           <TabPane tab="New offers" key="1">
-            <div className="col-sm-6">
+            <div className="col-sm-9">
             <h5>Here are new offers from your interests: </h5>
               { this.props.propnotifs.map(notif=> {
 
@@ -40,7 +40,7 @@ class ThreeTabs extends React.Component {
                       <div className="card-post__author d-flex">
                         <a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
                           Offer: {notif.Offer} </a>
-                      <div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{notif.Price}</span><small className="text-muted"> Offer expires {notif.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={notif.producturl}> BUY NOW</a></div></div>
+                      <div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{notif.Price}</span><small className="text-muted"> Offer expires: {notif.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={notif.producturl}> BUY NOW</a></div></div>
                     </div>
                   ) : ( 
                     <span> { "" } </span>
@@ -52,7 +52,7 @@ class ThreeTabs extends React.Component {
           </TabPane>
 
           <TabPane tab="Old offers" key="2">
-            <div className="col-sm-5">
+            <div className="col-sm-6">
 							<h5>Here are old offers from your interests: </h5>
 							{/* {this.props.propoffers.map(offer=>
 								<div className="card-post mb-4 card card-small">
@@ -97,7 +97,7 @@ class ThreeTabs extends React.Component {
                     <div className="card-post__author d-flex">
                       <a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
                         Offer: {notif.Offer} </a>
-                    <div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{notif.Price}</span><small className="text-muted"> Offer expires {notif.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={notif.producturl}> BUY NOW</a></div></div>
+                    <div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{notif.Price}</span><small className="text-muted"> Offer expires:{notif.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={notif.producturl}> BUY NOW</a></div></div>
                   </div>
                 ) : ( 
                   <span> { "" } </span>
@@ -108,7 +108,7 @@ class ThreeTabs extends React.Component {
           </TabPane>
           
           <TabPane tab="Other offers" key="3">
-          <div className="col-sm-5">
+          <div className="col-sm-6">
                       <h5>Here are all other offers: </h5>
 
 
@@ -130,7 +130,7 @@ class ThreeTabs extends React.Component {
                       <div className="card-post__author d-flex">
                         <a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
                           Offer: {off.Offer} </a>
-                      <div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{off.Price}</span><small className="text-muted"> Offer expires {off.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={off.producturl}> BUY NOW</a></div></div>
+                      <div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{off.Price}</span><small className="text-muted"> Offer expires:{off.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={off.producturl}> BUY NOW</a></div></div>
                     </div>
                  
                 
