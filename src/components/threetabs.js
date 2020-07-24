@@ -9,6 +9,8 @@ class ThreeTabs extends React.Component {
   //    super(props);
   //  }
   render() {
+
+
     return (
       <div>
         <Tabs tabPosition="left">
@@ -108,6 +110,33 @@ class ThreeTabs extends React.Component {
           
           <TabPane tab="Other offers" key="3">
           <h5>Here are all other offers: </h5>
+          <div className="col-sm-5">
+
+         
+              {/* { this.props.all.map(off=> {
+                return (
+                 
+                    <div className="card-post mb-4 card card-small">
+                      <div className="card-body">
+                        <h5 className="card-title">
+                          {off.Name}
+                        </h5>
+                        <img src= {off.imageurl} alt="DealArena" width="100px" height="100px"/>
+                        <h5 className="card-title"> {off.Description}</h5>
+
+                        <h5 className="card-title">Category: {off.Category}</h5>
+                      </div>
+
+                      <div className="border-top d-flex card-footer">
+                      <div className="card-post__author d-flex">
+                        <a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
+                          Offer: {off.Offer} </a>
+                      <div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{off.Price}</span><small className="text-muted"> Offer expires {off.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={off.producturl}> BUY NOW</a></div></div>
+                    </div>
+                 
+                )
+              })}*/}
+            </div> 
 
           </TabPane>
         </Tabs>

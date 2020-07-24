@@ -11,7 +11,7 @@ import ThreeTabs from './threetabs';
 
 const offers=[];
 const notifs=[];
-//const offersand=[];
+const all=[];
 //const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
 
 // var db=firebase.firestore()
@@ -64,7 +64,9 @@ class userhome extends Component{
 				//   this.setState({interest3 : doc.data().interests[2]})
 
 				}).then(()=>{
-					// this.ref=firebase.firestore().collection("offerDetails").where("Category","in",[this.state.interest1,this.state.interest2,this.state.interest3]);
+					this.refall=firebase.firestore().collection("offerDetails");
+					this.refall.onSnapshot(this.onCollectionUpdate2);
+
 					this.ref1=firebase.firestore().collection("offerDetails").where("Brand","in",this.state.interests);
 					this.ref1.onSnapshot(this.onCollectionUpdate);
 
@@ -87,28 +89,28 @@ class userhome extends Component{
 		})
 	}
 
-	// onCollectionUpdate2=(querySnapshot)=>{
-	// 	querySnapshot.forEach((doc)=>{
-	// 		const {Name, Description, Price, Expiry, category, Offer,imageurl, producturl}=doc.data();
-	// 		offersand.push({
-	// 			key:doc.id,
-	// 			doc,
-	// 			Name,
-	// 			Description,
-	// 			Price,
-	// 			category,
-	// 			Expiry,
-	// 			Offer,
-	// 			imageurl,
-	// 			producturl,
-	// 		});
-	// 	});
+	onCollectionUpdate2=(querySnapshot)=>{
+		querySnapshot.forEach((doc)=>{
+			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl}=doc.data();
+			all.push({
+				key:doc.id,
+				doc,
+				Brand,
+				Name,
+				Description,
+				Price,
+				Category,
+				Expiry,
+				Offer,
+				imageurl,
+				producturl
+			});
+		});
 
-	// 	this.setState({offersand});
-	// 	this.setState({offers: this.state.offers-this.state.offersand});
+		this.setState({all});
 
-	// 	console.log(this.state.offers);
-	// }
+		console.log(this.state.all);
+	}
 
 	onCollectionUpdate=(querySnapshot)=>{
 		// const offers=[];
@@ -220,7 +222,7 @@ class userhome extends Component{
 							<p id="interest2"></p>
 							<p id="interest3"></p> */}
 			  				<p>Manage your interests: </p>
-							{/* {<TreeCheck />} */}
+
 							{<TreeCheck propinterest={this.state.interests}  />}
 				
 							<button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
@@ -262,8 +264,7 @@ class userhome extends Component{
                 	
 					<div className="col-lg-8">
 					<div className="row">
-					<ThreeTabs propoffers={this.state.offers}
-					propnotifs={this.state.notifs}/>
+					<ThreeTabs all={this.state.all} propnotifs={this.state.notifs}/>
 						{/* <div className="col-sm-5">
 							<h5>Here are offers from your interests: </h5>
 							{this.state.offers.map(offer=>
