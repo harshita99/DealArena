@@ -10,7 +10,6 @@ class ThreeTabs extends React.Component {
   //  }
   render() {
 
-
     return (
       <div>
         <Tabs tabPosition="left">
@@ -113,8 +112,7 @@ class ThreeTabs extends React.Component {
           <div className="col-sm-5">
 
          
-              {/* { this.props.all.map(off=> {
-                return (
+               { this.props.all.map(off=> 
                  
                     <div className="card-post mb-4 card card-small">
                       <div className="card-body">
@@ -134,8 +132,8 @@ class ThreeTabs extends React.Component {
                       <div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{off.Price}</span><small className="text-muted"> Offer expires {off.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={off.producturl}> BUY NOW</a></div></div>
                     </div>
                  
-                )
-              })}*/}
+                
+              )}
             </div> 
 
           </TabPane>

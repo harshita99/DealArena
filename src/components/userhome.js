@@ -2,6 +2,7 @@
 import React,{Component} from 'react';
 // import Sidebar from "./sidebar.js"
 import firebase from "./Config";
+
 import history from './../history';
 import TreeCheck from './treecheck';
 import moment from 'moment';
@@ -23,7 +24,8 @@ class userhome extends Component{
 		this.unsubscribe=null;
 		this.state={
 			offers:[],
-			notifs:[]
+			notifs:[],
+			all:[]
 		};
 	}
   
