@@ -1,10 +1,11 @@
-
 import React,{Component} from 'react';
 // import Sidebar from "./sidebar.js"
 import firebase from "./Config";
 import history from './../history';
 import TreeCheck from './treecheck';
 import moment from 'moment';
+import ThreeTabs from './threetabs';
+
 //import { findAllByPlaceholderText } from '@testing-library/react';
 
 
@@ -253,27 +254,7 @@ class userhome extends Component{
                 	
 					<div className="col-lg-8">
 					<div className="row">
-						<div className="col-sm-5">
-							<h5>Here are offers from your interests: </h5>
-							{this.state.offers.map(offer=>
-								<div className="card-post mb-4 card card-small">
-								<div className="card-body">
-									<h5 className="card-title">
-										{offer.Name}
-									</h5>
-									<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
-									<h5 className="card-title"> {offer.Description}</h5>					
-
-									<h5 className="card-title">Category: {offer.Category}</h5>
-								</div>
-
-								<div className="border-top d-flex card-footer">
-								<div className="card-post__author d-flex">
-									<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
-										Offer: {offer.Offer} </a>
-								<div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{offer.Price}</span><small className="text-muted"> Offer expires {offer.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={offer.producturl}> BUY NOW</a></div></div></div>
-							)}
-						</div>
+                    <ThreeTabs propoffers={this.state.offers}/>
 						{/* <Sidebar/> */}
 
 	  				</div>

@@ -13,6 +13,13 @@ import {Navbar, Nav} from 'react-bootstrap';
                     <Nav.Link href="/">Home</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
+{/* 
+            <Navbar.Collapse>
+                <Nav>
+                    <Nav.Link href="/">LogOut</Nav.Link>
+                </Nav>
+            </Navbar.Collapse> */}
+
             </Navbar>
         );
     }

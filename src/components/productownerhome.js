@@ -125,7 +125,9 @@ class productownerhome extends Component{
 							{/* <button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
 								<i className="material-icons mr-1">Add product</i> </button>	 */}
 							<button onClick={() => history.push('/showproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-								<i className="material-icons mr-1">Manage products</i> </button>	
+								<i className="material-icons mr-1">Manage products</i> </button> 
+							<button onClick={() => history.push('/productownerhome')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+								<i className="material-icons mr-1">Manage offers</i> </button>	
 						</div>
 
 						<button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
