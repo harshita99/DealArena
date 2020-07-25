@@ -126,7 +126,7 @@ class productownerhome extends Component{
 								<i className="material-icons mr-1">Add product</i> </button>	 */}
 							<button onClick={() => history.push('/showproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
 								<i className="material-icons mr-1">Manage products</i> </button> 
-							<button onClick={() => history.push('/productownerhome')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+							<button onClick={() => history.push('/manageoffers')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
 								<i className="material-icons mr-1">Manage offers</i> </button>	
 						</div>
 
@@ -164,14 +164,6 @@ class productownerhome extends Component{
 									<div className="card-post__author d-flex">
 										<a href={offer.producturl} className="card-post__author-avatar card-post__author-avatar--small" > URL </a>
 									</div>
-								</div>
-
-								<div>
-									<button onClick={()=>this.update(offer.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
-									<i className="material-icons mr-1">Update offer</i> </button>
-
-									<button onClick={()=>this.delete(offer.key)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
-									<i className="material-icons mr-1">Delete offer</i> </button>
 								</div>
 							</div>
 						)};

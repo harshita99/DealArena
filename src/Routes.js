@@ -11,6 +11,7 @@ import addoffer from "./components/AddOffer";
 import addproduct from "./components/AddProduct";
 import showproduct from "./components/ShowProduct";
 import updateoffer from "./components/UpdateOffer";
+import manageoffers from "./components/ManageOffers";
 import updateproduct from "./components/UpdateProduct";
 
 import history from './history';
@@ -30,6 +31,7 @@ export default class Routes extends Component {
                     <Route path="/addproduct" component={addproduct}/>                  
                     <Route path="/showproduct" component={showproduct}/>
                     <Route path="/updateoffer" component={updateoffer}/>
+                    <Route path="/manageoffers" component={manageoffers}/>
                     <Route path="/updateproduct" component={updateproduct}/>
                 </Switch>
             </Router>
