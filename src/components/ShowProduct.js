@@ -130,7 +130,7 @@ render() {
                         <button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
                         <i className="material-icons mr-1">Add product</i> </button>	
                         <button onClick={() => history.push('/productownerhome')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-                        <i className="material-icons mr-1">Back to home</i> </button>
+                        <i className="material-icons mr-1">Home</i> </button>
 					</div>
 					<div>
                         <button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
