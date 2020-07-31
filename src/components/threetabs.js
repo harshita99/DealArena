@@ -12,7 +12,7 @@ class ThreeTabs extends React.Component {
 
     return (
       <div>
-        <Tabs tabPosition="left">
+        <Tabs tabPosition="top">
           <TabPane tab="New offers" key="1">
             <div className="col-sm-9">
             <h5>Here are new offers from your interests: </h5>
@@ -27,13 +27,14 @@ class ThreeTabs extends React.Component {
                   (	
                     <div className="card-post mb-4 card card-small">
                       <div className="card-body">
+                      <h7 className="card-title">{notif.Category}->{notif.Brand}->{notif.SubCategory}</h7>
+
                         <h5 className="card-title">
                           {notif.Name}
                         </h5>
                         <img src= {notif.imageurl} alt="DealArena" width="100px" height="100px"/>
-                        <h5 className="card-title"> {notif.Description}</h5>
+                        <h6 className="card-title"> {notif.Description}</h6>
 
-                        <h5 className="card-title">Category: {notif.Category}</h5>
                       </div>
 
                       <div className="border-top d-flex card-footer">
@@ -84,13 +85,14 @@ class ThreeTabs extends React.Component {
                 (	
                   <div className="card-post mb-4 card card-small">
                     <div className="card-body">
+                    <h7 className="card-title">{notif.Category}->{notif.Brand}->{notif.SubCategory}</h7>
+
                       <h5 className="card-title">
                         {notif.Name}
                       </h5>
                       <img src= {notif.imageurl} alt="DealArena" width="100px" height="100px"/>
-                      <h5 className="card-title"> {notif.Description}</h5>
+                      <h6 className="card-title"> {notif.Description}</h6>
 
-                      <h5 className="card-title">Category: {notif.Category}</h5>
                     </div>
 
                     <div className="border-top d-flex card-footer">
@@ -117,13 +119,13 @@ class ThreeTabs extends React.Component {
                  
                     <div className="card-post mb-4 card card-small">
                       <div className="card-body">
+                      <h7 className="card-title">{off.Category}->{off.Brand}->{off.SubCategory}</h7>
                         <h5 className="card-title">
                           {off.Name}
                         </h5>
                         <img src= {off.imageurl} alt="DealArena" width="100px" height="100px"/>
-                        <h5 className="card-title"> {off.Description}</h5>
+                        <h6 className="card-title"> {off.Description}</h6>
 
-                        <h5 className="card-title">Category: {off.Category}</h5>
                       </div>
 
                       <div className="border-top d-flex card-footer">
