@@ -209,12 +209,15 @@ class userhome extends Component{
 
     render(){
   		return (
-    		<div className="App">
+    		<div className="App body">
       			<div><br></br></div>
 
-       			<div className="row">
+       			<div className="row  ">
         
-       				<div className="col-lg-3"><div className="mb-4 pt-3 card card-small">
+       				<div className="col-lg-3 lol ">
+						   
+					   <div className="card-post mb-4 card card-small">
+
 						<div className="border-bottom text-center card-header">
 				
 							{/* <h4 class="mb-0" id="username">Name of User </h4> */}
@@ -226,7 +229,6 @@ class userhome extends Component{
 							{/* <p id="interest1"></p>
 							<p id="interest2"></p>
 							<p id="interest3"></p> */}
-			  				<p>Manage your interests: </p>
 
 							{<TreeCheck propinterest={this.state.interests}  />}
 				
@@ -235,9 +237,11 @@ class userhome extends Component{
 					
 						</div><ul className="list-group list-group-flush"></ul></div>
 						
-						<div className="mb-4 pt-3 card card-small">
+						<div className="card-post mb-4 card card-small">
+
 							<div className="border-bottom text-center card-header">
-								<h5 className="mb-0">New Offers From Your Interests</h5>
+								<h5 className="mb-0">Notifications!</h5>
+								<h6> New Offers From Your Interests</h6>
 								<ul className="notifications">
 									{ this.state.notifs.map(notif=> {
 

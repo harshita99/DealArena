@@ -2,6 +2,8 @@
   text-align: center;
 }
 
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -56,3 +58,4 @@
 
 .form-gradient input[type=password]:focus:not([readonly]) + label {
   color: #4f4f4f; }
+

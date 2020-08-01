@@ -1,6 +1,7 @@
 import React from "react";
 //import ReactDOM from "react-dom";
 import { Tabs } from "antd";
+import '../index.css';
 
 const { TabPane } = Tabs;
 
@@ -11,11 +12,11 @@ class ThreeTabs extends React.Component {
   render() {
 
     return (
-      <div>
-        <Tabs tabPosition="top">
-          <TabPane tab="New offers" key="1">
+      <div className="lol ">
+        <Tabs tabPosition="top"  >
+          <TabPane  tab="New offers" key="1" className="body2" >
             <div className="col-sm-9">
-            <h5>Here are new offers from your interests: </h5>
+            <h6>Here are new offers from your interests: </h6>
               { this.props.propnotifs.map(notif=> {
 
                 const elapsedTime = ((notif.time).valueOf() - notif.logTime)
@@ -54,7 +55,7 @@ class ThreeTabs extends React.Component {
 
           <TabPane tab="Old offers" key="2">
             <div className="col-sm-6">
-							<h5>Here are old offers from your interests: </h5>
+							<h6>Here are old offers from your interests: </h6>
 							{/* {this.props.propoffers.map(offer=>
 								<div className="card-post mb-4 card card-small">
 								<div className="card-body">
@@ -111,7 +112,7 @@ class ThreeTabs extends React.Component {
           
           <TabPane tab="Other offers" key="3">
           <div className="col-sm-6">
-                      <h5>Here are all other offers: </h5>
+                      <h6> Here are all other offers: </h6>
 
 
          
