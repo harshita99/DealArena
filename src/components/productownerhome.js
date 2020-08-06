@@ -45,7 +45,7 @@ class productownerhome extends Component{
 	onCollectionUpdate=(querySnapshot)=>{
 		const offers=[];
 		querySnapshot.forEach((doc)=>{
-			const {Name, Description,Brand, Price, Expiry, Category, Offer, imageurl, producturl}=doc.data();
+			const {Name, Description, Brand, Price, Expiry, Category, SubCategory, Offer, imageurl, producturl}=doc.data();
 			offers.push({
 				key:doc.id,
 				doc,
@@ -57,6 +57,7 @@ class productownerhome extends Component{
 				Expiry,
 				Offer,
 				imageurl,
+				SubCategory,
 				producturl
 			});
 		});
@@ -143,28 +144,22 @@ class productownerhome extends Component{
 						<h5>Your Offers:</h5>		  
 						{this.state.offers.map(offer=>
 							<div className="card-post mb-4 card card-small">
-
 								<div className="card-body">
-									<h5 className="card-title">
-										{offer.Name}
-									</h5>
-									<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
-									<h5 className="card-title"> {offer.Description}</h5>					
-
-									</div>
-
-									<div className="border-top d-flex card-footer">
-									<div className="card-post__author d-flex">
-										<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >Offer: {offer.Offer} </a>
-										<div className="d-flex flex-column justify-content-center ml-3">
-											<span className="card-post__author-name">Rs.{offer.Price}</span>
-											<small className="text-muted"> Offer expires {offer.Expiry}</small>
-										</div>
-									</div>
-									<div className="card-post__author d-flex">
-										<a href={offer.producturl} className="card-post__author-avatar card-post__author-avatar--small" > URL </a>
-									</div>
+								<h7 className="card-title">{offer.Category} -> {offer.Brand} -> {offer.SubCategory}</h7>
+			
+								<h5 className="card-title">
+									{offer.Name}
+								</h5>
+								<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
+								<h6 className="card-title"> {offer.Description}</h6>
+			
 								</div>
+			
+								<div className="border-top d-flex card-footer">
+								<div className="card-post__author d-flex">
+								<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
+									Offer: {offer.Offer} </a>
+								<div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{offer.Price}</span><small className="text-muted"> Offer expires:{offer.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={offer.producturl}> URL</a></div></div>
 							</div>
 						)};
 					</div>

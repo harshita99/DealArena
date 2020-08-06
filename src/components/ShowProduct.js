@@ -44,7 +44,7 @@ class ShowProduct extends Component{
 		const products=[];
 		querySnapshot.forEach((doc)=>{
 			// console.log(doc.id);
-			const {Name, Description,Brand, Price, Expiry, Category, Offer,imageurl, producturl}=doc.data();
+			const {Name, Description, Brand, Price, Expiry, Category, SubCategory, Offer,imageurl, producturl}=doc.data();
 		products.push({
 			key:doc.id,
 			doc,
@@ -56,8 +56,8 @@ class ShowProduct extends Component{
 			Expiry,
 			Offer,
 			imageurl,
-			producturl,
-			
+			SubCategory,
+			producturl
 		});
 	});
 	this.setState({products});
@@ -146,31 +146,22 @@ render() {
 				<h5>Your Products:</h5>			  
 				{this.state.products.map(product=>
 					<div className="card-post mb-4 card card-small">
-
 						<div className="card-body">
-							<h5 className="card-title">
-								{product.Name}
-							</h5>
-							<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
-                            <h5 className="card-title"> {product.Brand}</h5>
-							<h5 className="card-title"> {product.Description}</h5>					
+						<h7 className="card-title">{product.Category} -> {product.Brand} -> {product.SubCategory}</h7>
 
-							<h5 className="card-title">Category: {product.Category}</h5>
+						<h5 className="card-title">
+							{product.Name}
+						</h5>
+						<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
+						<h6 className="card-title"> {product.Description}</h6>
 
 						</div>
 
 						<div className="border-top d-flex card-footer">
-							<div className="card-post__author d-flex col-sm-10">
-								<div className="d-flex flex-column justify-content-center ml-3">
-									<span className="card-post__author-name">Rs.{product.Price}</span>
-								</div>
-							</div>
-                            <div>
-                                <div className="card-post__author d-flex col-sm-10">
-                                    <a href={product.producturl} className="card-post__author-avatar card-post__author-avatar--small" > URL </a>
-                                </div>
-                            </div>
-						</div>
+						<div className="card-post__author d-flex">
+						<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
+							Offer: {product.Offer} </a>
+						<div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{product.Price}</span><small className="text-muted"> Offer expires:{product.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={product.producturl}> URL</a></div></div>
 
 						<div>
 							<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
