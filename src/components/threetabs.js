@@ -14,7 +14,7 @@ class ThreeTabs extends React.Component {
     return (
       <div className="lol ">
         <Tabs tabPosition="top"  >
-          <TabPane  tab="New offers" key="1" className="body2" >
+          <TabPane  tab="New offers" key="1" >
             <div className="col-sm-9">
             <h6>Here are new offers from your interests: </h6>
               { this.props.propnotifs.map(notif=> {
@@ -29,20 +29,20 @@ class ThreeTabs extends React.Component {
                     <div className="card-post mb-4 card card-small">
                       <div className="card-body">
                       <h7 className="card-title">{notif.Category} -> {notif.Brand} -> {notif.SubCategory}</h7>
-
+  
                         <h5 className="card-title">
                           {notif.Name}
                         </h5>
                         <img src= {notif.imageurl} alt="DealArena" width="100px" height="100px"/>
                         <h6 className="card-title"> {notif.Description}</h6>
-
+  
                       </div>
-
+  
                       <div className="border-top d-flex card-footer">
                       <div className="card-post__author d-flex">
                         <a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
                           Offer: {notif.Offer} </a>
-                      <div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{notif.Price}</span><small className="text-muted"> Offer expires: {notif.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={notif.producturl}> BUY NOW</a></div></div>
+                      <div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{notif.Price}</span><small className="text-muted"> Offer expires:{notif.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={notif.producturl}> BUY NOW</a></div></div>
                     </div>
                   ) : ( 
                     <span> { "" } </span>
