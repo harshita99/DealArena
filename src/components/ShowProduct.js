@@ -147,7 +147,7 @@ render() {
 				{this.state.products.map(product=>
 					<div className="card-post mb-4 card card-small">
 						<div className="card-body">
-						<h7 className="card-title">{product.Category} -> {product.Brand} -> {product.SubCategory}</h7>
+						<h7 className="card-title">{product.Category} -{">"} {product.Brand} -{">"} {product.SubCategory}</h7>
 
 						<h5 className="card-title">
 							{product.Name}

@@ -145,7 +145,7 @@ class productownerhome extends Component{
 						{this.state.offers.map(offer=>
 							<div className="card-post mb-4 card card-small">
 								<div className="card-body">
-								<h7 className="card-title">{offer.Category} -> {offer.Brand} -> {offer.SubCategory}</h7>
+								<h7 className="card-title">{offer.Category} -{">"} {offer.Brand} -{">"} {offer.SubCategory}</h7>
 			
 								<h5 className="card-title">
 									{offer.Name}

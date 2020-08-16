@@ -15,7 +15,7 @@ class ThreeTabs extends React.Component {
       <div className="lol ">
         <Tabs tabPosition="top"  >
           <TabPane  tab="New offers" key="1" >
-            <div className="col-sm-9">
+            <div className="col-sm-12">
             <h6>Here are new offers from your interests: </h6>
               { this.props.propnotifs.map(notif=> {
 
@@ -28,7 +28,7 @@ class ThreeTabs extends React.Component {
                   (	
                     <div className="card-post mb-4 card card-small">
                       <div className="card-body">
-                      <h7 className="card-title">{notif.Category} -> {notif.Brand} -> {notif.SubCategory}</h7>
+                      <h7 className="card-title">{notif.Category} -{">"} {notif.Brand} -{">"} {notif.SubCategory}</h7>
   
                         <h5 className="card-title">
                           {notif.Name}
@@ -56,25 +56,6 @@ class ThreeTabs extends React.Component {
           <TabPane tab="Old offers" key="2">
             <div className="col-sm-6">
 							<h6>Here are old offers from your interests: </h6>
-							{/* {this.props.propoffers.map(offer=>
-								<div className="card-post mb-4 card card-small">
-								<div className="card-body">
-									<h5 className="card-title">
-										{offer.Name}
-									</h5>
-									<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
-									<h5 className="card-title"> {offer.Description}</h5>
-
-									<h5 className="card-title">Category: {offer.Category}</h5>
-								</div>
-
-								<div className="border-top d-flex card-footer">
-								<div className="card-post__author d-flex">
-									<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
-										Offer: {offer.Offer} </a>
-								<div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{offer.Price}</span><small className="text-muted"> Offer expires {offer.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={offer.producturl}> BUY NOW</a></div></div></div>
-							)}
-						</div> */}
             { this.props.propnotifs.map(notif=> {
 
               const elapsedTime = ((notif.time).valueOf() - notif.logTime)
@@ -86,7 +67,7 @@ class ThreeTabs extends React.Component {
                 (	
                   <div className="card-post mb-4 card card-small">
                     <div className="card-body">
-                    <h7 className="card-title">{notif.Category} -> {notif.Brand} -> {notif.SubCategory}</h7>
+                    <h7 className="card-title">{notif.Category} -{">"} {notif.Brand} -{">"} {notif.SubCategory}</h7>
 
                       <h5 className="card-title">
                         {notif.Name}
@@ -120,7 +101,7 @@ class ThreeTabs extends React.Component {
                  
                     <div className="card-post mb-4 card card-small">
                       <div className="card-body">
-                      <h7 className="card-title">{off.Category} -> {off.Brand} -> {off.SubCategory}</h7>
+                      <h7 className="card-title">{off.Category} -{">"} {off.Brand} -{">"} {off.SubCategory}</h7>
                         <h5 className="card-title">
                           {off.Name}
                         </h5>
