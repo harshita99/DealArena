@@ -19,9 +19,9 @@ class ThreeTabs extends React.Component {
             <h6>Here are new offers from your interests: </h6>
               { this.props.propnotifs.map(notif=> {
 
-                const elapsedTime = ((notif.time).valueOf() - notif.logTime)
-                console.log("OfferTime is "+ (notif.time).valueOf() + " and LogTime is "+notif.logTime)
-                console.log ("Elapsed time is "+ elapsedTime)
+                // const elapsedTime = ((notif.time).valueOf() - notif.logTime)
+                // console.log("OfferTime is "+ (notif.time).valueOf() + " and LogTime is "+notif.logTime)
+                // console.log ("Elapsed time is "+ elapsedTime)
 
                 return (
                   (notif.logTime <= (notif.time).valueOf()) ? 
@@ -58,9 +58,9 @@ class ThreeTabs extends React.Component {
 							<h6>Here are old offers from your interests: </h6>
             { this.props.propnotifs.map(notif=> {
 
-              const elapsedTime = ((notif.time).valueOf() - notif.logTime)
-              console.log("OfferTime is "+ (notif.time).valueOf() + " and LogTime is "+notif.logTime)
-              console.log ("Elapsed time is "+ elapsedTime)
+              // const elapsedTime = ((notif.time).valueOf() - notif.logTime)
+              // console.log("OfferTime is "+ (notif.time).valueOf() + " and LogTime is "+notif.logTime)
+              // console.log ("Elapsed time is "+ elapsedTime)
 
               return (
                 (notif.logTime > (notif.time).valueOf()) ? 

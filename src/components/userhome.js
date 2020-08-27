@@ -50,8 +50,8 @@ class userhome extends Component{
 			  firebase.firestore().collection("userDetails").doc(user.uid)
 				.get()
 				.then((doc)=> {
-					console.log("Document data:", doc.data().name);
-					console.log("Document data:", doc.data().interests);
+					// console.log("Document data:", doc.data().name);
+					// console.log("Document data:", doc.data().interests);
 				//   console.log("Document data:", doc.data().interests[0],doc.data().interests[1],doc.data().interests[2]);
 				//	document.getElementById("username").innerHTML = doc.data().name ;				  
 				//	document.getElementById("interest1").innerHTML = doc.data().interests ;
@@ -112,7 +112,7 @@ class userhome extends Component{
 
 		this.setState({all});
 
-		console.log(this.state.all);
+		// console.log(this.state.all);
 	}
 
 	onCollectionUpdate=(querySnapshot)=>{
@@ -245,9 +245,9 @@ class userhome extends Component{
 								<ul className="notifications">
 									{ this.state.notifs.map(notif=> {
 
-										const elapsedTime = ((notif.time).valueOf() - notif.logTime)
-										console.log("OfferTime is "+ (notif.time).valueOf() + " and LogTime is "+notif.logTime)
-										console.log ("Elapsed time is "+ elapsedTime)
+										// const elapsedTime = ((notif.time).valueOf() - notif.logTime)
+										// console.log("OfferTime is "+ (notif.time).valueOf() + " and LogTime is "+notif.logTime)
+										// console.log ("Elapsed time is "+ elapsedTime)
 										
 										return (
 											(notif.logTime <= (notif.time).valueOf()) ? 

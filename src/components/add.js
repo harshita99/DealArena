@@ -2,6 +2,7 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
+import TreeCheck1 from './treeCheck1';
 
 class add extends Component{
     constructor(props){
@@ -112,6 +113,15 @@ render() {
                         <i className="material-icons mr-1">LogOut</i> </button>				
                     </div>
                 </div>
+
+				<br></br>
+				<br></br>
+
+				<div>
+					<h6><b>To add an offer at intermediate node - </b></h6>
+					{<TreeCheck1  />}
+				</div>
+
             </div>
 		</div>
 		

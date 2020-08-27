@@ -164,8 +164,8 @@ render() {
 						<div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{product.Price}</span><small className="text-muted"> Offer expires:{product.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={product.producturl}> URL</a></div></div>
 
 						<div>
-							<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
-				   			<i className="material-icons mr-1">Add offer</i> </button>
+							{/* <button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
+				   			<i className="material-icons mr-1">Add offer</i> </button> */}
 
 							<button onClick={()=>this.update(product.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
 				   			<i className="material-icons mr-1">Edit product</i> </button>
