@@ -22,9 +22,6 @@ class add extends Component{
 		this.setState(state);
 	  }
 	
-	
-
-
 	componentDidMount(){
 		this.checkAuth();
 		firebase.auth().onAuthStateChanged((productowner)=>{
