@@ -99,42 +99,64 @@ class add extends Component{
 		});
 	}
 
-render() {
+	render() {
+		//console.log(this.state.brand)
+		console.log(this.state)
 
-	//console.log(this.state.brand)
-	console.log(this.state)
+		return (
+			<div>
+			<div className="row">
+				<div className="col-lg-3">
+				<div className="mb-4 pt-3 card card-small">
+					<div className="border-bottom text-center card-header">
+						<div className="mb-3 mx-auto">
+							<img className="rounded-circle" src="" alt="" width="80"/>
+						</div>
+						<h4 className="mb-0" id="brand">{this.state.brand}</h4>
+						<br></br>
 
+						<div>	
+							<button onClick={() => history.push('/productownerhome')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+							<i className="material-icons mr-1">Home</i> </button>
+					
+							<button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+							<i className="material-icons mr-1">LogOut</i> </button>				
+						</div>
+					</div>
 
-  return (
-		<div>
+					<br></br>
+					<br></br>
 
-<div className="row">
-		
-		<div className="col-lg-3"><div className="mb-4 pt-3 card card-small">
-            <div className="border-bottom text-center card-header">
-                <div className="mb-3 mx-auto">
-                    <img className="rounded-circle" src="" alt="" width="80"/>
-                </div>
-                    <h4 className="mb-0" id="brand">{this.state.brand}</h4>
-                    <br></br>
+					<div>
+						<h6><b>To add an offer at intermediate node - </b></h6>
+						{<TreeCheck1  brand={this.state.brand}  />}
+					</div>
 
-                    <div>	
-                        <button onClick={() => history.push('/productownerhome')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-                        <i className="material-icons mr-1">Home</i> </button>
-				
-                        <button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-                        <i className="material-icons mr-1">LogOut</i> </button>				
-                    </div>
-                </div>
-
-				<br></br>
-				<br></br>
+					<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
+					<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
 
 				<div>
 					<h6><b>To add an offer at intermediate node - </b></h6>
 					{<TreeCheck1  brand={this.state.brand} Expiry={this.state.Expiry} Offer={this.state.Offer} products={this.state.products}></TreeCheck1>}
 
 				</div>
+				</div>
+			
+				<div className="col-lg-8">
+				<div className="row">	  
+				<div className="col-sm-5">			  
+					{this.state.products.map(product=>
+						<div className="card-post mb-4 card card-small">
+
+							<div className="card-body">
+								<h5 className="card-title">
+									{product.Name}
+								</h5>
+								<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
+								<h5 className="card-title"> {product.Brand}</h5>
+								<h5 className="card-title"> {product.Description}</h5>					
+								<h5 className="card-title">Category: {product.Category}</h5>
+							</div>
 
 				<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
 				<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
@@ -171,32 +193,21 @@ render() {
 									<span className="card-post__author-name">Rs.{product.Price}</span>
 								</div>
 							</div>
-                            <div>
-                                <div className="card-post__author d-flex col-sm-10">
-                                    <a href={product.producturl} className="card-post__author-avatar card-post__author-avatar--small" > URL </a>
-                                </div>
-                            </div>
-						</div>
 
-						<div>
-							<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
-				   			<i className="material-icons mr-1">Add offer</i> </button>
+							<div>
+								<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
+								<i className="material-icons mr-1">Add offer</i> </button>
+							</div>
 						</div>
-					</div>
-					)
-				};
-	</div>
-	  </div>
-
-	  </div>
+					)};
+				</div>
+				</div>
+				</div>
 
 			</div>
-		</div>
-
-
-  )
-
-}
+			</div>
+		)
+	}
 }
 
 export default add;
