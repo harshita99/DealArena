@@ -3,6 +3,8 @@ import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
 import TreeCheck1 from './treeCheck1';
+import { MDBInput} from 'mdbreact';
+
 
 class add extends Component{
     constructor(props){
@@ -12,6 +14,41 @@ class add extends Component{
 		this.state={
 			products:[]
 		};
+	}
+
+	onInput=(e)=>{
+		const state=this.state;
+		state[e.target.name]=e.target.value;
+		this.setState(state);
+	  }
+	
+	
+
+	onSubmit=(e)=>{
+		console.log(this.state)
+
+		const w=this.state.Expiry
+
+		const x=this.state.brand
+		const y=this.state.Offer
+		// const z=this.state.products  
+		// const {Expiry, Brand,Offer,products}=this.state;
+
+		// this.state.products.map(p=>{
+
+
+	  firebase.firestore().collection("offerDetails").add({
+		  w,x,y
+	  })
+	  .catch((error)=>{
+		  console.error("Error adding document:",error);
+	  });
+
+	// })
+
+
+	this.props.history.push("/productownerhome")
+
 	}
 
 	componentDidMount(){
@@ -36,8 +73,10 @@ class add extends Component{
 
 	onCollectionUpdate=(querySnapshot)=>{
 		const products=[];
+		const brand=[];
 		querySnapshot.forEach((doc)=>{
 			const {Name, Description,Brand, Price, Expiry, Category, Offer,imageurl, producturl}=doc.data();
+			brand.push(Brand);
             products.push({
                 key:doc.id,
                 doc,
@@ -53,7 +92,8 @@ class add extends Component{
                 
             });
         });
-        this.setState({products});
+		this.setState({products});
+		this.setState(brand);
 	}
 
 	checkAuth(){
@@ -85,13 +125,12 @@ class add extends Component{
 		});
 	}
 
-	addoffer(u){
-		var productId = u;
-		localStorage.setItem('productsession', productId);
-		history.push("/addoffer");
-	}
-
 render() {
+
+	//console.log(this.state.brand)
+	console.log(this.state)
+
+
   return (
 		<div>
 
@@ -119,8 +158,18 @@ render() {
 
 				<div>
 					<h6><b>To add an offer at intermediate node - </b></h6>
-					{<TreeCheck1  />}
+					{<TreeCheck1  brand={this.state.brand}  />}
 				</div>
+
+				<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
+				<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
+
+				<button onClick={this.onSubmit} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+          			<i className="material-icons mr-1">Add</i> 
+        		</button>
+
+
+
 
             </div>
 		</div>
