@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import 'antd/dist/antd.css';
 import { TreeSelect } from 'antd';
-import firebase from "./Config";
+// import firebase from "./Config";
 
 const { SHOW_PARENT } = TreeSelect;
 
-const treeData = [
+var treeData = [
   {
     title: "Electronics",
     value: "Electronics",
@@ -129,8 +129,10 @@ const treeData = [
   }
 ];
 
+treeData=treeData[0].children[1].children;
+
 const offers=[];
-  
+
 
 class TreeCheck1 extends Component {
 
@@ -142,28 +144,11 @@ class TreeCheck1 extends Component {
     };
   }
 
-  saveButton=value=>{
-    window.location.reload(true);
-  }
 
   onChange = value => {
     console.log('onChange ', value);
     this.setState({ value });
 
-        firebase.firestore().collection("productDetails").get()
-        .then(()=>{
-
-            this.ref1=firebase.firestore().collection("productDetails").where("Brand","in",this.state.value);
-            this.ref1.onSnapshot(this.onCollectionUpdate);
-
-            this.ref2=firebase.firestore().collection("productDetails").where("SubCategory","in",this.state.value);
-            this.ref2.onSnapshot(this.onCollectionUpdate);
-
-            this.ref=firebase.firestore().collection("productDetails").where("Category","in",this.state.value);
-            console.log(this.state.value);
-            
-            this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-        })
   };
   
   onCollectionUpdate=(querySnapshot)=>{
@@ -197,11 +182,13 @@ class TreeCheck1 extends Component {
   }
 
   render() {
+    console.log(this.state.value) //this is where selected checkbox value is stored for examples Mobiles. but how to send it to add.js?
     const tProps = {
       treeData,
       value: this.state.value,
       onChange: this.onChange,
       treeCheckable: true,
+
       showCheckedStrategy: SHOW_PARENT,
       placeholder: 'Select nodes where you want to add',
       style: {
@@ -211,9 +198,7 @@ class TreeCheck1 extends Component {
     return( 
       <div>
         <TreeSelect {...tProps} />
-        <button onClick={this.saveButton} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-          <i className="material-icons mr-1">Add</i> 
-        </button>
+
       </div>
     )
   }
