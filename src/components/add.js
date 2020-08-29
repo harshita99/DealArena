@@ -24,32 +24,6 @@ class add extends Component{
 	
 	
 
-	onSubmit=(e)=>{
-		console.log(this.state)
-
-		const w=this.state.Expiry
-
-		const x=this.state.brand
-		const y=this.state.Offer
-		// const z=this.state.products  
-		// const {Expiry, Brand,Offer,products}=this.state;
-
-		// this.state.products.map(p=>{
-
-
-	  firebase.firestore().collection("offerDetails").add({
-		  w,x,y
-	  })
-	  .catch((error)=>{
-		  console.error("Error adding document:",error);
-	  });
-
-	// })
-
-
-	this.props.history.push("/productownerhome")
-
-	}
 
 	componentDidMount(){
 		this.checkAuth();
@@ -158,15 +132,14 @@ render() {
 
 				<div>
 					<h6><b>To add an offer at intermediate node - </b></h6>
-					{<TreeCheck1  brand={this.state.brand}  />}
+					{<TreeCheck1  brand={this.state.brand} Expiry={this.state.Expiry} Offer={this.state.Offer} products={this.state.products}></TreeCheck1>}
+
 				</div>
 
 				<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
 				<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
 
-				<button onClick={this.onSubmit} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-          			<i className="material-icons mr-1">Add</i> 
-        		</button>
+				
 
 
 

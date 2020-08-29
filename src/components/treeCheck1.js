@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import 'antd/dist/antd.css';
 import { TreeSelect } from 'antd';
-// import firebase from "./Config";
+import firebase from "./Config";
 
 const { SHOW_PARENT } = TreeSelect;
 
@@ -144,6 +144,34 @@ class TreeCheck1 extends Component {
     };
   }
 
+  
+	onSubmit=(e)=>{
+		console.log(this.props)
+
+		this.props.products.map(p=>{
+      var Category=p.Category
+      var Description=p.Description
+      var Name=p.Name
+      var Offer=this.props.Offer
+      var Expiry=this.props.Expiry
+      var Brand=p.Brand
+
+
+
+	  firebase.firestore().collection("offerDetails").add({
+      Category,Description,Name,Offer,Expiry,Brand
+
+	  })
+	  .catch((error)=>{
+		  console.error("Error adding document:",error);
+	  });
+
+	// })
+
+
+
+	})}
+
 
   onChange = value => {
     console.log('onChange ', value);
@@ -198,6 +226,9 @@ class TreeCheck1 extends Component {
     return( 
       <div>
         <TreeSelect {...tProps} />
+        <button onClick={this.onSubmit} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+          			<i className="material-icons mr-1">Add</i> 
+        		</button>
 
       </div>
     )
