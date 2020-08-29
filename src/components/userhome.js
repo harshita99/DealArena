@@ -2,19 +2,16 @@
 import React,{Component} from 'react';
 // import Sidebar from "./sidebar.js"
 import firebase from "./Config";
-
 import history from './../history';
 import TreeCheck from './treecheck';
 import moment from 'moment';
 import ThreeTabs from './threetabs';
 //import { findAllByPlaceholderText } from '@testing-library/react';
 
-
 const offers=[];
 const notifs=[];
 const all=[];
 //const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
-
 // var db=firebase.firestore()
 class userhome extends Component{
 	
@@ -46,12 +43,12 @@ class userhome extends Component{
 
 		firebase.auth().onAuthStateChanged((user)=> {
 			if (user) {
-			  console.log(user.uid);
-			  firebase.firestore().collection("userDetails").doc(user.uid)
+			  	console.log(user.uid);
+			  	firebase.firestore().collection("userDetails").doc(user.uid)
 				.get()
 				.then((doc)=> {
-					// console.log("Document data:", doc.data().name);
-					// console.log("Document data:", doc.data().interests);
+				// console.log("Document data:", doc.data().name);
+				// console.log("Document data:", doc.data().interests);
 				//   console.log("Document data:", doc.data().interests[0],doc.data().interests[1],doc.data().interests[2]);
 				//	document.getElementById("username").innerHTML = doc.data().name ;				  
 				//	document.getElementById("interest1").innerHTML = doc.data().interests ;
@@ -64,7 +61,6 @@ class userhome extends Component{
 				//   this.setState({interest1 : doc.data().interests[0]})
 				//   this.setState({interest2 : doc.data().interests[1]})
 				//   this.setState({interest3 : doc.data().interests[2]})
-
 				}).then(()=>{
 					this.refall=firebase.firestore().collection("offerDetails");
 					this.refall.onSnapshot(this.onCollectionUpdate2);
@@ -111,13 +107,11 @@ class userhome extends Component{
 		});
 
 		this.setState({all});
-
 		// console.log(this.state.all);
 	}
 
 	onCollectionUpdate=(querySnapshot)=>{
 		// const offers=[];
-
 		querySnapshot.forEach((doc)=>{
 			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time,SubCategory}=doc.data();
 			var logTime = (sessionStorage.getItem('logTime'));
@@ -211,15 +205,11 @@ class userhome extends Component{
   		return (
     		<div className="App body">
       			<div><br></br></div>
-
-       			<div className="row  ">
-        
-       				<div className="col-lg-3 lol ">
-						   
+       			<div className="row">
+					   
+       				<div className="col-lg-3 lol">
 					   <div className="card-post mb-4 card card-small">
-
 						<div className="border-bottom text-center card-header">
-				
 							{/* <h4 class="mb-0" id="username">Name of User </h4> */}
 							<h4>Welcome, {this.state.name} </h4>
 							<br></br>
@@ -238,17 +228,14 @@ class userhome extends Component{
 						</div><ul className="list-group list-group-flush"></ul></div>
 						
 						<div className="card-post mb-4 card card-small">
-
 							<div className="border-bottom text-center card-header">
 								<h5 className="mb-0">Notifications!</h5>
 								<h6> New Offers From Your Interests</h6>
 								<ul className="notifications">
 									{ this.state.notifs.map(notif=> {
-
 										// const elapsedTime = ((notif.time).valueOf() - notif.logTime)
 										// console.log("OfferTime is "+ (notif.time).valueOf() + " and LogTime is "+notif.logTime)
 										// console.log ("Elapsed time is "+ elapsedTime)
-										
 										return (
 											(notif.logTime <= (notif.time).valueOf()) ? 
 											(	
@@ -296,11 +283,9 @@ class userhome extends Component{
 							)}
 						</div> */}
 						{/* <Sidebar/> */}
-
 	  				</div>
 	 				</div>
     			</div>
-
 			</div>
   		);
     }
