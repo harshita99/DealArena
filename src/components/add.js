@@ -132,12 +132,12 @@ class add extends Component{
 					<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
 					<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
 
-				<div>
+				</div>
 					<h6><b>To add an offer at intermediate node - </b></h6>
 					{<TreeCheck1  brand={this.state.brand} Expiry={this.state.Expiry} Offer={this.state.Offer} products={this.state.products}></TreeCheck1>}
 
 				</div>
-				</div>
+			</div>
 			
 				<div className="col-lg-8">
 				<div className="row">	  
@@ -155,16 +155,12 @@ class add extends Component{
 								<h5 className="card-title">Category: {product.Category}</h5>
 							</div>
 
-				<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
-				<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
+							<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
+							<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
 
-				
-
-
-
-
-            </div>
-		</div>
+            			</div>
+					)}
+				</div>
 		
 			<div className="col-lg-8">
 			<div className="row">	  
@@ -173,15 +169,11 @@ class add extends Component{
 					<div className="card-post mb-4 card card-small">
 
 						<div className="card-body">
-							<h5 className="card-title">
-								{product.Name}
-							</h5>
+							<h5 className="card-title">{product.Name}</h5>
 							<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
                             <h5 className="card-title"> {product.Brand}</h5>
-							<h5 className="card-title"> {product.Description}</h5>					
-
+							<h5 className="card-title"> {product.Description}</h5>
 							<h5 className="card-title">Category: {product.Category}</h5>
-
 						</div>
 
 						<div className="border-top d-flex card-footer">
@@ -196,12 +188,16 @@ class add extends Component{
 								<i className="material-icons mr-1">Add offer</i> </button>
 							</div>
 						</div>
-					)};
-				</div>
-				</div>
-				</div>
+
+					</div>
+				)};
+			</div>
+			</div>
+			</div>
 
 			</div>
+			</div>
+
 			</div>
 		)
 	}
