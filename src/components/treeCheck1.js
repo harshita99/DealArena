@@ -148,7 +148,7 @@ class TreeCheck1 extends Component {
 	onSubmit=(e)=>{
     console.log(this.props)
 
-		this.props.products.map(p=>{
+		this.props.offers.map(p=>{
       var Category=p.Category
       var SubCategory = p.SubCategory
       var Description=p.Description
