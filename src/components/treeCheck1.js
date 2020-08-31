@@ -146,37 +146,51 @@ class TreeCheck1 extends Component {
 
   
 	onSubmit=(e)=>{
-		console.log(this.props)
+    console.log(this.props)
 
 		this.props.products.map(p=>{
       var Category=p.Category
+      var SubCategory = p.SubCategory
       var Description=p.Description
       var Name=p.Name
       var Offer=this.props.Offer
       var Expiry=this.props.Expiry
       var Brand=p.Brand
 
+      firebase.firestore().collection("offerDetails").add({
+        Category,Description,Name,Offer,Expiry,Brand, SubCategory
+      })
+      .catch((error)=>{
+        console.error("Error adding document:",error);
+      });
+      return null;
+    })
+  }
 
+  componentDidMount(){
+			  firebase.firestore().collection("productDetails")
+				.get()
+				.then((doc)=> {
+				  this.setState({brand : doc.data().brand})
+				}).then((doc)=>{
+          this.ref2=firebase.firestore().collection("productDetails").where("SubCategory","in",this.state.value);
+          this.ref2.onSnapshot(this.onCollectionUpdate);
+          
+          this.ref1=firebase.firestore().collection("productDetails").where("Category","in",this.state.value);
+					this.ref1.onSnapshot(this.onCollectionUpdate);
 
-	  firebase.firestore().collection("offerDetails").add({
-      Category,Description,Name,Offer,Expiry,Brand
-
-	  })
-	  .catch((error)=>{
-		  console.error("Error adding document:",error);
-	  });
-
-	// })
-
-
-
-	})}
-
+					this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand);
+          this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
+          console.log(this.state.value);
+				})
+				.catch(function(error){
+				  console.log("Error getting document:", error);
+				})
+	}
 
   onChange = value => {
     console.log('onChange ', value);
     this.setState({ value });
-
   };
   
   onCollectionUpdate=(querySnapshot)=>{
@@ -216,7 +230,6 @@ class TreeCheck1 extends Component {
       value: this.state.value,
       onChange: this.onChange,
       treeCheckable: true,
-
       showCheckedStrategy: SHOW_PARENT,
       placeholder: 'Select nodes where you want to add',
       style: {

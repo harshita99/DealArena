@@ -126,20 +126,19 @@ class add extends Component{
 
 					<div>
 						<h6><b>To add an offer at intermediate node - </b></h6>
-						{<TreeCheck1  brand={this.state.brand}  />}
+						{<TreeCheck1  brand={this.state.brand} Expiry={this.state.Expiry} Offer={this.state.Offer} products={this.state.products}/>}
 					</div>
 
-					<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
-					<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
+					<div>
+						<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
+						<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
+					</div>
 
 				</div>
-					<h6><b>To add an offer at intermediate node - </b></h6>
-					{<TreeCheck1  brand={this.state.brand} Expiry={this.state.Expiry} Offer={this.state.Offer} products={this.state.products}></TreeCheck1>}
-
 				</div>
 			</div>
 			
-				<div className="col-lg-8">
+			<div className="col-lg-8">
 				<div className="row">	  
 				<div className="col-sm-5">			  
 					{this.state.products.map(product=>
@@ -161,41 +160,39 @@ class add extends Component{
             			</div>
 					)}
 				</div>
-		
+				</div>
+			</div>
+
+			
 			<div className="col-lg-8">
-			<div className="row">	  
-			<div className="col-sm-5">			  
-				{this.state.products.map(product=>
-					<div className="card-post mb-4 card card-small">
+				<div className="row">	  
+				<div className="col-sm-5">			  
+					{this.state.products.map(product=>
+						<div className="card-post mb-4 card card-small">
+							<div className="card-body">
+								<h5 className="card-title">{product.Name}</h5>
+								<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
+								<h5 className="card-title"> {product.Brand}</h5>
+								<h5 className="card-title"> {product.Description}</h5>
+								<h5 className="card-title">Category: {product.Category}</h5>
+							</div>
 
-						<div className="card-body">
-							<h5 className="card-title">{product.Name}</h5>
-							<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
-                            <h5 className="card-title"> {product.Brand}</h5>
-							<h5 className="card-title"> {product.Description}</h5>
-							<h5 className="card-title">Category: {product.Category}</h5>
-						</div>
+							<div className="border-top d-flex card-footer">
+								<div className="card-post__author d-flex col-sm-10">
+									<div className="d-flex flex-column justify-content-center ml-3">
+										<span className="card-post__author-name">Rs.{product.Price}</span>
+									</div>
+								</div>
 
-						<div className="border-top d-flex card-footer">
-							<div className="card-post__author d-flex col-sm-10">
-								<div className="d-flex flex-column justify-content-center ml-3">
-									<span className="card-post__author-name">Rs.{product.Price}</span>
+								<div>
+									<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
+									<i className="material-icons mr-1">Add offer</i> </button>
 								</div>
 							</div>
-
-							<div>
-								<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
-								<i className="material-icons mr-1">Add offer</i> </button>
-							</div>
 						</div>
-
-					</div>
-				)};
-			</div>
-			</div>
-			</div>
-
-			</div>
+					)};
+				</div>
+				</div>
 			</div>
 
 			</div>
