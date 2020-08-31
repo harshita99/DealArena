@@ -96,10 +96,14 @@ class add extends Component{
 		});
 	}
 
-	render() {
-		//console.log(this.state.brand)
-		console.log(this.state)
+	addoffer(u){
+		var productId = u;
+		localStorage.setItem('productsession', productId);
+		history.push("/addoffer");
+	}
 
+	render() {
+		console.log(this.state);
 		return (
 			<div>
 			<div className="row">
@@ -138,7 +142,7 @@ class add extends Component{
 				</div>
 			</div>
 			
-			<div className="col-lg-8">
+			{/* <div className="col-lg-8">
 				<div className="row">	  
 				<div className="col-sm-5">			  
 					{this.state.products.map(product=>
@@ -161,8 +165,7 @@ class add extends Component{
 					)}
 				</div>
 				</div>
-			</div>
-
+			</div> */}
 			
 			<div className="col-lg-8">
 				<div className="row">	  
@@ -178,15 +181,20 @@ class add extends Component{
 							</div>
 
 							<div className="border-top d-flex card-footer">
-								<div className="card-post__author d-flex col-sm-10">
+								<div className="card-post__author d-flex col-sm-8">
 									<div className="d-flex flex-column justify-content-center ml-3">
-										<span className="card-post__author-name">Rs.{product.Price}</span>
+										<span className="card-post__author-name">
+											Rs.{product.Price}
+										</span>
 									</div>
 								</div>
 
-								<div>
-									<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
-									<i className="material-icons mr-1">Add offer</i> </button>
+								<div className="card-post__author d-flex col-sm-8">
+									<div className="d-flex flex-column justify-content-center ml-3">
+										<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
+											<i className="material-icons mr-1">Add offer</i> 
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>

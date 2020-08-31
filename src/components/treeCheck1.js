@@ -168,24 +168,21 @@ class TreeCheck1 extends Component {
   }
 
   componentDidMount(){
-			  firebase.firestore().collection("productDetails")
+    firebase.auth().onAuthStateChanged((productowner)=>{
+			if (productowner){
+			  firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
 				.get()
 				.then((doc)=> {
-				  this.setState({brand : doc.data().brand})
+				  this.setState({brand : doc.data().brand});
 				}).then((doc)=>{
-          this.ref2=firebase.firestore().collection("productDetails").where("SubCategory","in",this.state.value);
-          this.ref2.onSnapshot(this.onCollectionUpdate);
-          
-          this.ref1=firebase.firestore().collection("productDetails").where("Category","in",this.state.value);
-					this.ref1.onSnapshot(this.onCollectionUpdate);
-
-					this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand);
+          this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand);
           this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-          console.log(this.state.value);
 				})
 				.catch(function(error){
 				  console.log("Error getting document:", error);
 				})
+			}
+		})
 	}
 
   onChange = value => {
@@ -194,10 +191,8 @@ class TreeCheck1 extends Component {
   };
   
   onCollectionUpdate=(querySnapshot)=>{
-
     querySnapshot.forEach((doc)=>{
         const {Name, Brand, Description, Price, Category,imageurl, producturl,SubCategory}=doc.data();
-
         offers.push({
             key:doc.id,
             doc,
@@ -211,7 +206,6 @@ class TreeCheck1 extends Component {
             producturl
         });
     });
-
     this.setState({offers});
     console.log(this.state.offers);
 }
@@ -224,7 +218,7 @@ class TreeCheck1 extends Component {
   }
 
   render() {
-    console.log(this.state.value) //this is where selected checkbox value is stored for examples Mobiles. but how to send it to add.js?
+    console.log(this.state); //this is where selected checkbox value is stored for examples Mobiles. but how to send it to add.js?
     const tProps = {
       treeData,
       value: this.state.value,
