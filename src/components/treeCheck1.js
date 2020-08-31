@@ -175,7 +175,7 @@ class TreeCheck1 extends Component {
 				.then((doc)=> {
 				  this.setState({brand : doc.data().brand});
 				}).then((doc)=>{
-          this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand);
+          this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","==","Mobiles");
           this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
 				})
 				.catch(function(error){
