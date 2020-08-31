@@ -148,7 +148,7 @@ class TreeCheck1 extends Component {
 	onSubmit=(e)=>{
     console.log(this.props)
 
-		this.props.offers.map(p=>{
+		this.state.offers.map(p=>{
       var Category=p.Category
       var SubCategory = p.SubCategory
       var Description=p.Description
@@ -156,9 +156,11 @@ class TreeCheck1 extends Component {
       var Offer=this.props.Offer
       var Expiry=this.props.Expiry
       var Brand=p.Brand
+      var imageurl = p.imageurl
+      var Price = p.Price
 
       firebase.firestore().collection("offerDetails").add({
-        Category,Description,Name,Offer,Expiry,Brand, SubCategory
+        Category,Description,Name,Offer,Expiry,Brand, SubCategory, imageurl, Price
       })
       .catch((error)=>{
         console.error("Error adding document:",error);
