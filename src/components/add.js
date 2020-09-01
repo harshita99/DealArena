@@ -106,7 +106,7 @@ class add extends Component{
 		console.log(this.state);
 		return (
 			<div>
-								<div className="row">
+				<div className="row">
 
 				<div className="col-lg-3">
 
@@ -142,31 +142,6 @@ class add extends Component{
 
 				</div>
 				</div>
-			
-			{/* <div className="col-lg-8">
-				<div className="row">	  
-				<div className="col-sm-5">			  
-					{this.state.products.map(product=>
-						<div className="card-post mb-4 card card-small">
-
-							<div className="card-body">
-								<h5 className="card-title">
-									{product.Name}
-								</h5>
-								<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
-								<h5 className="card-title"> {product.Brand}</h5>
-								<h5 className="card-title"> {product.Description}</h5>					
-								<h5 className="card-title">Category: {product.Category}</h5>
-							</div>
-
-							<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
-							<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
-
-            			</div>
-					)}
-				</div>
-				</div>
-			</div> */}
 			
 			<div className="col-lg-8">
 				<div className="row">	  
