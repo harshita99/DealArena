@@ -106,8 +106,10 @@ class add extends Component{
 		console.log(this.state);
 		return (
 			<div>
-			<div className="row">
+								<div className="row">
+
 				<div className="col-lg-3">
+
 				<div className="mb-4 pt-3 card card-small">
 					<div className="border-bottom text-center card-header">
 						<div className="mb-3 mx-auto">
@@ -140,7 +142,6 @@ class add extends Component{
 
 				</div>
 				</div>
-			</div>
 			
 			{/* <div className="col-lg-8">
 				<div className="row">	  
@@ -204,6 +205,8 @@ class add extends Component{
 			</div>
 
 			</div>
+						</div>
+
 		)
 	}
 }
