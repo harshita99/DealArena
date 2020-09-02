@@ -212,10 +212,14 @@ class TreeCheck1 extends Component {
 	// 		}
 	// 	})
   // }
-
-  onChange = value => {
+  clear() {
     this.setState({offers: []});
     console.log("reset");
+  }
+
+  onChange = value => {
+    this.clear();
+
     console.log('onChange ', value);
     this.setState({ value });
 
