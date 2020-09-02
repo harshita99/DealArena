@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import 'antd/dist/antd.css';
 import { TreeSelect } from 'antd';
 import firebase from "./Config";
+import history from './../history';
 
 const { SHOW_PARENT } = TreeSelect;
 
@@ -167,9 +168,10 @@ class TreeCheck1 extends Component {
       });
       return null;
     })
+    history.push("/manageoffers");
   }
 
-  componentDidMount(){
+  // componentDidMount(){
     // firebase.auth().onAuthStateChanged((productowner)=>{
 		// 	if (productowner){
 		// 	  firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
@@ -189,7 +191,7 @@ class TreeCheck1 extends Component {
 		// 		})
 		// 	}
 		// })
-  }
+  // }
   
   // componentDidUpdate() {
   //   firebase.auth().onAuthStateChanged((productowner)=>{

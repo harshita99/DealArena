@@ -2,6 +2,7 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
+import Tree from "./tree";
 
 class ShowProduct extends Component{
     constructor(props){
@@ -137,6 +138,9 @@ render() {
                         <i className="material-icons mr-1">LogOut</i> </button>				
                     </div>
                 </div>
+				<div>
+					<Tree />
+				</div>
             </div>
 		</div>
 		
