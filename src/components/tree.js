@@ -2,8 +2,8 @@ import React, { useState, useRef } from "react";
 import SortableTree, {
   addNodeUnderParent,
   removeNodeAtPath,
-  changeNodeAtPath,
-  toggleExpandedForAll
+  changeNodeAtPath
+  //toggleExpandedForAll
 } from "react-sortable-tree";
 import "react-sortable-tree/style.css";
 
@@ -91,30 +91,30 @@ function Tree() {
     inputEl.current.value = "";
   }
 
-  function addNodeSibling(rowInfo) {
-    let { path } = rowInfo;
+  // function addNodeSibling(rowInfo) {
+  //   let { path } = rowInfo;
 
-    const value = inputEl.current.value;
+  //   const value = inputEl.current.value;
 
-    if (value === "") {
-      inputEl.current.focus();
-      return;
-    }
+  //   if (value === "") {
+  //     inputEl.current.focus();
+  //     return;
+  //   }
 
-    let newTree = addNodeUnderParent({
-      treeData: treeData,
-      parentKey: path[path.length - 2],
-      expandParent: true,
-      getNodeKey,
-      newNode: {
-        title: value
-      }
-    });
+  //   let newTree = addNodeUnderParent({
+  //     treeData: treeData,
+  //     parentKey: path[path.length - 2],
+  //     expandParent: true,
+  //     getNodeKey,
+  //     newNode: {
+  //       title: value
+  //     }
+  //   });
 
-    setTreeData(newTree.treeData);
+  //   setTreeData(newTree.treeData);
 
-    inputEl.current.value = "";
-  }
+  //   inputEl.current.value = "";
+  // }
 
   function removeNode(rowInfo) {
     const { path } = rowInfo;
@@ -131,35 +131,38 @@ function Tree() {
     setTreeData(treeData);
   }
 
-  function expand(expanded) {
-    setTreeData(
-      toggleExpandedForAll({
-        treeData,
-        expanded
-      })
-    );
-  }
+  // function expand(expanded) {
+  //   setTreeData(
+  //     toggleExpandedForAll({
+  //       treeData,
+  //       expanded
+  //     })
+  //   );
+  // }
 
-  function expandAll() {
-    expand(true);
-  }
+  // function expandAll() {
+  //   expand(true);
+  // }
 
-  function collapseAll() {
-    expand(false);
-  }
+  // function collapseAll() {
+  //   expand(false);
+  // }
 
   const getNodeKey = ({ treeIndex }) => treeIndex;
+
+  // function changeBackground(e) {
+  //   e.target.style.background = 'red';
+  // }
 
   return (
     <div>
       <div style={{ flex: "0 0 auto", padding: "0 15px" }}>
-        <input ref={inputEl} type="text" />
+        <input hint="Enter text" ref={inputEl} type="text" />
         <br />
         <button onClick={createNode}>Create Node</button>
         <br />
-        <button onClick={expandAll}>Expand All</button>
-        <button onClick={collapseAll}>Collapse All</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {/* <button onClick={expandAll}>Expand All</button>
+        <button onClick={collapseAll}>Collapse All</button> */}
         <form
           style={{ display: "inline-block" }}
           onSubmit={event => {
@@ -179,23 +182,25 @@ function Tree() {
           generateNodeProps={rowInfo => ({
             buttons: [
               <div>
-                <button
+                {/* <button
+                  style={{size: "100px", height: "100px", width: "100px" }}
                   label="Add Sibling"
                   onClick={event => addNodeSibling(rowInfo)}
                 >
-                  Add Sibling
-                </button>
+                <img src="images/add_icon.png" alt="a"/>
+                </button> */}
                 <button
-                  label="Add Child"
+                  label="Add Child" 
+                  hover={{text: "Add Child"}} 
                   onClick={event => addNodeChild(rowInfo)}
                 >
-                  Add Child
+                  <img src="images/add_icon.png" alt="add" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
                 <button label="Update" onClick={event => updateNode(rowInfo)}>
-                  Update
+                  <img src="images/edit_icon.png" alt="edit" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
                 <button label="Delete" onClick={event => removeNode(rowInfo)}>
-                  X
+                  <img src="images/delete_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
               </div>
             ],
