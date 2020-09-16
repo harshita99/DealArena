@@ -112,15 +112,15 @@ class ManageOffers extends Component{
 						<div className="mb-3 mx-auto">
 							<img className="rounded-circle" src="" alt="" width="80"/>
 						</div>
-						<h4 className="mb-0" id="brand">{this.state.brand}</h4>
+						<h4 className="mb-0" id="brand">Welcome <br></br>{this.state.brand} Offer Manager </h4>
 						<br></br>
 
                         <div>
 							<button onClick={() => history.push('/add')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
 								<i className="material-icons mr-1">Add Offer</i> </button>  
 								     
-							<button onClick={() => history.push('/productownerhome')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-								<i className="material-icons mr-1">Home</i> </button>               
+							{/* <button onClick={() => history.push('/productownerhome')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+								<i className="material-icons mr-1">Home</i> </button>                */}
                         </div>
 						
                         <div>

@@ -124,14 +124,14 @@ render() {
                 <div className="mb-3 mx-auto">
                     <img className="rounded-circle" src="" alt="" width="80"/>
                 </div>
-                    <h4 className="mb-0" id="brand">{this.state.brand}</h4>
+                    <h4 className="mb-0" id="brand">Welcome <br></br>{this.state.brand} product manager</h4>
                     <br></br>
 
                     <div>
                         <button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
                         <i className="material-icons mr-1">Add product</i> </button>	
-                        <button onClick={() => history.push('/productownerhome')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-                        <i className="material-icons mr-1">Home</i> </button>
+                        {/* <button onClick={() => history.push('/productownerhome')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+                        <i className="material-icons mr-1">Home</i> </button> */}
 					</div>
 					<div>
                         <button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
@@ -139,7 +139,6 @@ render() {
                     </div>
                 </div>
 				<div>
-					<Tree />
 				</div>
             </div>
 		</div>
@@ -147,6 +146,13 @@ render() {
 			<div className="col-lg-8">
 			<div className="row">	  
 			<div className="col-sm-5">
+			<h4>Manage your product tree</h4>
+			<Tree />
+			</div></div>
+
+			<div className="row">	  
+			<div className="col-sm-5">
+
 				<h5>Your Products:</h5>			  
 				{this.state.products.map(product=>
 					<div className="card-post mb-4 card card-small">
