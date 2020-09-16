@@ -11,6 +11,7 @@ class Home extends Component{
       super(props);
       this.login1 = this.login1.bind(this);
       this.login2 = this.login2.bind(this);
+      this.login3 = this.login3.bind(this);
       this.handleChange = this.handleChange.bind(this);
       this.state={
           Email : "",
@@ -27,10 +28,19 @@ class Home extends Component{
       });
     }
 
+    login3(e){
+      e.preventDefault();
+      firebase.auth().signInWithEmailAndPassword(this.state.Email,this.state.Password).then((u)=>{
+        this.props.history.push("/manageoffers");
+      }).catch((err)=>{
+        console.log(err);
+      });
+  }
+
     login1(e){
         e.preventDefault();
         firebase.auth().signInWithEmailAndPassword(this.state.Email,this.state.Password).then((u)=>{
-          this.props.history.push("/productownerhome");
+          this.props.history.push("/showproduct");
         }).catch((err)=>{
           console.log(err);
         });
@@ -71,8 +81,12 @@ class Home extends Component{
                       <div>
                         <form>
                             <Button variant="btn btn-success" onClick={this.login2}>User Login</Button>
+                        </form>
 
-                            <Button variant="btn btn-success" onClick={this.login1}>Product Owner Login</Button>
+                        <form>
+                            <Button variant="btn btn-success" onClick={this.login1}>Product Manager Login</Button>
+
+                            <Button variant="btn btn-success" onClick={this.login3}>Offer Maker Login</Button>
                         </form>
                       </div>  
 

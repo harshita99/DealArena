@@ -129,17 +129,12 @@ render() {
 
                     <div>
                         <button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-                        <i className="material-icons mr-1">Add product</i> </button>	
-                        {/* <button onClick={() => history.push('/productownerhome')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-                        <i className="material-icons mr-1">Home</i> </button> */}
-					</div>
-					<div>
+                        <i className="material-icons mr-1">Add product</i> </button>
+
                         <button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
                         <i className="material-icons mr-1">LogOut</i> </button>				
                     </div>
                 </div>
-				<div>
-				</div>
             </div>
 		</div>
 		

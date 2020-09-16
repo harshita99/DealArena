@@ -12,6 +12,8 @@ class i2signup extends Component{
         Email:"",
         Password:"",
         BrandName:"",
+        Category:"",
+        Role:""
     }
   }
 
@@ -25,6 +27,8 @@ class i2signup extends Component{
     
     const name=document.getElementById("name").value
     const brand=document.getElementById("brand").value
+    const category=document.getElementById("category").value
+    const role=document.getElementById("role").value
 
     const email = this.state.Email;
     const password = this.state.Password;
@@ -62,7 +66,9 @@ class i2signup extends Component{
           Name:name,
           Email:email,
           Password:password,
-          BrandName:brand
+          BrandName:brand,
+          Category:category,
+          Role:role
         });
         firebase.auth().createUserWithEmailAndPassword(email,password).then((u)=>{
           if (firebase.auth().currentUser){
@@ -102,6 +108,8 @@ class i2signup extends Component{
                       <MDBInput label="Your Name" group type="text" id="name" name="Name" validate onChange={this.onInput}/>
                       <MDBInput label="Your Email" group type="email" name="Email" validate onChange={this.onInput}/>
                       <MDBInput label="Your Company/Brand Name" group id="brand" type="text" name="BrandName" validate onChange={this.onInput}/>
+                      <MDBInput label="Category" group id="category" type="text" name="Category" validate onChange={this.onInput}/>
+                      <MDBInput label="Your Role" group id="role" type="text" name="Role" validate onChange={this.onInput}/>
                       <MDBInput label="Your Password" group type="password" name="Password" validate onChange={this.onInput}/>
 
                       <div className="text-center">
