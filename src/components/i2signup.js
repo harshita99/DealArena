@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn } from 'mdbreact';
 import history from './../history';
 import firebase from "./Config";
+import DemoForm from './form';
 
 class i2signup extends Component{
   constructor(props){
@@ -108,9 +109,14 @@ class i2signup extends Component{
                       <MDBInput label="Your Name" group type="text" id="name" name="Name" validate onChange={this.onInput}/>
                       <MDBInput label="Your Email" group type="email" name="Email" validate onChange={this.onInput}/>
                       <MDBInput label="Your Company/Brand Name" group id="brand" type="text" name="BrandName" validate onChange={this.onInput}/>
-                      <MDBInput label="Category" group id="category" type="text" name="Category" validate onChange={this.onInput}/>
-                      <MDBInput label="Your Role" group id="role" type="text" name="Role" validate onChange={this.onInput}/>
                       <MDBInput label="Your Password" group type="password" name="Password" validate onChange={this.onInput}/>
+
+                      <DemoForm></DemoForm>
+
+                      {/* <MDBInput label="Category" group id="category" type="text" name="Category" validate onChange={this.onInput}/>
+                      <MDBInput label="Your Role" group id="role" type="text" name="Role" validate onChange={this.onInput}/>
+                       */}
+
 
                       <div className="text-center">
                         <MDBBtn onClick={this.onSubmit} color="grey" rounded type="button" className="z-depth-1a" > Sign Up </MDBBtn>
