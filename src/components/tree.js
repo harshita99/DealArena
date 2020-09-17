@@ -150,9 +150,13 @@ function Tree() {
 
   const getNodeKey = ({ treeIndex }) => treeIndex;
 
-  // function changeBackground(e) {
-  //   e.target.style.background = 'red';
-  // }
+  function changeBackground(e) {
+
+    if (e.target.style.background === 'red')
+      e.target.style.background = 'grey';
+    else
+      e.target.style.background = 'red';
+  }
 
   return (
     <div>
@@ -197,10 +201,13 @@ function Tree() {
                   <img src="images/add_icon.png" alt="add" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
                 <button label="Update" onClick={event => updateNode(rowInfo)}>
-                  <img src="images/edit_icon.png" alt="edit" style={{size: "20px", height: "20px", width: "20px"}} />
+                  <img src="images/edit_icon.png" alt="edit" style={{size: "20px", height: "20px", width: "20px"}}/>
                 </button>
                 <button label="Delete" onClick={event => removeNode(rowInfo)}>
                   <img src="images/delete_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
+                </button>
+                <button label="Leaf" onClick={changeBackground}>
+                  <img src="images/star_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
               </div>
             ],
