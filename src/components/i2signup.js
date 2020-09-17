@@ -2,7 +2,26 @@ import React, { Component } from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn } from 'mdbreact';
 import history from './../history';
 import firebase from "./Config";
-import DemoForm from './form';
+import 'antd/dist/antd.css';
+import { Form, Button, Select } from 'antd';
+
+const { Option } = Select;
+const layout = {
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 16,
+  },
+};
+const tailLayout = {
+  wrapperCol: {
+    offset: 8,
+    span: 16,
+  },
+};
+
+var temp = [];
 
 class i2signup extends Component{
   constructor(props){
@@ -18,6 +37,12 @@ class i2signup extends Component{
     }
   }
 
+  formRef = React.createRef();
+  onFinish = (values) => {
+    // console.log(values);
+    temp = values;
+  };
+
   onInput=(e)=>{
     const state=this.state;
     state[e.target.name]=e.target.value;
@@ -28,8 +53,6 @@ class i2signup extends Component{
     
     const name=document.getElementById("name").value
     const brand=document.getElementById("brand").value
-    const category=document.getElementById("category").value
-    const role=document.getElementById("role").value
 
     const email = this.state.Email;
     const password = this.state.Password;
@@ -63,13 +86,14 @@ class i2signup extends Component{
       }
       else{
         console.log("new");
+        console.log(temp);
         firebase.firestore().collection("productOwnerDetails").add({
           Name:name,
           Email:email,
           Password:password,
           BrandName:brand,
-          Category:category,
-          Role:role
+          Category:temp.Category,
+          Role:temp.Role
         });
         firebase.auth().createUserWithEmailAndPassword(email,password).then((u)=>{
           if (firebase.auth().currentUser){
@@ -91,7 +115,6 @@ class i2signup extends Component{
     .catch(function(error){
       console.log("error getting documents:", error);
     })
-    // history.push("/productownerhome");
   }
     render(){
         return(
@@ -111,12 +134,30 @@ class i2signup extends Component{
                       <MDBInput label="Your Company/Brand Name" group id="brand" type="text" name="BrandName" validate onChange={this.onInput}/>
                       <MDBInput label="Your Password" group type="password" name="Password" validate onChange={this.onInput}/>
 
-                      <DemoForm></DemoForm>
+                      <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
 
-                      {/* <MDBInput label="Category" group id="category" type="text" name="Category" validate onChange={this.onInput}/>
-                      <MDBInput label="Your Role" group id="role" type="text" name="Role" validate onChange={this.onInput}/>
-                       */}
+                        <Form.Item name="Category" label="Category" rules={[ { required: true } ]} >
+                          <Select placeholder="Select Category" allowClear >
+                            <Option value="Electronics">Electronics</Option>
+                            <Option value="Flights">Flights</Option>
+                            <Option value="Footwear">Footwear</Option>
+                          </Select>
+                        </Form.Item>
 
+                        <Form.Item name="Role" label="Role" rules={[ { required: true } ]} >
+                          <Select placeholder="Select Role" allowClear >
+                            <Option value="Product Manager">Product Manager</Option>
+                            <Option value="Offer Manager">Offer Manager</Option>
+                          </Select>
+                        </Form.Item>
+
+                        <Form.Item {...tailLayout}>
+                          <Button type="primary" htmlType="submit">
+                            Submit
+                          </Button>
+                        </Form.Item>
+                      
+                      </Form>
 
                       <div className="text-center">
                         <MDBBtn onClick={this.onSubmit} color="grey" rounded type="button" className="z-depth-1a" > Sign Up </MDBBtn>
