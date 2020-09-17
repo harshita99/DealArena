@@ -6,6 +6,7 @@ import SortableTree, {
   //toggleExpandedForAll
 } from "react-sortable-tree";
 import "react-sortable-tree/style.css";
+import { Tooltip } from 'antd';
 
 const seed = [];
 
@@ -161,7 +162,7 @@ function Tree() {
   return (
     <div>
       <div style={{ flex: "0 0 auto", padding: "0 15px" }}>
-        <input hint="Enter text" ref={inputEl} type="text" />
+        <input placeholder="Enter text here" ref={inputEl} type="text" />
         <br />
         <button onClick={createNode}>Create Node</button>
         <br />
@@ -193,22 +194,26 @@ function Tree() {
                 >
                 <img src="images/add_icon.png" alt="a"/>
                 </button> */}
-                <button
-                  label="Add Child" 
-                  hover={{text: "Add Child"}} 
-                  onClick={event => addNodeChild(rowInfo)}
-                >
+                <Tooltip title="Add Child">
+                <button label="Add Child" onClick={event => addNodeChild(rowInfo)}>
                   <img src="images/add_icon.png" alt="add" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
-                <button label="Update" onClick={event => updateNode(rowInfo)}>
-                  <img src="images/edit_icon.png" alt="edit" style={{size: "20px", height: "20px", width: "20px"}}/>
+                </Tooltip>
+                <Tooltip title="Edit Node">
+                <button label="Update" onClick={event => updateNode(rowInfo)} backgroundColor='#fff'>
+                  <img src="images/edit_icon.png" alt="edit" style={{size: "20px", height: "20px", width: "20px"}} backgroundColor='#fff'/>
                 </button>
+                </Tooltip>
+                <Tooltip title="Delete Node">
                 <button label="Delete" onClick={event => removeNode(rowInfo)}>
                   <img src="images/delete_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
+                </Tooltip>
+                <Tooltip title="Make Leaf Node">
                 <button label="Leaf" onClick={changeBackground}>
                   <img src="images/star_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
+                </Tooltip>
               </div>
             ],
             style: {

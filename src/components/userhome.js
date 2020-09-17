@@ -211,7 +211,7 @@ class userhome extends Component{
 					   <div className="card-post mb-4 card card-small">
 						<div className="border-bottom text-center card-header">
 							{/* <h4 class="mb-0" id="username">Name of User </h4> */}
-							<h4>Welcome, {this.state.name} </h4>
+							<h4>Welcome, {this.state.name}! </h4>
 							<br></br>
 
 							<p>Your current interests are:</p>
