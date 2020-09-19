@@ -7,8 +7,10 @@ import SortableTree, {
 } from "react-sortable-tree";
 import "react-sortable-tree/style.css";
 import { Tooltip } from 'antd';
+import SomeButtons from "./somebuttons";
 
 const seed = [];
+// var leaf=false;
 
 function Tree() {
   const [searchString] = useState("");
@@ -151,13 +153,16 @@ function Tree() {
 
   const getNodeKey = ({ treeIndex }) => treeIndex;
 
-  function changeBackground(e) {
+  // function changeBackground(e) {
 
-    if (e.target.style.background === 'red')
-      e.target.style.background = 'grey';
-    else
-      e.target.style.background = 'red';
-  }
+  //   if (e.target.style.background === 'red'){
+  //     e.target.style.background = 'grey';
+  //   }
+  //   else
+  //     e.target.style.background = 'red';
+
+
+  // }
 
   return (
     <div>
@@ -177,7 +182,9 @@ function Tree() {
         </form>
       </div>
 
-      <div style={{ height: "100vh" }}>
+      {/* <div style={{ height: "50vh" }}> */}
+      <div style={{ height: "50vh" }}>
+
         <SortableTree
           treeData={treeData}
           onChange={treeData => updateTreeData(treeData)}
@@ -209,11 +216,20 @@ function Tree() {
                   <img src="images/delete_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
                 </Tooltip>
+
+                <SomeButtons/>
+
+                {/*                 
                 <Tooltip title="Make Leaf Node">
                 <button label="Leaf" onClick={changeBackground}>
                   <img src="images/star_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
-                </Tooltip>
+                </Tooltip> */}
+
+                {/* if (`${leaf}==true){ 
+                  <button label="View" > View </button>
+                } */}
+
               </div>
             ],
             style: {
@@ -222,6 +238,8 @@ function Tree() {
           })}
         />
       </div>
+      <button>Save</button>
+      <button>Release</button>
     </div>
   );
 }
