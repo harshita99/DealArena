@@ -101,7 +101,12 @@ class i2signup extends Component{
               name:name,
               brand:brand,
             });
-            history.push("/productownerhome");
+            if(temp.Role==='Offer Manager'){
+              history.push("/manageoffers");
+            }
+            else{
+              history.push("/showproduct");
+            }
           }
           else{
             console.log("helllooooo");
