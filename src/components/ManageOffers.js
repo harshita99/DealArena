@@ -112,7 +112,7 @@ class ManageOffers extends Component{
 						<div className="mb-3 mx-auto">
 							<img className="rounded-circle" src="" alt="" width="80"/>
 						</div>
-						<h4 className="mb-0" id="brand">Welcome <br></br>{this.state.brand} Offer Manager </h4>
+						<h4 className="mb-0" id="brand">Welcome! <br></br>{this.state.brand} Offer Manager </h4>
 						<br></br>
 
                         <div>

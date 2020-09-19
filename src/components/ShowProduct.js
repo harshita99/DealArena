@@ -124,7 +124,7 @@ render() {
                 <div className="mb-3 mx-auto">
                     <img className="rounded-circle" src="" alt="" width="80"/>
                 </div>
-                    <h4 className="mb-0" id="brand">Welcome <br></br>{this.state.brand} product manager</h4>
+                    <h4 className="mb-0" id="brand">Welcome! <br></br>{this.state.brand} Product Manager</h4>
                     <br></br>
 
                     <div>
