@@ -7,8 +7,10 @@ import SortableTree, {
 } from "react-sortable-tree";
 import "react-sortable-tree/style.css";
 import { Tooltip } from 'antd';
+import SomeButtons from "./somebuttons";
 
 const seed = [];
+// var leaf=false;
 
 function Tree() {
   const [searchString] = useState("");
@@ -16,14 +18,6 @@ function Tree() {
   const [treeData, setTreeData] = useState(seed);
 
   const inputEl = useRef();
-
-  function saveTree() {
-
-  }
-
-  function releaseTree() {
-    
-  }
 
   function createNode() {
     const value = inputEl.current.value;
@@ -159,12 +153,16 @@ function Tree() {
 
   const getNodeKey = ({ treeIndex }) => treeIndex;
 
-  function changeBackground(e) {
-    if (e.target.style.background === 'red')
-      e.target.style.background = 'white';
-    else
-      e.target.style.background = 'red';
-  }
+  // function changeBackground(e) {
+
+  //   if (e.target.style.background === 'red'){
+  //     e.target.style.background = 'grey';
+  //   }
+  //   else
+  //     e.target.style.background = 'red';
+
+
+  // }
 
   return (
     <div>
@@ -184,7 +182,9 @@ function Tree() {
         </form>
       </div>
 
-      <div style={{ height: "100vh" }}>
+      {/* <div style={{ height: "50vh" }}> */}
+      <div style={{ height: "50vh" }}>
+
         <SortableTree
           treeData={treeData}
           onChange={treeData => updateTreeData(treeData)}
@@ -207,7 +207,7 @@ function Tree() {
                 </button>
                 </Tooltip>
                 <Tooltip title="Edit Node">
-                <button label="Update" onClick={event => updateNode(rowInfo)} color='#fff'>
+                <button label="Update" onClick={event => updateNode(rowInfo)} backgroundColor='#fff'>
                   <img src="images/edit_icon.png" alt="edit" style={{size: "20px", height: "20px", width: "20px"}} backgroundColor='#fff'/>
                 </button>
                 </Tooltip>
@@ -216,11 +216,20 @@ function Tree() {
                   <img src="images/delete_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
                 </Tooltip>
+
+                <SomeButtons/>
+
+                {/*                 
                 <Tooltip title="Make Leaf Node">
                 <button label="Leaf" onClick={changeBackground}>
                   <img src="images/star_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
-                </Tooltip>
+                </Tooltip> */}
+
+                {/* if (`${leaf}==true){ 
+                  <button label="View" > View </button>
+                } */}
+
               </div>
             ],
             style: {
@@ -228,16 +237,9 @@ function Tree() {
             }
           })}
         />
-        <br />
-          <button onClick={saveTree}>Save</button>
-          <button onClick={releaseTree}>Release</button>
-        <br />
       </div>
-
-      <br />
-        <button onClick={saveTree}>Save</button>
-        <button onClick={releaseTree}>Release</button>
-      <br />
+      <button>Save</button>
+      <button>Release</button>
     </div>
   );
 }
