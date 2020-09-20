@@ -20,10 +20,12 @@ function Tree() {
   const inputEl = useRef();
 
   function createNode() {
-    const value = inputEl.current.value;
-
+    console.log(("Brand in tree is: "+ sessionStorage.getItem('brandN')));
+    console.log(("Category in tree is: "+ sessionStorage.getItem('category')));
+    
+    const value = sessionStorage.getItem('category');
     if (value === "") {
-      inputEl.current.focus();
+      // inputEl.current.focus();
       return;
     }
 
@@ -39,8 +41,7 @@ function Tree() {
     });
 
     setTreeData(newTree.treeData);
-
-    inputEl.current.value = "";
+    console.log("Category set");
   }
 
   function updateNode(rowInfo) {
@@ -135,6 +136,9 @@ function Tree() {
   }
 
   // function expand(expanded) {
+  //   <button onClick={xyz} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+	// 	  <i className="material-icons mr-1">XYZ</i>
+	// 	</button>	
   //   setTreeData(
   //     toggleExpandedForAll({
   //       treeData,
@@ -167,10 +171,10 @@ function Tree() {
   return (
     <div>
       <div style={{ flex: "0 0 auto", padding: "0 15px" }}>
+        <br />
         <input placeholder="Enter text here" ref={inputEl} type="text" />
         <br />
-        <button onClick={createNode}>Create Node</button>
-        <br />
+        
         {/* <button onClick={expandAll}>Expand All</button>
         <button onClick={collapseAll}>Collapse All</button> */}
         <form
@@ -181,10 +185,8 @@ function Tree() {
         >
         </form>
       </div>
-
       {/* <div style={{ height: "50vh" }}> */}
       <div style={{ height: "50vh" }}>
-
         <SortableTree
           treeData={treeData}
           onChange={treeData => updateTreeData(treeData)}
@@ -237,6 +239,7 @@ function Tree() {
             }
           })}
         />
+          <button onClick={createNode}>Create Tree</button>
       </div>
       <button>Save</button>
       <button>Release</button>

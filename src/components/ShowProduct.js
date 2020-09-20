@@ -5,7 +5,7 @@ import history from './../history';
 import Tree from "./tree";
 import { Tabs } from "antd";
 const { TabPane } = Tabs;
-
+const details=[];
 
 class ShowProduct extends Component{
     constructor(props){
@@ -22,12 +22,41 @@ class ShowProduct extends Component{
 		firebase.auth().onAuthStateChanged((productowner)=> {
 
 			if (productowner) {
+				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
+				  .get()
+				  .then((doc)=> {
+					console.log("Document data:", doc.data().name);
+					console.log("Document data:", doc.data().brand);
+					this.setState({brand : doc.data().brand})
+				  }).then((doc)=>{
+					this.ref=firebase.firestore().collection("productOwnerDetails").where("BrandName","==",this.state.brand)
+					this.unsubscribe=this.ref.onSnapshot(this.getDetails);
+				// 	  .get()
+				// 	  .then((doc)=> {
+				// 		this.setState({category : doc.data().Category})
+				// 		this.setState({brandN : doc.data().BrandName})
+				// 		console.log("Top Brand is: ", this.state.brandN);
+				// 		console.log("Top Category is: ", this.state.category);
+				// 	  })
+				// 	  .catch(function(error){
+				// 		console.log("Error getting particular document:", error);
+				// 		console.log(productowner.uid)
+				// 	  })
+				  })
+				  .catch(function(error){
+					console.log("Error getting particular document:", error);
+					console.log(productowner.uid)
+				  })
+			}
+
+			if (productowner) {
 			  firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
 				.get()
 				.then((doc)=> {
 				  console.log("Document data:", doc.data().name);
 				  console.log("Document data:", doc.data().brand);
 				  this.setState({brand : doc.data().brand})
+				  this.setState({category : doc.data().Category})
 				}).then((doc)=>{
 					this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand);
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
@@ -42,6 +71,24 @@ class ShowProduct extends Component{
 		history.push("/showproduct");
 	}
 
+	getDetails=(querySnapshot)=>{
+		// const details=[];
+		querySnapshot.forEach((doc)=>{
+			this.setState({category : doc.data().Category})
+			this.setState({brandN : doc.data().BrandName})
+			console.log("Top Brand is: ", this.state.brandN);
+			console.log("Top Category is: ", this.state.category);
+
+			sessionStorage.setItem('brandN', (doc.data().BrandName))
+			sessionStorage.setItem('category', (doc.data().Category))
+			details.push({
+				brand: this.state.brandN,
+				category: this.state.category
+			})
+		})
+		this.setState({details});
+	}
+	
 	onCollectionUpdate=(querySnapshot)=>{
 		const products=[];
 		querySnapshot.forEach((doc)=>{
@@ -114,6 +161,8 @@ class ShowProduct extends Component{
 	}
 
 	render() {
+		console.log("Brand is: ", this.state.brandN);
+		console.log("Category is: ", this.state.category);
 		return (
 			<div>
 				<div className="row">
@@ -149,7 +198,6 @@ class ShowProduct extends Component{
 							</div>
 						</TabPane>
 						
-						{/* </Tabs> */}
 						<TabPane  tab="All Products" key="2" >
 							<div className="row">	  
 							<div className="col-sm-5">
