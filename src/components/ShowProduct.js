@@ -37,9 +37,8 @@ class ShowProduct extends Component{
 				  console.log(productowner.uid)
 				})
 			}
-		}
-	)
-	console.log("yo")
+		})
+		console.log("yo");
 		history.push("/showproduct");
 	}
 
@@ -48,23 +47,22 @@ class ShowProduct extends Component{
 		querySnapshot.forEach((doc)=>{
 			// console.log(doc.id);
 			const {Name, Description, Brand, Price, Expiry, Category, SubCategory, Offer,imageurl, producturl}=doc.data();
-		products.push({
-			key:doc.id,
-			doc,
-			Name,
-			Brand,
-			Description,
-			Price,
-			Category,
-			Expiry,
-			Offer,
-			imageurl,
-			SubCategory,
-			producturl
+			products.push({
+				key:doc.id,
+				doc,
+				Name,
+				Brand,
+				Description,
+				Price,
+				Category,
+				Expiry,
+				Offer,
+				imageurl,
+				SubCategory,
+				producturl
+			});
 		});
-	});
-	this.setState({products});
-
+		this.setState({products});
 	}
 
 	checkAuth(){
@@ -76,7 +74,6 @@ class ShowProduct extends Component{
 			localStorage.setItem('usersession', produser);
 			console.log("User "+produser.uid+" is logged in with");
 			history.push("/productownerhome");
-
 		}
 		else{
 			console.log("Successfully logged out");
