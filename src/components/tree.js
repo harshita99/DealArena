@@ -17,6 +17,14 @@ function Tree() {
 
   const inputEl = useRef();
 
+  function saveTree() {
+
+  }
+
+  function releaseTree() {
+    
+  }
+
   function createNode() {
     const value = inputEl.current.value;
 
@@ -152,9 +160,8 @@ function Tree() {
   const getNodeKey = ({ treeIndex }) => treeIndex;
 
   function changeBackground(e) {
-
     if (e.target.style.background === 'red')
-      e.target.style.background = 'grey';
+      e.target.style.background = 'white';
     else
       e.target.style.background = 'red';
   }
@@ -200,7 +207,7 @@ function Tree() {
                 </button>
                 </Tooltip>
                 <Tooltip title="Edit Node">
-                <button label="Update" onClick={event => updateNode(rowInfo)} backgroundColor='#fff'>
+                <button label="Update" onClick={event => updateNode(rowInfo)} color='#fff'>
                   <img src="images/edit_icon.png" alt="edit" style={{size: "20px", height: "20px", width: "20px"}} backgroundColor='#fff'/>
                 </button>
                 </Tooltip>
@@ -221,7 +228,16 @@ function Tree() {
             }
           })}
         />
+        <br />
+          <button onClick={saveTree}>Save</button>
+          <button onClick={releaseTree}>Release</button>
+        <br />
       </div>
+
+      <br />
+        <button onClick={saveTree}>Save</button>
+        <button onClick={releaseTree}>Release</button>
+      <br />
     </div>
   );
 }
