@@ -5,6 +5,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput} from 'mdb
 import firebase from "./Config";
 
 const products = [];
+const products1 = [];
 var temp;
 
 class Home extends Component{
@@ -34,13 +35,40 @@ class Home extends Component{
 		});
 	});
 	this.setState({products});
-  // console.log(products[0].Role);
+  }
+
+  onCollectionUpdate1=(querySnapshot)=>{
+		// const products=[];
+		querySnapshot.forEach((doc)=>{
+			const {Name, Email}=doc.data();
+		products1.push({
+			Name,
+      Email
+		});
+  });
+	this.setState({products1});
   }
 
     login2(e){
       e.preventDefault();
+      firebase.auth().onAuthStateChanged((user)=> {
+        if (user) {
+          firebase.firestore().collection("userDetails").doc(user.uid)
+          .get()
+          .then((doc)=>{
+            this.ref=firebase.firestore().collection("userDetails").where("Email","==",this.state.Email);
+            this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate1);
+          })
+        }
+      })
       firebase.auth().signInWithEmailAndPassword(this.state.Email,this.state.Password).then((u)=>{
-        this.props.history.push("/userhome");
+        if(products1.length===0){
+          console.log("No such user exists!");
+          alert("No such user exists!");
+        }
+        else{
+          this.props.history.push("/userhome");
+        }
       }).catch((err)=>{
         console.log(err);
       });
@@ -62,12 +90,13 @@ class Home extends Component{
         products.map(product=>
           temp = product.Role
         );
-        if(temp==="Offer Manager")
+        if(temp==="Offer Manager"){
           this.props.history.push("/manageoffers");
-        
-        else
+        }
+        else{
           console.log("Invalid offer manager");
-        
+          alert("You're not an Offer Manager");
+        }
       }).catch((err)=>{
         console.log(err);
       });
@@ -96,6 +125,7 @@ class Home extends Component{
         }
         else{
           console.log("Invalid product manager");
+          alert("Ypu're not a Product Manager");
         }
       }).catch((err)=>{
         console.log(err);

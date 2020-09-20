@@ -10,6 +10,8 @@
     "firebase": "^7.15.3",
     "mdbreact": "^4.27.0",
     "react": "^16.13.1",
+    "react-alert": "^7.0.2",
+    "react-alert-template-basic": "^1.0.0",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-dropdown-tree-select": "^2.3.3",
