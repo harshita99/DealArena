@@ -95,7 +95,7 @@ class Home extends Component{
         }
         else{
           console.log("Invalid offer manager");
-          alert("You're not an Offer Manager");
+          alert("You're not an Offer Manager!");
         }
       }).catch((err)=>{
         console.log(err);
@@ -125,7 +125,7 @@ class Home extends Component{
         }
         else{
           console.log("Invalid product manager");
-          alert("Ypu're not a Product Manager");
+          alert("You're not a Product Manager!");
         }
       }).catch((err)=>{
         console.log(err);

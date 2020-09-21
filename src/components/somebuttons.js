@@ -1,17 +1,17 @@
 import React from 'react';
+import { Tooltip } from 'antd';
 
 const Button = (props) => {  
   return (
-
-    <button label="Leaf"    onClick={props.toggle}>
+    <Tooltip title="Make Leaf">
+    <button style={{backgroundColor:'grey'}} label="Leaf" onClick={props.toggle}>
         {/* onClick={changeBackground}     */}
     <img src="images/star_icon.png" alt="makeleaf" style={{size: "20px", height: "20px", width: "20px"}} />
- 
-      {props.name}
+      {/* {props.name} */}
     </button>
+    </Tooltip>
   )
 }
-
 
 class SomeButtons extends React.Component {
   constructor(props) {
@@ -21,41 +21,33 @@ class SomeButtons extends React.Component {
     this.toggle = this.toggle.bind(this);
   }
   
-  
 toggle(e) {
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen
-    }));
+  this.setState(prevState => ({
+    isOpen: !prevState.isOpen
+  }));
 
-
-
-    if (e.target.style.background === 'red'){
-      e.target.style.background = 'grey';
-    }
-    else
-      e.target.style.background = 'red';
-
-
-  }
+  if (e.target.style.background === 'red')
+    e.target.style.background = 'grey';
+  else
+    e.target.style.background = 'red';
+}
   
   render() {
     return(
-      <div class="container mg-top">
+      <span>
         <Button 
           toggle={this.toggle}
         />
 
-        
-        
         {this.state.isOpen && 
-            <button class="white-text">
+            <Tooltip title="View Product">
+            <button style={{backgroundColor:'grey', color:'black'}}>
               Go </button>
+            </Tooltip>
         }
-        
-      </div>
+      </span>
     );
   } 
 }
-
 
 export default SomeButtons;
