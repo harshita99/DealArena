@@ -41,6 +41,8 @@ class i2signup extends Component{
   onFinish = (values) => {
     // console.log(values);
     temp = values;
+    this.onSubmit()
+
   };
 
   onInput=(e)=>{
@@ -56,7 +58,7 @@ class i2signup extends Component{
 
     const email = this.state.Email;
     const password = this.state.Password;
-    e.preventDefault();
+    // e.preventDefault();
     // const { Name,Email,Password,BrandName }=this.state;
 
     // this.ref.add({
@@ -164,9 +166,10 @@ class i2signup extends Component{
                       
                       </Form>
 
-                      <div className="text-center">
+                      {/* <div className="text-center">
                         <MDBBtn onClick={this.onSubmit} color="grey" rounded type="button" className="z-depth-1a" > Sign Up </MDBBtn>
-                      </div>
+                      </div> */}
+
                     </MDBCardBody>
                   </MDBCard>
                 </MDBCol>
