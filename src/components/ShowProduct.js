@@ -25,8 +25,8 @@ class ShowProduct extends Component{
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
 				  .get()
 				  .then((doc)=> {
-					console.log("Document data:", doc.data().name);
-					console.log("Document data:", doc.data().brand);
+					// console.log("Document data:", doc.data().name);
+					// console.log("Document data:", doc.data().brand);
 					this.setState({brand : doc.data().brand})
 				  }).then((doc)=>{
 					this.ref=firebase.firestore().collection("productOwnerDetails").where("BrandName","==",this.state.brand)
@@ -35,12 +35,6 @@ class ShowProduct extends Component{
 				// 	  .then((doc)=> {
 				// 		this.setState({category : doc.data().Category})
 				// 		this.setState({brandN : doc.data().BrandName})
-				// 		console.log("Top Brand is: ", this.state.brandN);
-				// 		console.log("Top Category is: ", this.state.category);
-				// 	  })
-				// 	  .catch(function(error){
-				// 		console.log("Error getting particular document:", error);
-				// 		console.log(productowner.uid)
 				// 	  })
 				  })
 				  .catch(function(error){
@@ -50,11 +44,25 @@ class ShowProduct extends Component{
 			}
 
 			if (productowner) {
+				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
+				  .get()
+				  .then((doc)=>{
+					// console.log(this.state.brand);
+					this.ref=firebase.firestore().collection("tree")
+					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate1);
+					// console.log(this.ref.onSnapshot);
+				  })
+				  .catch(function(error){
+					console.log("Error getting particular document:", error);
+				  })
+			}
+
+			if (productowner) {
 			  firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
 				.get()
 				.then((doc)=> {
-				  console.log("Document data:", doc.data().name);
-				  console.log("Document data:", doc.data().brand);
+				//   console.log("Document data:", doc.data().name);
+				//   console.log("Document data:", doc.data().brand);
 				  this.setState({brand : doc.data().brand})
 				  this.setState({category : doc.data().Category})
 				}).then((doc)=>{
@@ -67,8 +75,22 @@ class ShowProduct extends Component{
 				})
 			}
 		})
-		console.log("yo");
 		history.push("/showproduct");
+	}
+
+	onCollectionUpdate1=(querySnapshot)=>{
+		const tree1=[];
+		querySnapshot.forEach((doc)=>{
+			// console.log(doc.id);
+			const {treeData}=doc.data();
+			if(doc.id === this.state.brand){
+				tree1.push({
+					treeData
+				});
+			}
+		});
+		this.setState({tree1});
+		console.log(tree1);
 	}
 
 	getDetails=(querySnapshot)=>{
@@ -76,8 +98,8 @@ class ShowProduct extends Component{
 		querySnapshot.forEach((doc)=>{
 			this.setState({category : doc.data().Category})
 			this.setState({brandN : doc.data().BrandName})
-			console.log("Top Brand is: ", this.state.brandN);
-			console.log("Top Category is: ", this.state.category);
+			// console.log("Top Brand is: ", this.state.brandN);
+			// console.log("Top Category is: ", this.state.category);
 
 			sessionStorage.setItem('brandN', (doc.data().BrandName))
 			sessionStorage.setItem('category', (doc.data().Category))
@@ -161,8 +183,8 @@ class ShowProduct extends Component{
 	}
 
 	render() {
-		console.log("Brand is: ", this.state.brandN);
-		console.log("Category is: ", this.state.category);
+		// console.log("Brand is: ", this.state.brandN);
+		// console.log("Category is: ", this.state.category);
 		return (
 			<div>
 				<div className="row">

@@ -22,8 +22,8 @@ function Tree() {
   const inputEl = useRef();
 
   function createNode() {
-    console.log(("Brand in tree is: "+ sessionStorage.getItem('brandN')));
-    console.log(("Category in tree is: "+ sessionStorage.getItem('category')));
+    // console.log(("Brand in tree is: "+ sessionStorage.getItem('brandN')));
+    // console.log(("Category in tree is: "+ sessionStorage.getItem('category')));
 
     const value = sessionStorage.getItem('category');
     if (value === "") {
@@ -43,10 +43,8 @@ function Tree() {
     });
 
     setTreeData(newTree.treeData);
-    console.log("Category set");
-    console.log(treeData);
-
-
+    // console.log("Category set");
+    // console.log(treeData);
   }
 
   function updateNode(rowInfo) {
