@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+// import firebase from "./Config";
+
 import SortableTree, {
   addNodeUnderParent,
   removeNodeAtPath,
@@ -22,7 +24,7 @@ function Tree() {
   function createNode() {
     console.log(("Brand in tree is: "+ sessionStorage.getItem('brandN')));
     console.log(("Category in tree is: "+ sessionStorage.getItem('category')));
-    
+
     const value = sessionStorage.getItem('category');
     if (value === "") {
       // inputEl.current.focus();
@@ -42,6 +44,9 @@ function Tree() {
 
     setTreeData(newTree.treeData);
     console.log("Category set");
+    console.log(treeData);
+
+
   }
 
   function updateNode(rowInfo) {
@@ -66,11 +71,13 @@ function Tree() {
     });
 
     setTreeData(newTree);
+    console.log(treeData);
 
     inputEl.current.value = "";
   }
 
   function addNodeChild(rowInfo) {
+
     let { path } = rowInfo;
 
     const value = inputEl.current.value;
@@ -91,6 +98,7 @@ function Tree() {
     });
 
     setTreeData(newTree.treeData);
+    console.log(treeData);
 
     inputEl.current.value = "";
   }
@@ -133,8 +141,41 @@ function Tree() {
 
   function updateTreeData(treeData) {
     setTreeData(treeData);
+    console.log(treeData);
+
   }
 
+  function saveyo(){
+    console.log(treeData);
+    // let payload = {};
+    // let dataArray = [];
+
+    // let obj1 = {
+    //   title: 'main',
+    //   subtitle: 'sub'
+    // };
+
+    // let obj2 = {
+    //   title: 'value2',
+    //   expanded: true,
+    //   children: []
+    // };
+
+    // let child = {
+    //   title: 'value3'
+    // }
+
+    // obj2.children.push(child);
+    // dataArray.push(obj1);
+    // dataArray.push(obj2);
+    // payload["treeData"] = dataArray;
+
+
+    // firebase.firestore().collection("tree").add(payload["treeData"]);
+
+  }
+ 
+  //UNUSED TREE FUNCS
   // function expand(expanded) {
   //   <button onClick={xyz} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
 	// 	  <i className="material-icons mr-1">XYZ</i>
@@ -169,7 +210,9 @@ function Tree() {
   // }
 
   return (
-    <div>
+    
+    <div>   
+
       <div style={{ flex: "0 0 auto", padding: "0 15px" }}>
         <br />
         <input placeholder="Enter text here" ref={inputEl} type="text" />
@@ -242,7 +285,8 @@ function Tree() {
         />
           <button onClick={createNode}>Create Tree</button>
       </div>
-      <button>Save</button>
+
+      <button onClick={saveyo}> Save</button>
       <button>Release</button>
     </div>
   );
