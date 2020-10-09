@@ -149,7 +149,9 @@ function Tree() {
     console.log(treeData);
     // console.log(typeof treeData);
     // firebase.firestore().collection("tree").add(treeData);
-    firebase.firestore().collection("tree").add({ treeData: treeData });
+    firebase.firestore().collection("tree").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
+    //db.collection("cities").doc().set(data);
+
 
     // let payload = {};
     // let dataArray = [];
