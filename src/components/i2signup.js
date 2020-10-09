@@ -81,12 +81,12 @@ class i2signup extends Component{
     firebase.firestore().collection("productOwnerDetails").where("BrandName","==",this.state.BrandName)
     .get()
     .then(function(querySnapshot){ 
-      if(querySnapshot.docs.length>0){
-        console.log("old");
-        alert('Brand already exists!');
-        return;
-      }
-      else{
+      // if(querySnapshot.docs.length>0){
+      //   console.log("old");
+      //   alert('Brand already exists!');
+      //   return;
+      // }
+      //  else{
         console.log("new");
         console.log(temp);
         firebase.firestore().collection("productOwnerDetails").add({
@@ -96,7 +96,7 @@ class i2signup extends Component{
           BrandName:brand,
           Category:temp.Category,
           Role:temp.Role
-        });
+         });
         firebase.auth().createUserWithEmailAndPassword(email,password).then((u)=>{
           if (firebase.auth().currentUser){
             firebase.firestore().collection("productOwnerDetails").doc(firebase.auth().currentUser.uid).set({
@@ -117,7 +117,7 @@ class i2signup extends Component{
         .catch((err)=>{
           console.log(err);
         }); 
-      }
+      // }
     })
     .catch(function(error){
       console.log("error getting documents:", error);
