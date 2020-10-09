@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-// import firebase from "./Config";
+import firebase from "./Config";
 
 import SortableTree, {
   addNodeUnderParent,
@@ -147,6 +147,10 @@ function Tree() {
 
   function saveyo(){
     console.log(treeData);
+    // console.log(typeof treeData);
+    // firebase.firestore().collection("tree").add(treeData);
+    firebase.firestore().collection("tree").add({ treeData: treeData });
+
     // let payload = {};
     // let dataArray = [];
 
