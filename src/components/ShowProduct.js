@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
 import Tree from "./tree";
+import Treee from "./classTree"
 import { Tabs } from "antd";
 const { TabPane } = Tabs;
 const details=[];
@@ -214,7 +215,8 @@ class ShowProduct extends Component{
 								<div className="row">	  
 									<div className="col-sm-5">
 										<h4>Manage your product tree</h4>
-										<Tree isleaf={false}/>
+										{/* <Tree isleaf={false}/> */}
+										<Treee/>
 									</div>
 								</div>
 							</div>
