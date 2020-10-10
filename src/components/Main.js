@@ -5,7 +5,7 @@ import '../index.css';
 
 
     const Main = (props) => {
-        console.log(props);
+        // console.log(props);
         return(
             <Navbar bg="primary" variant="dark" >
             <Navbar.Brand href="#home">Deal Arena</Navbar.Brand>

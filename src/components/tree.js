@@ -14,6 +14,9 @@ import SomeButtons from "./somebuttons";
 const seed = [];
 // var leaf=false;
 
+const t = JSON.parse(localStorage.getItem('treeValue'));
+console.log(t);
+
 function Tree() {
   const [searchString] = useState("");
   const [searchFocusIndex] = useState(0);
