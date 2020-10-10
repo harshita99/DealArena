@@ -90,7 +90,8 @@ class ShowProduct extends Component{
 			}
 		});
 		this.setState({tree1});
-		console.log(tree1);
+		// console.log(tree1);
+		localStorage.setItem('treeValue', JSON.stringify(tree1));
 	}
 
 	getDetails=(querySnapshot)=>{
