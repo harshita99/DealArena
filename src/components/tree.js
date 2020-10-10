@@ -24,32 +24,6 @@ function Tree() {
 
   const inputEl = useRef();
 
-  // function createSubNode() {
-  //   // console.log(("Brand in tree is: "+ sessionStorage.getItem('brandN')));
-  //   // console.log(("Category in tree is: "+ sessionStorage.getItem('category')));
-
-  //   const value = sessionStorage.getItem('brandN');
-  //   if (value === "") {
-  //     // inputEl.current.focus();
-  //     return;
-  //   }
-
-  //   let newTree = addNodeUnderParent({
-  //     treeData: treeData,
-  //     parentKey: null,
-  //     expandParent: true,
-  //     getNodeKey,
-  //     newNode: {
-  //       id: "123",
-  //       title: value
-  //     }
-  //   });
-
-  //   setTreeData(newTree.treeData);
-  //   // console.log("Category set");
-  //   // console.log(treeData);
-  // }
-
   function createNode() {
     // console.log(("Brand in tree is: "+ sessionStorage.getItem('brandN')));
     // console.log(("Category in tree is: "+ sessionStorage.getItem('category')));
@@ -73,7 +47,6 @@ function Tree() {
 
     setTreeData(newTree.treeData);
 
-    // createSubNode();
     // console.log("Category set");
     // console.log(treeData);
   }

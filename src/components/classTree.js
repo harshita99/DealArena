@@ -9,12 +9,17 @@ import SortableTree, {
 import "react-sortable-tree/style.css";
 import { Tooltip } from 'antd';
 import SomeButtons from "./somebuttons";
+import Tree from "./tree";
+
+const t = JSON.parse(localStorage.getItem('treeValue'));
+console.log(t);
 
 class Treee1 extends Component {
   constructor(props) {
     super(props);
  
     this.state = {
+      // treeData: [ t ]
       treeData: [
         { title: sessionStorage.getItem('category'), children: [{ title: sessionStorage.getItem('brandN') }] },
         // { title: 'Fish', children: [{ title: 'fingerline' }] },
@@ -24,12 +29,21 @@ class Treee1 extends Component {
  
   render() {
     return (
-      <div style={{ height: 400 }}>
-        <SortableTree
+      <div>
+        <Tree
           treeData={this.state.treeData}
           onChange={treeData => this.setState({ treeData })}
         />
       </div>
+      // <div style={{ height: 400 }}>
+      //   <SortableTree
+      //     treeData={this.state.treeData}
+      //     onChange={treeData => this.setState({ treeData })}
+      //   />
+      // </div>
+
+      
+
     );
   }
 }
