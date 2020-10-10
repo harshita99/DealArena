@@ -12,38 +12,38 @@ import SomeButtons from "./somebuttons";
 import Tree from "./tree";
 
 const t = JSON.parse(localStorage.getItem('treeValue'));
-console.log(t);
+// const t = localStorage.getItem('treeValue');
+const d = t[0];
+console.log(d["treeData"]);
 
 class Treee1 extends Component {
   constructor(props) {
     super(props);
  
     this.state = {
-      // treeData: [ t ]
-      treeData: [
-        { title: sessionStorage.getItem('category'), children: [{ title: sessionStorage.getItem('brandN') }] },
-        // { title: 'Fish', children: [{ title: 'fingerline' }] },
-      ],
+      treeData: d["treeData"]
+      // treeData: [
+      //   { title: sessionStorage.getItem('category'), children: [{ title: sessionStorage.getItem('brandN') }] },
+      //   // { title: 'Fish', children: [{ title: 'fingerline' }] },
+      // ]
     };
   }
  
   render() {
+    console.log(typeof this.state.treeData);
     return (
-      <div>
-        <Tree
-          treeData={this.state.treeData}
-          onChange={treeData => this.setState({ treeData })}
-        />
-      </div>
-      // <div style={{ height: 400 }}>
-      //   <SortableTree
+      // <div>
+      //   <Tree
       //     treeData={this.state.treeData}
       //     onChange={treeData => this.setState({ treeData })}
       //   />
       // </div>
-
-      
-
+      <div style={{ height: 400 }}>
+        <SortableTree
+          treeData={this.state.treeData}
+          onChange={treeData => this.setState({ treeData })}
+        />
+      </div>
     );
   }
 }
