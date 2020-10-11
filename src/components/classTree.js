@@ -144,7 +144,11 @@ class Treee1 extends Component {
         id: "123",
         title: value
       }
-    })}
+    })
+
+    setTreeData(newTree);
+    console.log(treeData);
+  }
 
   
   removeNode(rowInfo){

@@ -96,7 +96,15 @@ class i2signup extends Component{
           BrandName:brand,
           Category:temp.Category,
           Role:temp.Role
-         });
+        });
+
+        firebase.firestore().collection("tree").doc(brand).set({ 
+          treeData: [{ 
+            title: temp.Category, 
+            children: [{ title: brand }] },
+          ] 
+        });
+
         firebase.auth().createUserWithEmailAndPassword(email,password).then((u)=>{
           if (firebase.auth().currentUser){
             firebase.firestore().collection("productOwnerDetails").doc(firebase.auth().currentUser.uid).set({
@@ -107,7 +115,8 @@ class i2signup extends Component{
               history.push("/manageoffers");
             }
             else{
-              history.push("/showproduct");
+              history.push("/");
+              alert('Successfully signed up..... Proceed to LogIn!');
             }
           }
           else{
