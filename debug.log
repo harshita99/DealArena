@@ -1,0 +1,2 @@
+[1010/224827.980:ERROR:settings.cc(430)] Settings version is not 5
+[1010/224828.079:ERROR:file_io_win.cc(180)] CreateFile C:\Users\princ\AppData\Local\Microsoft\Edge\User Data\Crashpad\settings.dat: The process cannot access the file because it is being used by another process. (0x20)
