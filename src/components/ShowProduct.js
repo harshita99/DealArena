@@ -2,7 +2,7 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
-import Tree from "./tree";
+// import Tree from "./tree";
 import Treee from "./classTree"
 import { Tabs } from "antd";
 const { TabPane } = Tabs;

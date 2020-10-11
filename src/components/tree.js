@@ -14,7 +14,7 @@ import SomeButtons from "./somebuttons";
 const seed = [];
 // var leaf=false;
 
-const t = JSON.parse(localStorage.getItem('treeValue'));
+// const t = JSON.parse(localStorage.getItem('treeValue'));
 // console.log(t);
 
 function Tree() {
