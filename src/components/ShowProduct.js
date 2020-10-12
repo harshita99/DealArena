@@ -76,7 +76,7 @@ class ShowProduct extends Component{
 				})
 			}
 		})
-		history.push("/showproduct");
+		// history.push("/showproduct");
 	}
 
 	onCollectionUpdate1=(querySnapshot)=>{
@@ -144,7 +144,7 @@ class ShowProduct extends Component{
 		else if(produser){
 			localStorage.setItem('usersession', produser);
 			console.log("User "+produser.uid+" is logged in with");
-			history.push("/productownerhome");
+			history.push("/showproduct");
 		}
 		else{
 			console.log("Successfully logged out");

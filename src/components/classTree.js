@@ -12,7 +12,7 @@ import SortableTree, {
 } from "react-sortable-tree";
 import { Tooltip } from 'antd';
 import "react-sortable-tree/style.css";
-import Tree from "./tree";
+// import Tree from "./tree";
 
 // const tree1 = [];
 // const seed = [];
@@ -25,13 +25,15 @@ var d = [];
 const t = JSON.parse(localStorage.getItem('treeValue'));
 if(t!=null){
   d = t[0];
-  console.log(d["treeData"]);
+  // console.log(d["treeData"]);
 }
 const inputEl = React.createRef();
 
 class Treee1 extends Component {
   constructor(props) {
     super(props);
+    this.updateTreeData = this.updateTreeData.bind(this);
+    this.removeNode = this.removeNode.bind(this);
     console.log(d);
     this.state = {
       // treeData: d,
@@ -47,7 +49,7 @@ class Treee1 extends Component {
   inputEl = React.createRef();
 
   updateTreeData(treeData) {
-    setTreeData(treeData);
+    this.setState({ treeData });
     console.log(treeData);
   }
 
@@ -73,22 +75,19 @@ class Treee1 extends Component {
  
   removeNode(rowInfo){
     const { path } = rowInfo;
-    setTreeData(
-      removeNodeAtPath({
-        treeData,
-        path,
-        getNodeKey
+    this.setState({
+      treeData: removeNodeAtPath({
+        treeData: this.state.treeData,
+        path: path,
+        getNodeKey: ({node: TreeNode, treeIndex: number}) => {
+          // console.log(number);
+          return number;
+      },
+      ignoreCollapsed: false,
       })
-    );
-    // this.setState(state => ({
-    //   treeData: removeNodeAtPath({
-    //     treeData: state.treeData,
-    //     path,
-    //     getNodeKey,
-    //   })
-    // }))
+    })
   }
-  
+
   updateNode(rowInfo) {
     const { node, path } = rowInfo;
     const { children } = node;
@@ -134,7 +133,6 @@ class Treee1 extends Component {
 
   saveyo(){
     console.log(treeData);
-    // firebase.firestore().collection("tree").add(treeData);
     firebase.firestore().collection("tree").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
   }
  
@@ -174,19 +172,19 @@ class Treee1 extends Component {
             buttons: [
               <div>
                 <Tooltip title="Add Child">
-                <button style={{backgroundColor:'grey'}} label="Add Child" //onClick={Tree().addNodeChild(rowInfo)} //onClick={ this.addNodeChild(rowInfo)}
+                <button style={{backgroundColor:'grey'}} label="Add Child" //onClick={ this.addNodeChild(rowInfo)}
                 >
                   <img src="images/add_icon.png" alt="add" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
                 </Tooltip>
                 <Tooltip title="Edit Node">
-                <button style={{backgroundColor:'grey'}} label="Update" //onClick={event => updateNode(rowInfo)}
+                <button style={{backgroundColor:'grey'}} label="Update" //onClick={event => this.updateNode(rowInfo)}
                 >
                   <img src="images/edit_icon.png" alt="edit" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
                 </Tooltip>
                 <Tooltip title="Delete Node">
-                <button style={{backgroundColor:'grey'}} label="Delete" //onClick={event => removeNode(rowInfo)}
+                <button style={{backgroundColor:'grey'}} label="Delete" onClick={event => this.removeNode(rowInfo)}
                 >
                   <img src="images/delete_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>

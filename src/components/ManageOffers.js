@@ -34,8 +34,8 @@ class ManageOffers extends Component{
 			}
 		})
 
-		console.log("yo")
-		history.push("/manageoffers");
+		// console.log("yo")
+		// history.push("/manageoffers");
 	}
 
 	onCollectionUpdate=(querySnapshot)=>{
