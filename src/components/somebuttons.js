@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tooltip } from 'antd';
+import history from './../history';
 
 const Button = (props) => {  
   return (
@@ -41,7 +42,7 @@ toggle(e) {
 
         {this.state.isOpen && 
             <Tooltip title="View Product">
-            <button style={{backgroundColor:'grey', color:'black'}}>
+            <button onClick={() => history.push('/addproduct')} style={{backgroundColor:'grey', color:'black'}}>
               Go </button>
             </Tooltip>
         }

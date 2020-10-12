@@ -3,7 +3,7 @@ import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
 import Tree from "./tree";
-import Treee from "./classTree"
+// import Treee from "./classTree";
 import { Tabs } from "antd";
 const { TabPane } = Tabs;
 const details=[];
