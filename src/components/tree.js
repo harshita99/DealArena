@@ -11,6 +11,13 @@ import "react-sortable-tree/style.css";
 import { Tooltip } from 'antd';
 import SomeButtons from "./somebuttons";
 
+var d = [];
+const t = JSON.parse(localStorage.getItem('treeValue'));
+if(t!=null){
+  d = t[0];
+  console.log(d["treeData"]);
+}
+
 const seed = [];
 // var leaf=false;
 
@@ -26,24 +33,26 @@ function Tree() {
     // console.log(("Brand in tree is: "+ sessionStorage.getItem('brandN')));
     // console.log(("Category in tree is: "+ sessionStorage.getItem('category')));
 
-    const value = sessionStorage.getItem('category');
-    if (value === "") {
-      // inputEl.current.focus();
-      return;
-    }
+    // const value = sessionStorage.getItem('category');
+    // if (value === "") {
+    //   // inputEl.current.focus();
+    //   return;
+    // }
 
-    let newTree = addNodeUnderParent({
-      treeData: treeData,
-      parentKey: null,
-      expandParent: true,
-      getNodeKey,
-      newNode: {
-        id: "123",
-        title: value
-      }
-    });
+    // let newTree = addNodeUnderParent({
+    //   treeData: treeData,
+    //   parentKey: null,
+    //   expandParent: true,
+    //   getNodeKey,
+    //   newNode: {
+    //     id: "123",
+    //     title: value
+    //   }
+    // });
 
-    setTreeData(newTree.treeData);
+    // setTreeData(newTree.treeData);
+
+    setTreeData(d["treeData"]);
 
     // console.log("Category set");
     // console.log(treeData);

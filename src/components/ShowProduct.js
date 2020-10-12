@@ -2,7 +2,7 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
-// import Tree from "./tree";
+import Tree from "./tree";
 import Treee from "./classTree"
 import { Tabs } from "antd";
 const { TabPane } = Tabs;
@@ -216,8 +216,8 @@ class ShowProduct extends Component{
 								<div className="row">	  
 									<div className="col-sm-5">
 										<h4>Manage your product tree</h4>
-										{/* <Tree isleaf={false}/> */}
-										<Treee/>
+										<Tree isleaf={false}/>
+										{/* <Treee/> */}
 									</div>
 								</div>
 							</div>
