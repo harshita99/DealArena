@@ -30,33 +30,35 @@ function Tree() {
   const inputEl = useRef();
 
   function createNode() {
-    // console.log(("Brand in tree is: "+ sessionStorage.getItem('brandN')));
-    // console.log(("Category in tree is: "+ sessionStorage.getItem('category')));
-
-    // const value = sessionStorage.getItem('category');
-    // if (value === "") {
-    //   // inputEl.current.focus();
-    //   return;
-    // }
-
-    // let newTree = addNodeUnderParent({
-    //   treeData: treeData,
-    //   parentKey: null,
-    //   expandParent: true,
-    //   getNodeKey,
-    //   newNode: {
-    //     id: "123",
-    //     title: value
-    //   }
-    // });
-
-    // setTreeData(newTree.treeData);
-
     setTreeData(d["treeData"]);
-
-    // console.log("Category set");
-    // console.log(treeData);
   }
+
+  // function createNode() {
+  //   console.log(("Brand in tree is: "+ sessionStorage.getItem('brandN')));
+  //   console.log(("Category in tree is: "+ sessionStorage.getItem('category')));
+
+  //   const value = sessionStorage.getItem('category');
+  //   if (value === "") {
+  //     // inputEl.current.focus();
+  //     return;
+  //   }
+
+  //   let newTree = addNodeUnderParent({
+  //     treeData: treeData,
+  //     parentKey: null,
+  //     expandParent: true,
+  //     getNodeKey,
+  //     newNode: {
+  //       id: "123",
+  //       title: value
+  //     }
+  //   });
+
+  //   setTreeData(newTree.treeData);
+
+  //   console.log("Category set");
+  //   console.log(treeData);
+  // }
 
   function updateNode(rowInfo) {
     const { node, path } = rowInfo;
@@ -238,7 +240,7 @@ function Tree() {
             }
           })}
         />
-          <button onClick={createNode}>Create Tree</button>
+          <button onClick={createNode}>View Tree</button>
       </div>
 
       <button onClick={saveyo}> Save</button>
