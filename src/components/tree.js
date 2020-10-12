@@ -18,8 +18,6 @@ const seed = [];
 // console.log(t);
 
 function Tree() {
-  const [searchString] = useState("");
-  const [searchFocusIndex] = useState(0);
   const [treeData, setTreeData] = useState(seed);
 
   const inputEl = useRef();
@@ -105,31 +103,6 @@ function Tree() {
     inputEl.current.value = "";
   }
 
-  // function addNodeSibling(rowInfo) {
-  //   let { path } = rowInfo;
-
-  //   const value = inputEl.current.value;
-
-  //   if (value === "") {
-  //     inputEl.current.focus();
-  //     return;
-  //   }
-
-  //   let newTree = addNodeUnderParent({
-  //     treeData: treeData,
-  //     parentKey: path[path.length - 2],
-  //     expandParent: true,
-  //     getNodeKey,
-  //     newNode: {
-  //       title: value
-  //     }
-  //   });
-
-  //   setTreeData(newTree.treeData);
-
-  //   inputEl.current.value = "";
-  // }
-
   function removeNode(rowInfo) {
     const { path } = rowInfo;
     setTreeData(
@@ -182,27 +155,6 @@ function Tree() {
     // firebase.firestore().collection("tree").add(payload["treeData"]);
 
   }
- 
-  //UNUSED TREE FUNCS
-  // function expand(expanded) {
-  //   <button onClick={xyz} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-	// 	  <i className="material-icons mr-1">XYZ</i>
-	// 	</button>	
-  //   setTreeData(
-  //     toggleExpandedForAll({
-  //       treeData,
-  //       expanded
-  //     })
-  //   );
-  // }
-
-  // function expandAll() {
-  //   expand(true);
-  // }
-
-  // function collapseAll() {
-  //   expand(false);
-  // }
 
   const getNodeKey = ({ treeIndex }) => treeIndex;
 
@@ -213,8 +165,6 @@ function Tree() {
   //   }
   //   else
   //     e.target.style.background = 'red';
-
-
   // }
 
   return (
@@ -225,9 +175,6 @@ function Tree() {
         <br />
         <input placeholder="Enter text here" ref={inputEl} type="text" />
         <br />
-        
-        {/* <button onClick={expandAll}>Expand All</button>
-        <button onClick={collapseAll}>Collapse All</button> */}
         <form
           style={{ display: "inline-block" }}
           onSubmit={event => {
@@ -241,19 +188,10 @@ function Tree() {
         <SortableTree
           treeData={treeData}
           onChange={treeData => updateTreeData(treeData)}
-          searchQuery={searchString}
-          searchFocusOffset={searchFocusIndex}
           canDrag={({ node }) => !node.dragDisabled}
           generateNodeProps={rowInfo => ({
             buttons: [
               <div>
-                {/* <button
-                  style={{size: "100px", height: "100px", width: "100px" }}
-                  label="Add Sibling"
-                  onClick={event => addNodeSibling(rowInfo)}
-                >
-                <img src="images/add_icon.png" alt="a"/>
-                </button> */}
                 {/* <button onMouseOver={changeBackground}>Hover over me!</button> */}
                 <Tooltip title="Add Child">
                 <button style={{backgroundColor:'grey'}} label="Add Child" onClick={event => addNodeChild(rowInfo)}>
