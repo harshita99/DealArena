@@ -64,7 +64,7 @@ class Home extends Component{
       firebase.auth().signInWithEmailAndPassword(this.state.Email,this.state.Password).then((u)=>{
         if(products1.length===0){
           console.log("No such user exists!");
-          alert("No such user exists!");
+          // alert("No such user exists!");
         }
         else{
           this.props.history.push("/userhome");
@@ -95,7 +95,7 @@ class Home extends Component{
         }
         else{
           console.log("Invalid offer manager");
-          alert("You're not an Offer Manager!");
+          // alert("You're not an Offer Manager!");
         }
       }).catch((err)=>{
         console.log(err);
@@ -125,7 +125,7 @@ class Home extends Component{
         }
         else{
           console.log("Invalid product manager");
-          alert("You're not a Product Manager!");
+          // alert("You're not a Product Manager!");
         }
       }).catch((err)=>{
         console.log(err);
