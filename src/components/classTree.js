@@ -134,7 +134,8 @@ class Treee1 extends Component {
   saveyo(){
     console.log(treeData);
     firebase.firestore().collection("tree").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
-  }
+    
+    }
  
   render() {
     console.log(inputEl);
@@ -148,7 +149,7 @@ class Treee1 extends Component {
     <div>
       <div style={{ flex: "0 0 auto", padding: "0 15px" }}>
       <br />
-      <input placeholder="Enter text here" ref={inputEl} type="text" />
+      <input style={{marginLeft:"-45px"}} placeholder="Enter text here" ref={inputEl} type="text" />
       <br />
       
       <form

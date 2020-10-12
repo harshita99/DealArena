@@ -137,6 +137,8 @@ function Tree() {
     // firebase.firestore().collection("tree").add(treeData);
     firebase.firestore().collection("tree").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
     //db.collection("cities").doc().set(data);
+    console.log("Saved to database");
+    alert("Saved to database");
 
 
     // let payload = {};
@@ -184,7 +186,7 @@ function Tree() {
 
       <div style={{ flex: "0 0 auto", padding: "0 15px" }}>
         <br />
-        <input placeholder="Enter text here" ref={inputEl} type="text" />
+        <input style={{marginLeft:"-30vw"}} placeholder="Enter text here" ref={inputEl} type="text" />
         <br />
         <form
           style={{ display: "inline-block" }}
@@ -195,11 +197,11 @@ function Tree() {
         </form>
       </div>
       {/* <div style={{ height: "50vh" }}> */}
-      <div style={{ height: "50vh" }}>
+      <div style={{  flex: "0 0 auto", padding: "0 15px" , marginLeft:"10vw", height: "60vh", width:"60vw" }}>
         <SortableTree
           treeData={treeData}
           onChange={treeData => updateTreeData(treeData)}
-          canDrag={({ node }) => !node.dragDisabled}
+          canDrag={({ node }) => node.dragDisabled}
           generateNodeProps={rowInfo => ({
             buttons: [
               <div>
@@ -240,11 +242,11 @@ function Tree() {
             }
           })}
         />
-          <button onClick={createNode}>View Tree</button>
+        <span style={{marginLeft:"-10vw", marginTop:"-15vh"}} >
+          <button onClick={createNode} >View Tree</button></span>
       </div>
-
-      <button onClick={saveyo}> Save</button>
-      <button>Release</button>
+      <button onClick={saveyo} style={{ marginTop:"-10vh"}}> Save</button>
+      <button style={{ marginTop:"-10vh"}}>Release</button>
     </div>
   );
 }

@@ -190,37 +190,38 @@ class ShowProduct extends Component{
 		return (
 			<div>
 				<div className="row">
-					<div className="col-lg-3"><div className="mb-4 pt-3 card card-small">
-						<div className="border-bottom text-center card-header">
-							<div className="mb-3 mx-auto">
-								<img className="rounded-circle" src="" alt="" width="80"/>
-							</div>
-							<h4 className="mb-0" id="brand">Welcome! <br></br>{this.state.brand} Product Manager</h4>
-							<br></br>
-
-							<div>
-								<button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-									<i className="material-icons mr-1">Add product</i>
-								</button>
-
-								<button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-									<i className="material-icons mr-1">LogOut</i>
-								</button>				
-							</div>
-						</div>
-					</div>
-					</div>
-					<Tabs tabPosition="top" className="col-lg-9">			
-						<TabPane  tab="Product Tree " key="1" >
-							<div className="col-lg-9">
-								<div className="row">	  
-									<div className="col-sm-5">
-										<h4>Manage your product tree</h4>
-										<Tree isleaf={false}/>
-										{/* <Treee/> */}
+					<div className="col-lg-3">
+						<div className="mb-4 pt-3 card card-small">
+							<div className="border-bottom text-center card-header">
+									<div className="mb-3 mx-auto">
+										<img className="rounded-circle" src="" alt="" width="80"/>
 									</div>
+								<h4 className="mb-0" id="brand">Welcome! <br></br>{this.state.brand} Product Manager</h4>
+							<	br></br>
+
+								<div>
+									<button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+										<i className="material-icons mr-1">Add product</i>
+									</button>
+
+									<button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+										<i className="material-icons mr-1">LogOut</i>
+									</button>				
 								</div>
 							</div>
+						</div>
+						</div>
+					<Tabs tabPosition="top" >			
+						<TabPane  tab="Product Tree " key="1" > 
+							{/* <div */}
+								{/* <div className="row">	   */}
+									{/* <div className="col-sm-5"> */}
+										<h4 style= {{marginLeft:"-30vw"}} >Manage your product tree</h4>
+										<Tree isleaf={false}/>
+										{/* <Treee/> */}
+									{/* </div> */}
+								{/* </div> */}
+							{/* </div> */}
 						</TabPane>
 						
 						<TabPane  tab="All Products" key="2" >
