@@ -133,40 +133,15 @@ function Tree() {
 
   function saveyo(){
     console.log(treeData);
-    // console.log(typeof treeData);
-    // firebase.firestore().collection("tree").add(treeData);
     firebase.firestore().collection("tree").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
-    //db.collection("cities").doc().set(data);
     console.log("Saved to database");
     alert("Saved to database");
+  }
 
-
-    // let payload = {};
-    // let dataArray = [];
-
-    // let obj1 = {
-    //   title: 'main',
-    //   subtitle: 'sub'
-    // };
-
-    // let obj2 = {
-    //   title: 'value2',
-    //   expanded: true,
-    //   children: []
-    // };
-
-    // let child = {
-    //   title: 'value3'
-    // }
-
-    // obj2.children.push(child);
-    // dataArray.push(obj1);
-    // dataArray.push(obj2);
-    // payload["treeData"] = dataArray;
-
-
-    // firebase.firestore().collection("tree").add(payload["treeData"]);
-
+  function release(){
+    firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
+    console.log("Released to Offer Manager");
+    alert("Released to Offer Manager ");
   }
 
   const getNodeKey = ({ treeIndex }) => treeIndex;
@@ -205,7 +180,6 @@ function Tree() {
           generateNodeProps={rowInfo => ({
             buttons: [
               <div>
-                {/* <button onMouseOver={changeBackground}>Hover over me!</button> */}
                 <Tooltip title="Add Child">
                 <button style={{backgroundColor:'grey'}} label="Add Child" onClick={event => addNodeChild(rowInfo)}>
                   <img src="images/add_icon.png" alt="add" style={{size: "20px", height: "20px", width: "20px"}} />
@@ -246,7 +220,7 @@ function Tree() {
           <button onClick={createNode} >View Tree</button></span>
       </div>
       <button onClick={saveyo} style={{ marginTop:"-10vh"}}> Save</button>
-      <button style={{ marginTop:"-10vh"}}>Release</button>
+      <button onClick={release} style={{ marginTop:"-10vh"}}>Release</button>
     </div>
   );
 }
