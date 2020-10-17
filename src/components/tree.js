@@ -90,6 +90,8 @@ function Tree() {
   function addNodeChild(rowInfo) {
 
     let { path } = rowInfo;
+    console.log(rowInfo["node"].title);
+    console.log(rowInfo["node"].title,sessionStorage.getItem('category'));
 
     const value = inputEl.current.value;
 
@@ -136,6 +138,7 @@ function Tree() {
     firebase.firestore().collection("tree").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
     console.log("Saved to database");
     alert("Saved to database");
+
   }
 
   function release(){
@@ -180,34 +183,35 @@ function Tree() {
           generateNodeProps={rowInfo => ({
             buttons: [
               <div>
-                <Tooltip title="Add Child">
-                <button style={{backgroundColor:'grey'}} label="Add Child" onClick={event => addNodeChild(rowInfo)}>
-                  <img src="images/add_icon.png" alt="add" style={{size: "20px", height: "20px", width: "20px"}} />
-                </button>
-                </Tooltip>
-                <Tooltip title="Edit Node">
-                <button style={{backgroundColor:'grey'}} label="Update" onClick={event => updateNode(rowInfo)}>
-                  <img src="images/edit_icon.png" alt="edit" style={{size: "20px", height: "20px", width: "20px"}} />
-                </button>
-                </Tooltip>
-                <Tooltip title="Delete Node">
-                <button style={{backgroundColor:'grey'}} label="Delete" onClick={event => removeNode(rowInfo)}>
-                  <img src="images/delete_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
-                </button>
-                </Tooltip>
+                {  ( (rowInfo["node"].title!==sessionStorage.getItem('brandN')) && (rowInfo["node"].title!==sessionStorage.getItem('category')) ) && (
+                <div>
+                                  
+                  <Tooltip title="Add Child">
 
-                <SomeButtons/>
+                    <button  disabled={ rowInfo["node"].title===sessionStorage.getItem('brandN')}style={{backgroundColor:'grey'}} label="Add Child" onClick={event => addNodeChild(rowInfo)}>
+                    <img src="images/add_icon.png" alt="add" style={{size: "20px", height: "20px", width: "20px"}} />
+                  </button>
+                  </Tooltip>
 
-                {/*                 
-                <Tooltip title="Make Leaf Node">
-                <button label="Leaf" onClick={changeBackground}>
-                  <img src="images/star_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
-                </button>
-                </Tooltip> */}
+                  <Tooltip title="Edit Node">
+                  <button style={{backgroundColor:'grey'}} label="Update" onClick={event => updateNode(rowInfo)}>
+                    <img src="images/edit_icon.png" alt="edit" style={{size: "20px", height: "20px", width: "20px"}} />
+                  </button>
+                  </Tooltip>
+                  <Tooltip title="Delete Node">
+                  <button style={{backgroundColor:'grey'}} label="Delete" onClick={event => removeNode(rowInfo)}>
+                    <img src="images/delete_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
+                  </button>
+                  </Tooltip>
+           
 
-                {/* if (`${leaf}==true){ 
-                  <button label="View" > View </button>
-                } */}
+              <SomeButtons/>
+
+                </div>
+                ) }
+
+
+       
 
               </div>
             ],
