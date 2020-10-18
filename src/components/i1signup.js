@@ -1,10 +1,11 @@
 import React, { Component} from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBFormInline} from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBFormInline} from 'mdbreact';
 // import history from './../history';
 import firebase from "./Config";
 import 'antd/dist/antd.css';
 import '../index.css';
-import { Form, Input, Button } from 'antd';
+import { Button } from 'antd';
+// import { Form, Input, Button } from 'antd';
 
 class i1signup extends Component{
 

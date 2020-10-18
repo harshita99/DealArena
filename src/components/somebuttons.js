@@ -2,7 +2,7 @@ import React from 'react';
 import { Tooltip } from 'antd';
 import 'antd/dist/antd.css';
 import history from './../history';
-import Icon from '@ant-design/icons';
+// import Icon from '@ant-design/icons';
 import { ShoppingTwoTone, SendOutlined, setTwoToneColor, getTwoToneColor } from '@ant-design/icons';
 const Button = (props) => {  
   return (
