@@ -142,15 +142,19 @@ function Tree() {
           generateNodeProps={rowInfo => ({
             buttons: [
               <div>
-                {  ( (rowInfo["node"].title!==sessionStorage.getItem('brandN')) && (rowInfo["node"].title!==sessionStorage.getItem('category')) ) && (
-                <div>
-                                  
-                  <Tooltip title="Add Child">
+                {  ( (rowInfo["node"].title!==sessionStorage.getItem('category'))  ) && (
 
-                    <button  disabled={ rowInfo["node"].title===sessionStorage.getItem('brandN')}style={{backgroundColor:'grey'}} label="Add Child" onClick={event => addNodeChild(rowInfo)}>
-                    <img src="images/add_icon.png" alt="add" style={{size: "20px", height: "20px", width: "20px"}} />
-                  </button>
-                  </Tooltip>
+                <Tooltip title="Add Child">
+
+                <button  disabled={ rowInfo["node"].title===sessionStorage.getItem('brandN')}style={{backgroundColor:'grey'}} label="Add Child" onClick={event => addNodeChild(rowInfo)}>
+                <img src="images/add_icon.png" alt="add" style={{size: "20px", height: "20px", width: "20px"}} />
+                </button>
+                </Tooltip>)}
+
+                {  ( (rowInfo["node"].title!==sessionStorage.getItem('brandN')) && (rowInfo["node"].title!==sessionStorage.getItem('category')) ) && (
+                <span>
+                                  
+
 
                   <Tooltip title="Edit Node">
                   <button style={{backgroundColor:'grey'}} label="Update" onClick={event => updateNode(rowInfo)}>
@@ -166,7 +170,7 @@ function Tree() {
 
               <SomeButtons/>
 
-                </div>
+                </span>
                 ) }
 
 
