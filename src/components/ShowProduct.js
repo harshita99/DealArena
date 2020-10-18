@@ -212,7 +212,7 @@ class ShowProduct extends Component{
 							{/* <div */}
 								{/* <div className="row">	   */}
 									{/* <div className="col-sm-5"> */}
-										<h4 style= {{marginLeft:"-30vw"}} >Manage your product tree</h4>
+										<h4 style= {{marginLeft:"-30vw"}} >Manage Your Product Tree</h4>
 										<Tree isleaf={false}/>
 										{/* <Treee/> */}
 									{/* </div> */}
