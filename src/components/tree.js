@@ -5,7 +5,6 @@ import SortableTree, {
   addNodeUnderParent,
   removeNodeAtPath,
   changeNodeAtPath
-  //toggleExpandedForAll
 } from "react-sortable-tree";
 import "react-sortable-tree/style.css";
 import { Tooltip } from 'antd';
@@ -19,10 +18,6 @@ if(t!=null){
 }
 
 const seed = [];
-// var leaf=false;
-
-// const t = JSON.parse(localStorage.getItem('treeValue'));
-// console.log(t);
 
 function Tree() {
   const [treeData, setTreeData] = useState(seed);
@@ -32,33 +27,6 @@ function Tree() {
   function createNode() {
     setTreeData(d["treeData"]);
   }
-
-  // function createNode() {
-  //   console.log(("Brand in tree is: "+ sessionStorage.getItem('brandN')));
-  //   console.log(("Category in tree is: "+ sessionStorage.getItem('category')));
-
-  //   const value = sessionStorage.getItem('category');
-  //   if (value === "") {
-  //     // inputEl.current.focus();
-  //     return;
-  //   }
-
-  //   let newTree = addNodeUnderParent({
-  //     treeData: treeData,
-  //     parentKey: null,
-  //     expandParent: true,
-  //     getNodeKey,
-  //     newNode: {
-  //       id: "123",
-  //       title: value
-  //     }
-  //   });
-
-  //   setTreeData(newTree.treeData);
-
-  //   console.log("Category set");
-  //   console.log(treeData);
-  // }
 
   function updateNode(rowInfo) {
     const { node, path } = rowInfo;
@@ -148,15 +116,6 @@ function Tree() {
   }
 
   const getNodeKey = ({ treeIndex }) => treeIndex;
-
-  // function changeBackground(e) {
-
-  //   if (e.target.style.background === 'red'){
-  //     e.target.style.background = 'grey';
-  //   }
-  //   else
-  //     e.target.style.background = 'red';
-  // }
 
   return (
     

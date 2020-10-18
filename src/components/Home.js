@@ -174,7 +174,6 @@ class Home extends Component{
                         <p> Don't have an account?</p>
                         <form>
                             <Button variant="btn btn-success" onClick={() => history.push('/i1signup')}>User SignUp</Button>
-
                             <Button variant="btn btn-success" onClick={() => history.push('/i2signup')}>Product Owner SignUp</Button>
                         </form>
                       </div>  

@@ -2,6 +2,9 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
+import Released from "./released";
+import { Tabs } from "antd";
+const { TabPane } = Tabs;
 
 class ManageOffers extends Component{
     constructor(props){
@@ -20,8 +23,8 @@ class ManageOffers extends Component{
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
 					.then((doc)=> {
-					console.log("Document data:", doc.data().name);
-					console.log("Document data:", doc.data().brand);
+					// console.log("Document data:", doc.data().name);
+					// console.log("Document data:", doc.data().brand);
 					this.setState({brand : doc.data().brand})
 					}).then((doc)=>{
 					this.ref=firebase.firestore().collection("offerDetails").where("Brand","==",this.state.brand);
@@ -32,10 +35,36 @@ class ManageOffers extends Component{
 						console.log(productowner.uid)
 				})
 			}
-		})
 
-		// console.log("yo")
+			if (productowner) {
+				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
+				  .get()
+				  .then((doc)=>{
+					this.ref=firebase.firestore().collection("released")
+					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate1);
+				  })
+				  .catch(function(error){
+					console.log("Error getting particular document:", error);
+				  })
+			}
+		})
 		// history.push("/manageoffers");
+	}
+
+	onCollectionUpdate1=(querySnapshot)=>{
+		const tree1=[];
+		querySnapshot.forEach((doc)=>{
+			const {treeData}=doc.data();
+			if(doc.id === this.state.brand){
+				tree1.push({
+					treeData
+				});
+			}
+		});
+		this.setState({tree1});
+		// console.log(tree1);
+		localStorage.setItem('treeValue1', JSON.stringify(tree1));
+		// console.log(JSON.parse(localStorage.getItem('treeValue1')));
 	}
 
 	onCollectionUpdate=(querySnapshot)=>{
@@ -117,10 +146,7 @@ class ManageOffers extends Component{
 
                         <div>
 							<button onClick={() => history.push('/add')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-								<i className="material-icons mr-1">Add Offer</i> </button>  
-								     
-							{/* <button onClick={() => history.push('/productownerhome')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-								<i className="material-icons mr-1">Home</i> </button>                */}
+								<i className="material-icons mr-1">Add Offer</i> </button>
                         </div>
 						
                         <div>
@@ -131,12 +157,18 @@ class ManageOffers extends Component{
 					</div>
 					</div>
 					</div>
-					
-					<div className="col-lg-8">
-					<div className="row">
-					<div className="col-sm-5">		  
-						<h5>Your Offers:</h5>		  
-						{this.state.offers.map(offer=>
+
+					<Tabs tabPosition="top" >			
+						<TabPane  tab="Product Tree " key="1" >
+							<h4 style= {{marginLeft:"-30vw"}} >Product tree</h4>
+							<Released isleaf={false}/>
+						</TabPane>
+						
+						<TabPane  tab="All Offers" key="2" >
+							<div className="row">	  
+							<div className="col-sm-5">
+								<h5>Your Offers:</h5>			  
+								{this.state.offers.map(offer=>
 							<div className="card-post mb-4 card card-small">
 								<div className="card-body">
 								<h7 className="card-title">{offer.Category} -{">"} {offer.Brand} -{">"} {offer.SubCategory}</h7>
@@ -164,9 +196,10 @@ class ManageOffers extends Component{
 								</div>
 							</div>
 						)};
-					</div>
-					</div>
-					</div>
+							</div>
+							</div>
+						</TabPane>	
+					</Tabs>
 				</div>
 			</div>	
   		)

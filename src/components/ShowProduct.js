@@ -26,8 +26,6 @@ class ShowProduct extends Component{
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
 				  .get()
 				  .then((doc)=> {
-					// console.log("Document data:", doc.data().name);
-					// console.log("Document data:", doc.data().brand);
 					this.setState({brand : doc.data().brand})
 				  }).then((doc)=>{
 					this.ref=firebase.firestore().collection("productOwnerDetails").where("BrandName","==",this.state.brand)
@@ -62,8 +60,6 @@ class ShowProduct extends Component{
 			  firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
 				.get()
 				.then((doc)=> {
-				//   console.log("Document data:", doc.data().name);
-				//   console.log("Document data:", doc.data().brand);
 				  this.setState({brand : doc.data().brand})
 				  this.setState({category : doc.data().Category})
 				}).then((doc)=>{

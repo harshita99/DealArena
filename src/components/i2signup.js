@@ -97,13 +97,21 @@ class i2signup extends Component{
           Category:temp.Category,
           Role:temp.Role
         });
+        if(temp.Role === 'Product Manager'){
+          firebase.firestore().collection("tree").doc(brand).set({ 
+            treeData: [{ 
+              title: temp.Category, 
+              children: [{ title: brand }] },
+            ] 
+          });
 
-        firebase.firestore().collection("tree").doc(brand).set({ 
-          treeData: [{ 
-            title: temp.Category, 
-            children: [{ title: brand }] },
-          ] 
-        });
+          firebase.firestore().collection("released").doc(brand).set({ 
+            treeData: [{ 
+              title: temp.Category, 
+              children: [{ title: brand }] },
+            ] 
+          });
+        }
 
         firebase.auth().createUserWithEmailAndPassword(email,password).then((u)=>{
           if (firebase.auth().currentUser){
