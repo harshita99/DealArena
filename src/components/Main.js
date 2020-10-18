@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import {Navbar, Nav} from 'react-bootstrap';
 import '../index.css';
 
-
     const Main = (props) => {
         // console.log(props);
         return(
@@ -16,15 +15,13 @@ import '../index.css';
                 </Nav>
             </Navbar.Collapse>
             
-{/* 
             <Navbar.Collapse>
                 <Nav>
                     <Nav.Link href="/">LogOut</Nav.Link>
                 </Nav>
-            </Navbar.Collapse> */}
+            </Navbar.Collapse> 
 
             </Navbar>
-
         );
     }
 

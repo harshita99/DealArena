@@ -1,15 +1,19 @@
 import React from 'react';
 import { Tooltip } from 'antd';
+import 'antd/dist/antd.css';
 import history from './../history';
-
+import Icon from '@ant-design/icons';
+import { ShoppingTwoTone, SendOutlined, setTwoToneColor, getTwoToneColor } from '@ant-design/icons';
 const Button = (props) => {  
   return (
     <Tooltip title="Make Leaf">
-    <button style={{backgroundColor:'grey'}} label="Leaf" onClick={props.toggle}>
+      {/* <Icon type="message" style={{ fontSize: '22px', color: '#08c' }} label="Leaf" theme="outlined"  onClick={props.toggle} /> */}
+      <ShoppingTwoTone style={{ fontSize: '22px', color: '#08c' }} label="Leaf" onClick={props.toggle} /> {" "}
+    {/* <button style={{backgroundColor:'grey'}} label="Leaf" onClick={props.toggle}>
         {/* onClick={changeBackground}     */}
-    <img src="images/star_icon.png" alt="makeleaf" style={{size: "20px", height: "20px", width: "20px"}} />
+   {/*} <img src="images/star_icon.png" alt="makeleaf" style={{size: "20px", height: "20px", width: "20px"}} />
       {/* {props.name} */}
-    </button>
+   {/* </button> */}
     </Tooltip>
   )
 }
@@ -27,10 +31,13 @@ toggle(e) {
     isOpen: !prevState.isOpen
   }));
 
-  if (e.target.style.background === 'red')
-    e.target.style.background = 'grey';
+  console.log(getTwoToneColor);
+  
+  if (!this.state.isOpen)
+    setTwoToneColor("black");
+
   else
-    e.target.style.background = 'red';
+    setTwoToneColor("#08c");
 }
   
   render() {
@@ -42,8 +49,9 @@ toggle(e) {
 
         {this.state.isOpen && 
             <Tooltip title="View Product">
-            <button onClick={() => history.push('/addproduct')} style={{backgroundColor:'grey', color:'black'}}>
-              Go </button>
+              <SendOutlined style={{ fontSize: '22px', color: '#08c' }} label="View" onClick={() => history.push('/addproduct')} />
+            {/* <button onClick={() => history.push('/addproduct')} style={{backgroundColor:'grey', color:'black'}}>
+              Go </button> */}
             </Tooltip>
         }
       </span>

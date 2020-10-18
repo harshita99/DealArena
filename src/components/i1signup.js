@@ -2,7 +2,9 @@ import React, { Component} from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBFormInline} from 'mdbreact';
 // import history from './../history';
 import firebase from "./Config";
-
+import 'antd/dist/antd.css';
+import '../index.css';
+import { Form, Input, Button } from 'antd';
 
 class i1signup extends Component{
 
@@ -75,10 +77,11 @@ class i1signup extends Component{
     render(){
         return(
             <MDBContainer>
+              <br />
               <MDBRow>
-                <MDBCol md="6">
+                <MDBCol md="10">
                   <MDBCard>
-                    <div className="header pt-3 peach-gradient">
+                    <div className="header pt-3 blue-gradient">
                       <MDBRow className="d-flex justify-content-center">
                         <h3 className="white-text mb-3 pt-3 font-weight-bold"> Sign Up </h3>
                       </MDBRow>
@@ -110,7 +113,10 @@ class i1signup extends Component{
                
 
                       <div className="text-center">
-                        <MDBBtn  onClick={this.onSubmit} color="grey" rounded type="button" className="z-depth-1a" > Sign Up </MDBBtn>
+                      <Button onClick={this.onSubmit} type="primary" m-2 htmlType="submit">
+                            Sign Up
+                        </Button>
+                        {/* <MDBBtn  onClick={this.onSubmit} color="grey" rounded type="button" className="z-depth-1a" > Sign Up </MDBBtn> */}
                       </div>
                     </MDBCardBody>
                   </MDBCard>

@@ -14,9 +14,8 @@ import updateoffer from "./components/UpdateOffer";
 import manageoffers from "./components/ManageOffers";
 import updateproduct from "./components/UpdateProduct";
 import add from "./components/add";
-
+import nav from "./components/NavBar"
 import history from './history';
-
 
 export default class Routes extends Component {
     render() {
@@ -35,6 +34,7 @@ export default class Routes extends Component {
                     <Route path="/manageoffers" component={manageoffers}/>
                     <Route path="/updateproduct" component={updateproduct}/>
                     <Route path="/add" component={add}/>
+                    <Route path="/nav" component={nav}/>
                 </Switch>
             </Router>
         )

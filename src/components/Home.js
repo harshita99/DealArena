@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 import history from './../history';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput} from 'mdbreact';
 import firebase from "./Config";
+import 'antd/dist/antd.css';
+import '../index.css';
+import { Form, Input, Button } from 'antd';
 
 const products = [];
 const products1 = [];
@@ -64,7 +67,7 @@ class Home extends Component{
       firebase.auth().signInWithEmailAndPassword(this.state.Email,this.state.Password).then((u)=>{
         if(products1.length===0){
           console.log("No such user exists!");
-          // alert("No such user exists!");
+          alert("No such user exists!");
         }
         else{
           this.props.history.push("/userhome");
@@ -95,7 +98,7 @@ class Home extends Component{
         }
         else{
           console.log("Invalid offer manager");
-          // alert("You're not an Offer Manager!");
+          alert("You're not an Offer Manager!");
         }
       }).catch((err)=>{
         console.log(err);
@@ -125,7 +128,7 @@ class Home extends Component{
         }
         else{
           console.log("Invalid product manager");
-          // alert("You're not a Product Manager!");
+          alert("You're not a Product Manager!");
         }
       }).catch((err)=>{
         console.log(err);
@@ -141,29 +144,75 @@ class Home extends Component{
     render(){
         return(
             <MDBContainer>
+              <br />
               <MDBRow>
-                <MDBCol md="500">
+                <MDBCol md="8">
                   <MDBCard>
-                    <div className="header pt-3 peach-gradient">
+                    <div className="header pt-3 blue-gradient">
                       <MDBRow className="d-flex justify-content-center">
                         <h1 className="white-text mb-3 pt-3 font-weight-bold"> Deal Arena </h1>
                       </MDBRow>
                     </div>
 
                     <MDBCardBody className="mx-4 mt-4">
-                      <MDBInput label="Your Email" group type="text" name="Email" onChange={this.handleChange} validate />
-                      <MDBInput label="Your Password" group type="password" name="Password" onChange={this.handleChange} validate />
+                      {/* <MDBInput label="Your Email" group type="text" name="Email" onChange={this.handleChange} validate />
+                      <MDBInput label="Your Password" group type="password" name="Password" onChange={this.handleChange} validate /> */}
+                      <Form>
+                        <Form.Item
+                          label="Your Email"
+                          name="Email"
+                          rules={[
+                          {
+                            required: true,
+                            message: 'Please input your username!',
+                          },
+                          ]}
+                        >
+                          <Input
+                            name="Email"
+                            placeholder="Enter your email."
+                            onChange={this.handleChange}
+                            validate 
+                          />
+                        </Form.Item>
 
+                        <Form.Item
+                          label="Your Password"
+                          name="Password"
+                          rules={[
+                          {
+                            required: true,
+                            message: 'Please input your password!',
+                          },
+                          ]}
+                        >
+                          <Input.Password 
+                            name="Password"
+                            placeholder="Enter an 8-digit password."
+                            onChange={this.handleChange}
+                            validate
+                          />
+                        </Form.Item>
+                      </Form>
                       <br />
 
                       <div>
                         <form>
-                            <Button variant="btn btn-success" onClick={this.login2}>User Login</Button>
-                        </form>
-
-                        <form>
-                            <Button variant="btn btn-success" onClick={this.login1}>Product Manager Login</Button>
-                            <Button variant="btn btn-success" onClick={this.login3}>Offer Maker Login</Button>
+                        <Button onClick={this.login2} type="primary" m-2 htmlType="submit">
+                            User Login
+                        </Button>{' '}
+                            {/* <Button variant="btn btn-success" onClick={this.login2}>User Login</Button> */}
+                        {/* </form>  */}
+                          {/* <p /> */}
+                        {/* <form> */}
+                        <Button onClick={this.login1} type="primary" m-2 htmlType="submit">
+                            Product Manager Login
+                        </Button> {' '}
+                        <Button onClick={this.login3} type="primary" m-2 htmlType="submit">
+                            Offer Maker Login
+                        </Button>
+                            {/* <Button variant="btn btn-success" onClick={this.login1}>Product Manager Login</Button>
+                            <Button variant="btn btn-success" onClick={this.login3}>Offer Maker Login</Button> */}
                         </form>
                       </div>  
 
@@ -173,8 +222,14 @@ class Home extends Component{
                       <div>
                         <p> Don't have an account?</p>
                         <form>
-                            <Button variant="btn btn-success" onClick={() => history.push('/i1signup')}>User SignUp</Button>
-                            <Button variant="btn btn-success" onClick={() => history.push('/i2signup')}>Product Owner SignUp</Button>
+                        <Button onClick={() => history.push('/i1signup')} type="primary" m-2 htmlType="submit">
+                            User Sign Up
+                        </Button> {' '}
+                        <Button onClick={() => history.push('/i2signup')} type="primary" m-2 htmlType="submit">
+                            Product Owner Sign Up
+                        </Button>
+                            {/* <Button variant="btn btn-success" onClick={() => history.push('/i1signup')}>User SignUp</Button>
+                            <Button variant="btn btn-success" onClick={() => history.push('/i2signup')}>Product Owner SignUp</Button> */}
                         </form>
                       </div>  
                     </MDBCardBody>

@@ -144,9 +144,10 @@ class i2signup extends Component{
         return(
             <MDBContainer>
               <MDBRow>
-                <MDBCol md="6">
+                <MDBCol md="10">
+                  <br />
                   <MDBCard>
-                    <div className="header pt-3 peach-gradient">
+                    <div className="header pt-3 blue-gradient">
                       <MDBRow className="d-flex justify-content-center">
                         <h3 className="white-text mb-3 pt-3 font-weight-bold"> Sign Up </h3>
                       </MDBRow>
