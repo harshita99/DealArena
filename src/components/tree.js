@@ -146,7 +146,7 @@ function Tree() {
 
                 <Tooltip title="Add Child">
 
-                <button  disabled={ rowInfo["node"].title===sessionStorage.getItem('brandN')}style={{backgroundColor:'grey'}} label="Add Child" onClick={event => addNodeChild(rowInfo)}>
+                <button  label="Add Child" onClick={event => addNodeChild(rowInfo)}>
                 <img src="images/add_icon.png" alt="add" style={{size: "20px", height: "20px", width: "20px"}} />
                 </button>
                 </Tooltip>)}
