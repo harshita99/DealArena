@@ -7,7 +7,7 @@ import SortableTree, {
 } from "react-sortable-tree";
 import "react-sortable-tree/style.css";
 import { Tooltip } from 'antd';
-import { PlusCircleTwoTone, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
+import { PlusCircleOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import SomeButtons from "./somebuttons";
 
 var d = [];
@@ -144,7 +144,7 @@ function Tree() {
               <div>
                 {( (rowInfo["node"].title!==sessionStorage.getItem('category'))) && (
                   <Tooltip title="Add Child">
-                    <PlusCircleTwoTone style={{ fontSize: '22px', color: '#08c' }} label="Add Child" onClick={event => addNodeChild(rowInfo)} />{" "}
+                    <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add Child" onClick={event => addNodeChild(rowInfo)} />{" "}
                     {/* <button style={{backgroundColor:'grey'}} label="Add Child" onClick={event => addNodeChild(rowInfo)}>
                       <img src="images/add_icon.png" alt="add" style={{size: "20px", height: "20px", width: "20px"}} />
                     </button> */}
@@ -154,13 +154,13 @@ function Tree() {
                 {( (rowInfo["node"].title!==sessionStorage.getItem('brandN')) && (rowInfo["node"].title!==sessionStorage.getItem('category'))) && (
                   <span>
                     <Tooltip title="Edit Node">
-                      <EditTwoTone style={{ fontSize: '22px', color: '#08c' }} label="Update" onClick={event => updateNode(rowInfo)} /> {" "}
+                      <EditOutlined style={{ fontSize: '22px', color: '#08c' }} label="Update" onClick={event => updateNode(rowInfo)} /> {" "}
                       {/* <button style={{backgroundColor:'grey'}} label="Update" onClick={event => updateNode(rowInfo)}>
                         <img src="images/edit_icon.png" alt="edit" style={{size: "20px", height: "20px", width: "20px"}} />
                       </button> */}
                     </Tooltip>
                     <Tooltip title="Delete Node">
-                      <DeleteTwoTone style={{ fontSize: '22px', color: '#08c' }} label="Delete" onClick={event => removeNode(rowInfo)} /> {" "}
+                      <DeleteOutlined style={{ fontSize: '22px', color: '#08c' }} label="Delete" onClick={event => removeNode(rowInfo)} /> {" "}
                       {/* <button style={{backgroundColor:'grey'}} label="Delete" onClick={event => removeNode(rowInfo)}>
                         <img src="images/delete_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
                       </button> */}

@@ -12,7 +12,7 @@ class Sidebar extends Component{
         <ul className="list cat-list">
           <li>
             <a href="/userhome?category=Electronics" className="d-flex">
-              <p>Electronics </p>
+              <p>Electronics</p>
             </a>
           </li>
           <li>
