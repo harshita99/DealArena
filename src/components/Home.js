@@ -198,17 +198,17 @@ class Home extends Component{
 
                       <div>
                         <form>
-                        <Button onClick={this.login2} type="primary" m-2 htmlType="submit">
+                        <Button style={{margin:"0.25vw"}} onClick={this.login2} type="primary" m-2 htmlType="submit">
                             User Login
-                        </Button>{' '}
+                        </Button>
                             {/* <Button variant="btn btn-success" onClick={this.login2}>User Login</Button> */}
                         {/* </form>  */}
                           {/* <p /> */}
                         {/* <form> */}
-                        <Button onClick={this.login1} type="primary" m-2 htmlType="submit">
+                        <Button style={{margin:"0.25vw"}} onClick={this.login1} type="primary" m-2 htmlType="submit">
                             Product Manager Login
-                        </Button> {' '}
-                        <Button onClick={this.login3} type="primary" m-2 htmlType="submit">
+                        </Button>
+                        <Button style={{margin:"0.25vw"}} onClick={this.login3} type="primary" m-2 htmlType="submit">
                             Offer Maker Login
                         </Button>
                             {/* <Button variant="btn btn-success" onClick={this.login1}>Product Manager Login</Button>
@@ -218,14 +218,14 @@ class Home extends Component{
 
                       <br />
                       <br />
-                    
+                      
                       <div>
                         <p> Don't have an account?</p>
                         <form>
-                        <Button onClick={() => history.push('/i1signup')} type="primary" m-2 htmlType="submit">
+                        <Button style={{margin:"0.25vw"}} onClick={() => history.push('/i1signup')} type="primary" m-2 htmlType="submit">
                             User Sign Up
-                        </Button> {' '}
-                        <Button onClick={() => history.push('/i2signup')} type="primary" m-2 htmlType="submit">
+                        </Button>
+                        <Button style={{margin:"0.25vw"}} onClick={() => history.push('/i2signup')} type="primary" m-2 htmlType="submit">
                             Product Owner Sign Up
                         </Button>
                             {/* <Button variant="btn btn-success" onClick={() => history.push('/i1signup')}>User SignUp</Button>
