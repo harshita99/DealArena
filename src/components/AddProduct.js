@@ -133,7 +133,7 @@ class AddProduct extends Component{
                         <textArea className="form-control" name="producturl" onChange={this.onChange} placeholder="URL to buy this product">{producturl}</textArea>
                         </div>
                     </div>
-
+                    <br />
                     <div>
                       <input type="file" onChange={this.handleChange} />
                       <img src={this.state.imageurl} alt="DealArena" height="100px" width="100px"/>

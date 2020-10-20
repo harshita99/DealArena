@@ -184,16 +184,18 @@ class ShowProduct extends Component{
 		// console.log("Brand is: ", this.state.brandN);
 		// console.log("Category is: ", this.state.category);
 		return (
-			<div>
+			<div className="App body">
+      			<div><br></br></div>
+				
 				<div className="row">
-					<div className="col-lg-3">
+					<div className="col-lg-3 lol" >
 						<div className="mb-4 pt-3 card card-small">
 							<div className="border-bottom text-center card-header">
 									<div className="mb-3 mx-auto">
 										<img className="rounded-circle" src="" alt="" width="80"/>
 									</div>
 								<h4 className="mb-0" id="brand">Welcome! <br></br>{this.state.brand} Product Manager</h4>
-							<	br></br>
+								<br></br>
 
 								<div>
 									<button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
@@ -206,69 +208,76 @@ class ShowProduct extends Component{
 								</div>
 							</div>
 						</div>
-						</div>
-					<Tabs tabPosition="top" >			
-						<TabPane  tab="Product Tree " key="1" > 
-							{/* <div */}
-								{/* <div className="row">	   */}
-									{/* <div className="col-sm-5"> */}
-										<h4 style= {{marginLeft:"-30vw"}} >Manage Your Product Tree</h4>
-										<Tree isleaf={false}/>
-										{/* <Treee/> */}
+					</div>
+
+					<div className="col-lg-8">
+					<div className="row">
+					<div className="lol ">
+						<Tabs tabPosition="top" >			
+							<TabPane  tab="Product Tree" key="1"> 
+								{/* <div */}
+									{/* <div className="row">	   */}
+										{/* <div className="col-sm-5"> */}
+											<h4 style= {{marginLeft:"-30vw"}} >Manage Your Product Tree</h4>
+											<Tree isleaf={false}/>
+											{/* <Treee/> */}
+										{/* </div> */}
 									{/* </div> */}
 								{/* </div> */}
-							{/* </div> */}
-						</TabPane>
-						
-						<TabPane  tab="All Products" key="2" >
-							<div className="row">	  
-							<div className="col-sm-5">
-								<h5>Your Products:</h5>			  
-								{this.state.products.map(product=>
-									<div className="card-post mb-4 card card-small">
-										<div className="card-body">
-											<h7 className="card-title">{product.Category} -{">"} {product.Brand} -{">"} {product.SubCategory}</h7>
-											<h5 className="card-title">
-												{product.Name}
-											</h5>
-											<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
-											<h6 className="card-title"> {product.Description}</h6>
-										</div>
+							</TabPane>
+							
+							<TabPane  tab="All Products" key="2" >
+								<div className="row" style={{margin:"0.25vw"}}>	  
+								<div className="col-sm-10">
+									<h5>Your Products:</h5>			  
+									{this.state.products.map(product=>
+										<div className="card-post mb-4 card card-small">
+											<div className="card-body">
+												<h7 className="card-title">{product.Category} -{">"} {product.Brand} -{">"} {product.SubCategory}</h7>
+												<h5 className="card-title">
+													{product.Name}
+												</h5>
+												<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
+												<h6 className="card-title"> {product.Description}</h6>
+											</div>
 
-										<div className="border-top d-flex card-footer">
-											<div className="card-post__author d-flex">
-												<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
-													Offer: {product.Offer} 
-												</a>
-												<div className="d-flex flex-column justify-content-center ml-3">
-													<span className="card-post__author-name">Rs.{product.Price}</span>
-													<small className="text-muted"> Offer expires:{product.Expiry}</small>
+											<div className="border-top d-flex card-footer" >
+												<div className="card-post__author d-flex">
+													{/* <a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
+														Offer: {product.Offer} 
+													</a> */}
+													<div className="d-flex flex-column justify-content-center ml-3">
+														<span className="card-post__author-name">Rs.{product.Price}</span>
+														{/* <small className="text-muted"> Offer expires:{product.Expiry}</small> */}
+													</div>
+												</div>
+												<div className="my-auto ml-auto">
+													<a href={product.producturl}> URL </a>
 												</div>
 											</div>
-											<div className="my-auto ml-auto">
-												<a href={product.producturl}> URL </a>
+
+											<div>
+												{/* <button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
+												<i className="material-icons mr-1">Add offer</i> </button> */}
+
+												<button onClick={()=>this.update(product.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
+													<i className="material-icons mr-1">Edit product</i>
+												</button>
+
+												<button onClick={()=>this.delete(product.key)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
+													<i className="material-icons mr-1">Delete product</i>
+												</button>
 											</div>
 										</div>
-
-										<div>
-											{/* <button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
-											<i className="material-icons mr-1">Add offer</i> </button> */}
-
-											<button onClick={()=>this.update(product.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
-												<i className="material-icons mr-1">Edit product</i>
-											</button>
-
-											<button onClick={()=>this.delete(product.key)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
-												<i className="material-icons mr-1">Delete product</i>
-											</button>
-										</div>
-									</div>
-									)
-								};
-							</div>
-							</div>
-						</TabPane>	
-					</Tabs>
+										)
+									};
+								</div>
+								</div>
+							</TabPane>	
+						</Tabs>
+					</div>
+					</div>
+					</div>
 				</div>
 			</div>
 		)

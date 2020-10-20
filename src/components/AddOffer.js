@@ -201,6 +201,7 @@ class AddOffer extends Component{
                         </div>
                     </div>
 
+                    <br />
                     <div>
                       <input type="file" onChange={this.handleChange} />
                       <img src={this.state.imageurl} alt="DealArena" height="100px" width="100px"/>

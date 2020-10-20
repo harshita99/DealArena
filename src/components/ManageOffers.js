@@ -133,10 +133,11 @@ class ManageOffers extends Component{
 
 	render() {
   		return (
-			<div>
+			<div className="App body">
+      			<div><br></br></div>
+				
 				<div className="row">
-		
-					<div className="col-lg-3"><div className="mb-4 pt-3 card card-small">
+					<div className="col-lg-3 lol"><div className="mb-4 pt-3 card card-small">
 					<div className="border-bottom text-center card-header">
 						<div className="mb-3 mx-auto">
 							<img className="rounded-circle" src="" alt="" width="80"/>
@@ -158,48 +159,52 @@ class ManageOffers extends Component{
 					</div>
 					</div>
 
-					<Tabs tabPosition="top" >			
-						<TabPane  tab="Product Tree " key="1" >
-							<h4 style= {{marginLeft:"-30vw"}} >Product tree</h4>
-							<Released isleaf={false}/>
-						</TabPane>
+					<div className="col-lg-8">
+					<div className="row">
+					<div className="lol ">
+						<Tabs tabPosition="top" >			
+							<TabPane  tab="Product Tree " key="1" >
+								<h4 style= {{marginLeft:"-30vw"}} >Product Tree</h4>
+								<Released isleaf={false}/>
+							</TabPane>
+							
+							<TabPane  tab="All Offers" key="2" >
+								<div className="row" style={{margin:"0.25vw"}}>	  
+								<div className="col-sm-10">
+									<h5>Your Offers:</h5>			  
+									{this.state.offers.map(offer=>
+										<div className="card-post mb-4 card card-small">
+											<div className="card-body">
+												<h7 className="card-title">{offer.Category} -{">"} {offer.Brand} -{">"} {offer.SubCategory}</h7>
+												<h5 className="card-title">
+													{offer.Name}
+												</h5>
+												<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
+												<h6 className="card-title"> {offer.Description}</h6>
+											</div>
 						
-						<TabPane  tab="All Offers" key="2" >
-							<div className="row">	  
-							<div className="col-sm-5">
-								<h5>Your Offers:</h5>			  
-								{this.state.offers.map(offer=>
-							<div className="card-post mb-4 card card-small">
-								<div className="card-body">
-								<h7 className="card-title">{offer.Category} -{">"} {offer.Brand} -{">"} {offer.SubCategory}</h7>
-			
-								<h5 className="card-title">
-									{offer.Name}
-								</h5>
-								<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
-								<h6 className="card-title"> {offer.Description}</h6>
-			
-								</div>
-			
-								<div className="border-top d-flex card-footer">
-								<div className="card-post__author d-flex">
-								<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
-									Offer: {offer.Offer} </a>
-								<div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{offer.Price}</span><small className="text-muted"> Offer expires:{offer.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={offer.producturl}> URL</a></div></div>
-						  
-								<div>
-									<button onClick={()=>this.update(offer.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
-									<i className="material-icons mr-1">Update offer</i> </button>
+											<div className="border-top d-flex card-footer">
+											<div className="card-post__author d-flex">
+											<a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
+												Offer: {offer.Offer} </a>
+											<div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{offer.Price}</span><small className="text-muted"> Offer expires:{offer.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={offer.producturl}> URL</a></div></div>
+									
+											<div>
+												<button onClick={()=>this.update(offer.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
+												<i className="material-icons mr-1">Update offer</i> </button>
 
-									<button onClick={()=>this.delete(offer.key)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
-									<i className="material-icons mr-1">Delete offer</i> </button>
+												<button onClick={()=>this.delete(offer.key)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
+												<i className="material-icons mr-1">Delete offer</i> </button>
+											</div>
+										</div>
+									)};
 								</div>
-							</div>
-						)};
-							</div>
-							</div>
-						</TabPane>	
-					</Tabs>
+								</div>
+							</TabPane>	
+						</Tabs>
+					</div>
+					</div>
+					</div>
 				</div>
 			</div>	
   		)
