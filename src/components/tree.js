@@ -120,7 +120,6 @@ function Tree() {
   return (
     
     <div>   
-
       <div style={{ flex: "0 0 auto", padding: "0 15px" }}>
         <br />
         <input style={{marginLeft:"-30vw"}} placeholder="Enter text here" ref={inputEl} type="text" />
