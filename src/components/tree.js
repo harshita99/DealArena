@@ -14,7 +14,7 @@ var d = [];
 const t = JSON.parse(localStorage.getItem('treeValue'));
 if(t!=null){
   d = t[0];
-  console.log(d["treeData"]);
+  // console.log(d["treeData"]);
 }
 
 const seed = [];
