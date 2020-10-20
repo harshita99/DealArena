@@ -2,8 +2,8 @@ import React, { Component, //useState
   // useState, useRef 
 } from "react";
 // import firebase from "./Config";
-import SomeButtons from "./somebuttons";
-import firebase from "./Config";
+import SomeButtons from "../somebuttons";
+import firebase from "../Config";
 import SortableTree, {
   addNodeUnderParent,
   removeNodeAtPath,

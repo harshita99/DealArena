@@ -1,8 +1,8 @@
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import React,{Component} from 'react';
-import firebase from "./Config";
-import history from './../history';
-import TreeCheck1 from './treeCheck1';
+import firebase from "../Config";
+import history from '../../history';
+import TreeCheck1 from '../treeCheck1';
 import { MDBInput} from 'mdbreact';
 
 

@@ -1,8 +1,8 @@
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import React,{Component} from 'react';
-import firebase from "./Config";
+import firebase from "../Config";
 // import {Link} from "react-router-dom";
-import history from './../history';
+import history from '../../history';
 
 class productownerhome extends Component{
     constructor(props){
