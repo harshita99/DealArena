@@ -14,7 +14,7 @@ var d = [];
 const t = JSON.parse(localStorage.getItem('treeValue'));
 if(t!=null){
   d = t[0];
-  console.log(d["treeData"]);
+  // console.log(d["treeData"]);
 }
 
 const seed = [];
@@ -95,6 +95,7 @@ function Tree() {
       })
     );
     console.log("Remove Node: ", rowInfo);
+    console.log(Object.keys(rowInfo["node"]).length);
   }
 
   function updateTreeData(treeData) {
@@ -164,8 +165,9 @@ function Tree() {
                         <img src="images/delete_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
                       </button> */}
                     </Tooltip>
-
+                    { Object.keys(rowInfo["node"]).length ===1 &&(
                     <SomeButtons/>
+                    )}
                   </span>
                 )}
               </div>
