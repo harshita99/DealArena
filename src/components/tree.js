@@ -117,13 +117,12 @@ function Tree() {
   function release(){
     console.log("Number of leaf nodes in the tree:",y/2);
     console.log("numberofproducts:",(parseInt(sessionStorage.getItem('numberofproducts'))));
-    
-    
+
+
     if ((Math.trunc(y))===2*(parseInt(sessionStorage.getItem('numberofproducts')))){
       console.log("Released to Offer Manager");
       alert("Released to Offer Manager ");
       firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
- 
 
     }
     else{
@@ -205,7 +204,7 @@ function Tree() {
       </div>
 
       <button onClick={saveyo} style={{ marginTop:"-10vh"}}> Save </button> { }
-      <button onClick={release} style={{ marginTop:"-10vh"}}> Release </button>
+      <button onClick={release} style={{ marginTop:"-10vh"}}> Save & Release </button>
     </div>
   );
 }
