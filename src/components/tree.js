@@ -120,10 +120,11 @@ function Tree() {
 
 
     if ((Math.trunc(y))===2*(parseInt(sessionStorage.getItem('numberofproducts')))){
+      
+      saveyo()
+      firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
       console.log("Released to Offer Manager");
       alert("Released to Offer Manager ");
-      firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
-
     }
     else{
       alert("Please add products at each end");
