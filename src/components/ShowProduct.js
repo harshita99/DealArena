@@ -81,13 +81,14 @@ class ShowProduct extends Component{
 			// console.log(doc.id);
 			const {treeData}=doc.data();
 			if(doc.id === this.state.brand){
+
 				tree1.push({
 					treeData
 				});
 			}
 		});
 		this.setState({tree1});
-		// console.log(tree1);
+		console.log(tree1);
 		localStorage.setItem('treeValue', JSON.stringify(tree1));
 	}
 

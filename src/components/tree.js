@@ -5,6 +5,8 @@ import SortableTree, {
   removeNodeAtPath,
   changeNodeAtPath
 } from "react-sortable-tree";
+
+
 import "react-sortable-tree/style.css";
 import { Tooltip } from 'antd';
 import { PlusCircleOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
@@ -14,18 +16,20 @@ var d = [];
 const t = JSON.parse(localStorage.getItem('treeValue'));
 if(t!=null){
   d = t[0];
-  // console.log(d["treeData"]);
 }
 
 const seed = [];
 
 function Tree() {
   const [treeData, setTreeData] = useState(seed);
-
+  var  x=0;
   const inputEl = useRef();
+
 
   function createNode() {
     setTreeData(d["treeData"]);
+
+    console.log(x);
   }
 
   function updateNode(rowInfo) {
@@ -94,8 +98,8 @@ function Tree() {
         getNodeKey
       })
     );
-    console.log("Remove Node: ", rowInfo);
-    console.log(Object.keys(rowInfo["node"]).length);
+    // console.log("Remove Node: ", rowInfo);
+    // console.log(Object.keys(rowInfo["node"]).length);
   }
 
   function updateTreeData(treeData) {
@@ -111,16 +115,32 @@ function Tree() {
   }
 
   function release(){
-    firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
-    console.log("Released to Offer Manager");
-    alert("Released to Offer Manager ");
-  }
+    console.log("Number of leaf nodes in the tree:",y/2);
+    var N=0; //N is the number of total products in the database of this brand
+    
+    
+    if ((y/2)===N){
+      firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
+      console.log("Released to Offer Manager");
+      alert("Released to Offer Manager ");
 
+    }
+    else{
+      alert("Please add products at each end");
+
+    }
+  }
+  
+    
+    
+  var y;
   const getNodeKey = ({ treeIndex }) => treeIndex;
 
   return (
-    
-    <div>   
+    <div>  
+     <span style={{visibility: "hidden" }}> {y=0}</span>
+ 
+
       <div style={{ flex: "0 0 auto", padding: "0 15px" }}>
         <br />
         <input style={{marginLeft:"-30vw"}} placeholder="Enter text here" ref={inputEl} type="text" />
@@ -135,6 +155,7 @@ function Tree() {
       </div>
 
       <div style={{  flex: "0 0 auto", padding: "0 15px" , marginLeft:"10vw", height: "60vh", width:"60vw" }}>
+
         <SortableTree
           treeData={treeData}
           onChange={treeData => updateTreeData(treeData)}
@@ -145,9 +166,7 @@ function Tree() {
                 {( (rowInfo["node"].title!==sessionStorage.getItem('category'))) && (
                   <Tooltip title="Add Child">
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add Child" onClick={event => addNodeChild(rowInfo)} />{" "}
-                    {/* <button style={{backgroundColor:'grey'}} label="Add Child" onClick={event => addNodeChild(rowInfo)}>
-                      <img src="images/add_icon.png" alt="add" style={{size: "20px", height: "20px", width: "20px"}} />
-                    </button> */}
+
                   </Tooltip>
                 )}
 
@@ -155,19 +174,20 @@ function Tree() {
                   <span>
                     <Tooltip title="Edit Node">
                       <EditOutlined style={{ fontSize: '22px', color: '#08c' }} label="Update" onClick={event => updateNode(rowInfo)} /> {" "}
-                      {/* <button style={{backgroundColor:'grey'}} label="Update" onClick={event => updateNode(rowInfo)}>
-                        <img src="images/edit_icon.png" alt="edit" style={{size: "20px", height: "20px", width: "20px"}} />
-                      </button> */}
+             
                     </Tooltip>
                     <Tooltip title="Delete Node">
                       <DeleteOutlined style={{ fontSize: '22px', color: '#08c' }} label="Delete" onClick={event => removeNode(rowInfo)} /> {" "}
-                      {/* <button style={{backgroundColor:'grey'}} label="Delete" onClick={event => removeNode(rowInfo)}>
-                        <img src="images/delete_icon.png" alt="delete" style={{size: "20px", height: "20px", width: "20px"}} />
-                      </button> */}
+                  
                     </Tooltip>
                     { Object.keys(rowInfo["node"]).length === 1 && (
                       <SomeButtons/>
-                    )}
+                    ) 
+                  } 
+              
+                  <div  style={{visibility: "hidden" }}>
+                    {y=  ((rowInfo["node"].title===sessionStorage.getItem('brandN')) || (rowInfo["node"].title===sessionStorage.getItem('category'))||(Object.keys(rowInfo["node"]).length !== 1))? y:y+1}
+                    </div>
                   </span>
                 )}
               </div>
