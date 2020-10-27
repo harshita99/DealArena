@@ -115,11 +115,11 @@ function Tree() {
   }
 
   function release(){
-    console.log("Number of leaf nodes in the tree:",y/2);
+    console.log("Number of leaf nodes in the tree:",y);
     var N=0; //N is the number of total products in the database of this brand
     
     
-    if ((y/2)===N){
+    if ((y)===N){
       firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
       console.log("Released to Offer Manager");
       alert("Released to Offer Manager ");
