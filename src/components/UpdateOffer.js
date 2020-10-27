@@ -98,7 +98,7 @@ class UpdateOffer extends Component{
                 imageurl:"",
                 producturl:"",
             });
-            this.props.history.push("/productownerhome")
+            this.props.history.push("/manageoffers")
         })
         .catch((error)=>{
             console.error("Error editing the document:",error);

@@ -83,7 +83,7 @@ class AddOffer extends Component{
                 imageurl:"",
                 producturl:"",
             });
-            this.props.history.push("/productownerhome")
+            this.props.history.push("/manageoffers")
         })
         .catch((error)=>{
             console.error("Error adding document:",error);
@@ -128,13 +128,8 @@ class AddOffer extends Component{
         };
         return(
             <div style={divStyle}>
-                {/* <Card class="col-sm-9"> */}
-                    {/* <Link to="/productownerhome">
-                        <button>Show Products</button>
-                    </Link> */}
-                {/* </Card> */}
                 <div id="formbutton" className="Buttons" style={bottomStyle}>
-                    <button type="submit" className="btn btn-primary" onClick={() => history.push('/productownerhome')}> Show Offers </button>
+                    <button type="submit" className="btn btn-primary" onClick={() => history.push('/manageoffers')}> Show Offers </button>
                 </div>
 
                 <div>
