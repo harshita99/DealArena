@@ -115,14 +115,15 @@ function Tree() {
   }
 
   function release(){
-    console.log("Number of leaf nodes in the tree:",y);
-    var N=0; //N is the number of total products in the database of this brand
+    console.log("Number of leaf nodes in the tree:",y/2);
+    console.log("numberofproducts:",(parseInt(sessionStorage.getItem('numberofproducts'))));
     
     
-    if ((y)===N){
-      firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
+    if ((Math.trunc(y))===2*(parseInt(sessionStorage.getItem('numberofproducts')))){
       console.log("Released to Offer Manager");
       alert("Released to Offer Manager ");
+      firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
+ 
 
     }
     else{

@@ -7,13 +7,14 @@ import Tree from "./tree";
 import { Tabs } from "antd";
 const { TabPane } = Tabs;
 const details=[];
-
+var z=0;
 class ShowProduct extends Component{
     constructor(props){
 		super(props);
 		this.logout = this.logout.bind(this);
 		this.unsubscribe=null;
 		this.state={
+			numberofproducts:0,
 			products:[]
 		};
 	}
@@ -72,6 +73,7 @@ class ShowProduct extends Component{
 				})
 			}
 		})
+
 		// history.push("/showproduct");
 	}
 
@@ -230,9 +232,14 @@ class ShowProduct extends Component{
 							<TabPane  tab="All Products" key="2" >
 								<div className="row" style={{margin:"0.25vw"}}>	  
 								<div className="col-sm-10">
+								<span style={{visibility: "hidden" }}> {z=0}</span>
 									<h5>Your Products:</h5>			  
 									{this.state.products.map(product=>
+
 										<div className="card-post mb-4 card card-small">
+										<span style={{visibility: "hidden" }}> {z=z+1}</span>
+										<span style={{visibility: "hidden" }}> {sessionStorage.setItem('numberofproducts', z )}</span>
+
 											<div className="card-body">
 												<h7 className="card-title">{product.Category} -{">"} {product.Brand} -{">"} {product.SubCategory}</h7>
 												<h5 className="card-title">
@@ -269,9 +276,11 @@ class ShowProduct extends Component{
 													<i className="material-icons mr-1">Delete product</i>
 												</button>
 											</div>
+
 										</div>
+
 										)
-									};
+									}
 								</div>
 								</div>
 							</TabPane>	
