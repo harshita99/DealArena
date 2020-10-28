@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
 import Released from "./released";
+import Add from "./add";
 import { Tabs } from "antd";
 const { TabPane } = Tabs;
 
@@ -166,6 +167,11 @@ class ManageOffers extends Component{
 							<TabPane  tab="Product Tree " key="1" >
 								<h4 style= {{marginLeft:"-30vw"}} >Product Tree</h4>
 								<Released isleaf={false}/>
+							</TabPane>
+
+							<TabPane  tab="Products" key="3" >
+								{/* <h4 style= {{marginLeft:"-30vw"}} ></h4> */}
+								<Add/>
 							</TabPane>
 							
 							<TabPane  tab="All Offers" key="2" >

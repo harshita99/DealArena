@@ -2,11 +2,11 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
-import TreeCheck1 from './treeCheck1';
-import { MDBInput} from 'mdbreact';
+// import TreeCheck1 from './treeCheck1';
+// import { MDBInput} from 'mdbreact';
 
 
-class add extends Component{
+class Add extends Component{
     constructor(props){
 		super(props);
 		this.logout = this.logout.bind(this);
@@ -39,7 +39,7 @@ class add extends Component{
 				})
 			}
 		})
-		history.push("/add");
+		// history.push("/add");
 	}
 
 	onCollectionUpdate=(querySnapshot)=>{
@@ -107,15 +107,15 @@ class add extends Component{
 		return (
 			<div>
 				<div className="row">
-
+{/* 
 				<div className="col-lg-3">
 
-				<div className="mb-4 pt-3 card card-small">
+				<div className="mb-4 pt-3 card card-small" style={{margin:10}}>
 					<div className="border-bottom text-center card-header">
 						<div className="mb-3 mx-auto">
 							<img className="rounded-circle" src="" alt="" width="80"/>
 						</div>
-						<h4 className="mb-0" id="brand">{this.state.brand}</h4>
+						<h4 className="mb-0" id="brand">Welcome {this.state.brand} Offer Manager</h4>
 						<br></br>
 
 						<div>	
@@ -141,13 +141,14 @@ class add extends Component{
 					</div>
 
 				</div>
-				</div>
+		   		</div>  */}
 			
 			<div className="col-lg-8">
-				<div className="row">	  
-				<div className="col-sm-5">			  
+				<div className="row">	
+				<h4 style={{marginLeft:"10%",marginTop:10}}>Add offer directly at any product</h4>  
+				<div className="col-sm-8">			  
 					{this.state.products.map(product=>
-						<div className="card-post mb-4 card card-small">
+						<div style={{margin:10}} className="card-post mb-4 card card-small">
 							<div className="card-body">
 								<h5 className="card-title">{product.Name}</h5>
 								<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
@@ -165,13 +166,11 @@ class add extends Component{
 									</div>
 								</div>
 
-								<div className="card-post__author d-flex col-sm-8">
-									<div className="d-flex flex-column justify-content-center ml-3">
+									<div className="d-flex flex-column ">
 										<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
 											<i className="material-icons mr-1">Add offer</i> 
 										</button>
 									</div>
-								</div>
 							</div>
 						</div>
 					)};
@@ -186,4 +185,4 @@ class add extends Component{
 	}
 }
 
-export default add;
+export default Add;
