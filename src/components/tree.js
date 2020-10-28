@@ -5,12 +5,17 @@ import SortableTree, {
   removeNodeAtPath,
   changeNodeAtPath
 } from "react-sortable-tree";
-
-
 import "react-sortable-tree/style.css";
 import { Tooltip } from 'antd';
 import { PlusCircleOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import SomeButtons from "./somebuttons";
+
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 var d = [];
 const t = JSON.parse(localStorage.getItem('treeValue'));
@@ -25,10 +30,38 @@ function Tree() {
   var  x=0;
   const inputEl = useRef();
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const [saveOpen, setSaveOpen] = React.useState(false);
+
+  const handleSaveOpen = () => {
+    setSaveOpen(true);
+  };
+
+  const handleSaveClose = () => {
+    setSaveOpen(false);
+  };
+
+  const [releaseOpen, setReleaseOpen] = React.useState(false);
+
+  const handleReleaseOpen = () => {
+    setReleaseOpen(true);
+  };
+
+  const handleReleaseClose = () => {
+    setReleaseOpen(false);
+  };
 
   function createNode() {
     setTreeData(d["treeData"]);
-
     console.log(x);
   }
 
@@ -98,6 +131,7 @@ function Tree() {
         getNodeKey
       })
     );
+    handleClose();
     // console.log("Remove Node: ", rowInfo);
     // console.log(Object.keys(rowInfo["node"]).length);
   }
@@ -115,32 +149,26 @@ function Tree() {
   }
 
   function release(){
-    console.log("Number of leaf nodes in the tree:",y/2);
+    console.log("Number of leaf nodes in the tree:",y);
     console.log("numberofproducts:",(parseInt(sessionStorage.getItem('numberofproducts'))));
 
-
-    if ((Math.trunc(y))===2*(parseInt(sessionStorage.getItem('numberofproducts')))){
-      
+    if ((Math.trunc(y))===(parseInt(sessionStorage.getItem('numberofproducts')))){
       saveyo()
       firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
-      console.log("Released to Offer Manager");
-      alert("Released to Offer Manager ");
+      console.log("Released to Offer Manager!");
+      alert("Released to Offer Manager!");
     }
     else{
-      alert("Please add products at each end");
-
+      alert("Please add products at each end!");
     }
   }
   
-    
-    
   var y;
   const getNodeKey = ({ treeIndex }) => treeIndex;
 
   return (
     <div>  
-     <span style={{visibility: "hidden" }}> {y=0}</span>
- 
+     <span style={{visibility: "hidden" }}> {y=0} </span>
 
       <div style={{ flex: "0 0 auto", padding: "0 15px" }}>
         <br />
@@ -156,7 +184,6 @@ function Tree() {
       </div>
 
       <div style={{  flex: "0 0 auto", padding: "0 15px" , marginLeft:"10vw", height: "60vh", width:"60vw" }}>
-
         <SortableTree
           treeData={treeData}
           onChange={treeData => updateTreeData(treeData)}
@@ -167,7 +194,6 @@ function Tree() {
                 {( (rowInfo["node"].title!==sessionStorage.getItem('category'))) && (
                   <Tooltip title="Add Child">
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add Child" onClick={event => addNodeChild(rowInfo)} />{" "}
-
                   </Tooltip>
                 )}
 
@@ -175,19 +201,65 @@ function Tree() {
                   <span>
                     <Tooltip title="Edit Node">
                       <EditOutlined style={{ fontSize: '22px', color: '#08c' }} label="Update" onClick={event => updateNode(rowInfo)} /> {" "}
-             
                     </Tooltip>
                     <Tooltip title="Delete Node">
-                      <DeleteOutlined style={{ fontSize: '22px', color: '#08c' }} label="Delete" onClick={event => removeNode(rowInfo)} /> {" "}
-                  
+                      <DeleteOutlined style={{ fontSize: '22px', color: '#08c' }} label="Delete" onClick={handleClickOpen} /> {" "}
                     </Tooltip>
                     { Object.keys(rowInfo["node"]).length === 1 && (
                       <SomeButtons/>
-                    ) 
-                  } 
-              
-                  <div  style={{visibility: "hidden" }}>
-                    {y=  ((rowInfo["node"].title===sessionStorage.getItem('brandN')) || (rowInfo["node"].title===sessionStorage.getItem('category'))||(Object.keys(rowInfo["node"]).length !== 1))? y:y+1}
+                    )}
+                    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                      <DialogTitle id="form-dialog-title">Delete</DialogTitle>
+                      <DialogContent>
+                      <DialogContentText>
+                          Are you sure you want to delete the node? <br />All the children of this node, if any, will also be deleted.
+                      </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                      <Button style={{ color: '#08c' }} onClick={handleClose} color="primary">
+                          Cancel
+                      </Button>
+                      <Button style={{ color: '#08c' }} onClick={event => removeNode(rowInfo)} color="primary">
+                          Delete
+                      </Button>
+                      </DialogActions>
+                    </Dialog>
+
+                    <Dialog open={saveOpen} onClose={handleSaveClose} aria-labelledby="form-dialog-title">
+                      <DialogTitle id="form-dialog-title">Save Tree</DialogTitle>
+                      <DialogContent>
+                      <DialogContentText>
+                          Are you sure you want to save the tree? <br /> You can keep editing it later.
+                      </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                      <Button style={{ color: '#08c' }} onClick={handleSaveClose} color="primary">
+                          Cancel
+                      </Button>
+                      <Button style={{ color: '#08c' }} onClick={saveyo} color="primary">
+                          Save
+                      </Button>
+                      </DialogActions>
+                    </Dialog>
+
+                    <Dialog open={releaseOpen} onClose={handleReleaseClose} aria-labelledby="form-dialog-title">
+                      <DialogTitle id="form-dialog-title">Release Tree</DialogTitle>
+                      <DialogContent>
+                      <DialogContentText>
+                          Are you sure you want to release the tree? <br /> The Offer Manager would now be able to Add Offers on them.
+                      </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                      <Button style={{ color: '#08c' }} onClick={handleReleaseClose} color="primary">
+                          Cancel
+                      </Button>
+                      <Button style={{ color: '#08c' }} onClick={release} color="primary">
+                          Release
+                      </Button>
+                      </DialogActions>
+                    </Dialog>
+                    <div style={{visibility: "hidden" }}>
+                      {y= ((rowInfo["node"].title === sessionStorage.getItem('brandN')) || (rowInfo["node"].title===sessionStorage.getItem('category')) || (Object.keys(rowInfo["node"]).length !== 1)) ? y:y+1}
                     </div>
                   </span>
                 )}
@@ -204,8 +276,8 @@ function Tree() {
         </span>
       </div>
 
-      <button onClick={saveyo} style={{ marginTop:"-10vh"}}> Save </button> { }
-      <button onClick={release} style={{ marginTop:"-10vh"}}> Save & Release </button>
+      <button onClick={handleSaveOpen} style={{ marginTop:"-10vh"}}> Save </button> { }
+      <button onClick={handleReleaseOpen} style={{ marginTop:"-10vh"}}> Save & Release </button>
     </div>
   );
 }
