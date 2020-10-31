@@ -23,7 +23,7 @@ const tailLayout = {
 
 var temp = [];
 
-class i2signup extends Component{
+class i3signup extends Component{
   constructor(props){
     super(props);
     this.ref=firebase.firestore().collection("productOwnerDetails");
@@ -39,8 +39,10 @@ class i2signup extends Component{
 
   formRef = React.createRef();
   onFinish = (values) => {
+    // console.log(values);
     temp = values;
     this.onSubmit()
+
   };
 
   onInput=(e)=>{
@@ -56,10 +58,9 @@ class i2signup extends Component{
 
     const email = this.state.Email;
     const password = this.state.Password;
-
     firebase.firestore().collection("productOwnerDetails").where("BrandName","==",this.state.BrandName)
     .get()
-    .then(function(querySnapshot){ 
+    .then(function(querySnapshot){
         console.log("new");
         console.log(temp);
         firebase.firestore().collection("productOwnerDetails").add({
@@ -68,22 +69,8 @@ class i2signup extends Component{
           Password:password,
           BrandName:brand,
           Category:temp.Category,
-          Role:"Product Manager"
+          Role:"Offer Maker"
         });
-        
-          firebase.firestore().collection("tree").doc(brand).set({ 
-            treeData: [{ 
-              title: temp.Category, 
-              children: [{ title: brand }] },
-            ] 
-          });
-
-          firebase.firestore().collection("released").doc(brand).set({ 
-            treeData: [{ 
-              title: temp.Category, 
-              children: [{ title: brand }] },
-            ] 
-          });
 
         firebase.auth().createUserWithEmailAndPassword(email,password).then((u)=>{
           if (firebase.auth().currentUser){
@@ -91,8 +78,7 @@ class i2signup extends Component{
               name:name,
               brand:brand,
             });
-            history.push("/");
-            alert('Successfully signed up..... Proceed to LogIn!');
+            history.push("/manageoffers");
           }
           else{
             console.log("helllooooo");
@@ -100,7 +86,7 @@ class i2signup extends Component{
         })
         .catch((err)=>{
           console.log(err);
-        }); 
+        });
     })
     .catch(function(error){
       console.log("error getting documents:", error);
@@ -134,14 +120,6 @@ class i2signup extends Component{
                             <Option value="Footwear">Footwear</Option>
                           </Select>
                         </Form.Item>
-
-                        {/* <Form.Item name="Role" label="Role" rules={[ { required: true } ]} >
-                          <Select placeholder="Select Role" allowClear >
-                            <Option value="Product Manager">Product Manager</Option>
-                            <Option value="Offer Manager">Offer Manager</Option>
-                          </Select>
-                        </Form.Item> */}
-
                         <Form.Item {...tailLayout}>
                           <Button type="primary" htmlType="submit">
                             Submit
@@ -149,7 +127,6 @@ class i2signup extends Component{
                         </Form.Item>
                       
                       </Form>
-
                     </MDBCardBody>
                   </MDBCard>
                 </MDBCol>
@@ -159,4 +136,4 @@ class i2signup extends Component{
     }
 }
 
-export default i2signup;
+export default i3signup;

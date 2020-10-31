@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { Button } from 'react-bootstrap';
 import history from './../history';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody} from 'mdbreact';
 import firebase from "./Config";
@@ -27,7 +26,6 @@ class Home extends Component{
   }
   
   onCollectionUpdate=(querySnapshot)=>{
-		// const products=[];
 		querySnapshot.forEach((doc)=>{
 			const {Name, BrandName, Email, Role}=doc.data();
 		products.push({
@@ -41,7 +39,6 @@ class Home extends Component{
   }
 
   onCollectionUpdate1=(querySnapshot)=>{
-		// const products=[];
 		querySnapshot.forEach((doc)=>{
 			const {Name, Email}=doc.data();
 		products1.push({
@@ -155,8 +152,6 @@ class Home extends Component{
                     </div>
 
                     <MDBCardBody className="mx-4 mt-4">
-                      {/* <MDBInput label="Your Email" group type="text" name="Email" onChange={this.handleChange} validate />
-                      <MDBInput label="Your Password" group type="password" name="Password" onChange={this.handleChange} validate /> */}
                       <Form>
                         <Form.Item
                           label="Your Email"
@@ -201,18 +196,12 @@ class Home extends Component{
                         <Button style={{margin:"0.25vw"}} onClick={this.login2} type="primary" m-2 htmlType="submit">
                             User Login
                         </Button>
-                            {/* <Button variant="btn btn-success" onClick={this.login2}>User Login</Button> */}
-                        {/* </form>  */}
-                          {/* <p /> */}
-                        {/* <form> */}
                         <Button style={{margin:"0.25vw"}} onClick={this.login1} type="primary" m-2 htmlType="submit">
                             Product Manager Login
                         </Button>
                         <Button style={{margin:"0.25vw"}} onClick={this.login3} type="primary" m-2 htmlType="submit">
                             Offer Maker Login
                         </Button>
-                            {/* <Button variant="btn btn-success" onClick={this.login1}>Product Manager Login</Button>
-                            <Button variant="btn btn-success" onClick={this.login3}>Offer Maker Login</Button> */}
                         </form>
                       </div>  
 
@@ -226,10 +215,11 @@ class Home extends Component{
                             User Sign Up
                         </Button>
                         <Button style={{margin:"0.25vw"}} onClick={() => history.push('/i2signup')} type="primary" m-2 htmlType="submit">
-                            Product Owner Sign Up
+                            Product Manager Sign Up
                         </Button>
-                            {/* <Button variant="btn btn-success" onClick={() => history.push('/i1signup')}>User SignUp</Button>
-                            <Button variant="btn btn-success" onClick={() => history.push('/i2signup')}>Product Owner SignUp</Button> */}
+                        <Button style={{margin:"0.25vw"}} onClick={() => history.push('/i3signup')} type="primary" m-2 htmlType="submit">
+                            Offer Maker Sign Up
+                        </Button>
                         </form>
                       </div>  
                     </MDBCardBody>

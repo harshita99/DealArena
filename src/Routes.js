@@ -5,6 +5,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
 import i1signup from "./components/i1signup";
 import i2signup from "./components/i2signup";
+import i3signup from "./components/i3signup";
 import userhome from "./components/userhome";
 // import productownerhome from "./components/productownerhome";
 import addoffer from "./components/AddOffer";
@@ -26,6 +27,7 @@ export default class Routes extends Component {
                     <Route path="/" exact component={Home} />
                     <Route path="/i1signup" component={i1signup} />
                     <Route path="/i2signup" component={i2signup} />
+                    <Route path="/i3signup" component={i3signup} />
                     <Route path="/userhome" component={userhome}/>
                     {/* <Route path="/productownerhome" component={productownerhome}/> */}
                     <Route path="/addoffer" component={addoffer}/>
