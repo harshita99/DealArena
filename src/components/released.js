@@ -55,7 +55,7 @@ function Tree() {
           generateNodeProps={rowInfo => ({
             buttons: [
               <div>
-                {( (rowInfo["node"].title==sessionStorage.getItem('brandN'))) && (
+                {( (rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
                   <Tooltip title="Add offer on all brand products">
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} onClick={event => addofferonall(rowInfo)} label="Add Offer"  />{" "}
                   </Tooltip>
