@@ -35,15 +35,15 @@ function Tree() {
 
 
   }
-  // function addofferatsubcat1(rowInfo){
+  function addofferatsubcat1(rowInfo){
 
-  // }
-  // function addofferatsubcat2(rowInfo){
+  }
+  function addofferatsubcat2(rowInfo){
 
-  // }
-  // function addofferatsubcat3(rowInfo){
+  }
+  function addofferatsubcat3(rowInfo){
 
-  // }
+  }
   return (
     
     <div>
@@ -63,15 +63,15 @@ function Tree() {
 
           
 
-                 {/* {( (rowInfo!==null) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) ) && (
+                 {( (rowInfo!==null) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) ) && (
                   <span>
                     <Tooltip title="Add offer at subcategory level 1 ">
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat1(rowInfo)} /> {" "}
                     </Tooltip>
                   </span>
-                )}  */}
+                )} 
 
-                 {/* {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
+                 {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
                     <Tooltip title="Add offer at subcategory level 2 ">
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat2(rowInfo)} /> {" "}
@@ -85,7 +85,7 @@ function Tree() {
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat3(rowInfo)} /> {" "}
                     </Tooltip>
                   </span>
-                )}    */}
+                )}   
                  </div>
             ],
             style: {

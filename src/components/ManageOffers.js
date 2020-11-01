@@ -33,7 +33,7 @@ class ManageOffers extends Component{
 					this.setState({brand : doc.data().brand})
 					
 					sessionStorage.setItem('brandN', (doc.data().brand))
-					sessionStorage.setItem('category', (doc.data().Category))
+					sessionStorage.setItem('category', (doc.data().category))
 				
 
 					}).then((doc)=>{
