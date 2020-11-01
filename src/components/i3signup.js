@@ -69,7 +69,7 @@ class i3signup extends Component{
           Password:password,
           BrandName:brand,
           Category:temp.Category,
-          Role:"Offer Maker"
+          Role:"Offer Manager"
         });
 
         firebase.auth().createUserWithEmailAndPassword(email,password).then((u)=>{
