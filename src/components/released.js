@@ -36,11 +36,12 @@ function Tree() {
 
   }
   function addofferatsubcat1(rowInfo){
-    console.log(rowInfo["parentNode"].title);
 
   }
   function addofferatsubcat2(rowInfo){
-    console.log(rowInfo);
+
+  }
+  function addofferatsubcat3(rowInfo){
 
   }
   return (
@@ -80,7 +81,7 @@ function Tree() {
               {( (Object.keys(rowInfo["node"]).length == 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
                     <Tooltip title="Add offer at subcategory level 3 ">
-                      <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat2(rowInfo)} /> {" "}
+                      <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat3(rowInfo)} /> {" "}
                     </Tooltip>
                   </span>
                 )}   
