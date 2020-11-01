@@ -167,6 +167,8 @@ class ManageOffers extends Component{
 							<TabPane  tab="Product Tree " key="1" >
 								<h4 style= {{marginLeft:"-30vw"}} >Product Tree</h4>
 								<Released isleaf={false}/>
+
+								{/* <button >Add </button> */}
 							</TabPane>
 
 							<TabPane  tab="Products" key="3" >
