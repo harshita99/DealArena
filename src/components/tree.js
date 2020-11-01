@@ -123,6 +123,11 @@ function Tree() {
   }
 
   function removeNode(rowInfo) {
+    // console.log(rowInfo);
+    // console.log(rowInfo["node"].title);
+    // console.log(rowInfo["parentNode"]);
+    // console.log(rowInfo["parentNode"].title);
+
     const { path } = rowInfo;
     setTreeData(
       removeNodeAtPath({
