@@ -5,7 +5,11 @@ import history from './../history';
 import Released from "./released";
 import Add from "./add";
 import { Tabs } from "antd";
+import { MDBInput} from 'mdbreact';
 const { TabPane } = Tabs;
+const products=[];
+var E = [];
+var O = [];
 
 class ManageOffers extends Component{
     constructor(props){
@@ -48,6 +52,20 @@ class ManageOffers extends Component{
 					console.log("Error getting particular document:", error);
 				  })
 			}
+
+			if (productowner) {
+				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
+					.then((doc)=> {
+					this.setState({brand : doc.data().brand})
+					}).then((doc)=>{
+					this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand);
+					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate2);
+					})
+					.catch(function(error){
+						console.log("Error getting document:", error);
+						console.log(productowner.uid)
+				})
+			}
 		})
 		// history.push("/manageoffers");
 	}
@@ -88,6 +106,61 @@ class ManageOffers extends Component{
 			});
 		});
 		this.setState({offers});
+	}
+
+	onCollectionUpdate2=(querySnapshot)=>{
+		querySnapshot.forEach((doc)=>{
+			const {Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory}=doc.data();
+			products.push({
+				key:doc.id,
+				doc,
+				Name,
+				Brand,
+				Description,
+				Price,
+				Category,
+				imageurl,
+				SubCategory,
+				producturl
+			});
+		});
+		console.log(products);
+		this.setState({products});
+	}
+
+	onInput=(e)=>{
+		const state=this.state;
+		state[e.target.name]=e.target.value;
+		this.setState(state);
+		console.log(this.state.Expiry);
+		console.log(this.state.Offer);
+		E = this.state.Expiry;
+		O = this.state.Offer;
+	  }
+
+	addoffer(){
+		products.map(p=>{
+			var Category=p.Category
+			var SubCategory = p.SubCategory
+			var Description=p.Description
+			var Name=p.Name
+			var Offer=O
+			var Expiry=E
+			var Brand=p.Brand
+			var imageurl = p.imageurl
+			var Price = p.Price
+	  
+			firebase.firestore().collection("offerDetails").add({
+			  Category,Description,Name,Offer,Expiry,Brand, SubCategory, imageurl, Price
+			})
+			.catch((error)=>{
+			  console.error("Error adding document:",error);
+			});
+			return null;
+		  })
+		  alert('Offers added');
+		  history.push("/manageoffers");
+		  window.location.reload(false);
 	}
 
 	checkAuth(){
@@ -149,12 +222,19 @@ class ManageOffers extends Component{
                         <div>
 							<button onClick={() => history.push('/add')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
 								<i className="material-icons mr-1">Add Offer</i> </button>
-                        </div>
-						
-                        <div>
+                        
                             <button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
                                 <i className="material-icons mr-1">LogOut</i> </button>	                        
-                        </div>			
+                        </div>	
+
+						<div>
+							<div>
+								<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
+								<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
+							</div>
+							<button onClick={this.addoffer} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
+                                <i className="material-icons mr-1">Add offer at all products</i> </button>
+						</div>		
 								
 					</div>
 					</div>
@@ -167,6 +247,8 @@ class ManageOffers extends Component{
 							<TabPane  tab="Product Tree " key="1" >
 								<h4 style= {{marginLeft:"-30vw"}} >Product Tree</h4>
 								<Released isleaf={false}/>
+
+								{/* <button >Add </button> */}
 							</TabPane>
 
 							<TabPane  tab="Products" key="3" >

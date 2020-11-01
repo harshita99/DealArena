@@ -170,7 +170,7 @@ class SomeButtons extends React.Component {
             <MButton style={{ color: '#08c' }} onClick={this.handleClose} color="primary">
               Cancel
             </MButton>
-            <MButton style={{ color: '#08c' }} onClick={this.handleFormOpen}  color="primary">
+            <MButton style={{ color: '#08c' }} onClick={this.handleFormOpen} color="primary">
               Add Product
             </MButton>
           </DialogActions>
@@ -199,7 +199,6 @@ class SomeButtons extends React.Component {
               fullWidth
             />
             <TextField
-              autoFocus
               margin="dense"
               name="Brand"
               id="Brand"
@@ -209,7 +208,6 @@ class SomeButtons extends React.Component {
               fullWidth
             />
             <TextField
-              autoFocus
               margin="dense"
               name="Description"
               id="Description"
@@ -219,7 +217,6 @@ class SomeButtons extends React.Component {
               fullWidth
             />
             <TextField
-              autoFocus
               margin="dense"
               name="Price"
               id="Price"
@@ -229,7 +226,6 @@ class SomeButtons extends React.Component {
               fullWidth
             />
             <TextField
-              autoFocus
               margin="dense"
               name="Category"
               id="Category"
@@ -239,11 +235,19 @@ class SomeButtons extends React.Component {
               fullWidth
             />
             <TextField
-              autoFocus
               margin="dense"
               name="SubCategory"
               id="SubCategory"
               label="SubCategory"
+              type="text"
+              onChange={this.onChange}
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              name="producturl"
+              id="producturl"
+              label="URL to buy this product"
               type="text"
               onChange={this.onChange}
               fullWidth

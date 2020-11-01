@@ -123,6 +123,11 @@ function Tree() {
   }
 
   function removeNode(rowInfo) {
+    // console.log(rowInfo);
+    // console.log(rowInfo["node"].title);
+    // console.log(rowInfo["parentNode"]);
+    // console.log(rowInfo["parentNode"].title);
+
     const { path } = rowInfo;
     setTreeData(
       removeNodeAtPath({
@@ -152,7 +157,7 @@ function Tree() {
     console.log("Number of leaf nodes in the tree:",y);
     console.log("numberofproducts:",(parseInt(sessionStorage.getItem('numberofproducts'))));
 
-    if ((Math.trunc(y))===(parseInt(sessionStorage.getItem('numberofproducts')))){
+    if ((Math.trunc(y/2))===(parseInt(sessionStorage.getItem('numberofproducts')))){
       saveyo()
       firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
       console.log("Released to Offer Manager!");

@@ -46,7 +46,7 @@ class Add extends Component{
 		const products=[];
 		const brand=[];
 		querySnapshot.forEach((doc)=>{
-			const {Name, Description,Brand, Price, Expiry, Category, Offer,imageurl, producturl}=doc.data();
+			const {Name, Description,Brand, Price, Expiry, Category, SubCategory, Offer,imageurl, producturl}=doc.data();
 			brand.push(Brand);
             products.push({
                 key:doc.id,
@@ -55,7 +55,8 @@ class Add extends Component{
                 Brand,
                 Description,
                 Price,
-                Category,
+				Category,
+				SubCategory,
                 Expiry,
                 Offer,
                 imageurl,
@@ -106,7 +107,7 @@ class Add extends Component{
 		console.log(this.state);
 		return (
 			<div>
-				<div className="row">
+				{/* <div className="row"> */}
 {/* 
 				<div className="col-lg-3">
 
@@ -143,43 +144,44 @@ class Add extends Component{
 				</div>
 		   		</div>  */}
 			
-			<div className="col-lg-8">
-				<div className="row">	
-				<h4 style={{marginLeft:"10%",marginTop:10}}>Add offer directly at any product</h4>  
-				<div className="col-sm-8">			  
-					{this.state.products.map(product=>
-						<div style={{margin:10}} className="card-post mb-4 card card-small">
-							<div className="card-body">
-								<h5 className="card-title">{product.Name}</h5>
-								<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
-								<h5 className="card-title"> {product.Brand}</h5>
-								<h5 className="card-title"> {product.Description}</h5>
-								<h5 className="card-title">Category: {product.Category}</h5>
-							</div>
-
-							<div className="border-top d-flex card-footer">
-								<div className="card-post__author d-flex col-sm-8">
-									<div className="d-flex flex-column justify-content-center ml-3">
-										<span className="card-post__author-name">
-											Rs.{product.Price}
-										</span>
-									</div>
+				{/* <div className="col-lg-8"> */}
+					<div className="row" style={{margin:"0.25vw"}}>	
+					<div className="col-sm-10">	
+						<h5>Add offer directly at any product:</h5>
+						{this.state.products.map(product=>
+							<div className="card-post mb-4 card card-small">
+								<div className="card-body">
+									<h7 className="card-title">{product.Category} -{">"} {product.Brand} -{">"} {product.SubCategory}</h7>
+									<h5 className="card-title">{product.Name}</h5>
+									<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
+									<h5 className="card-title"> {product.Brand}</h5>
+									<h6 className="card-title"> {product.Description}</h6>
+									<h6 className="card-title">Category: {product.Category}</h6>
 								</div>
 
-									<div className="d-flex flex-column ">
-										<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
-											<i className="material-icons mr-1">Add offer</i> 
-										</button>
+								<div className="border-top d-flex card-footer">
+									<div className="card-post__author d-flex col-sm-8">
+										<div className="d-flex flex-column justify-content-center ml-3">
+											<span className="card-post__author-name">
+												Rs.{product.Price}
+											</span>
+										</div>
 									</div>
-							</div>
-						</div>
-					)};
-				</div>
-				</div>
-			</div>
 
+										<div className="d-flex flex-column">
+											<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
+												<i className="material-icons mr-1">Add offer</i> 
+											</button>
+										</div>
+								</div>
+							</div>
+						)};
+					</div>
+					</div>
+				{/* </div> */}
+
+			{/* </div> */}
 			</div>
-						</div>
 
 		)
 	}
