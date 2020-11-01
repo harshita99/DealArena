@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { PlusCircleOutlined} from '@ant-design/icons';
-import { Tooltip } from 'antd';
+// import { PlusCircleOutlined} from '@ant-design/icons';
+// import { Tooltip } from 'antd';
 // import firebase from "./Config";
 // import history from './../history';
 
@@ -31,19 +31,19 @@ function Tree() {
     setTreeData(treeData);
     console.log(treeData);
   }
-  function addofferonall(rowInfo){
+  // function addofferonall(rowInfo){
 
 
-  }
-  function addofferatsubcat1(rowInfo){
+  // }
+  // function addofferatsubcat1(rowInfo){
 
-  }
-  function addofferatsubcat2(rowInfo){
+  // }
+  // function addofferatsubcat2(rowInfo){
 
-  }
-  function addofferatsubcat3(rowInfo){
+  // }
+  // function addofferatsubcat3(rowInfo){
 
-  }
+  // }
   return (
     
     <div>
@@ -55,7 +55,7 @@ function Tree() {
           generateNodeProps={rowInfo => ({
             buttons: [
               <div>
-                {( (rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
+                {/* {( (rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
                   <Tooltip title="Add offer on all brand products">
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} onClick={event => addofferonall(rowInfo)} label="Add Offer"  />{" "}
                   </Tooltip>
@@ -69,8 +69,9 @@ function Tree() {
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat1(rowInfo)} /> {" "}
                     </Tooltip>
                   </span>
-                )} 
-                 {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
+                )}  */}
+
+                 {/* {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
                     <Tooltip title="Add offer at subcategory level 2 ">
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat2(rowInfo)} /> {" "}
@@ -84,7 +85,7 @@ function Tree() {
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat3(rowInfo)} /> {" "}
                     </Tooltip>
                   </span>
-                )}   
+                )}    */}
                  </div>
             ],
             style: {
