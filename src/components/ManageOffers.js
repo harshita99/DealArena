@@ -31,6 +31,11 @@ class ManageOffers extends Component{
 					// console.log("Document data:", doc.data().name);
 					// console.log("Document data:", doc.data().brand);
 					this.setState({brand : doc.data().brand})
+					
+					sessionStorage.setItem('brandN', (doc.data().brand))
+					sessionStorage.setItem('category', (doc.data().Category))
+				
+
 					}).then((doc)=>{
 					this.ref=firebase.firestore().collection("offerDetails").where("Brand","==",this.state.brand);
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
