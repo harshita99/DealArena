@@ -24,7 +24,6 @@ class ManageOffers extends Component{
 	componentDidMount(){
 		this.checkAuth();
 		firebase.auth().onAuthStateChanged((productowner)=> {
-
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
 					.then((doc)=> {
@@ -162,10 +161,10 @@ class ManageOffers extends Component{
 			  console.error("Error adding document:",error);
 			});
 			return null;
-		  })
-		  alert('Offers added');
-		  history.push("/manageoffers");
-		  window.location.reload(false);
+		})
+		alert('Offers added');
+		history.push("/manageoffers");
+		window.location.reload(false);
 	}
 
 	checkAuth(){
