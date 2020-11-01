@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { PlusCircleOutlined} from '@ant-design/icons';
 import { Tooltip } from 'antd';
+// import firebase from "./Config";
+// import history from './../history';
+
 
 import SortableTree from "react-sortable-tree";
 import "react-sortable-tree/style.css";
@@ -8,6 +11,7 @@ import "react-sortable-tree/style.css";
 var d = [];
 const t = JSON.parse(localStorage.getItem('treeValue1'));
 // console.log(t);
+
 
 if(t!=null){
   d = t[0];
@@ -28,7 +32,7 @@ function Tree() {
     console.log(treeData);
   }
   function addofferonall(rowInfo){
-    console.log(rowInfo["parentNode"].title);
+
 
   }
   function addofferatsubcat1(rowInfo){
@@ -55,6 +59,8 @@ function Tree() {
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} onClick={event => addofferonall(rowInfo)} label="Add Offer"  />{" "}
                   </Tooltip>
                 )}
+
+          
 
                  {(  (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title==sessionStorage.getItem('brandN')) ) && (
                   <span>
