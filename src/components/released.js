@@ -63,7 +63,7 @@ function Tree() {
 
           
 
-                 {(  (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title==sessionStorage.getItem('brandN')) ) && (
+                 {(  (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) ) && (
                   <span>
                     <Tooltip title="Add offer at subcategory level 1 ">
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat1(rowInfo)} /> {" "}
@@ -78,7 +78,7 @@ function Tree() {
                   </span>
                 )}   
 
-              {( (Object.keys(rowInfo["node"]).length == 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
+              {( (Object.keys(rowInfo["node"]).length === 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
                     <Tooltip title="Add offer at subcategory level 3 ">
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat3(rowInfo)} /> {" "}
@@ -100,5 +100,4 @@ function Tree() {
     </div>
   );
 }
-
 export default Tree;
