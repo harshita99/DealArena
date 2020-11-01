@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { PlusCircleOutlined} from '@ant-design/icons';
 import { Tooltip } from 'antd';
+import MButton from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import firebase from "./Config";
+import history from './../history';
 // import firebase from "./Config";
 // import history from './../history';
 
@@ -12,16 +22,68 @@ var d = [];
 const t = JSON.parse(localStorage.getItem('treeValue1'));
 // console.log(t);
 
-
 if(t!=null){
   d = t[0];
   // console.log(d["treeData"]);
 }
 
 const seed = [];
+const products=[];
+var E = [];
+var O = [];
 
 function Tree() {
   const [treeData, setTreeData] = useState(seed);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  function onInput() {
+
+  }
+
+  // function onInput = (e) =>{
+	// 	const state=this.state;
+	// 	state[e.target.name]=e.target.value;
+	// 	this.setState(state);
+	// 	console.log(this.state.Expiry);
+	// 	console.log(this.state.Offer);
+	// 	E = this.state.Expiry;
+	// 	O = this.state.Offer;
+	//   }
+
+  function addoffer() {
+    products.map(p=>{
+      var Category=p.Category
+      var SubCategory = p.SubCategory
+      var Description=p.Description
+      var Name=p.Name
+      var Offer=O
+      var Expiry=E
+      var Brand=p.Brand
+      var imageurl = p.imageurl
+      var Price = p.Price
+    
+      firebase.firestore().collection("offerDetails").add({
+        Category, Description, Name, Offer, Expiry, Brand, SubCategory, imageurl, Price
+      })
+      .catch((error)=>{
+        console.error("Error adding document:",error);
+      });
+      return null;
+    })
+    alert('Offer Added!');
+    setOpen(false);
+    // history.push("/manageoffers");
+    // window.location.reload(false);
+  }
 
   function createNode() {
     setTreeData(d["treeData"]);
@@ -31,10 +93,10 @@ function Tree() {
     setTreeData(treeData);
     console.log(treeData);
   }
-  function addofferonall(rowInfo){
+  // function addofferonall(rowInfo){
 
 
-  }
+  // }
   function addofferatsubcat1(rowInfo){
 
   }
@@ -57,13 +119,47 @@ function Tree() {
               <div>
                 {( (rowInfo["node"] !== null) &&(rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
                   <Tooltip title="Add offer on all brand products">
-                    <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} onClick={event => addofferonall(rowInfo)} label="Add Offer"  />{" "}
+                    <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} onClick={handleOpen} label="Add Offer" />{" "}
                   </Tooltip>
                 )}
 
-          
+                <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Add Offer on all Products</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Fill the details.
+                  </DialogContentText>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    name="OfferDetails"
+                    id="OfferDetails"
+                    label="Offer Details"
+                    type="text"
+                    onChange={onInput}
+                    fullWidth
+                  />
+                  <TextField
+                    margin="dense"
+                    name="ExpiryDate"
+                    id="ExpiryDate"
+                    label="Expiry Date"
+                    type="text"
+                    onChange={onInput}
+                    fullWidth
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <MButton style={{ color: '#08c' }} onClick={handleClose} color="primary">
+                    Cancel
+                  </MButton>
+                  <MButton style={{ color: '#08c' }} onClick={addoffer} color="primary">
+                    Add Offer
+                  </MButton>
+                </DialogActions>
+                </Dialog>
 
-                 {( (rowInfo!==null) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) ) && (
+                {( (rowInfo!==null) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) ) && (
                   <span>
                     <Tooltip title="Add offer at subcategory level 1 ">
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat1(rowInfo)} /> {" "}
@@ -71,7 +167,7 @@ function Tree() {
                   </span>
                 )} 
 
-                 {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
+                {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
                     <Tooltip title="Add offer at subcategory level 2 ">
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat2(rowInfo)} /> {" "}
@@ -79,7 +175,7 @@ function Tree() {
                   </span>
                 )}   
 
-              {( (Object.keys(rowInfo["node"]).length === 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
+                {( (Object.keys(rowInfo["node"]).length === 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
                     <Tooltip title="Add offer at subcategory level 3 ">
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat3(rowInfo)} /> {" "}
