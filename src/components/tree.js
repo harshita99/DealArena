@@ -150,13 +150,14 @@ function Tree() {
     console.log(treeData);
     firebase.firestore().collection("tree").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
     console.log("Saved to database");
-    alert("Saved to database");
+    setSaveOpen(false);
+    alert("Saved to Database!");
   }
 
   function release(){
     console.log("Number of leaf nodes in the tree:",y);
     console.log("numberofproducts:",(parseInt(sessionStorage.getItem('numberofproducts'))));
-
+    setReleaseOpen(false);
     if ((Math.trunc(y/2))===(parseInt(sessionStorage.getItem('numberofproducts')))){
       saveyo()
       firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
