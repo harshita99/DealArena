@@ -3,14 +3,12 @@ import { PlusCircleOutlined} from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import MButton from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import firebase from "./Config";
-import history from './../history';
 // import firebase from "./Config";
 // import history from './../history';
 
@@ -29,13 +27,15 @@ if(t!=null){
 
 const seed = [];
 const products=[];
-var E = [];
-var O = [];
+// var E = [];
+// var O = [];
 
 function Tree() {
   const [treeData, setTreeData] = useState(seed);
 
   const [open, setOpen] = React.useState(false);
+  const [offerD, setOffer] = React.useState("");
+  const [expiry, setExpiry] = React.useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -45,14 +45,13 @@ function Tree() {
     setOpen(false);
   };
 
-  function onInput() {
+  // function onInput() {
 
-  }
+  // }
 
-  // function onInput = (e) =>{
-	// 	const state=this.state;
-	// 	state[e.target.name]=e.target.value;
-	// 	this.setState(state);
+  // const onInput = (e) =>{
+	// 	setExpiry=e.target.value;
+	// 	setState(state);
 	// 	console.log(this.state.Expiry);
 	// 	console.log(this.state.Offer);
 	// 	E = this.state.Expiry;
@@ -60,13 +59,15 @@ function Tree() {
 	//   }
 
   function addoffer() {
+    console.log("Offer Details: ", offerD);
+    console.log("Expiry: ", expiry);
     products.map(p=>{
       var Category=p.Category
       var SubCategory = p.SubCategory
       var Description=p.Description
       var Name=p.Name
-      var Offer=O
-      var Expiry=E
+      var Offer=offerD
+      var Expiry=expiry
       var Brand=p.Brand
       var imageurl = p.imageurl
       var Price = p.Price
@@ -131,21 +132,23 @@ function Tree() {
                   </DialogContentText>
                   <TextField
                     autoFocus
+                    value={offerD}
                     margin="dense"
                     name="OfferDetails"
                     id="OfferDetails"
                     label="Offer Details"
                     type="text"
-                    onChange={onInput}
+                    onChange={e => setOffer(e.target.value)}
                     fullWidth
                   />
                   <TextField
                     margin="dense"
+                    value={expiry}
                     name="ExpiryDate"
                     id="ExpiryDate"
                     label="Expiry Date"
                     type="text"
-                    onChange={onInput}
+                    onChange={e => setExpiry(e.target.value)}
                     fullWidth
                   />
                 </DialogContent>
