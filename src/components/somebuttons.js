@@ -39,7 +39,9 @@ class SomeButtons extends React.Component {
       Description:"",
       Price:"",
       Category:"",
-      SubCategory:"",
+      SubCategory1:"",
+      SubCategory2:"",
+      SubCategory3:"",
       imageurl:"",
       Brand:"",
       image:null,
@@ -100,13 +102,15 @@ class SomeButtons extends React.Component {
 
   onSubmit=(e)=>{
     e.preventDefault();
-    const {Name, Description, Price, Category, SubCategory, Brand,imageurl,producturl}=this.state;
+    const {Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand,imageurl,producturl}=this.state;
     firebase.firestore().collection("productDetails").add({
       Name,
       Brand,
       Description,
       Price,
-      SubCategory,
+      SubCategory1,
+      SubCategory2,
+      SubCategory3,
       Category,
       imageurl,
       producturl
@@ -117,7 +121,9 @@ class SomeButtons extends React.Component {
         Description:"",
         Price:"",
         Category:"",
-        SubCategory:"",
+        SubCategory1:"",
+        SubCategory2:"",
+        SubCategory3:"",
         imageurl:"",
         producturl:""
       });
@@ -200,9 +206,45 @@ class SomeButtons extends React.Component {
             />
             <TextField
               margin="dense"
+              name="Category"
+              id="Category"
+              label="Category"
+              type="text"
+              onChange={this.onChange}
+              fullWidth
+            />
+            <TextField
+              margin="dense"
               name="Brand"
               id="Brand"
               label="Brand"
+              type="text"
+              onChange={this.onChange}
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              name="SubCategory1"
+              id="SubCategory1"
+              label="SubCategory1"
+              type="text"
+              onChange={this.onChange}
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              name="SubCategory2"
+              id="SubCategory2"
+              label="SubCategory2"
+              type="text"
+              onChange={this.onChange}
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              name="SubCategory3"
+              id="SubCategory3"
+              label="SubCategory3"
               type="text"
               onChange={this.onChange}
               fullWidth
@@ -221,24 +263,6 @@ class SomeButtons extends React.Component {
               name="Price"
               id="Price"
               label="Price"
-              type="text"
-              onChange={this.onChange}
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="Category"
-              id="Category"
-              label="Category"
-              type="text"
-              onChange={this.onChange}
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="SubCategory"
-              id="SubCategory"
-              label="SubCategory"
               type="text"
               onChange={this.onChange}
               fullWidth
