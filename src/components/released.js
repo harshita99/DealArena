@@ -1,7 +1,7 @@
 // import React, { useState } from "react";
 // import { PlusCircleOutlined} from '@ant-design/icons';
 import React, { useState, useEffect } from "react";
-// import { PlusCircleOutlined} from '@ant-design/icons';
+import { PlusCircleOutlined} from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import MButton from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -38,13 +38,13 @@ function Tree() {
   const [offerD, setOffer] = React.useState("");
   const [expiry, setExpiry] = React.useState("");
   // const [brand, setBrand] = React.useState("");
-  const [ setUnsubscribe] = React.useState(null);
+  // const [ setUnsubscribe] = React.useState(null);
   // const [ref, setRef] = React.useState(null);
   const [products, setProducts] = React.useState([]);
 
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -63,7 +63,7 @@ function Tree() {
           console.log("ref val: ", firebase.firestore().collection("offerDetails").where("Brand","==",doc.data().brand));
           // this.ref=firebase.firestore().collection("offerDetails").where("Brand","==",brand);
           // setRef(ref => ref.concat(firebase.firestore().collection("productDetails").where("Brand","==",brand)));
-          setUnsubscribe(firebase.firestore().collection("productDetails").where("Brand","==",doc.data().brand).onSnapshot(onCollectionUpdate2));
+          firebase.firestore().collection("productDetails").where("Brand","==",doc.data().brand).onSnapshot(onCollectionUpdate2);
           // console.log("ref type: ", typeof(firebase.firestore().collection("productDetails").where("Brand","==",brand)));
 				})
 				.catch(function(error){
@@ -73,7 +73,7 @@ function Tree() {
 			}
 		})
 		// history.push("/manageoffers");
-  })
+  }, [])
 
   function onCollectionUpdate2(querySnapshot){
 		querySnapshot.forEach((doc)=>{
@@ -104,7 +104,7 @@ function Tree() {
 			// 	producturl
 			// });
 		});
-		// console.log(products);
+		console.log(products);
 		// this.setState({products});
   }
   
@@ -172,9 +172,8 @@ function Tree() {
               <div>
                 {( (rowInfo["node"] !== null) &&(rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
                   <Tooltip title="Add offer on all brand products">
-                    {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} onClick={handleOpen} label="Add Offer" />{" "} */}
-                    <ClassButton rowInfo={rowInfo}/>
-
+                    <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} onClick={handleOpen} label="Add Offer" />{" "}
+                    {/* <ClassButton rowInfo={rowInfo}/> */}
                   </Tooltip>
                 )}
 
