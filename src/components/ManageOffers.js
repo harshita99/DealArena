@@ -5,7 +5,6 @@ import history from './../history';
 import Released from "./released";
 import Add from "./add";
 import { Tabs } from "antd";
-import { MDBInput} from 'mdbreact';
 const { TabPane } = Tabs;
 const products=[];
 var E = [];
@@ -230,14 +229,14 @@ class ManageOffers extends Component{
                                 <i className="material-icons mr-1">LogOut</i> </button>	                        
                         </div>	
 
-						<div>
+						{/* <div>
 							<div>
 								<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
 								<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
 							</div>
 							<button onClick={this.addoffer} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
                                 <i className="material-icons mr-1">Add offer at all products</i> </button>
-						</div>		
+						</div>		 */}
 								
 					</div>
 					</div>
