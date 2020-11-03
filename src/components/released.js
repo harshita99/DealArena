@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+// import { PlusCircleOutlined} from '@ant-design/icons';
+import React, { useState, useEffect } from "react";
 // import { PlusCircleOutlined} from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import MButton from '@material-ui/core/Button';
@@ -12,9 +14,7 @@ import firebase from "./Config";
 import ClassButton from "./classbutton";
 
 // import firebase from "./Config";
-// import history from './../history';
-
-
+import history from './../history';
 import SortableTree from "react-sortable-tree";
 import "react-sortable-tree/style.css";
 
@@ -28,7 +28,6 @@ if(t!=null){
 }
 
 const seed = [];
-const products=[];
 // var E = [];
 // var O = [];
 
@@ -38,6 +37,10 @@ function Tree() {
   const [open, setOpen] = React.useState(false);
   const [offerD, setOffer] = React.useState("");
   const [expiry, setExpiry] = React.useState("");
+  // const [brand, setBrand] = React.useState("");
+  const [unsubscribe, setUnsubscribe] = React.useState(null);
+  // const [ref, setRef] = React.useState(null);
+  const [products, setProducts] = React.useState([]);
 
   // const handleOpen = () => {
   //   setOpen(true);
@@ -47,30 +50,91 @@ function Tree() {
     setOpen(false);
   };
 
-  // function onInput() {
+  useEffect(() => {
+    checkAuth();
+		firebase.auth().onAuthStateChanged((productowner)=> {
+			if (productowner) {
+				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
+				// .then((doc)=> {
+				// 	setBrand(doc.data().brand)
+        // })
+        .then((doc)=>{
+          // console.log("Brand is: ", brand);
+          console.log("ref val: ", firebase.firestore().collection("offerDetails").where("Brand","==",doc.data().brand));
+          // this.ref=firebase.firestore().collection("offerDetails").where("Brand","==",brand);
+          // setRef(ref => ref.concat(firebase.firestore().collection("productDetails").where("Brand","==",brand)));
+          setUnsubscribe(firebase.firestore().collection("productDetails").where("Brand","==",doc.data().brand).onSnapshot(onCollectionUpdate2));
+          // console.log("ref type: ", typeof(firebase.firestore().collection("productDetails").where("Brand","==",brand)));
+				})
+				.catch(function(error){
+          console.log("Error getting document:", error);
+          console.log(productowner.uid)
+				})
+			}
+		})
+		// history.push("/manageoffers");
+  })
 
-  // }
+  function onCollectionUpdate2(querySnapshot){
+		querySnapshot.forEach((doc)=>{
+			const {Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory}=doc.data();
+      
+      setProducts(products => products.concat({
+        key:doc.id,
+				Name,
+				Brand,
+				Description,
+				Price,
+				Category,
+				imageurl,
+				SubCategory,
+        producturl
+      }))
+      
+      // products.push({
+			// 	key:doc.id,
+			// 	doc,
+			// 	Name,
+			// 	Brand,
+			// 	Description,
+			// 	Price,
+			// 	Category,
+			// 	imageurl,
+			// 	SubCategory,
+			// 	producturl
+			// });
+		});
+		// console.log(products);
+		// this.setState({products});
+  }
+  
+  function checkAuth(){
+		var produser = firebase.auth().currentUser;
+		if(localStorage.getItem('usersession')) {
 
-  // const onInput = (e) =>{
-	// 	setExpiry=e.target.value;
-	// 	setState(state);
-	// 	console.log(this.state.Expiry);
-	// 	console.log(this.state.Offer);
-	// 	E = this.state.Expiry;
-	// 	O = this.state.Offer;
-	//   }
+		}
+		else if(produser) {
+			localStorage.setItem('usersession', produser);
+			console.log("User "+produser.uid+" is logged in with");
+			history.push("/manageoffers");
+		}
+		else {
+			console.log("Successfully logged out");
+			history.push("/");
+		}
+	}
 
   function addoffer() {
     console.log("Offer Details: ", offerD);
     console.log("Expiry: ", expiry);
     products.map(p=>{
-      var Category=p.Category
+      var Category = p.Category
       var SubCategory = p.SubCategory
-      var Description=p.Description
-      var Name=p.Name
-      var Offer=offerD
-      var Expiry=expiry
-      var Brand=p.Brand
+      var Description = p.Description
+      var Name = p.Name
+      var Offer = offerD
+      var Expiry = expiry
+      var Brand = p.Brand
       var imageurl = p.imageurl
       var Price = p.Price
     
@@ -82,6 +146,7 @@ function Tree() {
       });
       return null;
     })
+    console.log("Products: ", products);
     alert('Offer Added!');
     setOpen(false);
     // history.push("/manageoffers");

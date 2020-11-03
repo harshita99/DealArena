@@ -26,48 +26,46 @@ class ManageOffers extends Component{
 		firebase.auth().onAuthStateChanged((productowner)=> {
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
-					.then((doc)=> {
+				.then((doc)=> {
 					// console.log("Document data:", doc.data().name);
 					// console.log("Document data:", doc.data().brand);
 					this.setState({brand : doc.data().brand})
-					
 					sessionStorage.setItem('brandN', (doc.data().brand))
 					sessionStorage.setItem('category', (doc.data().category))
-				
-
-					}).then((doc)=>{
+				}).then((doc)=>{
+					console.log("ref val in manage offer: ", firebase.firestore().collection("offerDetails").where("Brand","==",this.state.brand));
 					this.ref=firebase.firestore().collection("offerDetails").where("Brand","==",this.state.brand);
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-					})
-					.catch(function(error){
-						console.log("Error getting document:", error);
-						console.log(productowner.uid)
+				})
+				.catch(function(error){
+					console.log("Error getting document:", error);
+					console.log(productowner.uid)
 				})
 			}
 
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
-				  .get()
-				  .then((doc)=>{
+				.get()
+				.then((doc)=>{
 					this.ref=firebase.firestore().collection("released")
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate1);
-				  })
-				  .catch(function(error){
+				})
+				.catch(function(error){
 					console.log("Error getting particular document:", error);
-				  })
+				})
 			}
 
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
-					.then((doc)=> {
+				.then((doc)=> {
 					this.setState({brand : doc.data().brand})
-					}).then((doc)=>{
+				}).then((doc)=>{
 					this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand);
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate2);
-					})
-					.catch(function(error){
-						console.log("Error getting document:", error);
-						console.log(productowner.uid)
+				})
+				.catch(function(error){
+					console.log("Error getting document:", error);
+					console.log(productowner.uid)
 				})
 			}
 		})
@@ -140,17 +138,17 @@ class ManageOffers extends Component{
 		console.log(this.state.Offer);
 		E = this.state.Expiry;
 		O = this.state.Offer;
-	  }
+	}
 
 	addoffer(){
 		products.map(p=>{
-			var Category=p.Category
+			var Category = p.Category
 			var SubCategory = p.SubCategory
-			var Description=p.Description
-			var Name=p.Name
-			var Offer=O
-			var Expiry=E
-			var Brand=p.Brand
+			var Description = p.Description
+			var Name = p.Name
+			var Offer = O
+			var Expiry = E
+			var Brand = p.Brand
 			var imageurl = p.imageurl
 			var Price = p.Price
 	  
@@ -162,9 +160,10 @@ class ManageOffers extends Component{
 			});
 			return null;
 		})
+		console.log("Products: ", products);
 		alert('Offers added');
 		history.push("/manageoffers");
-		window.location.reload(false);
+		// window.location.reload(false);
 	}
 
 	checkAuth(){
