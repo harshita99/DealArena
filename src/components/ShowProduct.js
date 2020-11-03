@@ -20,7 +20,7 @@ class ShowProduct extends Component{
 	}
 
 	componentDidMount(){
-		window.location.reload(false);
+		// window.location.reload(false);
 		this.checkAuth();
 		firebase.auth().onAuthStateChanged((productowner)=> {
 			if (productowner) {
