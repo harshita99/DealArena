@@ -11,9 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import firebase from "./Config";
-import ClassButton from "./classbutton";
-
-// import firebase from "./Config";
+// import ClassButton from "./classbutton";
 import history from './../history';
 import SortableTree from "react-sortable-tree";
 import "react-sortable-tree/style.css";
@@ -28,8 +26,6 @@ if(t!=null){
 }
 
 const seed = [];
-// var E = [];
-// var O = [];
 
 function Tree() {
   const [treeData, setTreeData] = useState(seed);
@@ -38,7 +34,7 @@ function Tree() {
   const [offerD, setOffer] = React.useState("");
   const [expiry, setExpiry] = React.useState("");
   // const [brand, setBrand] = React.useState("");
-  // const [ setUnsubscribe] = React.useState(null);
+  // const [setUnsubscribe] = React.useState(null);
   // const [ref, setRef] = React.useState(null);
   const [products, setProducts] = React.useState([]);
 
@@ -90,22 +86,8 @@ function Tree() {
 				SubCategory,
         producturl
       }))
-      
-      // products.push({
-			// 	key:doc.id,
-			// 	doc,
-			// 	Name,
-			// 	Brand,
-			// 	Description,
-			// 	Price,
-			// 	Category,
-			// 	imageurl,
-			// 	SubCategory,
-			// 	producturl
-			// });
 		});
 		console.log(products);
-		// this.setState({products});
   }
   
   function checkAuth(){
@@ -151,6 +133,18 @@ function Tree() {
     setOpen(false);
   }
 
+  function addofferatsubcat1(treeData) {
+    
+  }
+
+  function addofferatsubcat2(treeData) {
+    
+  }
+
+  function addofferatsubcat3(treeData) {
+    
+  }
+
   function createNode() {
     setTreeData(d["treeData"]);
   }
@@ -171,7 +165,7 @@ function Tree() {
             buttons: [
               <div>
                 {( (rowInfo["node"] !== null) &&(rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
-                  <Tooltip title="Add offer on all brand products">
+                  <Tooltip title="Add offer at Level 2 (on all brand products)">
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} onClick={handleOpen} label="Add Offer" />{" "}
                     {/* <ClassButton rowInfo={rowInfo}/> */}
                   </Tooltip>
@@ -217,30 +211,27 @@ function Tree() {
 
                 {( (rowInfo!==null) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) ) && (
                   <span>
-                    <Tooltip title="Add offer at subcategory level 1 ">
-                      {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat1(rowInfo)} /> {" "} */}
-                      <ClassButton/>
-
+                    <Tooltip title="Add offer at Level 3">
+                      <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat1(rowInfo)} /> {" "}
+                      {/* <ClassButton/> */}
                     </Tooltip>
                   </span>
                 )} 
 
                 {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
-                    <Tooltip title="Add offer at subcategory level 2 ">
-                    <ClassButton/>
-
-                      {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat2(rowInfo)} /> {" "} */}
+                    <Tooltip title="Add offer at Level 4">
+                    {/* <ClassButton/> */}
+                      <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat2(rowInfo)} /> {" "}
                     </Tooltip>
                   </span>
                 )}   
 
                 {( (Object.keys(rowInfo["node"]).length === 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
-                    <Tooltip title="Add offer at subcategory level 3 ">
-                      {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat3(rowInfo)} /> {" "} */}
-                      <ClassButton/>
-
+                    <Tooltip title="Add offer at Level 5">
+                      <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={event => addofferatsubcat3(rowInfo)} /> {" "}
+                      {/* <ClassButton/> */}
                     </Tooltip>
                   </span>
                 )}   
