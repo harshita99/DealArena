@@ -67,7 +67,7 @@ function Tree() {
           // console.log("ref type: ", typeof(firebase.firestore().collection("productDetails").where("Brand","==",brand)));
 				})
 				.catch(function(error){
-          console.log("Error getting document:", error);
+          // console.log("Error getting document:", error);
           console.log(productowner.uid)
 				})
 			}
@@ -149,8 +149,6 @@ function Tree() {
     console.log("Products: ", products);
     alert('Offer Added!');
     setOpen(false);
-    // history.push("/manageoffers");
-    // window.location.reload(false);
   }
 
   function createNode() {
@@ -161,19 +159,6 @@ function Tree() {
     setTreeData(treeData);
     console.log(treeData);
   }
-  // function addofferonall(rowInfo){
-
-
-  // }
-  // function addofferatsubcat1(rowInfo){
-
-  // }
-  // function addofferatsubcat2(rowInfo){
-
-  // }
-  // function addofferatsubcat3(rowInfo){
-
-  // }
   return (
     
     <div>
@@ -188,7 +173,7 @@ function Tree() {
                 {( (rowInfo["node"] !== null) &&(rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
                   <Tooltip title="Add offer on all brand products">
                     {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} onClick={handleOpen} label="Add Offer" />{" "} */}
-                    <ClassButton/>
+                    <ClassButton rowInfo={rowInfo}/>
 
                   </Tooltip>
                 )}

@@ -13,41 +13,18 @@ import { ShoppingTwoTone} from '@ant-design/icons';
 // import DialogContentText from '@material-ui/core/DialogContentText';
 // import DialogTitle from '@material-ui/core/DialogTitle';
 
-const Button = (props) => {  
-  return (
-    <Tooltip title="Add offer">
-      <ShoppingTwoTone style={{ fontSize: '22px', color: '#08c' }} 
-    //   label="Leaf" onClick={props.toggle} 
-      /> {" "}
-    </Tooltip>
-  )
-}
+
 
 class ClassButton extends React.Component {
 
-//   constructor(props) {
-//     super(props);
-    // this.state = { isOpen: true }
-    // this.toggle = this.toggle.bind(this);
-    // this.state = { open: false };
-    // this.handleClickOpen = this.handleClickOpen.bind(this);
-    // this.handleClose = this.handleClose.bind(this);
-    // this.state = { formOpen: false };
-    // this.handleFormOpen = this.handleFormOpen.bind(this);
-    // this.handleFormClose = this.handleFormClose.bind(this);
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { isOpen: true }
+   
+  
+  // }
 
-    // this.state={
-    //   Name:"",
-    //   Description:"",
-    //   Price:"",
-    //   Category:"",
-    //   SubCategory:"",
-    //   imageurl:"",
-    //   Brand:"",
-    //   image:null,
-    //   producturl:""
-    // }
-  //}
+  
 
 //   handleClickOpen(e) {
 //     this.setState({
@@ -141,141 +118,41 @@ class ClassButton extends React.Component {
 //     console.log(e.target.files[0])
 //   };
 
-//   handleUpload=(e)=>{
-//     const {image}=this.state;
-//     const uploadTask=firebase.storage().ref(`image/${image.name}`).put(this.state.image)
-//     uploadTask.on("state_changed",(snapshot)=>{console.log("snapshot")},
-//     (error)=>{console.log("error");},
-//     ()=>{
-//       firebase.storage().ref("image").child(image.name).getDownloadURL().then(imageurl=>this.setState({imageurl}))
-//     })
-//   }
+  // handleUpload=(e)=>{
+  //   const {image}=this.state;
+  //   const uploadTask=firebase.storage().ref(`image/${image.name}`).put(this.state.image)
+  //   uploadTask.on("state_changed",(snapshot)=>{console.log("snapshot")},
+  //   (error)=>{console.log("error");},
+  //   ()=>{
+  //     firebase.storage().ref("image").child(image.name).getDownloadURL().then(imageurl=>this.setState({imageurl}))
+  //   })
+  // }
 
-
+  click=()=>{
+    console.log(this.props.rowInfo);
+  }
+  
   render() {
-    // const {Name, Description, Price, Category, SubCategory, Brand, producturl}=this.state;
 
     return(
       <span>
-        <Button 
-        //   toggle={this.toggle}
-        />
+        {/* {( (this.props.rowInfo["node"] !== null) &&(this.props.rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
+                  <Tooltip title="Add offer on all brand products">
 
-        {/* <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Make Leaf</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To make it leaf, add the Product to it.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <MButton style={{ color: '#08c' }} onClick={this.handleClose} color="primary">
-              Cancel
-            </MButton>
-            <MButton style={{ color: '#08c' }} onClick={this.handleFormOpen} color="primary">
-              Add Product
-            </MButton>
-          </DialogActions>
-        </Dialog>
+                    <ShoppingTwoTone style={{ fontSize: '22px', color: '#08c' }} 
+              label="Leaf" onClick={this.click} 
+              /> {" "}
+                  </Tooltip>
+                )} */}
 
-        {this.state.isOpen && 
-            <Tooltip title="View Product">
-              <SendOutlined style={{ fontSize: '22px', color: '#08c' }} label="View" onClick={() => history.push('/addproduct')} />
+        
+        <Tooltip title="Add offer">
+              <ShoppingTwoTone style={{ fontSize: '22px', color: '#08c' }} 
+              label="Leaf" onClick={this.click} 
+              /> {" "}
             </Tooltip>
-        }
 
-        <Dialog open={this.state.formOpen} onClose={this.handleFormClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Add Product</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Fill the details.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              name="Name"
-              id="Name"
-              label="Name"
-              type="text"
-              onChange={this.onChange}
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="Brand"
-              id="Brand"
-              label="Brand"
-              type="text"
-              onChange={this.onChange}
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="Description"
-              id="Description"
-              label="Description"
-              type="text"
-              onChange={this.onChange}
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="Price"
-              id="Price"
-              label="Price"
-              type="text"
-              onChange={this.onChange}
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="Category"
-              id="Category"
-              label="Category"
-              type="text"
-              onChange={this.onChange}
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="SubCategory"
-              id="SubCategory"
-              label="SubCategory"
-              type="text"
-              onChange={this.onChange}
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="producturl"
-              id="producturl"
-              label="URL to buy this product"
-              type="text"
-              onChange={this.onChange}
-              fullWidth
-            />
-            <br />
-            <Input
-              margin="dense"
-              name="Photo"
-              id="Photo"
-              type="file"
-              onChange={this.handleChange}
-            />
-            <img src={this.state.imageurl} alt="DealArena" height="100px" width="100px"/>
-          </DialogContent>
-          <DialogActions>
-            <MButton style={{ color: '#08c' }} onClick={this.handleFormClose} color="primary">
-              Cancel
-            </MButton>
-            <MButton style={{ color: '#08c' }} onClick={this.handleUpload} color="primary">
-              Upload Photo First
-            </MButton>
-            <MButton style={{ color: '#08c' }} onClick={this.onSubmit} color="primary">
-              Save All
-            </MButton>
-          </DialogActions>
-        </Dialog> */}
+        
       </span>
     );
   } 
