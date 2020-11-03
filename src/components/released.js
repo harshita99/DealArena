@@ -77,7 +77,7 @@ function Tree() {
 
   function onCollectionUpdate2(querySnapshot){
 		querySnapshot.forEach((doc)=>{
-			const {Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory}=doc.data();
+			const {Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
       
       setProducts(products => products.concat({
         key:doc.id,
@@ -87,7 +87,9 @@ function Tree() {
 				Price,
 				Category,
 				imageurl,
-				SubCategory,
+        SubCategory1,
+        SubCategory2,
+        SubCategory3,
         producturl
       }))
       
@@ -129,7 +131,9 @@ function Tree() {
     console.log("Expiry: ", expiry);
     products.map(p=>{
       var Category = p.Category
-      var SubCategory = p.SubCategory
+      var SubCategory1 = p.SubCategory1
+      var SubCategory2 = p.SubCategory2
+      var SubCategory3 = p.SubCategory3
       var Description = p.Description
       var Name = p.Name
       var Offer = offerD
@@ -139,7 +143,7 @@ function Tree() {
       var Price = p.Price
     
       firebase.firestore().collection("offerDetails").add({
-        Category, Description, Name, Offer, Expiry, Brand, SubCategory, imageurl, Price
+        Category, Description, Name, Offer, Expiry, Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price
       })
       .catch((error)=>{
         console.error("Error adding document:",error);
