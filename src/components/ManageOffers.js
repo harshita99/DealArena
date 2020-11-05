@@ -90,7 +90,7 @@ class ManageOffers extends Component{
 	onCollectionUpdate=(querySnapshot)=>{
 		const offers=[];
 		querySnapshot.forEach((doc)=>{
-			const {Name, Description, Brand, Price, Expiry, Category, Offer, imageurl, producturl, SubCategory}=doc.data();
+			const {Name, Description, Brand, Price, Expiry, Category, Offer, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			offers.push({
 				key:doc.id,
 				doc,
@@ -102,7 +102,9 @@ class ManageOffers extends Component{
 				Expiry,
 				Offer,
 				imageurl,
-				SubCategory,
+				SubCategory1,
+				SubCategory2,
+				SubCategory3,
 				producturl
 			});
 		});
@@ -111,7 +113,7 @@ class ManageOffers extends Component{
 
 	onCollectionUpdate2=(querySnapshot)=>{
 		querySnapshot.forEach((doc)=>{
-			const {Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory}=doc.data();
+			const {Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			products.push({
 				key:doc.id,
 				doc,
@@ -121,7 +123,9 @@ class ManageOffers extends Component{
 				Price,
 				Category,
 				imageurl,
-				SubCategory,
+				SubCategory1,
+				SubCategory2,
+				SubCategory3,
 				producturl
 			});
 		});
@@ -142,17 +146,20 @@ class ManageOffers extends Component{
 	addoffer(){
 		products.map(p=>{
 			var Category = p.Category
-			var SubCategory = p.SubCategory
+			var SubCategory1 = p.SubCategory1
+			var SubCategory2 = p.SubCategory2
+			var SubCategory3 = p.SubCategory3
 			var Description = p.Description
 			var Name = p.Name
 			var Offer = O
 			var Expiry = E
 			var Brand = p.Brand
 			var imageurl = p.imageurl
+			var producturl = p.producturl
 			var Price = p.Price
 	  
 			firebase.firestore().collection("offerDetails").add({
-			  Category,Description,Name,Offer,Expiry,Brand, SubCategory, imageurl, Price
+			  Category,Description,Name,Offer,Expiry,Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price, producturl
 			})
 			.catch((error)=>{
 			  console.error("Error adding document:",error);
@@ -265,7 +272,7 @@ class ManageOffers extends Component{
 									{this.state.offers.map(offer=>
 										<div className="card-post mb-4 card card-small">
 											<div className="card-body">
-												<h7 className="card-title">{offer.Category} -{">"} {offer.Brand} -{">"} {offer.SubCategory}</h7>
+												<h7 className="card-title">{offer.Category} -{">"} {offer.Brand} -{">"} {offer.SubCategory1}</h7>
 												<h5 className="card-title">
 													{offer.Name}
 												</h5>

@@ -68,7 +68,7 @@ class userhome extends Component{
 					this.ref1=firebase.firestore().collection("offerDetails").where("Brand","in",this.state.interests);
 					this.ref1.onSnapshot(this.onCollectionUpdate);
 
-					this.ref2=firebase.firestore().collection("offerDetails").where("SubCategory","in",this.state.interests);
+					this.ref2=firebase.firestore().collection("offerDetails").where("SubCategory1","in",this.state.interests);
 					this.ref2.onSnapshot(this.onCollectionUpdate);
 
 					this.ref=firebase.firestore().collection("offerDetails").where("Category","in",this.state.interests);
@@ -89,7 +89,7 @@ class userhome extends Component{
 
 	onCollectionUpdate2=(querySnapshot)=>{
 		querySnapshot.forEach((doc)=>{
-			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl,SubCategory, producturl}=doc.data();
+			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl,SubCategory1, SubCategory2, SubCategory3, producturl}=doc.data();
 			all.push({
 				key:doc.id,
 				doc,
@@ -99,7 +99,9 @@ class userhome extends Component{
 				Price,
 				Category,
 				Expiry,
-				SubCategory,
+				SubCategory1,
+				SubCategory2,
+				SubCategory3,
 				Offer,
 				imageurl,
 				producturl
@@ -113,7 +115,7 @@ class userhome extends Component{
 	onCollectionUpdate=(querySnapshot)=>{
 		// const offers=[];
 		querySnapshot.forEach((doc)=>{
-			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time,SubCategory}=doc.data();
+			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time,SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			var logTime = (sessionStorage.getItem('logTime'));
 
 			offers.push({
@@ -125,7 +127,9 @@ class userhome extends Component{
 				Price,
 				Category,
 				Expiry,
-				SubCategory,
+				SubCategory1,
+				SubCategory2,
+				SubCategory3,
 				Offer,
 				imageurl,
 				producturl
@@ -139,7 +143,9 @@ class userhome extends Component{
 				Description,
 				Price,
 				Category,
-				SubCategory,
+				SubCategory1,
+				SubCategory2,
+				SubCategory3,
 				Expiry,
 				Offer,
 				imageurl,

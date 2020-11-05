@@ -10,7 +10,9 @@ class AddProduct extends Component{
             Description:"",
             Price:"",
             Category:"",
-            SubCategory:"",
+            SubCategory1:"",
+            SubCategory2:"",
+            SubCategory3:"",
             imageurl:"",
             Brand:"",
             image:null,
@@ -26,13 +28,15 @@ class AddProduct extends Component{
 
     onSubmit=(e)=>{
         e.preventDefault();
-        const {Name, Description, Price, Category, SubCategory, Brand,imageurl,producturl}=this.state;
+        const {Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand,imageurl,producturl}=this.state;
         firebase.firestore().collection("productDetails").add({
             Name,
             Brand,
             Description,
             Price,
-            SubCategory,
+            SubCategory1,
+            SubCategory2,
+            SubCategory3,
             Category,
             imageurl,
             producturl
@@ -43,7 +47,9 @@ class AddProduct extends Component{
                 Description:"",
                 Price:"",
                 Category:"",
-                SubCategory:"",
+                SubCategory1:"",
+                SubCategory2:"",
+                SubCategory3:"",
                 imageurl:"",
                 producturl:""
             });
@@ -75,7 +81,7 @@ class AddProduct extends Component{
     }
 
     render() {
-        const {Name, Description, Price, Category, SubCategory, Brand, producturl}=this.state;
+        const {Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand, producturl, imageurl}=this.state;
         
         const divStyle = {
             margin: '40px'
@@ -124,7 +130,19 @@ class AddProduct extends Component{
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
-                        <textArea className="form-control" name="SubCategory" onChange={this.onChange} placeholder="SubCategory">{SubCategory}</textArea>
+                        <textArea className="form-control" name="SubCategory1" onChange={this.onChange} placeholder="SubCategory1">{SubCategory1}</textArea>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="SubCategory2" onChange={this.onChange} placeholder="SubCategory2">{SubCategory2}</textArea>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="SubCategory3" onChange={this.onChange} placeholder="SubCategory3">{SubCategory3}</textArea>
                         </div>
                     </div>
                     <div>
