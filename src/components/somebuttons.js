@@ -30,6 +30,7 @@ class SomeButtons extends React.Component {
     this.state = { open: false };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleClose1 = this.handleClose1.bind(this);
     this.state = { formOpen: false };
     this.handleFormOpen = this.handleFormOpen.bind(this);
     this.handleFormClose = this.handleFormClose.bind(this);
@@ -60,6 +61,12 @@ class SomeButtons extends React.Component {
         open: false
     });
     this.toggle();
+  }
+
+  handleClose1(e) {
+    this.setState({
+        open: false
+    });
   }
 
   handleFormOpen(e) {
@@ -127,8 +134,8 @@ class SomeButtons extends React.Component {
         producturl:""
       });
       // this.props.history.push("/showproduct");
+      this.handleClose1();
       this.handleFormClose();
-      this.handleClose();
       alert('Product Added!');
       console.log("product added");
     })
