@@ -81,7 +81,7 @@ class AddProduct extends Component{
     }
 
     render() {
-        const {Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand, producturl, imageurl}=this.state;
+        const {Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand, producturl}=this.state;
         
         const divStyle = {
             margin: '40px'
