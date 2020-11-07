@@ -21,7 +21,9 @@ class ManageOffers extends Component{
 	}
 
 	componentDidMount(){
+		// window.location.reload(false);
 		this.checkAuth();
+		console.log("Component in Offer Manager.");
 		firebase.auth().onAuthStateChanged((productowner)=> {
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
@@ -179,7 +181,7 @@ class ManageOffers extends Component{
 		}
 		else if(produser) {
 			localStorage.setItem('usersession', produser);
-			console.log("User "+produser.uid+" is logged in with");
+			console.log("User "+ produser.uid +" is logged in with");
 			history.push("/manageoffers");
 		}
 		else {
@@ -225,7 +227,7 @@ class ManageOffers extends Component{
 						<div className="mb-3 mx-auto">
 							<img className="rounded-circle" src="" alt="" width="80"/>
 						</div>
-						<h4 className="mb-0" id="brand">Welcome! <br></br>{this.state.brand} Offer Manager </h4>
+						<h4 className="mb-0" id="brand"> Welcome! <br></br> {this.state.brand} Offer Manager </h4>
 						<br></br>
 
                         <div>

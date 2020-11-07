@@ -27,6 +27,8 @@ class userhome extends Component{
 	}
   
 	componentDidMount(){
+		// window.location.reload(false);
+		console.log("Component in User.");
 		this.checkAuth();
 		// const params = new URLSearchParams(this.props.location.search);
 

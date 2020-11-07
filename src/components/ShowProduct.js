@@ -21,6 +21,8 @@ class ShowProduct extends Component{
 
 	componentDidMount(){
 		// window.location.reload(false);
+		console.log("Component in Product Manager.");
+
 		this.checkAuth();
 		firebase.auth().onAuthStateChanged((productowner)=> {
 			if (productowner) {
