@@ -179,33 +179,8 @@ function Tree() {
   
   function checkAuth(){
 		var produser = firebase.auth().currentUser;
-		if(localStorage.getItem('usersession')) {console.log("Offer Details: ", offerD);
-    console.log("Expiry: ", expiry);
-    products.map(p=>{
-      var Category = p.Category
-      var SubCategory1 = p.SubCategory1
-      var SubCategory2 = p.SubCategory2
-      var SubCategory3 = p.SubCategory3
-      var Description = p.Description
-      var Name = p.Name
-      var Offer = offerD
-      var Expiry = expiry
-      var Brand = p.Brand
-      var imageurl = p.imageurl
-      var Price = p.Price
-    
-      firebase.firestore().collection("offerDetails").add({
-        Category, Description, Name, Offer, Expiry, Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price
-      })
-      .catch((error)=>{
-        console.error("Error adding document:",error);
-      });
-      return null;
-    })
-    console.log("Products: ", products);
-    alert('Offer Added!');
-    setOpen(false);
-
+		if(localStorage.getItem('usersession')) {
+      
 		}
 		else if(produser) {
 			localStorage.setItem('usersession', produser);
