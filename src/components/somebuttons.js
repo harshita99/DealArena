@@ -72,7 +72,6 @@ class SomeButtons extends React.Component {
     this.setState({
         formOpen: false
     });
-    this.handleClose();
   }
   
   toggle(e) {
@@ -129,6 +128,8 @@ class SomeButtons extends React.Component {
       });
       // this.props.history.push("/showproduct");
       this.handleFormClose();
+      this.handleClose();
+      alert('Product Added!');
       console.log("product added");
     })
     .catch((error)=>{

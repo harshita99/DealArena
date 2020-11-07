@@ -24,6 +24,11 @@ class Home extends Component{
           Password : ""
       }
   }
+
+  componentDidMount(){
+    console.log("Component in Home.");
+    // window.location.reload(false);
+  }
   
   onCollectionUpdate=(querySnapshot)=>{
 		querySnapshot.forEach((doc)=>{
@@ -41,102 +46,102 @@ class Home extends Component{
   onCollectionUpdate1=(querySnapshot)=>{
 		querySnapshot.forEach((doc)=>{
 			const {Name, Email}=doc.data();
-		products1.push({
-			Name,
-      Email
-		});
-  });
-	this.setState({products1});
+      products1.push({
+        Name,
+        Email
+      });
+    });
+    this.setState({products1});
   }
 
-    login2(e){
-      e.preventDefault();
-      firebase.auth().onAuthStateChanged((user)=> {
-        if (user) {
-          firebase.firestore().collection("userDetails").doc(user.uid)
-          .get()
-          .then((doc)=>{
-            this.ref=firebase.firestore().collection("userDetails").where("Email","==",this.state.Email);
-            this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate1);
-          })
-        }
-      })
-      firebase.auth().signInWithEmailAndPassword(this.state.Email,this.state.Password).then((u)=>{
-        if(products1.length===0){
-          console.log("No such user exists!");
-          // alert("No such user exists!");
-        }
-        else{
-          this.props.history.push("/userhome");
-        }
-      }).catch((err)=>{
-        console.log(err);
-      });
-    }
-
-    login3(e){
-      e.preventDefault();
-      firebase.auth().onAuthStateChanged((productowner)=> {
-        if (productowner) {
-          firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
-          .get()
-          .then((doc)=>{
-            this.ref=firebase.firestore().collection("productOwnerDetails").where("Email","==",this.state.Email);
-            this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-          })
-        }
-      })
-      firebase.auth().signInWithEmailAndPassword(this.state.Email,this.state.Password).then((u)=>{
-        products.map(product=>
-          temp = product.Role
-        );
-        if(temp==="Offer Manager"){
-          this.props.history.push("/manageoffers");
-        }
-        else{
-          console.log("Invalid offer manager");
-          // alert("You're not an Offer Manager!");
-        }
-      }).catch((err)=>{
-        console.log(err);
-      });
+  login2(e){
+    e.preventDefault();
+    firebase.auth().onAuthStateChanged((user)=> {
+      if (user) {
+        firebase.firestore().collection("userDetails").doc(user.uid)
+        .get()
+        .then((doc)=>{
+          this.ref=firebase.firestore().collection("userDetails").where("Email","==",this.state.Email);
+          this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate1);
+        })
+      }
+    })
+    firebase.auth().signInWithEmailAndPassword(this.state.Email,this.state.Password).then((u)=>{
+      if(products1.length===0){
+        console.log("No such user exists!");
+        // alert("No such user exists!");
+      }
+      else{
+        this.props.history.push("/userhome");
+      }
+    }).catch((err)=>{
+      console.log(err);
+    });
   }
 
-    login1(e){
-      e.preventDefault();
-      firebase.auth().onAuthStateChanged((productowner)=> {
-        if (productowner) {
-          firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
-          .get()
-          .then((doc)=> {
-            this.setState({brand : doc.data().brand})
-          }).then((doc)=>{
-            this.ref=firebase.firestore().collection("productOwnerDetails").where("Email","==",this.state.Email);
-            this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-          })
-        }
-      })
-      firebase.auth().signInWithEmailAndPassword(this.state.Email,this.state.Password).then((u)=>{
-        products.map(product=>
-          temp = product.Role
-        );
-        if(temp==="Product Manager"){
-          this.props.history.push("/showproduct");
-        }
-        else{
-          console.log("Invalid product manager");
-          // alert("You're not a Product Manager!");
-        }
-      }).catch((err)=>{
-        console.log(err);
-      });
-    }
+  login3(e){
+    e.preventDefault();
+    firebase.auth().onAuthStateChanged((productowner)=> {
+      if (productowner) {
+        firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
+        .get()
+        .then((doc)=>{
+          this.ref=firebase.firestore().collection("productOwnerDetails").where("Email","==",this.state.Email);
+          this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
+        })
+      }
+    })
+    firebase.auth().signInWithEmailAndPassword(this.state.Email,this.state.Password).then((u)=>{
+      products.map(product=>
+        temp = product.Role
+      );
+      if(temp==="Offer Manager"){
+        this.props.history.push("/manageoffers");
+      }
+      else{
+        console.log("Invalid offer manager");
+        // alert("You're not an Offer Manager!");
+      }
+    }).catch((err)=>{
+      console.log(err);
+    });
+  }
 
-    handleChange=(e)=>{
-      const state=this.state;
-      state[e.target.name]=e.target.value;
-      this.setState(state);
-    }
+  login1(e){
+    e.preventDefault();
+    firebase.auth().onAuthStateChanged((productowner)=> {
+      if (productowner) {
+        firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
+        .get()
+        .then((doc)=> {
+          this.setState({brand : doc.data().brand})
+        }).then((doc)=>{
+          this.ref=firebase.firestore().collection("productOwnerDetails").where("Email","==",this.state.Email);
+          this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
+        })
+      }
+    })
+    firebase.auth().signInWithEmailAndPassword(this.state.Email,this.state.Password).then((u)=>{
+      products.map(product=>
+        temp = product.Role
+      );
+      if(temp==="Product Manager"){
+        this.props.history.push("/showproduct");
+      }
+      else{
+        console.log("Invalid product manager");
+        // alert("You're not a Product Manager!");
+      }
+    }).catch((err)=>{
+      console.log(err);
+    });
+  }
+
+  handleChange=(e)=>{
+    const state=this.state;
+    state[e.target.name]=e.target.value;
+    this.setState(state);
+  }
 
     render(){
         return(
