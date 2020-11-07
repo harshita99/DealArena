@@ -151,7 +151,9 @@ class TreeCheck1 extends Component {
 
 		this.state.offers.map(p=>{
       var Category=p.Category
-      var SubCategory = p.SubCategory
+      var SubCategory1 = p.SubCategory1
+      var SubCategory2 = p.SubCategory2
+      var SubCategory3 = p.SubCategory3
       var Description=p.Description
       var Name=p.Name
       var Offer=this.props.Offer
@@ -161,7 +163,7 @@ class TreeCheck1 extends Component {
       var Price = p.Price
 
       firebase.firestore().collection("offerDetails").add({
-        Category,Description,Name,Offer,Expiry,Brand, SubCategory, imageurl, Price
+        Category,Description,Name,Offer,Expiry,Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price
       })
       .catch((error)=>{
         console.error("Error adding document:",error);
@@ -235,7 +237,7 @@ class TreeCheck1 extends Component {
           // this.setState({offers: []});
           // console.log("reset");
           console.log("cdm value in onChange: ", this.state.value);
-          this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","in", this.state.value);
+          this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory1","in", this.state.value);
           //this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","==", "AirConditioner");
           //this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","==", first[1]);
           //console.log("ref is: ", this.ref);
@@ -250,7 +252,7 @@ class TreeCheck1 extends Component {
   
   onCollectionUpdate=(querySnapshot)=>{
     querySnapshot.forEach((doc)=>{
-        const {Name, Brand, Description, Price, Category,imageurl, producturl,SubCategory}=doc.data();
+        const {Name, Brand, Description, Price, Category,imageurl, producturl,SubCategory1, SubCategory2, SubCategory3}=doc.data();
         offers.push({
             key:doc.id,
             doc,
@@ -259,7 +261,9 @@ class TreeCheck1 extends Component {
             Description,
             Price,
             Category,
-            SubCategory,
+            SubCategory1,
+            SubCategory2,
+            SubCategory3,
             imageurl,
             producturl
         });

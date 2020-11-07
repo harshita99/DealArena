@@ -18,7 +18,9 @@ class AddOffer extends Component{
             Expiry:"",
             Price:"",
             Category:"",
-            SubCategory:"",
+            SubCategory1:"",
+            SubCategory2:"",
+            SubCategory3:"",
             Offer:"",
             imageurl:"",
             Brand:"",
@@ -38,7 +40,9 @@ class AddOffer extends Component{
                     Description: doc.data().Description,
                     Price: doc.data().Price,
                     Category: doc.data().Category,
-                    SubCategory: doc.data().SubCategory,
+                    SubCategory1: doc.data().SubCategory1,
+                    SubCategory2: doc.data().SubCategory2,
+                    SubCategory3: doc.data().SubCategory3,
                     imageurl: doc.data().imageurl,
                     producturl: doc.data().producturl
                 });
@@ -57,7 +61,7 @@ class AddOffer extends Component{
     onSubmit=(e)=>{
         console.log("hogya submit re")
         e.preventDefault();
-        const {Name, Description, Expiry, Price, Category, SubCategory, Brand,Offer,imageurl,producturl}=this.state;
+        const {Name, Description, Expiry, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand,Offer,imageurl,producturl}=this.state;
         firebase.firestore().collection("offerDetails").add({
             Name,
             Brand,
@@ -65,7 +69,9 @@ class AddOffer extends Component{
             Expiry,
             Price,
             Category,
-            SubCategory,
+            SubCategory1,
+            SubCategory2,
+            SubCategory3,
             Offer,
             imageurl,
             producturl,
@@ -78,7 +84,9 @@ class AddOffer extends Component{
                 Expiry:"",
                 Price:"",
                 Category:"",
-                SubCategory:"",
+                SubCategory1:"",
+                SubCategory2:"",
+                SubCategory3:"",
                 Offer:"",
                 imageurl:"",
                 producturl:"",
@@ -118,7 +126,7 @@ class AddOffer extends Component{
     }
 
     render(){
-        const {Name, Description, Expiry, Price, Category, SubCategory, Brand, Offer, producturl}=this.state;
+        const {Name, Description, Expiry, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand, Offer, producturl}=this.state;
         
         const divStyle = {
             margin: '40px'
@@ -135,9 +143,7 @@ class AddOffer extends Component{
                 <div>
                     <div>
                         <div className="form-group row"></div>
-                        {/* <label class="sol-sm-3" for="Name">Name</label> */}
                         <div className="col-sm-9">
-                      
                             <input type="text" className="form-control" name="Name" value ={Name} onChange={this.onChange} placeholder="Name"></input>
                         </div>
                         <div className="col-sm-9">
@@ -147,42 +153,48 @@ class AddOffer extends Component{
                     </div>
                     <div>
                         <div className="form-group row"></div>
-                        {/* <label for="Description">Description:</label> */}
                         <div className="col-sm-9">
                         <textArea className="form-control" name="Description"  onChange={this.onChange} placeholder="Description">{Description}</textArea>
                         </div>
                     </div>
                     <div>
                         <div className="form-group row"></div>
-                        {/* <label for="description">Price</label> */}
                         <div className="col-sm-9">
                         <textArea className="form-control" name="Price" onChange={this.onChange} placeholder="Price">{Price}</textArea>
                         </div>
                     </div>
                     <div>
                         <div className="form-group row"></div>
-                        {/* <label for="Expiry">Expiry</label> */}
                         <div className="col-sm-9">
                         <textArea className="form-control" name="Expiry" onChange={this.onChange} placeholder="Expiry">{Expiry}</textArea>
                         </div>
                     </div>
                     <div>
                         <div className="form-group row"></div>
-                        {/* <label for="Category">Category</label> */}
                         <div className="col-sm-9">
                         <textArea className="form-control" name="Category" onChange={this.onChange} placeholder="Category">{Category}</textArea>
                         </div>
                     </div>
                     <div>
                         <div className="form-group row"></div>
-                        {/* <label for="Category">Category</label> */}
                         <div className="col-sm-9">
-                        <textArea className="form-control" name="SubCategory" onChange={this.onChange} placeholder="SubCategory">{SubCategory}</textArea>
+                        <textArea className="form-control" name="SubCategory1" onChange={this.onChange} placeholder="SubCategory1">{SubCategory1}</textArea>
                         </div>
                     </div>
                     <div>
                         <div className="form-group row"></div>
-                        {/* <label for="Offer">Offer</label> */}
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="SubCategory2" onChange={this.onChange} placeholder="SubCategory2">{SubCategory2}</textArea>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="SubCategory3" onChange={this.onChange} placeholder="SubCategory3">{SubCategory3}</textArea>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="form-group row"></div>
                         <div className="col-sm-9">
                         <textArea className="form-control" name="Offer" onChange={this.onChange} placeholder="Offer">{Offer}</textArea>
                         </div>
@@ -190,7 +202,6 @@ class AddOffer extends Component{
 
                     <div>
                         <div className="form-group row"></div>
-                        {/* <label for="producturl">producturl</label> */}
                         <div className="col-sm-9">
                         <textArea className="form-control" name="producturl" onChange={this.onChange} placeholder="URL to buy this product">{producturl}</textArea>
                         </div>

@@ -11,7 +11,9 @@ class UpdateOffer extends Component{
             Expiry:"",
             Price:"",
             Category:"",
-            SubCategory:"",
+            SubCategory1:"",
+            SubCategory2:"",
+            SubCategory3:"",
             Offer:"",
             imageurl:"",
             Brand:"",
@@ -31,7 +33,9 @@ class UpdateOffer extends Component{
                     Expiry: doc.data().Expiry,
                     Price: doc.data().Price,
                     Category: doc.data().Category,
-                    SubCategory: doc.data().SubCategory,
+                    SubCategory1: doc.data().SubCategory1,
+                    SubCategory2: doc.data().SubCategory2,
+                    SubCategory3: doc.data().SubCategory3,
                     Offer: doc.data().Offer,
                     imageurl: doc.data().imageurl,
                     producturl: doc.data().producturl
@@ -71,7 +75,7 @@ class UpdateOffer extends Component{
     onSubmit=(e)=>{
         e.preventDefault();
         var offerId = localStorage.getItem('offersession');
-        const {Name, Description, Expiry, Price, Category, SubCategory, Brand, Offer, imageurl, producturl}=this.state;
+        const {Name, Description, Expiry, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand, Offer, imageurl, producturl}=this.state;
         const updateRef = firebase.firestore().collection("offerDetails").doc(offerId);
         updateRef.set({
             Name,
@@ -80,7 +84,9 @@ class UpdateOffer extends Component{
             Expiry,
             Price,
             Category,
-            SubCategory,
+            SubCategory1,
+            SubCategory2,
+            SubCategory3,
             Offer,
             imageurl,
             producturl,
@@ -93,7 +99,9 @@ class UpdateOffer extends Component{
                 Expiry:"",
                 Price:"",
                 Category:"",
-                SubCategory:"",
+                SubCategory1:"",
+                SubCategory2:"",
+                SubCategory3:"",
                 Offer:"",
                 imageurl:"",
                 producturl:"",
@@ -106,7 +114,7 @@ class UpdateOffer extends Component{
     }
 
     render(){
-        const {Name, Description, Expiry, Price, Category, SubCategory, Brand, Offer, producturl}=this.state;
+        const {Name, Description, Expiry, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand, Offer, producturl}=this.state;
         
         const bottomStyle = {
             margin: '20px'
@@ -154,7 +162,19 @@ class UpdateOffer extends Component{
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
-                        <textArea className="form-control" name="SubCategory" onChange={this.onChange} placeholder="SubCategory">{SubCategory}</textArea>
+                        <textArea className="form-control" name="SubCategory1" onChange={this.onChange} placeholder="SubCategory1">{SubCategory1}</textArea>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="SubCategory2" onChange={this.onChange} placeholder="SubCategory2">{SubCategory2}</textArea>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="SubCategory3" onChange={this.onChange} placeholder="SubCategory3">{SubCategory3}</textArea>
                         </div>
                     </div>
                     <div>
