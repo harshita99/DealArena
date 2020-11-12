@@ -132,7 +132,8 @@ function Tree() {
         producturl
       }))
 		});
-		console.log(products1);
+    console.log(products1);
+    console.log("Hi there, SubLevel 1");
   }
 
   function onCollectionUpdate2(querySnapshot){
@@ -225,12 +226,14 @@ function Tree() {
   function addofferatsubcat1(rowInfo) {
     var title = rowInfo["node"].title;
 
+    checkAuth();
     firebase.auth().onAuthStateChanged((productowner)=> {
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
         .then((doc)=>{
-          firebase.firestore().collection("productDetails").where("Brand","==",doc.data().brand).where("SubCategory1", "==", title).onSnapshot(onCollectionUpdate1);
-				})
+          firebase.firestore().collection("productDetails").where("Brand","==",doc.data().brand).onSnapshot(onCollectionUpdate1);
+          console.log("Hi there, SubLevel 1");
+        })
 				.catch(function(error){
           console.log("Error getting document:", error);
           console.log(productowner.uid)
@@ -458,8 +461,6 @@ function Tree() {
                     </Dialog> 
                   </span>
                 )}
-
-                
 
                 {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>

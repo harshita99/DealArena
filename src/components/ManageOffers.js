@@ -290,10 +290,10 @@ class ManageOffers extends Component{
 									
 											<div>
 												<button onClick={()=>this.update(offer.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
-												<i className="material-icons mr-1">Update offer</i> </button>
+												<i className="material-icons mr-1">Update Offer</i> </button>
 
 												<button onClick={()=>this.delete(offer.key)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
-												<i className="material-icons mr-1">Delete offer</i> </button>
+												<i className="material-icons mr-1">Delete Offer</i> </button>
 											</div>
 										</div>
 									)};
