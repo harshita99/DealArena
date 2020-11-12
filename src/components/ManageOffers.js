@@ -21,15 +21,12 @@ class ManageOffers extends Component{
 	}
 
 	componentDidMount(){
-		// window.location.reload(false);
 		this.checkAuth();
 		console.log("Component in Offer Manager.");
 		firebase.auth().onAuthStateChanged((productowner)=> {
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
 				.then((doc)=> {
-					// console.log("Document data:", doc.data().name);
-					// console.log("Document data:", doc.data().brand);
 					this.setState({brand : doc.data().brand})
 					sessionStorage.setItem('brandN', (doc.data().brand))
 					sessionStorage.setItem('category', (doc.data().category))
@@ -70,7 +67,6 @@ class ManageOffers extends Component{
 				})
 			}
 		})
-		// history.push("/manageoffers");
 	}
 
 	onCollectionUpdate1=(querySnapshot)=>{
@@ -84,9 +80,7 @@ class ManageOffers extends Component{
 			}
 		});
 		this.setState({tree1});
-		// console.log(tree1);
 		localStorage.setItem('treeValue1', JSON.stringify(tree1));
-		// console.log(JSON.parse(localStorage.getItem('treeValue1')));
 	}
 
 	onCollectionUpdate=(querySnapshot)=>{
@@ -171,7 +165,6 @@ class ManageOffers extends Component{
 		console.log("Products: ", products);
 		alert('Offers added');
 		history.push("/manageoffers");
-		// window.location.reload(false);
 	}
 
 	checkAuth(){
@@ -237,15 +230,6 @@ class ManageOffers extends Component{
                             <button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
                                 <i className="material-icons mr-1">LogOut</i> </button>	                        
                         </div>	
-
-						{/* <div>
-							<div>
-								<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
-								<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
-							</div>
-							<button onClick={this.addoffer} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-                                <i className="material-icons mr-1">Add offer at all products</i> </button>
-						</div>		 */}
 								
 					</div>
 					</div>
@@ -259,11 +243,9 @@ class ManageOffers extends Component{
 								<h4 style= {{marginLeft:"-30vw"}} >Product Tree</h4>
 								<Released isleaf={false}/>
 
-								{/* <button >Add </button> */}
 							</TabPane>
 
 							<TabPane  tab="Products" key="3" >
-								{/* <h4 style= {{marginLeft:"-30vw"}} ></h4> */}
 								<Add/>
 							</TabPane>
 							

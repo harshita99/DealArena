@@ -173,49 +173,6 @@ class TreeCheck1 extends Component {
     history.push("/manageoffers");
   }
 
-  // componentDidMount(){
-    // firebase.auth().onAuthStateChanged((productowner)=>{
-		// 	if (productowner){
-		// 	  firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
-		// 		.get()
-		// 		.then((doc)=> {
-		// 		  this.setState({brand : doc.data().brand});
-		// 		}).then((doc)=>{
-    //       const first = this.state.value;
-    //       console.log("cdm value: ", this.state.value);
-    //       this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","==", first[0]);
-    //       //this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","==", "AirConditioner");
-    //    //this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","==", first[1]);
-    //       this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-		// 		})
-		// 		.catch(function(error){
-		// 		  console.log("Error getting document:", error);
-		// 		})
-		// 	}
-		// })
-  // }
-  
-  // componentDidUpdate() {
-  //   firebase.auth().onAuthStateChanged((productowner)=>{
-	// 		if (productowner){
-	// 		  firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
-	// 			.get()
-	// 			.then((doc)=> {
-	// 			  this.setState({brand : doc.data().brand});
-	// 			}).then((doc)=>{
-  //         const first = this.state.value;
-  //         console.log("cdm value in onChange: ", this.state.value);
-  //         this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","in", this.state.value);
-  //         //this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","==", "AirConditioner");
-  //         //this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","==", first[1]);
-  //         this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-	// 			})
-	// 			.catch(function(error){
-	// 			  console.log("Error getting document:", error);
-	// 			})
-	// 		}
-	// 	})
-  // }
   clear() {
     this.setState({offers: []});
     console.log("reset");
@@ -234,13 +191,10 @@ class TreeCheck1 extends Component {
 				.then((doc)=> {
 				  this.setState({brand : doc.data().brand});
 				}).then((doc)=>{
-          // this.setState({offers: []});
-          // console.log("reset");
+      
           console.log("cdm value in onChange: ", this.state.value);
           this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory1","in", this.state.value);
-          //this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","==", "AirConditioner");
-          //this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","==", first[1]);
-          //console.log("ref is: ", this.ref);
+        
           this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
 				})
 				.catch(function(error){
@@ -279,30 +233,8 @@ class TreeCheck1 extends Component {
     }
   }
 
-    //   firebase.auth().onAuthStateChanged((productowner)=>{
-    //     if (productowner){
-    //       firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
-    //       .get()
-    //       .then((doc)=> {
-    //         this.setState({brand : doc.data().brand});
-    //       }).then((doc)=>{
-    //         const first = this.state.value;
-    //         console.log("cdm value in onChange: ", this.state.value);
-    //         this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","in", this.state.value);
-    //         //this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","==", "AirConditioner");
-    //         //this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory","==", first[1]);
-    //         this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-    //       })
-    //       .catch(function(error){
-    //         console.log("Error getting document:", error);
-    //       })
-    //     }
-    //   })
-
   render() {
-    console.log(this.state); //this is where selected checkbox value is stored for examples Mobiles. but how to send it to add.js?
-    // this.setState({offers: []});
-    // console.log("reset");
+    console.log(this.state);
     console.log("render value: ", this.state.value);
     const first = this.state.value;
     console.log("first[0] is: ", first[0]);

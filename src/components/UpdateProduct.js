@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import firebase from "./Config";
-// import history from '../history';
 
 class UpdateProduct extends Component{
     constructor(props){
