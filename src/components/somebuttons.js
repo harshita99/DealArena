@@ -12,7 +12,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-var list1=["Model 101","Model 204","ok"];
 
 
 class SomeButtons extends React.Component {
@@ -43,6 +42,8 @@ class SomeButtons extends React.Component {
       image:null,
       producturl:""
     }
+
+  
 
   }
 
@@ -165,20 +166,148 @@ class SomeButtons extends React.Component {
     })
   }
 
+  
+	// componentDidMount(){
+	// 	// window.location.reload(false);
+	// 	// console.log("Component in Product Manager.");
+
+	// 	// this.checkAuth();
+	// 	firebase.auth().onAuthStateChanged((productowner)=> {
+	// 		if (productowner) {
+	// 			firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
+	// 			  .get()
+	// 			  .then((doc)=> {
+	// 				this.setState({brand : doc.data().brand})
+	// 			  }).then((doc)=>{
+	// 				this.ref=firebase.firestore().collection("productOwnerDetails").where("BrandName","==",this.state.brand)
+	// 				this.unsubscribe=this.ref.onSnapshot(this.getDetails);
+	// 			// 	  .get()
+	// 			// 	  .then((doc)=> {
+	// 			// 		this.setState({category : doc.data().Category})
+	// 			// 		this.setState({brandN : doc.data().BrandName})
+	// 			// 	  })
+	// 			  })
+	// 			  .catch(function(error){
+	// 				console.log("Error getting particular document:", error);
+	// 				// console.log(productowner.uid)
+	// 			  })
+	// 		}
+
+	// 		if (productowner) {
+	// 			firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
+	// 			  .get()
+	// 			  .then((doc)=>{
+	// 				// console.log(this.state.brand);
+	// 				this.ref=firebase.firestore().collection("tree")
+	// 				this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate1);
+	// 				// console.log(this.ref.onSnapshot);
+	// 			  })
+	// 			  .catch(function(error){
+	// 				console.log("Error getting particular document:", error);
+	// 			  })
+	// 		}
+
+	// 		if (productowner) {
+	// 		  firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
+	// 			.get()
+	// 			.then((doc)=> {
+	// 			  this.setState({brand : doc.data().brand})
+	// 			  this.setState({category : doc.data().Category})
+	// 			}).then((doc)=>{
+	// 				this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand);
+	// 				this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
+	// 			})
+	// 			.catch(function(error){
+	// 			  console.log("Error getting document:", error);
+	// 			  console.log(productowner.uid)
+	// 			})
+	// 		}
+	// 	})
+
+	// }
+
+	// onCollectionUpdate1=(querySnapshot)=>{
+	// 	const tree1=[];
+	// 	querySnapshot.forEach((doc)=>{
+	// 		const {treeData}=doc.data();
+	// 		if(doc.id === this.state.brand){
+
+	// 			tree1.push({
+	// 				treeData
+	// 			});
+	// 		}
+	// 	});
+	// 	this.setState({tree1});
+	// 	console.log(tree1);
+	// 	localStorage.setItem('treeValue', JSON.stringify(tree1));
+	// }
+
+	// getDetails=(querySnapshot)=>{
+	// 	querySnapshot.forEach((doc)=>{
+	// 		this.setState({category : doc.data().Category})
+	// 		this.setState({brandN : doc.data().BrandName})
+
+
+	// 		sessionStorage.setItem('brandN', (doc.data().BrandName))
+	// 		sessionStorage.setItem('category', (doc.data().Category))
+
+	// 	})
+	// }
+	
+	// onCollectionUpdate=(querySnapshot)=>{
+	// 	const products=[];
+	// 	querySnapshot.forEach((doc)=>{
+	// 		const {Model, Name, Description, Brand, Price, Expiry, Category, SubCategory1, SubCategory2, SubCategory3, Offer,imageurl, producturl}=doc.data();
+	// 		products.push({
+	// 			key:doc.id,
+	// 			doc,
+	// 			Name,
+	// 			Brand,
+	// 			Description,
+	// 			Price,
+	// 			Category,
+	// 			Expiry,
+	// 			Offer,
+	// 			imageurl,
+	// 			Model,
+	// 			SubCategory1,
+	// 			SubCategory2,
+	// 			SubCategory3,
+	// 			producturl
+	// 		});
+	// 	});
+  //   this.setState({products});
+    
+  //   var list2=[];
+  //   this.state.products.map(product=>
+  //     list2.push(product.Model)
+  //   )
+
+  //   this.setState({list2});
+  //   console.log(this.state.list2)
+	// 	localStorage.setItem('list2', list2);
+	// }
+
 
   render() {
     console.log(this.props.node )
 
     return(
       <span>
-         <Tooltip title="Make Leaf">
-         { (list1.indexOf(this.props.node["node"].title) >= 0) &&
-      <SendOutlined style={{ fontSize: '22px', color: '#000000' }} label="Leaf"  /> }
+
+
+
+         { (localStorage.getItem("list2").indexOf(this.props.node["node"].title) >= 0) &&
+         <Tooltip title="Product exists at this level">
+         <SendOutlined style={{ fontSize: '22px', color: '#000000' }} label="Leaf"  />   
+      </Tooltip>
+  
+     }
            
-           { (list1.indexOf(this.props.node["node"].title) < 0) &&
-      <ShoppingTwoTone style={{ fontSize: '22px', color: '#08c' }} onClick={this.toggle} label="Leaf"  /> }
-      
-    </Tooltip>
+           { (localStorage.getItem("list2").indexOf(this.props.node["node"].title) < 0) &&
+                    <Tooltip title="Make Leaf">
+      <ShoppingTwoTone style={{ fontSize: '22px', color: '#08c' }} onClick={this.toggle} label="Leaf"  />   </Tooltip>
+}
 
         <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Make Leaf</DialogTitle>
@@ -196,6 +325,7 @@ class SomeButtons extends React.Component {
             </MButton>
           </DialogActions>
         </Dialog>
+      
 
         {this.state.isOpen && 
             <Tooltip title="View Product">

@@ -133,6 +133,15 @@ class ShowProduct extends Component{
 			});
 		});
 		this.setState({products});
+
+		var list2=[];
+		this.state.products.map(product=>
+		  list2.push(product.Model)
+		)
+	
+		this.setState({list2});
+		console.log(this.state.list2)
+			localStorage.setItem('list2', list2);
 	}
 
 	checkAuth(){
