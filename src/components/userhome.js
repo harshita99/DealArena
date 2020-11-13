@@ -86,7 +86,7 @@ class userhome extends Component{
 
 	onCollectionUpdate=(querySnapshot)=>{
 		querySnapshot.forEach((doc)=>{
-			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time,SubCategory1, SubCategory2, SubCategory3}=doc.data();
+			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time, SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			var logTime = (sessionStorage.getItem('logTime'));
 
 			offers.push({
@@ -122,7 +122,7 @@ class userhome extends Component{
 				imageurl,
 				producturl,
 				content: 'New Offer: ',
-            	offerD: `${Brand} ${Category} ${Offer}`,
+            	offerD: `${Brand} ${Name} (${Offer})`,
             	time: time.toDate(),
 				logTime,
 			});
@@ -168,7 +168,7 @@ class userhome extends Component{
 			history.push("/"); 
 		})
 		.then(() => {
-			console.log("User"+uid+"logged out successfully");
+			console.log("User "+uid+" logged out successfully");
 		}).catch((err)=>{
 			console.log(err);
 		});
@@ -227,8 +227,8 @@ class userhome extends Component{
                 	
 					<div className="col-lg-8">
 					<div className="row">
-					<ThreeTabs all={this.state.all} propnotifs={this.state.notifs}/>
-						  				</div>
+						<ThreeTabs all={this.state.all} propnotifs={this.state.notifs}/>
+					</div>
 	 				</div>
     			</div>
 			</div>

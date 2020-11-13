@@ -1,4 +1,5 @@
-
+// import React, { useState } from "react";
+// import { PlusCircleOutlined} from '@ant-design/icons';
 import React, { useState, useEffect } from "react";
 import { PlusCircleOutlined} from '@ant-design/icons';
 import { Tooltip } from 'antd';
@@ -10,12 +11,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import firebase from "./Config";
+// import ClassButton from "./classbutton";
 import history from './../history';
 import SortableTree from "react-sortable-tree";
 import "react-sortable-tree/style.css";
 
 var d = [];
 const t = JSON.parse(localStorage.getItem('treeValue1'));
+// console.log(t);
 
 if(t!=null){
   d = t[0];
@@ -33,6 +36,9 @@ function Tree() {
   const [open3, setOpen3] = React.useState(false);
   const [offerD, setOffer] = React.useState("");
   const [expiry, setExpiry] = React.useState("");
+  // const [brand, setBrand] = React.useState("");
+  // const [setUnsubscribe] = React.useState(null);
+  // const [ref, setRef] = React.useState(null);
   const [products, setProducts] = React.useState([]);
   const [products1, setProducts1] = React.useState([]);
   const [products2, setProducts2] = React.useState([]);
@@ -203,9 +209,10 @@ function Tree() {
       var Brand = p.Brand
       var imageurl = p.imageurl
       var Price = p.Price
+      var time = firebase.firestore.FieldValue.serverTimestamp()
     
       firebase.firestore().collection("offerDetails").add({
-        Category, Description, Name, Offer, Expiry, Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price
+        Category, Description, Name, Offer, Expiry, Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price, time
       })
       .catch((error)=>{
         console.error("Error adding document:",error);
@@ -220,14 +227,12 @@ function Tree() {
   function addofferatsubcat1(rowInfo) {
     var title = rowInfo["node"].title;
 
-    checkAuth();
     firebase.auth().onAuthStateChanged((productowner)=> {
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
         .then((doc)=>{
-          firebase.firestore().collection("productDetails").where("Brand","==",doc.data().brand).onSnapshot(onCollectionUpdate1);
-          console.log("Hi there, SubLevel 1");
-        })
+          firebase.firestore().collection("productDetails").where("Brand","==",doc.data().brand).where("SubCategory1", "==", title).onSnapshot(onCollectionUpdate1);
+				})
 				.catch(function(error){
           console.log("Error getting document:", error);
           console.log(productowner.uid)
@@ -367,6 +372,7 @@ function Tree() {
                 {( (rowInfo["node"] !== null) &&(rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
                   <Tooltip title="Add offer at Level 2 (on all brand products)">
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} onClick={handleOpen} label="Add Offer" />{" "}
+                    {/* <ClassButton rowInfo={rowInfo}/> */}
                   </Tooltip>
                 )}
 
@@ -412,6 +418,7 @@ function Tree() {
                   <span>
                     <Tooltip title="Add offer at Level 3">
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen1} /> {" "}
+                      {/* <ClassButton/> */}
                     </Tooltip>
 
                     <Dialog open={open1} onClose={handleClose1} aria-labelledby="form-dialog-title">
@@ -458,6 +465,7 @@ function Tree() {
                   <span>
                     <Tooltip title="Add offer at Level 4">
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen2} /> {" "}
+                      {/* <ClassButton/> */}
                     </Tooltip>
 
                     <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title">
@@ -504,6 +512,7 @@ function Tree() {
                   <span>
                     <Tooltip title="Add offer at Level 5">
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen3} /> {" "}
+                      {/* <ClassButton/> */}
                     </Tooltip>
 
                     <Dialog open={open3} onClose={handleClose3} aria-labelledby="form-dialog-title">
