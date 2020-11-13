@@ -136,6 +136,7 @@ function Tree() {
 
   function saveyo(){
     console.log(treeData);
+    console.log("y=", y)
     firebase.firestore().collection("tree").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
     console.log("Saved to database");
     setSaveOpen(false);
@@ -146,7 +147,11 @@ function Tree() {
     console.log("Number of leaf nodes in the tree:",y/2);
     console.log("numberofproducts:",(parseInt(sessionStorage.getItem('numberofproducts'))));
     setReleaseOpen(false);
-    if ((Math.trunc(y/2))===(parseInt(sessionStorage.getItem('numberofproducts')))){
+<<<<<<< HEAD
+    // if ((Math.trunc(y/2))===(parseInt(sessionStorage.getItem('numberofproducts')))){
+=======
+    if ((Math.trunc(y/2))<=(parseInt(sessionStorage.getItem('numberofproducts')))){
+>>>>>>> 82d8e11120c09939ae944c8237631a3f9e0ea3d9
       saveyo()
       firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
       console.log("Released to Offer Manager!");
@@ -157,9 +162,9 @@ function Tree() {
     }
   }
   
-  var y;
+  var y=0;
   const getNodeKey = ({ treeIndex }) => treeIndex;
-
+  console.log("y=", y);
   return (
     <div>  
      <span style={{visibility: "hidden" }}> {y=0} </span>
@@ -201,6 +206,10 @@ function Tree() {
                     </Tooltip>
                     { Object.keys(rowInfo["node"]).length === 1 && (
                       <SomeButtons  node={rowInfo}  />
+                    )}
+                    { Object.keys(rowInfo["node"]).length === 1 && (
+                      y=y+1,
+                      console.log(rowInfo["node"].title)
                     )}
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">Delete</DialogTitle>
@@ -251,10 +260,10 @@ function Tree() {
                           Release
                       </Button>
                       </DialogActions>
-                    </Dialog>
-                    <span style={{visibility: "hidden" }}>
+                    </Dialog> 
+                    {/* <span style={{visibility: "hidden" }}>
                       {y= ((rowInfo["node"].title === sessionStorage.getItem('brandN')) || (rowInfo["node"].title===sessionStorage.getItem('category')) || (Object.keys(rowInfo["node"]).length !== 1)) ? y:y+1}
-                    </span>
+                    </span> */}
                   </span>
                 )}
               </div>

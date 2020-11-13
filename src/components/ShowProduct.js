@@ -113,7 +113,7 @@ class ShowProduct extends Component{
 	onCollectionUpdate=(querySnapshot)=>{
 		const products=[];
 		querySnapshot.forEach((doc)=>{
-			const {Name, Description, Brand, Price, Expiry, Category, SubCategory1, SubCategory2, SubCategory3, Offer,imageurl, producturl}=doc.data();
+			const {Model, Name, Description, Brand, Price, Expiry, Category, SubCategory1, SubCategory2, SubCategory3, Offer,imageurl, producturl}=doc.data();
 			products.push({
 				key:doc.id,
 				doc,
@@ -125,6 +125,7 @@ class ShowProduct extends Component{
 				Expiry,
 				Offer,
 				imageurl,
+				Model,
 				SubCategory1,
 				SubCategory2,
 				SubCategory3,
@@ -233,7 +234,7 @@ class ShowProduct extends Component{
 										<span style={{visibility: "hidden" }}> {sessionStorage.setItem('numberofproducts', z )}</span>
 
 											<div className="card-body">
-												<h7 className="card-title">{product.Category} -{">"} {product.Brand} -{">"} {product.SubCategory1}</h7>
+												<h7 className="card-title">{product.Category} -{">"} {product.Brand} -{">"} {product.SubCategory1} -{">"} {product.Model}</h7>
 												<h5 className="card-title">
 													{product.Name}
 												</h5>

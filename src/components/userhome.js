@@ -63,7 +63,7 @@ class userhome extends Component{
 
 	onCollectionUpdate2=(querySnapshot)=>{
 		querySnapshot.forEach((doc)=>{
-			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl,SubCategory1, SubCategory2, SubCategory3, producturl}=doc.data();
+			const {Model, Name, Brand, Description, Price, Expiry, Category, Offer,imageurl,SubCategory1, SubCategory2, SubCategory3, producturl}=doc.data();
 			all.push({
 				key:doc.id,
 				doc,
@@ -73,6 +73,7 @@ class userhome extends Component{
 				Price,
 				Category,
 				Expiry,
+				Model,
 				SubCategory1,
 				SubCategory2,
 				SubCategory3,
@@ -86,7 +87,11 @@ class userhome extends Component{
 
 	onCollectionUpdate=(querySnapshot)=>{
 		querySnapshot.forEach((doc)=>{
+<<<<<<< HEAD
 			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl,SubCategory1, SubCategory2, SubCategory3}=doc.data();
+=======
+			const {Model, Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time,SubCategory1, SubCategory2, SubCategory3}=doc.data();
+>>>>>>> 82d8e11120c09939ae944c8237631a3f9e0ea3d9
 			var logTime = (sessionStorage.getItem('logTime'));
 			offers.push({
 				key:doc.id,
@@ -97,6 +102,7 @@ class userhome extends Component{
 				Price,
 				Category,
 				Expiry,
+				Model,
 				SubCategory1,
 				SubCategory2,
 				SubCategory3,
@@ -113,6 +119,7 @@ class userhome extends Component{
 				Description,
 				Price,
 				Category,
+				Model,
 				SubCategory1,
 				SubCategory2,
 				SubCategory3,
@@ -121,8 +128,13 @@ class userhome extends Component{
 				imageurl,
 				producturl,
 				content: 'New Offer: ',
+<<<<<<< HEAD
             	offerD: `${Brand} ${Category} ${Offer}`,
             	time: logTime.toDate(),
+=======
+            	offerD: `${Brand} ${Name} (${Offer})`,
+            	time: time.toDate(),
+>>>>>>> 82d8e11120c09939ae944c8237631a3f9e0ea3d9
 				logTime,
 			});
 		});
@@ -167,7 +179,7 @@ class userhome extends Component{
 			history.push("/"); 
 		})
 		.then(() => {
-			console.log("User"+uid+"logged out successfully");
+			console.log("User "+uid+" logged out successfully");
 		}).catch((err)=>{
 			console.log(err);
 		});
@@ -226,8 +238,8 @@ class userhome extends Component{
                 	
 					<div className="col-lg-8">
 					<div className="row">
-					<ThreeTabs all={this.state.all} propnotifs={this.state.notifs}/>
-						  				</div>
+						<ThreeTabs all={this.state.all} propnotifs={this.state.notifs}/>
+					</div>
 	 				</div>
     			</div>
 			</div>
