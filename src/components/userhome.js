@@ -62,7 +62,7 @@ class userhome extends Component{
 
 	onCollectionUpdate2=(querySnapshot)=>{
 		querySnapshot.forEach((doc)=>{
-			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl,SubCategory1, SubCategory2, SubCategory3, producturl}=doc.data();
+			const {Model, Name, Brand, Description, Price, Expiry, Category, Offer,imageurl,SubCategory1, SubCategory2, SubCategory3, producturl}=doc.data();
 			all.push({
 				key:doc.id,
 				doc,
@@ -72,6 +72,7 @@ class userhome extends Component{
 				Price,
 				Category,
 				Expiry,
+				Model,
 				SubCategory1,
 				SubCategory2,
 				SubCategory3,
@@ -86,7 +87,7 @@ class userhome extends Component{
 
 	onCollectionUpdate=(querySnapshot)=>{
 		querySnapshot.forEach((doc)=>{
-			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time, SubCategory1, SubCategory2, SubCategory3}=doc.data();
+			const {Model, Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time,SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			var logTime = (sessionStorage.getItem('logTime'));
 
 			offers.push({
@@ -98,6 +99,7 @@ class userhome extends Component{
 				Price,
 				Category,
 				Expiry,
+				Model,
 				SubCategory1,
 				SubCategory2,
 				SubCategory3,
@@ -114,6 +116,7 @@ class userhome extends Component{
 				Description,
 				Price,
 				Category,
+				Model,
 				SubCategory1,
 				SubCategory2,
 				SubCategory3,

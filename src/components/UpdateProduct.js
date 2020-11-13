@@ -9,6 +9,7 @@ class UpdateProduct extends Component{
             Description:"",
             Price:"",
             Category:"",
+            Model:"",
             SubCategory1:"",
             SubCategory2:"",
             SubCategory3:"",
@@ -32,6 +33,7 @@ class UpdateProduct extends Component{
                     SubCategory1: doc.data().SubCategory1,
                     SubCategory2: doc.data().SubCategory2,
                     SubCategory3: doc.data().SubCategory3,
+                    Model: doc.data().Model,
                     imageurl: doc.data().imageurl,
                     producturl: doc.data().producturl
                 });
@@ -70,7 +72,7 @@ class UpdateProduct extends Component{
     onSubmit=(e)=>{
         e.preventDefault();
         var productId = localStorage.getItem('productsession');
-        const {Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand,imageurl,producturl}=this.state;
+        const {Model, Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand,imageurl,producturl}=this.state;
         const updateRef = firebase.firestore().collection("productDetails").doc(productId);
         updateRef.set({
             Name,
@@ -78,6 +80,7 @@ class UpdateProduct extends Component{
             Description,
             Price,
             Category,
+            Model,
             SubCategory1,
             SubCategory2,
             SubCategory3,
@@ -91,6 +94,7 @@ class UpdateProduct extends Component{
                 Description:"",
                 Price:"",
                 Category:"",
+                Model:"",
                 SubCategory1:"",
                 SubCategory2:"",
                 SubCategory3:"",
@@ -105,7 +109,7 @@ class UpdateProduct extends Component{
     }
 
     render(){
-        const {Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand, producturl}=this.state;
+        const {Model, Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand, producturl}=this.state;
         
         const bottomStyle = {
             margin: '20px'
@@ -160,6 +164,18 @@ class UpdateProduct extends Component{
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
                         <textArea className="form-control" name="SubCategory3" onChange={this.onChange} placeholder="SubCategory3">{SubCategory3}</textArea>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Model" onChange={this.onChange} placeholder="Model">{Model}</textArea>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Model" onChange={this.onChange} placeholder="Model">{Model}</textArea>
                         </div>
                     </div>
                     <div>
