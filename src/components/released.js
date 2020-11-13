@@ -85,7 +85,7 @@ function Tree() {
 				})
 			}
 		})
-  }, [])
+  })
 
   function onCollectionUpdate(querySnapshot){
 		querySnapshot.forEach((doc)=>{
@@ -451,12 +451,10 @@ function Tree() {
                   </span>
                 )}
 
-                
-
                 {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
                     <Tooltip title="Add offer at Level 4">
-                    <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen2} /> {" "}
+                      <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen2} /> {" "}
                     </Tooltip>
 
                     <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title">

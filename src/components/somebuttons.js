@@ -12,14 +12,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+var list1=["Model 101","Model 204","ok"];
 
-const Button = (props) => {  
-  return (
-    <Tooltip title="Make Leaf">
-      <ShoppingTwoTone style={{ fontSize: '22px', color: '#08c' }} label="Leaf" onClick={props.toggle} /> {" "}
-    </Tooltip>
-  )
-}
 
 class SomeButtons extends React.Component {
 
@@ -48,8 +42,13 @@ class SomeButtons extends React.Component {
       image:null,
       producturl:""
     }
+
   }
 
+  // clickevent(e){
+  //   console.log(this.props.node )
+
+  // }
   handleClickOpen(e) {
     this.setState({
         open: true
@@ -165,12 +164,18 @@ class SomeButtons extends React.Component {
 
 
   render() {
+    console.log(this.props.node )
 
     return(
       <span>
-        <Button 
-          toggle={this.toggle}
-        />
+         <Tooltip title="Make Leaf">
+         { (list1.indexOf(this.props.node["node"].title) >= 0) &&
+      <SendOutlined style={{ fontSize: '22px', color: '#000000' }} label="Leaf"  /> }
+           
+           { (list1.indexOf(this.props.node["node"].title) < 0) &&
+      <ShoppingTwoTone style={{ fontSize: '22px', color: '#08c' }} onClick={this.toggle} label="Leaf"  /> }
+      
+    </Tooltip>
 
         <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Make Leaf</DialogTitle>

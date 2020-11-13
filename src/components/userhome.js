@@ -9,6 +9,7 @@ import ThreeTabs from './threetabs';
 const offers=[];
 const notifs=[];
 const all=[];
+
 class userhome extends Component{
 	
 	constructor(props){
@@ -80,15 +81,13 @@ class userhome extends Component{
 				producturl
 			});
 		});
-
 		this.setState({all});
 	}
 
 	onCollectionUpdate=(querySnapshot)=>{
 		querySnapshot.forEach((doc)=>{
-			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time,SubCategory1, SubCategory2, SubCategory3}=doc.data();
+			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl,SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			var logTime = (sessionStorage.getItem('logTime'));
-
 			offers.push({
 				key:doc.id,
 				doc,
@@ -123,7 +122,7 @@ class userhome extends Component{
 				producturl,
 				content: 'New Offer: ',
             	offerD: `${Brand} ${Category} ${Offer}`,
-            	time: time.toDate(),
+            	time: logTime.toDate(),
 				logTime,
 			});
 		});
@@ -202,7 +201,7 @@ class userhome extends Component{
 								<h6> New Offers From Your Interests</h6>
 								<ul className="notifications">
 									{ this.state.notifs.map(notif=> {
-									
+
 										return (
 											(notif.logTime <= (notif.time).valueOf()) ? 
 											(	

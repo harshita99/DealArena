@@ -143,10 +143,10 @@ function Tree() {
   }
 
   function release(){
-    console.log("Number of leaf nodes in the tree:",y);
+    console.log("Number of leaf nodes in the tree:",y/2);
     console.log("numberofproducts:",(parseInt(sessionStorage.getItem('numberofproducts'))));
     setReleaseOpen(false);
-    if ((Math.trunc(y))===(parseInt(sessionStorage.getItem('numberofproducts')))){
+    if ((Math.trunc(y/2))===(parseInt(sessionStorage.getItem('numberofproducts')))){
       saveyo()
       firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
       console.log("Released to Offer Manager!");
@@ -200,7 +200,7 @@ function Tree() {
                       <DeleteOutlined style={{ fontSize: '22px', color: '#08c' }} label="Delete" onClick={handleClickOpen} /> {" "}
                     </Tooltip>
                     { Object.keys(rowInfo["node"]).length === 1 && (
-                      <SomeButtons/>
+                      <SomeButtons  node={rowInfo}  />
                     )}
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">Delete</DialogTitle>
