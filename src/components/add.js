@@ -2,9 +2,6 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
-// import TreeCheck1 from './treeCheck1';
-// import { MDBInput} from 'mdbreact';
-
 
 class Add extends Component{
     constructor(props){
@@ -39,7 +36,6 @@ class Add extends Component{
 				})
 			}
 		})
-		// history.push("/add");
 	}
 
 	onCollectionUpdate=(querySnapshot)=>{
@@ -110,44 +106,6 @@ class Add extends Component{
 		console.log(this.state);
 		return (
 			<div>
-				{/* <div className="row"> */}
-{/* 
-				<div className="col-lg-3">
-
-				<div className="mb-4 pt-3 card card-small" style={{margin:10}}>
-					<div className="border-bottom text-center card-header">
-						<div className="mb-3 mx-auto">
-							<img className="rounded-circle" src="" alt="" width="80"/>
-						</div>
-						<h4 className="mb-0" id="brand">Welcome {this.state.brand} Offer Manager</h4>
-						<br></br>
-
-						<div>	
-							<button onClick={() => history.push('/manageoffers')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-							<i className="material-icons mr-1">Home</i> </button>
-					
-							<button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-							<i className="material-icons mr-1">LogOut</i> </button>				
-						</div>
-					</div>
-
-					<br></br>
-					<br></br>
-
-					<div>
-						<h6><b>To add an offer at intermediate node - </b></h6>
-						{<TreeCheck1  brand={this.state.brand} Expiry={this.state.Expiry} Offer={this.state.Offer} products={this.state.products}/>}
-					</div>
-
-					<div>
-						<MDBInput label="Offer details" group type="text" id="Offer" name="Offer" validate onChange={this.onInput}/>
-						<MDBInput label="Expiry date" group type="text" id="Expiry" name="Expiry" validate onChange={this.onInput}/>
-					</div>
-
-				</div>
-		   		</div>  */}
-			
-				{/* <div className="col-lg-8"> */}
 					<div className="row" style={{margin:"0.25vw"}}>	
 					<div className="col-sm-10">	
 						<h5>Add offer directly at any product:</h5>
@@ -181,9 +139,7 @@ class Add extends Component{
 						)};
 					</div>
 					</div>
-				{/* </div> */}
-
-			{/* </div> */}
+			
 			</div>
 
 		)

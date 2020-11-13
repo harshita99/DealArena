@@ -76,13 +76,11 @@ class ShowProduct extends Component{
 			}
 		})
 
-		// history.push("/showproduct");
 	}
 
 	onCollectionUpdate1=(querySnapshot)=>{
 		const tree1=[];
 		querySnapshot.forEach((doc)=>{
-			// console.log(doc.id);
 			const {treeData}=doc.data();
 			if(doc.id === this.state.brand){
 
@@ -97,12 +95,10 @@ class ShowProduct extends Component{
 	}
 
 	getDetails=(querySnapshot)=>{
-		// const details=[];
 		querySnapshot.forEach((doc)=>{
 			this.setState({category : doc.data().Category})
 			this.setState({brandN : doc.data().BrandName})
-			// console.log("Top Brand is: ", this.state.brandN);
-			// console.log("Top Category is: ", this.state.category);
+
 
 			sessionStorage.setItem('brandN', (doc.data().BrandName))
 			sessionStorage.setItem('category', (doc.data().Category))
@@ -188,8 +184,7 @@ class ShowProduct extends Component{
 	}
 
 	render() {
-		// console.log("Brand is: ", this.state.brandN);
-		// console.log("Category is: ", this.state.category);
+		
 		return (
 			<div className="App body">
       			<div><br></br></div>
@@ -222,15 +217,9 @@ class ShowProduct extends Component{
 					<div className="lol ">
 						<Tabs tabPosition="top" >			
 							<TabPane  tab="Product Tree" key="1"> 
-								{/* <div */}
-									{/* <div className="row">	   */}
-										{/* <div className="col-sm-5"> */}
+						
 											<h4 style= {{marginLeft:"-30vw"}} >Manage Your Product Tree</h4>
 											<Tree isleaf={false}/>
-											{/* <Treee/> */}
-										{/* </div> */}
-									{/* </div> */}
-								{/* </div> */}
 							</TabPane>
 							
 							<TabPane  tab="All Products" key="2" >
@@ -255,12 +244,9 @@ class ShowProduct extends Component{
 
 											<div className="border-top d-flex card-footer" >
 												<div className="card-post__author d-flex">
-													{/* <a href="/" className="card-post__author-avatar card-post__author-avatar--small" >
-														Offer: {product.Offer} 
-													</a> */}
+										
 													<div className="d-flex flex-column justify-content-center ml-3">
 														<span className="card-post__author-name">Rs.{product.Price}</span>
-														{/* <small className="text-muted"> Offer expires:{product.Expiry}</small> */}
 													</div>
 												</div>
 												<div className="my-auto ml-auto">
@@ -269,8 +255,6 @@ class ShowProduct extends Component{
 											</div>
 
 											<div>
-												{/* <button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
-												<i className="material-icons mr-1">Add offer</i> </button> */}
 
 												<button onClick={()=>this.update(product.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
 													<i className="material-icons mr-1">Edit product</i>

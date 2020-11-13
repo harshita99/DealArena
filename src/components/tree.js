@@ -1,15 +1,10 @@
 import React, { useState, useRef } from "react";
 import firebase from "./Config";
-import SortableTree, {
-  addNodeUnderParent,
-  removeNodeAtPath,
-  changeNodeAtPath
-} from "react-sortable-tree";
+import SortableTree, {addNodeUnderParent,removeNodeAtPath,changeNodeAtPath} from "react-sortable-tree";
 import "react-sortable-tree/style.css";
 import { Tooltip } from 'antd';
 import { PlusCircleOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import SomeButtons from "./somebuttons";
-
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -29,9 +24,8 @@ function Tree() {
   const [treeData, setTreeData] = useState(seed);
   var  x=0;
   const inputEl = useRef();
-
   const [open, setOpen] = React.useState(false);
-
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -123,10 +117,6 @@ function Tree() {
   }
 
   function removeNode(rowInfo) {
-    // console.log(rowInfo);
-    // console.log(rowInfo["node"].title);
-    // console.log(rowInfo["parentNode"]);
-    // console.log(rowInfo["parentNode"].title);
 
     const { path } = rowInfo;
     setTreeData(
@@ -137,8 +127,6 @@ function Tree() {
       })
     );
     handleClose();
-    // console.log("Remove Node: ", rowInfo);
-    // console.log(Object.keys(rowInfo["node"]).length);
   }
 
   function updateTreeData(treeData) {

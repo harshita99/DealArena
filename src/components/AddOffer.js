@@ -1,12 +1,5 @@
-// import '@fortawesome/fontawesome-free/css/all.min.css';
-// import 'bootstrap-css-only/css/bootstrap.min.css';
-// import 'mdbreact/dist/css/mdb.css';
 import React,{Component} from 'react';
-// import '../App.css';
-// import { Card } from 'react-bootstrap';
-// import {Button} from "react-bootstrap";
 import firebase from "./Config";
-// import {Link} from "react-router-dom";
 import history from '../history';
 
 class AddOffer extends Component{

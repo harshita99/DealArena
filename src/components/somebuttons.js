@@ -136,7 +136,7 @@ class SomeButtons extends React.Component {
         imageurl:"",
         producturl:""
       });
-      // this.props.history.push("/showproduct");
+
       this.handleClose1();
       this.handleFormClose();
       alert('Product Added!');
@@ -168,7 +168,6 @@ class SomeButtons extends React.Component {
 
 
   render() {
-    // const {Name, Description, Price, Category, SubCategory, Brand, producturl}=this.state;
 
     return(
       <span>
