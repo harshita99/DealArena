@@ -472,12 +472,8 @@ function Tree() {
                 {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
                     <Tooltip title="Add offer at Level 4">
-<<<<<<< HEAD
-                      <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen2} /> {" "}
-=======
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen2} /> {" "}
                       {/* <ClassButton/> */}
->>>>>>> 82d8e11120c09939ae944c8237631a3f9e0ea3d9
                     </Tooltip>
 
                     <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title">

@@ -147,11 +147,7 @@ function Tree() {
     console.log("Number of leaf nodes in the tree:",y/2);
     console.log("numberofproducts:",(parseInt(sessionStorage.getItem('numberofproducts'))));
     setReleaseOpen(false);
-<<<<<<< HEAD
-    // if ((Math.trunc(y/2))===(parseInt(sessionStorage.getItem('numberofproducts')))){
-=======
     if ((Math.trunc(y/2))<=(parseInt(sessionStorage.getItem('numberofproducts')))){
->>>>>>> 82d8e11120c09939ae944c8237631a3f9e0ea3d9
       saveyo()
       firebase.firestore().collection("released").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
       console.log("Released to Offer Manager!");

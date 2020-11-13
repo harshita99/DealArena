@@ -87,11 +87,7 @@ class userhome extends Component{
 
 	onCollectionUpdate=(querySnapshot)=>{
 		querySnapshot.forEach((doc)=>{
-<<<<<<< HEAD
-			const {Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl,SubCategory1, SubCategory2, SubCategory3}=doc.data();
-=======
 			const {Model, Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time,SubCategory1, SubCategory2, SubCategory3}=doc.data();
->>>>>>> 82d8e11120c09939ae944c8237631a3f9e0ea3d9
 			var logTime = (sessionStorage.getItem('logTime'));
 			offers.push({
 				key:doc.id,
@@ -128,13 +124,8 @@ class userhome extends Component{
 				imageurl,
 				producturl,
 				content: 'New Offer: ',
-<<<<<<< HEAD
-            	offerD: `${Brand} ${Category} ${Offer}`,
-            	time: logTime.toDate(),
-=======
             	offerD: `${Brand} ${Name} (${Offer})`,
             	time: time.toDate(),
->>>>>>> 82d8e11120c09939ae944c8237631a3f9e0ea3d9
 				logTime,
 			});
 		});
