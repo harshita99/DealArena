@@ -154,6 +154,7 @@ class TreeCheck1 extends Component {
       var SubCategory1 = p.SubCategory1
       var SubCategory2 = p.SubCategory2
       var SubCategory3 = p.SubCategory3
+      var Model = p.Model
       var Description=p.Description
       var Name=p.Name
       var Offer=this.props.Offer
@@ -163,7 +164,7 @@ class TreeCheck1 extends Component {
       var Price = p.Price
 
       firebase.firestore().collection("offerDetails").add({
-        Category,Description,Name,Offer,Expiry,Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price
+        Category,Description,Name,Offer,Expiry,Brand, SubCategory1, SubCategory2, SubCategory3, Model, imageurl, Price
       })
       .catch((error)=>{
         console.error("Error adding document:",error);
@@ -252,7 +253,7 @@ class TreeCheck1 extends Component {
   
   onCollectionUpdate=(querySnapshot)=>{
     querySnapshot.forEach((doc)=>{
-        const {Name, Brand, Description, Price, Category,imageurl, producturl,SubCategory1, SubCategory2, SubCategory3}=doc.data();
+        const {Model, Name, Brand, Description, Price, Category,imageurl, producturl,SubCategory1, SubCategory2, SubCategory3}=doc.data();
         offers.push({
             key:doc.id,
             doc,
@@ -261,6 +262,7 @@ class TreeCheck1 extends Component {
             Description,
             Price,
             Category,
+            Model,
             SubCategory1,
             SubCategory2,
             SubCategory3,

@@ -10,6 +10,7 @@ class AddProduct extends Component{
             Description:"",
             Price:"",
             Category:"",
+            Model:"",
             SubCategory1:"",
             SubCategory2:"",
             SubCategory3:"",
@@ -28,12 +29,13 @@ class AddProduct extends Component{
 
     onSubmit=(e)=>{
         e.preventDefault();
-        const {Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand,imageurl,producturl}=this.state;
+        const {Model, Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand,imageurl,producturl}=this.state;
         firebase.firestore().collection("productDetails").add({
             Name,
             Brand,
             Description,
             Price,
+            Model,
             SubCategory1,
             SubCategory2,
             SubCategory3,
@@ -47,6 +49,7 @@ class AddProduct extends Component{
                 Description:"",
                 Price:"",
                 Category:"",
+                Model:"",
                 SubCategory1:"",
                 SubCategory2:"",
                 SubCategory3:"",
@@ -81,7 +84,7 @@ class AddProduct extends Component{
     }
 
     render() {
-        const {Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand, producturl}=this.state;
+        const {Model, Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand, producturl}=this.state;
         
         const divStyle = {
             margin: '40px'
@@ -143,6 +146,12 @@ class AddProduct extends Component{
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
                         <textArea className="form-control" name="SubCategory3" onChange={this.onChange} placeholder="SubCategory3">{SubCategory3}</textArea>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Model" onChange={this.onChange} placeholder="Model">{Model}</textArea>
                         </div>
                     </div>
                     <div>

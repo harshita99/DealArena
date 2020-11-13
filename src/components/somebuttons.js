@@ -40,6 +40,7 @@ class SomeButtons extends React.Component {
       Description:"",
       Price:"",
       Category:"",
+      Model:"",
       SubCategory1:"",
       SubCategory2:"",
       SubCategory3:"",
@@ -108,12 +109,13 @@ class SomeButtons extends React.Component {
 
   onSubmit=(e)=>{
     e.preventDefault();
-    const {Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand,imageurl,producturl}=this.state;
+    const {Model, Name, Description, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand,imageurl,producturl}=this.state;
     firebase.firestore().collection("productDetails").add({
       Name,
       Brand,
       Description,
       Price,
+      Model,
       SubCategory1,
       SubCategory2,
       SubCategory3,
@@ -127,6 +129,7 @@ class SomeButtons extends React.Component {
         Description:"",
         Price:"",
         Category:"",
+        Model:"",
         SubCategory1:"",
         SubCategory2:"",
         SubCategory3:"",
@@ -253,6 +256,15 @@ class SomeButtons extends React.Component {
               name="SubCategory3"
               id="SubCategory3"
               label="SubCategory3"
+              type="text"
+              onChange={this.onChange}
+              fullWidth
+            />
+            <TextField
+              margin="dense"
+              name="Model"
+              id="Model"
+              label="Model"
               type="text"
               onChange={this.onChange}
               fullWidth

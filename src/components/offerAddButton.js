@@ -28,6 +28,7 @@ class OfferAddButton extends React.Component {
           Description:"",
           Price:"",
           Category:"",
+          Model:"",
           SubCategory1:"",
           SubCategory2:"",
           SubCategory13:"",

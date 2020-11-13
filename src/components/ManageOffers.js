@@ -92,7 +92,7 @@ class ManageOffers extends Component{
 	onCollectionUpdate=(querySnapshot)=>{
 		const offers=[];
 		querySnapshot.forEach((doc)=>{
-			const {Name, Description, Brand, Price, Expiry, Category, Offer, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
+			const {Model, Name, Description, Brand, Price, Expiry, Category, Offer, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			offers.push({
 				key:doc.id,
 				doc,
@@ -104,6 +104,7 @@ class ManageOffers extends Component{
 				Expiry,
 				Offer,
 				imageurl,
+				Model,
 				SubCategory1,
 				SubCategory2,
 				SubCategory3,
@@ -115,7 +116,7 @@ class ManageOffers extends Component{
 
 	onCollectionUpdate2=(querySnapshot)=>{
 		querySnapshot.forEach((doc)=>{
-			const {Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
+			const {Model, Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			products.push({
 				key:doc.id,
 				doc,
@@ -125,6 +126,7 @@ class ManageOffers extends Component{
 				Price,
 				Category,
 				imageurl,
+				Model,
 				SubCategory1,
 				SubCategory2,
 				SubCategory3,
@@ -151,6 +153,7 @@ class ManageOffers extends Component{
 			var SubCategory1 = p.SubCategory1
 			var SubCategory2 = p.SubCategory2
 			var SubCategory3 = p.SubCategory3
+			var Model = p.Model
 			var Description = p.Description
 			var Name = p.Name
 			var Offer = O
@@ -161,7 +164,7 @@ class ManageOffers extends Component{
 			var Price = p.Price
 	  
 			firebase.firestore().collection("offerDetails").add({
-			  Category,Description,Name,Offer,Expiry,Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price, producturl
+			  Model, Category, Description, Name, Offer, Expiry, Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price, producturl
 			})
 			.catch((error)=>{
 			  console.error("Error adding document:",error);
@@ -274,7 +277,7 @@ class ManageOffers extends Component{
 									{this.state.offers.map(offer=>
 										<div className="card-post mb-4 card card-small">
 											<div className="card-body">
-												<h7 className="card-title">{offer.Category} -{">"} {offer.Brand} -{">"} {offer.SubCategory1}</h7>
+												<h7 className="card-title">{offer.Category} -{">"} {offer.Brand} -{">"} {offer.SubCategory1} -{">"} {offer.Model}</h7>
 												<h5 className="card-title">
 													{offer.Name}
 												</h5>

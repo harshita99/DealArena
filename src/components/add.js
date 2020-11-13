@@ -46,11 +46,12 @@ class Add extends Component{
 		const products=[];
 		const brand=[];
 		querySnapshot.forEach((doc)=>{
-			const {Name, Description,Brand, Price, Expiry, Category, SubCategory1, SubCategory2, SubCategory3, Offer,imageurl, producturl}=doc.data();
+			const {Model, Name, Description,Brand, Price, Expiry, Category, SubCategory1, SubCategory2, SubCategory3, Offer,imageurl, producturl}=doc.data();
 			brand.push(Brand);
             products.push({
                 key:doc.id,
-                doc,
+				doc,
+				Model,
                 Name,
                 Brand,
                 Description,
@@ -153,7 +154,7 @@ class Add extends Component{
 						{this.state.products.map(product=>
 							<div className="card-post mb-4 card card-small">
 								<div className="card-body">
-									<h7 className="card-title">{product.Category} -{">"} {product.Brand} -{">"} {product.SubCategory1}</h7>
+									<h7 className="card-title">{product.Category} -{">"} {product.Brand} -{">"} {product.SubCategory1} -{">"} {product.Model}</h7>
 									<h5 className="card-title">{product.Name}</h5>
 									<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
 									<h5 className="card-title"> {product.Brand}</h5>

@@ -18,6 +18,7 @@ class AddOffer extends Component{
             Expiry:"",
             Price:"",
             Category:"",
+            Model:"",
             SubCategory1:"",
             SubCategory2:"",
             SubCategory3:"",
@@ -40,6 +41,7 @@ class AddOffer extends Component{
                     Description: doc.data().Description,
                     Price: doc.data().Price,
                     Category: doc.data().Category,
+                    Model: doc.data().Model,
                     SubCategory1: doc.data().SubCategory1,
                     SubCategory2: doc.data().SubCategory2,
                     SubCategory3: doc.data().SubCategory3,
@@ -61,8 +63,9 @@ class AddOffer extends Component{
     onSubmit=(e)=>{
         console.log("hogya submit re")
         e.preventDefault();
-        const {Name, Description, Expiry, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand,Offer,imageurl,producturl}=this.state;
+        const {Model, Name, Description, Expiry, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand,Offer,imageurl,producturl}=this.state;
         firebase.firestore().collection("offerDetails").add({
+            Model,
             Name,
             Brand,
             Description,
@@ -84,6 +87,7 @@ class AddOffer extends Component{
                 Expiry:"",
                 Price:"",
                 Category:"",
+                Model:"",
                 SubCategory1:"",
                 SubCategory2:"",
                 SubCategory3:"",
@@ -126,7 +130,7 @@ class AddOffer extends Component{
     }
 
     render(){
-        const {Name, Description, Expiry, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand, Offer, producturl}=this.state;
+        const {Model, Name, Description, Expiry, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand, Offer, producturl}=this.state;
         
         const divStyle = {
             margin: '40px'
@@ -191,6 +195,12 @@ class AddOffer extends Component{
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
                         <textArea className="form-control" name="SubCategory3" onChange={this.onChange} placeholder="SubCategory3">{SubCategory3}</textArea>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                        <textArea className="form-control" name="Model" onChange={this.onChange} placeholder="Model">{Model}</textArea>
                         </div>
                     </div>
                     <div>
