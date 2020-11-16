@@ -5,6 +5,13 @@ import history from './../history';
 import Released from "./released";
 import Add from "./add";
 import { Tabs } from "antd";
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 const { TabPane } = Tabs;
 const products=[];
 var E = [];
@@ -16,9 +23,24 @@ class ManageOffers extends Component{
 		this.logout = this.logout.bind(this);
 		this.unsubscribe=null;
 		this.state={
-			offers:[]
+			offers:[],
+			open: false
 		};
+        this.handleOpen = this.handleOpen.bind(this);
+		this.handleClose = this.handleClose.bind(this);
 	}
+
+	handleOpen(e) {
+        this.setState({
+            open: true
+        });
+    }
+    
+    handleClose(e) {
+        this.setState({
+            open: false
+        });
+    }
 
 	componentDidMount(){
 		this.checkAuth();
@@ -232,8 +254,7 @@ class ManageOffers extends Component{
                         
                             <button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
                                 <i className="material-icons mr-1">LogOut</i> </button>	                        
-                        </div>	
-								
+                        </div>			
 					</div>
 					</div>
 					</div>
@@ -245,7 +266,6 @@ class ManageOffers extends Component{
 							<TabPane  tab="Product Tree " key="1" >
 								<h4 style= {{marginLeft:"-30vw"}} >Product Tree</h4>
 								<Released isleaf={false}/>
-
 							</TabPane>
 
 							<TabPane  tab="Products" key="3" >
@@ -260,10 +280,10 @@ class ManageOffers extends Component{
 										<div className="card-post mb-4 card card-small">
 											<div className="card-body">
 												<h7 className="card-title">{offer.Category} -{">"} {offer.Brand} -{">"} {offer.SubCategory1} -{">"} {offer.Model}</h7>
-												<h5 className="card-title">
+												<h5 className="card-tit0le">
 													{offer.Name}
 												</h5>
-												<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/>
+												<img src= {offer.imageurl} alt="DealArena" width="100px" height="100px"/> <br />
 												<h6 className="card-title"> {offer.Description}</h6>
 											</div>
 						
@@ -277,8 +297,25 @@ class ManageOffers extends Component{
 												<button onClick={()=>this.update(offer.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
 												<i className="material-icons mr-1">Update Offer</i> </button>
 
-												<button onClick={()=>this.delete(offer.key)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
+												<button onClick={this.handleOpen} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
 												<i className="material-icons mr-1">Delete Offer</i> </button>
+
+												<Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+													<DialogTitle id="form-dialog-title">Delete Offer</DialogTitle>
+													<DialogContent>
+														<DialogContentText>
+															Are you sure you want to delete the offer?
+														</DialogContentText>
+													</DialogContent>
+													<DialogActions>
+														<Button style={{ color: '#08c' }} onClick={this.handleClose} color="primary">
+															Cancel
+														</Button>
+														<Button style={{ color: '#08c' }} onClick={()=>this.delete(offer.key)} color="primary">
+															Delete
+														</Button>
+													</DialogActions>
+												</Dialog>
 											</div>
 										</div>
 									)};
