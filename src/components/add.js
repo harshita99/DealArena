@@ -116,7 +116,7 @@ class Add extends Component{
 								<div className="card-body">
 									<h7 className="card-title">{product.Category} -{">"} {product.Brand} -{">"} {product.SubCategory1} -{">"} {product.Model}</h7>
 									<h5 className="card-title">{product.Name}</h5>
-									<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
+									<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/> <br />
 									<h5 className="card-title"> {product.Brand}</h5>
 									<h6 className="card-title"> {product.Description}</h6>
 									<h6 className="card-title">Category: {product.Category}</h6>
@@ -131,19 +131,17 @@ class Add extends Component{
 										</div>
 									</div>
 
-										<div className="d-flex flex-column">
-											<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
-												<i className="material-icons mr-1">Add offer</i> 
-											</button>
-										</div>
+									<div className="d-flex flex-column">
+										<button onClick={()=>this.addoffer(product.key)} className="mb-2 btn btn-outline-success btn-sm btn-pill">
+											<i className="material-icons mr-1">Add offer</i> 
+										</button>
+									</div>
 								</div>
 							</div>
 						)}
 					</div>
 					</div>
-			
 			</div>
-
 		)
 	}
 }

@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { ShoppingTwoTone} from '@ant-design/icons';
 
 
-class ClassButton extends React.Component {
+class ClassSub1 extends React.Component {
   click=()=>{
     console.log(this.props.rowInfo);
   }
@@ -23,4 +23,4 @@ class ClassButton extends React.Component {
   } 
 }
 
-export default ClassButton;
+export default ClassSub1;

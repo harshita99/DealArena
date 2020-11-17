@@ -42,15 +42,8 @@ class SomeButtons extends React.Component {
       image:null,
       producturl:""
     }
-
-  
-
   }
 
-  // clickevent(e){
-  //   console.log(this.props.node )
-
-  // }
   handleClickOpen(e) {
     this.setState({
         open: true
@@ -302,10 +295,11 @@ class SomeButtons extends React.Component {
         </Tooltip>
           }
            
-           { (localStorage.getItem("list2").indexOf(this.props.node["node"].title) < 0) &&
-                    <Tooltip title="Make Leaf">
-      <ShoppingTwoTone style={{ fontSize: '22px', color: '#08c' }} onClick={this.toggle} label="Leaf"  />   </Tooltip>
-}
+        { (localStorage.getItem("list2").indexOf(this.props.node["node"].title) < 0) &&
+          <Tooltip title="Make Leaf">
+            <ShoppingTwoTone style={{ fontSize: '22px', color: '#08c' }} onClick={this.toggle} label="Leaf"  />
+          </Tooltip>
+        }
 
         <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Make Leaf</DialogTitle>
@@ -325,9 +319,9 @@ class SomeButtons extends React.Component {
         </Dialog>
       
 
-        {this.state.isOpen && 
+        { this.state.isOpen && 
             <Tooltip title="View Product">
-              <SendOutlined style={{ fontSize: '22px', color: '#08c' }} label="View" onClick={() => history.push('/addproduct')} />
+              <SendOutlined style={{ fontSize: '22px', color: '#000000' }} label="View" onClick={() => history.push('/addproduct')} />
             </Tooltip>
         }
 

@@ -5,6 +5,13 @@ import history from './../history';
 import Tree from "./tree";
 // import Treee from "./classTree";
 import { Tabs } from "antd";
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 const { TabPane } = Tabs;
 const details=[];
 var z=0;
@@ -15,8 +22,11 @@ class ShowProduct extends Component{
 		this.unsubscribe=null;
 		this.state={
 			numberofproducts:0,
-			products:[]
+			products:[],
+			openn: false
 		};
+        this.handleOpenn = this.handleOpenn.bind(this);
+		this.handleClosee = this.handleClosee.bind(this);
 	}
 
 	componentDidMount(){
@@ -75,7 +85,6 @@ class ShowProduct extends Component{
 				})
 			}
 		})
-
 	}
 
 	onCollectionUpdate1=(querySnapshot)=>{
@@ -98,8 +107,6 @@ class ShowProduct extends Component{
 		querySnapshot.forEach((doc)=>{
 			this.setState({category : doc.data().Category})
 			this.setState({brandN : doc.data().BrandName})
-
-
 			sessionStorage.setItem('brandN', (doc.data().BrandName))
 			sessionStorage.setItem('category', (doc.data().Category))
 			details.push({
@@ -172,6 +179,18 @@ class ShowProduct extends Component{
 		});
 	}
 
+	handleOpenn(e) {
+        this.setState({
+            openn: true
+        });
+    }
+    
+    handleClosee(e) {
+        this.setState({
+            openn: false
+        });
+    }
+
 	addoffer(u){
 		var productId = u;
 		localStorage.setItem('productsession', productId);
@@ -190,6 +209,10 @@ class ShowProduct extends Component{
 		}).catch(function(error){
 			console.log("Error deleting document: ", error);
 		});
+
+		this.setState({
+            openn: false
+        });
 	}
 
 	render() {
@@ -223,15 +246,14 @@ class ShowProduct extends Component{
 
 					<div className="col-lg-8">
 					<div className="row">
-					<div className="lol ">
+					<div className="lol">
 						<Tabs tabPosition="top" >			
-							<TabPane  tab="Product Tree" key="1"> 
-						
-											<h4 style= {{marginLeft:"-30vw"}} >Manage Your Product Tree</h4>
-											<Tree isleaf={false}/>
+							<TabPane tab="Product Tree" key="1"> 
+								<h4 style= {{marginLeft:"-30vw"}} >Manage Your Product Tree</h4>
+								<Tree isleaf={false}/>
 							</TabPane>
 							
-							<TabPane  tab="All Products" key="2" >
+							<TabPane tab="All Products" key="2">
 								<div className="row" style={{margin:"0.25vw"}}>	  
 								<div className="col-sm-10">
 								<span style={{visibility: "hidden" }}> {z=0}</span>
@@ -239,21 +261,20 @@ class ShowProduct extends Component{
 									{this.state.products.map(product=>
 
 										<div className="card-post mb-4 card card-small">
-										<span style={{visibility: "hidden" }}> {z=z+1}</span>
-										<span style={{visibility: "hidden" }}> {sessionStorage.setItem('numberofproducts', z )}</span>
+										<span style={{visibility: "hidden" }}> {z=z+1} -</span>
+										<span style={{visibility: "hidden" }}> {sessionStorage.setItem('numberofproducts', z )} </span>
 
 											<div className="card-body">
 												<h7 className="card-title">{product.Category} -{">"} {product.Brand} -{">"} {product.SubCategory1} -{">"} {product.Model}</h7>
 												<h5 className="card-title">
 													{product.Name}
 												</h5>
-												<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/>
+												<img src= {product.imageurl} alt="DealArena" width="100px" height="100px"/> <br />
 												<h6 className="card-title"> {product.Description}</h6>
 											</div>
 
 											<div className="border-top d-flex card-footer" >
 												<div className="card-post__author d-flex">
-										
 													<div className="d-flex flex-column justify-content-center ml-3">
 														<span className="card-post__author-name">Rs.{product.Price}</span>
 													</div>
@@ -264,20 +285,32 @@ class ShowProduct extends Component{
 											</div>
 
 											<div>
-
 												<button onClick={()=>this.update(product.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
 													<i className="material-icons mr-1">Edit product</i>
 												</button>
-
-												<button onClick={()=>this.delete(product.key)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
+												<button onClick={this.handleOpenn} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
 													<i className="material-icons mr-1">Delete product</i>
 												</button>
 											</div>
 
+											<Dialog open={this.state.openn} onClose={this.handleClosee} aria-labelledby="form-dialog-title">
+												<DialogTitle id="form-dialog-title">Delete Product</DialogTitle>
+												<DialogContent>
+													<DialogContentText>
+														Are you sure you want to delete the product?
+													</DialogContentText>
+												</DialogContent>
+												<DialogActions>
+													<Button style={{ color: '#08c' }} onClick={this.handleClosee} color="primary">
+														Cancel
+													</Button>
+													<Button style={{ color: '#08c' }} onClick={()=>this.delete(product.key)} color="primary">
+														Delete
+													</Button>
+												</DialogActions>
+											</Dialog>
 										</div>
-
-										)
-									}
+									)}
 								</div>
 								</div>
 							</TabPane>	
