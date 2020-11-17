@@ -174,7 +174,7 @@ class ClassSub1 extends React.Component {
                   <TextField
                     autoFocus
                     margin="dense"
-                    name="OfferDetails"
+                    name="Offer"
                     id="OfferDetails"
                     label="Offer Details"
                     type="text"
@@ -183,7 +183,7 @@ class ClassSub1 extends React.Component {
                   />
                   <TextField
                     margin="dense"
-                    name="ExpiryDate"
+                    name="Expiry"
                     id="ExpiryDate"
                     label="Expiry Date"
                     type="text"
