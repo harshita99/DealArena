@@ -2,7 +2,7 @@
 // import { PlusCircleOutlined} from '@ant-design/icons';
 import React, { useState } from "react";
 // import { PlusCircleOutlined} from '@ant-design/icons';
-import { Tooltip } from 'antd';
+// import { Tooltip } from 'antd';
 // import MButton from '@material-ui/core/Button';
 // import TextField from '@material-ui/core/TextField';
 // import Dialog from '@material-ui/core/Dialog';
@@ -12,9 +12,12 @@ import { Tooltip } from 'antd';
 // import DialogTitle from '@material-ui/core/DialogTitle';
 // import firebase from "./Config";
 import ClassAllBrands from "./classAllBrand";
+import ClassSub1 from "./classSub1";
+import ClassSub2 from "./classSub2";
+import ClassSub3 from "./classSub3";
 // import history from './../history';
 import SortableTree from "react-sortable-tree";
-import "react-sortable-tree/style.css";
+import "react-sortable-tree/style.css"
 
 var d = [];
 const t = JSON.parse(localStorage.getItem('treeValue1'));
@@ -36,9 +39,9 @@ function Tree() {
   // const [open3, setOpen3] = React.useState(false);
   // const [offerD, setOffer] = React.useState("");
   // const [expiry, setExpiry] = React.useState("");
-  // // const [brand, setBrand] = React.useState("");
-  // // const [setUnsubscribe] = React.useState(null);
-  // // const [ref, setRef] = React.useState(null);
+  // const [brand, setBrand] = React.useState("");
+  // const [setUnsubscribe] = React.useState(null);
+  // const [ref, setRef] = React.useState(null);
   // const [products, setProducts] = React.useState([]);
   // const [products1, setProducts1] = React.useState([]);
   // const [products2, setProducts2] = React.useState([]);
@@ -378,10 +381,7 @@ function Tree() {
             buttons: [
               <div>
                 {( (rowInfo["node"] !== null) &&(rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
-                  <Tooltip title="Add offer at Level 2 (on all brand products)">
-                    {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} onClick={handleOpen} label="Add Offer" />{" "} */}
-                    <ClassAllBrands rowInfo={rowInfo}/>
-                  </Tooltip>
+                    <ClassAllBrands node={rowInfo}/>
                 )}
 
                 {/* <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -424,11 +424,12 @@ function Tree() {
 
                 {( (rowInfo!==null) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) ) && (
                   <span>
-                    {/* <Tooltip title="Add offer at Level 3">
-                      <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen1} /> {" "}
-                      <ClassButton/>
-                    </Tooltip>
-                    <Dialog open={open1} onClose={handleClose1} aria-labelledby="form-dialog-title">
+                    {/* <Tooltip title="Add offer at Level 3"> */}
+                      {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen1} /> {" "} */}
+                      <ClassSub1 node={rowInfo}/>
+                    {/* </Tooltip> */}
+
+                    {/* <Dialog open={open1} onClose={handleClose1} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">Add Offer at Level 3</DialogTitle>
                       <DialogContent>
                         <DialogContentText>
@@ -470,11 +471,10 @@ function Tree() {
 
                 {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
-                    {/* <Tooltip title="Add offer at Level 4">
-                    <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen2} /> {" "}
-                      <ClassButton/>
-                    </Tooltip>
-                    <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title">
+                    {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen2} /> {" "} */}
+                      <ClassSub2 node={rowInfo}/>
+
+                   {/* <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">Add Offer at Level 4</DialogTitle>
                       <DialogContent>
                         <DialogContentText>
@@ -516,11 +516,11 @@ function Tree() {
 
                 {( (Object.keys(rowInfo["node"]).length === 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
-                    {/* <Tooltip title="Add offer at Level 5">
-                    <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen3} /> {" "}
-                      <ClassButton/>
-                    </Tooltip>
-                    <Dialog open={open3} onClose={handleClose3} aria-labelledby="form-dialog-title">
+                    
+                    {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen3} /> {" "} */}
+                      <ClassSub3 node={rowInfo}/>
+
+                   {/* <Dialog open={open3} onClose={handleClose3} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">Add Offer at Level 5</DialogTitle>
                       <DialogContent>
                         <DialogContentText>
@@ -558,7 +558,7 @@ function Tree() {
                       </DialogActions>
                     </Dialog> */}
                   </span>
-                )}   
+                )} 
                  </div>
             ],
             style: {

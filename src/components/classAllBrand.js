@@ -11,6 +11,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Tooltip } from 'antd';
 
 const products=[];
 // var E = [];
@@ -158,9 +159,11 @@ class ClassAllBrand extends React.Component {
     render() {
         return(
             <span>
-                <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} 
-                    label="Add" onClick={this.handleOpen} 
-                /> {" "}
+				<Tooltip title="Add offer at Level 2 (on all brand products)">
+					<PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} 
+						label="Add" onClick={this.handleOpen} 
+					/> {" "}
+				</Tooltip>
 
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Add Offer on all Products</DialogTitle>

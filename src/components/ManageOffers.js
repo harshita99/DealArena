@@ -228,10 +228,15 @@ class ManageOffers extends Component{
 
 	delete(u){
 		firebase.firestore().collection('offerDetails').doc(u).delete().then(function(){
+			alert("Offer deleted successfully!");
 			console.log("Document deleted successfully!");
 		}).catch(function(error){
 			console.log("Error deleting document: ", error);
 		});
+
+		this.setState({
+            open: false
+        });
 	}
 
 	render() {
