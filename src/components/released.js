@@ -1,18 +1,18 @@
 // import React, { useState } from "react";
 // import { PlusCircleOutlined} from '@ant-design/icons';
 import React, { useState } from "react";
-import { PlusCircleOutlined} from '@ant-design/icons';
+// import { PlusCircleOutlined} from '@ant-design/icons';
 import { Tooltip } from 'antd';
-import MButton from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import firebase from "./Config";
+// import MButton from '@material-ui/core/Button';
+// import TextField from '@material-ui/core/TextField';
+// import Dialog from '@material-ui/core/Dialog';
+// import DialogActions from '@material-ui/core/DialogActions';
+// import DialogContent from '@material-ui/core/DialogContent';
+// import DialogContentText from '@material-ui/core/DialogContentText';
+// import DialogTitle from '@material-ui/core/DialogTitle';
+// import firebase from "./Config";
 import ClassAllBrands from "./classAllBrand";
-import history from './../history';
+// import history from './../history';
 import SortableTree from "react-sortable-tree";
 import "react-sortable-tree/style.css";
 
@@ -30,94 +30,94 @@ const seed = [];
 function Tree() {
   const [treeData, setTreeData] = useState(seed);
 
-  const [open, setOpen] = React.useState(false);
-  const [open1, setOpen1] = React.useState(false);
-  const [open2, setOpen2] = React.useState(false);
-  const [open3, setOpen3] = React.useState(false);
-  const [offerD, setOffer] = React.useState("");
-  const [expiry, setExpiry] = React.useState("");
-  // const [brand, setBrand] = React.useState("");
-  // const [setUnsubscribe] = React.useState(null);
-  // const [ref, setRef] = React.useState(null);
-  const [products, setProducts] = React.useState([]);
-  const [products1, setProducts1] = React.useState([]);
-  const [products2, setProducts2] = React.useState([]);
-  const [products3, setProducts3] = React.useState([]);
+  // const [open, setOpen] = React.useState(false);
+  // const [open1, setOpen1] = React.useState(false);
+  // const [open2, setOpen2] = React.useState(false);
+  // const [open3, setOpen3] = React.useState(false);
+  // const [offerD, setOffer] = React.useState("");
+  // const [expiry, setExpiry] = React.useState("");
+  // // const [brand, setBrand] = React.useState("");
+  // // const [setUnsubscribe] = React.useState(null);
+  // // const [ref, setRef] = React.useState(null);
+  // const [products, setProducts] = React.useState([]);
+  // const [products1, setProducts1] = React.useState([]);
+  // const [products2, setProducts2] = React.useState([]);
+  // const [products3, setProducts3] = React.useState([]);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
-  const handleOpen1 = () => {
-    setOpen1(true);
-  };
+  // const handleOpen1 = () => {
+  //   setOpen1(true);
+  // };
 
-  const handleClose1 = () => {
-    setOpen1(false);
-  };
+  // const handleClose1 = () => {
+  //   setOpen1(false);
+  // };
 
-  const handleOpen2 = () => {
-    setOpen2(true);
-  };
+  // const handleOpen2 = () => {
+  //   setOpen2(true);
+  // };
 
-  const handleClose2 = () => {
-    setOpen2(false);
-  };
+  // const handleClose2 = () => {
+  //   setOpen2(false);
+  // };
 
-  const handleOpen3 = () => {
-    setOpen3(true);
-  };
+  // const handleOpen3 = () => {
+  //   setOpen3(true);
+  // };
 
-  const handleClose3 = () => {
-    setOpen3(false);
-  };
+  // const handleClose3 = () => {
+  //   setOpen3(false);
+  // };
 
-  useEffect(() => {
-    checkAuth();
-		firebase.auth().onAuthStateChanged((productowner)=> {
-			if (productowner) {
-				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
-        .then((doc)=>{
-          console.log("ref val: ", firebase.firestore().collection("offerDetails").where("Brand","==",doc.data().brand));
-          firebase.firestore().collection("productDetails").where("Brand","==",doc.data().brand).onSnapshot(onCollectionUpdate);
-				})
-				.catch(function(error){
-          console.log("Error getting document:", error);
-          console.log(productowner.uid)
-				})
-			}
-		})
-  },[]);
+  // useEffect(() => {
+  //   checkAuth();
+	// 	firebase.auth().onAuthStateChanged((productowner)=> {
+	// 		if (productowner) {
+	// 			firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
+  //       .then((doc)=>{
+  //         console.log("ref val: ", firebase.firestore().collection("offerDetails").where("Brand","==",doc.data().brand));
+  //         firebase.firestore().collection("productDetails").where("Brand","==",doc.data().brand).onSnapshot(onCollectionUpdate);
+	// 			})
+	// 			.catch(function(error){
+  //         console.log("Error getting document:", error);
+  //         console.log(productowner.uid)
+	// 			})
+	// 		}
+	// 	})
+  // })
 
-  function onCollectionUpdate(querySnapshot){
-		querySnapshot.forEach((doc)=>{
-			const {Model, Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
+  // function onCollectionUpdate(querySnapshot){
+	// 	querySnapshot.forEach((doc)=>{
+	// 		const {Model, Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
       
-      setProducts(products => products.concat({
-        key:doc.id,
-				Name,
-				Brand,
-				Description,
-				Price,
-				Category,
-        imageurl,
-        Model,
-        SubCategory1,
-        SubCategory2,
-        SubCategory3,
-        producturl
-      }))
-		});
-		// console.log(products);
-  }
+  //     setProducts(products => products.concat({
+  //       key:doc.id,
+	// 			Name,
+	// 			Brand,
+	// 			Description,
+	// 			Price,
+	// 			Category,
+  //       imageurl,
+  //       Model,
+  //       SubCategory1,
+  //       SubCategory2,
+  //       SubCategory3,
+  //       producturl
+  //     }))
+	// 	});
+	// 	console.log(products);
+  // }
 
-  function onCollectionUpdate1(querySnapshot){
-		querySnapshot.forEach((doc)=>{
-			const {Model, Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
+  // function onCollectionUpdate1(querySnapshot){
+	// 	querySnapshot.forEach((doc)=>{
+	// 		const {Model, Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
       
   //     setProducts1(products1 => products1.concat({
   //       key:doc.id,
@@ -428,7 +428,6 @@ function Tree() {
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen1} /> {" "}
                       <ClassButton/>
                     </Tooltip>
-
                     <Dialog open={open1} onClose={handleClose1} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">Add Offer at Level 3</DialogTitle>
                       <DialogContent>
@@ -475,7 +474,6 @@ function Tree() {
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen2} /> {" "}
                       <ClassButton/>
                     </Tooltip>
-
                     <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">Add Offer at Level 4</DialogTitle>
                       <DialogContent>
@@ -522,7 +520,6 @@ function Tree() {
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen3} /> {" "}
                       <ClassButton/>
                     </Tooltip>
-
                     <Dialog open={open3} onClose={handleClose3} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">Add Offer at Level 5</DialogTitle>
                       <DialogContent>
