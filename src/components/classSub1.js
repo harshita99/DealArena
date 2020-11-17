@@ -177,7 +177,7 @@ class ClassSub1 extends React.Component {
                     autoFocus
                     margin="dense"
                     name="Offer"
-                    id="OfferDetails"
+                    id="Offer"
                     label="Offer Details"
                     type="text"
                     onChange={this.onInput}
@@ -186,7 +186,7 @@ class ClassSub1 extends React.Component {
                   <TextField
                     margin="dense"
                     name="Expiry"
-                    id="ExpiryDate"
+                    id="Expiry"
                     label="Expiry Date"
                     type="text"
                     onChange={this.onInput}
