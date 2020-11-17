@@ -3,7 +3,7 @@ import firebase from "./Config";
 import { Tooltip } from 'antd';
 import 'antd/dist/antd.css';
 import history from './../history';
-import { ShoppingTwoTone, SendOutlined, setTwoToneColor, getTwoToneColor } from '@ant-design/icons';
+import { ShoppingTwoTone, SendOutlined,  } from '@ant-design/icons';
 import MButton from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
@@ -80,18 +80,18 @@ class SomeButtons extends React.Component {
       isOpen: !prevState.isOpen
     }));
 
-    console.log(getTwoToneColor);
+    // console.log(getTwoToneColor);
 
-    if (!this.state.isOpen)
-    {
-      this.handleClickOpen();
-      setTwoToneColor("black");
-    }
+    // if (!this.state.isOpen)
+    // {
+    //   this.handleClickOpen();
+    //   setTwoToneColor("black");
+    // }
 
-    else
-    {
-      setTwoToneColor("#08c");
-    }
+    // else
+    // {
+    //   setTwoToneColor("#08c");
+    // }
   }
   
   onChange=(e)=>{
@@ -287,11 +287,13 @@ class SomeButtons extends React.Component {
 
     return(
       <span>
-        { (localStorage.getItem("list2").indexOf(this.props.node["node"].title) >= 0) &&
-          <Tooltip title="View the Added Product">
-            <SendOutlined style={{ fontSize: '22px', color: '#000000' }} label="Leaf"  />   
-          </Tooltip>
-        }
+
+         {
+          (localStorage.getItem("list2").indexOf(this.props.node["node"].title) >= 0) &&
+        <Tooltip title="Product exists at this level">
+           <SendOutlined style={{ fontSize: '22px', color: '#000000' }} label="Leaf"  />   
+        </Tooltip>
+          }
            
         { (localStorage.getItem("list2").indexOf(this.props.node["node"].title) < 0) &&
           <Tooltip title="Make Leaf">

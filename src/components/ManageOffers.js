@@ -318,7 +318,7 @@ class ManageOffers extends Component{
 												</Dialog>
 											</div>
 										</div>
-									)};
+									)}
 								</div>
 								</div>
 							</TabPane>	
