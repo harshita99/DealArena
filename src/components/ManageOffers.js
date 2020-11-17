@@ -281,7 +281,7 @@ class ManageOffers extends Component{
 												<i className="material-icons mr-1">Delete Offer</i> </button>
 											</div>
 										</div>
-									)};
+									)}
 								</div>
 								</div>
 							</TabPane>	

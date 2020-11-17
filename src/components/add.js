@@ -64,6 +64,8 @@ class Add extends Component{
             });
         });
 		this.setState({products});
+		console.log(this.state.products);
+
 		this.setState(brand);
 	}
 
@@ -103,7 +105,7 @@ class Add extends Component{
 	}
 
 	render() {
-		console.log(this.state);
+		console.log(this.state.products);
 		return (
 			<div>
 					<div className="row" style={{margin:"0.25vw"}}>	
@@ -136,7 +138,7 @@ class Add extends Component{
 										</div>
 								</div>
 							</div>
-						)};
+						)}
 					</div>
 					</div>
 			

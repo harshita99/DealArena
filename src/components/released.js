@@ -91,7 +91,7 @@ function Tree() {
 				})
 			}
 		})
-  })
+  },[]);
 
   function onCollectionUpdate(querySnapshot){
 		querySnapshot.forEach((doc)=>{
@@ -112,7 +112,7 @@ function Tree() {
         producturl
       }))
 		});
-		console.log(products);
+		// console.log(products);
   }
 
   function onCollectionUpdate1(querySnapshot){
