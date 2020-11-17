@@ -205,7 +205,8 @@ class ShowProduct extends Component{
 
 	delete(u){
 		firebase.firestore().collection('productDetails').doc(u).delete().then(function(){
-			console.log("Document deleted successfully!");
+			alert("Product deleted successfully!");
+			console.log("Product deleted successfully!");
 		}).catch(function(error){
 			console.log("Error deleting document: ", error);
 		});
