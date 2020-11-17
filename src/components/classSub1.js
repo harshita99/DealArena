@@ -16,6 +16,7 @@ import { Tooltip } from 'antd';
 const products=[];
 // var E = [];
 // var O = [];
+// const title = this.props.node["node"].title;
 
 class ClassSub1 extends React.Component {
 
@@ -23,8 +24,8 @@ class ClassSub1 extends React.Component {
         super(props);
         // this.state = { open: false };
         this.handleOpen = this.handleOpen.bind(this);
-		this.handleClose = this.handleClose.bind(this);
-		this.addoffer = this.addoffer.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.addoffer = this.addoffer.bind(this);
     
         this.state={
             Name:"",
@@ -37,21 +38,22 @@ class ClassSub1 extends React.Component {
             imageurl:"",
             Brand:"",
             image:null,
-			producturl:"",
-			open: false
+            producturl:"",
+            open: false
         }
     }
 
     componentDidMount(){
 		this.checkAuth();
-		console.log("Component in Offer Manager.");
+    console.log("Component in Offer Manager.");
+    console.log("Title is: ", this.props.node["node"].title)
 		firebase.auth().onAuthStateChanged((productowner)=> {
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
 				.then((doc)=> {
 					this.setState({brand : doc.data().brand})
 				}).then((doc)=>{
-					this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand);
+					this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory1", "==", this.props.node["node"].title);
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
 				})
 				.catch(function(error){

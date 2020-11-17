@@ -381,7 +381,7 @@ function Tree() {
             buttons: [
               <div>
                 {( (rowInfo["node"] !== null) &&(rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
-                    <ClassAllBrands rowInfo={rowInfo}/>
+                    <ClassAllBrands node={rowInfo}/>
                 )}
 
                 {/* <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -426,7 +426,7 @@ function Tree() {
                   <span>
                     {/* <Tooltip title="Add offer at Level 3"> */}
                       {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen1} /> {" "} */}
-                      <ClassSub1 rowInfo={rowInfo}/>
+                      <ClassSub1 node={rowInfo}/>
                     {/* </Tooltip> */}
 
                     {/* <Dialog open={open1} onClose={handleClose1} aria-labelledby="form-dialog-title">
@@ -472,7 +472,7 @@ function Tree() {
                 {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
                     {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen2} /> {" "} */}
-                      <ClassSub2 rowInfo={rowInfo}/>
+                      <ClassSub2 node={rowInfo}/>
 
                    {/* <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">Add Offer at Level 4</DialogTitle>
@@ -518,7 +518,7 @@ function Tree() {
                   <span>
                     
                     {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen3} /> {" "} */}
-                      <ClassSub3 rowInfo={rowInfo}/>
+                      <ClassSub3 node={rowInfo}/>
 
                    {/* <Dialog open={open3} onClose={handleClose3} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">Add Offer at Level 5</DialogTitle>
