@@ -171,8 +171,8 @@ class ClassAllBrand extends React.Component {
                   <TextField
                     autoFocus
                     margin="dense"
-                    name="OfferDetails"
-                    id="OfferDetails"
+                    name="Offer"
+                    id="Offer"
                     label="Offer Details"
                     type="text"
                     onChange={this.onInput}
@@ -180,8 +180,8 @@ class ClassAllBrand extends React.Component {
                   />
                   <TextField
                     margin="dense"
-                    name="ExpiryDate"
-                    id="ExpiryDate"
+                    name="Expiry"
+                    id="Expiry"
                     label="Expiry Date"
                     type="text"
                     onChange={this.onInput}
