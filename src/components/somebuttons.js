@@ -82,16 +82,11 @@ class SomeButtons extends React.Component {
 
     // console.log(getTwoToneColor);
 
-    // if (!this.state.isOpen)
-    // {
-    //   this.handleClickOpen();
-    //   setTwoToneColor("black");
-    // }
-
-    // else
-    // {
-    //   setTwoToneColor("#08c");
-    // }
+    if (!this.state.isOpen)
+    {
+      this.handleClickOpen();
+      // setTwoToneColor("black");
+    }
   }
   
   onChange=(e)=>{
@@ -290,9 +285,9 @@ class SomeButtons extends React.Component {
 
          {
           (localStorage.getItem("list2").indexOf(this.props.node["node"].title) >= 0) &&
-        <Tooltip title="Product exists at this level">
-           <SendOutlined style={{ fontSize: '22px', color: '#000000' }} label="Leaf"  />   
-        </Tooltip>
+            <Tooltip title="Product exists at this level">
+              <SendOutlined style={{ fontSize: '22px', color: '#000000' }} label="Leaf"  />   
+            </Tooltip>
           }
            
         { (localStorage.getItem("list2").indexOf(this.props.node["node"].title) < 0) &&
