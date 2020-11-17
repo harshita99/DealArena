@@ -232,6 +232,10 @@ class ManageOffers extends Component{
 		}).catch(function(error){
 			console.log("Error deleting document: ", error);
 		});
+
+		this.setState({
+            open: false
+        });
 	}
 
 	render() {
