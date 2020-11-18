@@ -129,7 +129,6 @@ class ClassAllBrand extends React.Component {
         this.setState({
             open: false
         });
-		// history.push("/manageoffers");
 	}
 
 	checkAuth(){

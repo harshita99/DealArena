@@ -153,16 +153,13 @@ class SomeButtons extends React.Component {
   }
 
   render() {
-    // console.log(this.props.node )
     return(
       <span>
-
-         {
-          (localStorage.getItem("list2").indexOf(this.props.node["node"].title) >= 0) &&
-            <Tooltip title="Product exists at this level">
-              <SendOutlined style={{ fontSize: '22px', color: '#000000' }} label="Leaf"  />   
-            </Tooltip>
-          }
+        { (localStorage.getItem("list2").indexOf(this.props.node["node"].title) >= 0) &&
+          <Tooltip title="Product exists at this level">
+            <SendOutlined style={{ fontSize: '22px', color: '#000000' }} label="Leaf"  />   
+          </Tooltip>
+        }
            
         { (localStorage.getItem("list2").indexOf(this.props.node["node"].title) < 0) &&
           <Tooltip title="Make Leaf">
@@ -186,7 +183,6 @@ class SomeButtons extends React.Component {
             </MButton>
           </DialogActions>
         </Dialog>
-      
 
         { this.state.isOpen && 
             <Tooltip title="View Product">

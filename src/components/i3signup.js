@@ -39,7 +39,6 @@ class i3signup extends Component{
 
   formRef = React.createRef();
   onFinish = (values) => {
-    // console.log(values);
     temp = values;
     this.onSubmit()
 

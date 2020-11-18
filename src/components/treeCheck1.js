@@ -131,9 +131,7 @@ var treeData = [
 ];
 
 treeData=treeData[0].children[1].children;
-
 var offers=[];
-
 
 class TreeCheck1 extends Component {
 
@@ -145,10 +143,7 @@ class TreeCheck1 extends Component {
     };
   }
 
-  
 	onSubmit=(e)=>{
-    // console.log(this.props)
-
 		this.state.offers.map(p=>{
       var Category=p.Category
       var SubCategory1 = p.SubCategory1
@@ -236,8 +231,6 @@ class TreeCheck1 extends Component {
   }
 
   render() {
-    // console.log(this.state);
-    // console.log("render value: ", this.state.value);
     const first = this.state.value;
     console.log("first[0] is: ", first[0]);
     console.log("first[1] is: ", first[1]);

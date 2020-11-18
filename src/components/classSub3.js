@@ -129,7 +129,6 @@ class ClassSub3 extends React.Component {
         this.setState({
             open: false
         });
-		// history.push("/manageoffers");
 	}
 
 	checkAuth(){

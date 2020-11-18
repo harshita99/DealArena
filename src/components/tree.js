@@ -87,9 +87,6 @@ function Tree() {
 
   function addNodeChild(rowInfo) {
     let { path } = rowInfo;
-    // console.log(rowInfo["node"].title);
-    // console.log(rowInfo["node"].title,sessionStorage.getItem('category'));
-
     const value = inputEl.current.value;
 
     if (value === "") {
@@ -157,7 +154,7 @@ function Tree() {
   
   var y=0;
   const getNodeKey = ({ treeIndex }) => treeIndex;
-  
+
   return (
     <div>  
      <span style={{visibility: "hidden" }}> {y=0} </span>

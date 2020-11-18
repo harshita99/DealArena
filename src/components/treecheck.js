@@ -128,7 +128,6 @@ const treeData = [
     ]
   }
 ];
-  
 
 class TreeCheck extends Component {
 
@@ -144,7 +143,6 @@ class TreeCheck extends Component {
   }
 
   onChange = value => {
-    // console.log('onChange ', value);
     this.setState({ value });
 
     if (firebase.auth().currentUser){

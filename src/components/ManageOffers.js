@@ -110,7 +110,6 @@ class ManageOffers extends Component{
 					sessionStorage.setItem('brandN', (doc.data().brand))
 					sessionStorage.setItem('category', (doc.data().category))
 				}).then((doc)=>{
-					// console.log("ref val in manage offer: ", firebase.firestore().collection("offerDetails").where("Brand","==",this.state.brand));
 					this.ref=firebase.firestore().collection("discardedOffers").where("Brand","==",this.state.brand);
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate3);
 				})
@@ -223,41 +222,6 @@ class ManageOffers extends Component{
 		this.setState({products});
 	}
 
-	onInput=(e)=>{
-		const state=this.state;
-		state[e.target.name]=e.target.value;
-		this.setState(state);
-	}
-
-	// addoffer(){
-	// 	products.map(p=>{
-	// 		var Category = p.Category
-	// 		var SubCategory1 = p.SubCategory1
-	// 		var SubCategory2 = p.SubCategory2
-	// 		var SubCategory3 = p.SubCategory3
-	// 		var Model = p.Model
-	// 		var Description = p.Description
-	// 		var Name = p.Name
-	// 		var Offer = O
-	// 		var Expiry = E
-	// 		var Brand = p.Brand
-	// 		var imageurl = p.imageurl
-	// 		var producturl = p.producturl
-	// 		var Price = p.Price
-	  
-	// 		firebase.firestore().collection("offerDetails").add({
-	// 		  Model, Category, Description, Name, Offer, Expiry, Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price, producturl
-	// 		})
-	// 		.catch((error)=>{
-	// 		  console.error("Error adding document:",error);
-	// 		});
-	// 		return null;
-	// 	})
-	// 	console.log("Products: ", products);
-	// 	alert('Offers added');
-	// 	history.push("/manageoffers");
-	// }
-
 	checkAuth(){
 		var produser = firebase.auth().currentUser;
 		if(localStorage.getItem('usersession')){
@@ -355,7 +319,6 @@ class ManageOffers extends Component{
 		var imageurl = p.imageurl
 		var producturl = p.producturl
 		var Price = p.Price
-		// var time = p.time
 		var discardTime = firebase.firestore.FieldValue.serverTimestamp()
 	
 		firebase.firestore().collection("discardedOffers").add({
