@@ -22,11 +22,15 @@ class ManageOffers extends Component{
 		this.unsubscribe=null;
 		this.state={
 			offers:[],
-			open1: false,
+			offersAll:[],
 			open: false,
-
+			open1: false,
 			open2: false,
-			discards: []
+			open3: false,
+			open4: false,
+			open5: false,
+			discards: [],
+			discardsAll: []
 		};
         this.handleOpen = this.handleOpen.bind(this);
 		this.handleClose = this.handleClose.bind(this);
@@ -34,6 +38,15 @@ class ManageOffers extends Component{
 		this.handleClose1 = this.handleClose1.bind(this);
 		this.handleOpen2 = this.handleOpen2.bind(this);
 		this.handleClose2 = this.handleClose2.bind(this);
+		this.handleOpen3 = this.handleOpen3.bind(this);
+		this.handleClose3 = this.handleClose3.bind(this);
+		this.handleOpen4 = this.handleOpen4.bind(this);
+		this.handleClose4 = this.handleClose4.bind(this);
+		this.handleOpen5 = this.handleOpen5.bind(this);
+		this.handleClose5 = this.handleClose5.bind(this);
+		this.okayDiscard = this.okayDiscard.bind(this);
+		this.okayRestore = this.okayRestore.bind(this);
+		this.okayDelete = this.okayDelete.bind(this);
 	}
 
 	handleOpen(e) {
@@ -69,6 +82,42 @@ class ManageOffers extends Component{
     handleClose2(e) {
         this.setState({
             open2: false
+        });
+	}
+
+	handleOpen3(e) {
+        this.setState({
+            open3: true
+        });
+    }
+    
+    handleClose3(e) {
+        this.setState({
+            open3: false
+        });
+	}
+
+	handleOpen4(e) {
+        this.setState({
+            open4: true
+        });
+    }
+    
+    handleClose4(e) {
+        this.setState({
+            open4: false
+        });
+	}
+
+	handleOpen5(e) {
+        this.setState({
+            open5: true
+        });
+    }
+    
+    handleClose5(e) {
+        this.setState({
+            open5: false
         });
 	}
 	
@@ -222,6 +271,58 @@ class ManageOffers extends Component{
 		this.setState({products});
 	}
 
+	onCollectionUpdate4=(querySnapshot)=>{
+		const offersAll=[];
+		querySnapshot.forEach((doc)=>{
+			const {Model, Name, Description, Brand, Price, Expiry, Category, Offer, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
+			offersAll.push({
+				key:doc.id,
+				doc,
+				Name,
+				Brand,
+				Description,
+				Price,
+				Category,
+				Expiry,
+				Offer,
+				imageurl,
+				Model,
+				SubCategory1,
+				SubCategory2,
+				SubCategory3,
+				producturl,
+			});
+		});
+		this.setState({offersAll});
+		console.log(offersAll);
+	}
+
+	onCollectionUpdate5=(querySnapshot)=>{
+		const discardsAll=[];
+		querySnapshot.forEach((doc)=>{
+			const {Model, Name, Description, Brand, Price, Expiry, Category, Offer, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
+			discardsAll.push({
+				key:doc.id,
+				doc,
+				Name,
+				Brand,
+				Description,
+				Price,
+				Category,
+				Expiry,
+				Offer,
+				imageurl,
+				Model,
+				SubCategory1,
+				SubCategory2,
+				SubCategory3,
+				producturl
+			});
+		});
+		this.setState({discardsAll});
+		console.log(discardsAll);
+	}
+
 	checkAuth(){
 		var produser = firebase.auth().currentUser;
 		if(localStorage.getItem('usersession')){
@@ -254,6 +355,70 @@ class ManageOffers extends Component{
 		var offerId = u;
 		localStorage.setItem('offersession', offerId);
 		history.push("/updateoffer");
+	}
+
+	okayRestore(){
+		this.setState({
+            open4: false
+        });
+		this.state.discardsAll.map(p=>{
+			var Category = p.Category
+			var SubCategory1 = p.SubCategory1
+			var SubCategory2 = p.SubCategory2
+			var SubCategory3 = p.SubCategory3
+			var Model = p.Model
+			var Description = p.Description
+			var Name = p.Name
+			var Offer = p.Offer
+			var Expiry = p.Expiry
+			var Brand = p.Brand
+			var imageurl = p.imageurl
+			var producturl = p.producturl
+			var Price = p.Price
+			var time = firebase.firestore.FieldValue.serverTimestamp()
+	  
+			firebase.firestore().collection("offerDetails").add({
+				Model, Category, Description, Name, Offer, Expiry, Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price, producturl, time
+			}).then(()=>{
+				console.log("Offer restored successfully!");
+			})
+			.catch((error)=>{
+				console.error("Error restoring document:", error);
+			});
+	
+			firebase.firestore().collection('discardedOffers').doc(p.key).delete().then(function(){
+				console.log("Offer removed from discards successfully!");
+			}).catch(function(error){
+				console.log("Error restoring document: ", error);
+			});
+			return null;
+		})
+        alert('Offers restored!');
+        this.setState({
+            open2: false
+        });
+	}
+
+	restoreAll(p){
+		var Offer = p.Offer
+		var Expiry = p.Expiry
+
+		this.setState({
+            open4: true
+        });
+		firebase.auth().onAuthStateChanged((productowner)=> {
+			if (productowner) {
+				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
+				.then((doc)=>{
+					this.ref=firebase.firestore().collection("disardedOffers").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
+					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate5);
+				})
+				.catch(function(error){
+					console.log("Error getting document:", error);
+					console.log(productowner.uid)
+				})
+			}
+		})
 	}
 
 	restore(p) {
@@ -292,6 +457,47 @@ class ManageOffers extends Component{
             open2: false
         });
 	}
+
+	okayDelete(){
+		this.setState({
+            open5: false
+        });
+		this.state.discardsAll.map(p=>{
+			firebase.firestore().collection('discardedOffers').doc(p.key).delete().then(function(){
+				console.log("Offer deleted successfully!");
+			}).catch(function(error){
+				console.log("Error deleting document: ", error);
+			});
+			return null;
+		})
+        alert('Offers deleted!');
+        this.setState({
+            open1: false
+        });
+	}
+
+	deleteAll(p){
+		var Offer = p.Offer
+		var Expiry = p.Expiry
+
+		this.setState({
+            open5: true
+        });
+		firebase.auth().onAuthStateChanged((productowner)=> {
+			if (productowner) {
+				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
+				.then((doc)=>{
+					this.ref=firebase.firestore().collection("disardedOffers").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
+					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate5);
+				})
+				.catch(function(error){
+					console.log("Error getting document:", error);
+					console.log(productowner.uid)
+				})
+			}
+		})
+	}
+	
 	delete(p){
 		firebase.firestore().collection('discardedOffers').doc(p.key).delete().then(function(){
 			alert("Offer deleted successfully!");
@@ -303,6 +509,70 @@ class ManageOffers extends Component{
 		this.setState({
             open1: false
         });
+	}
+
+	okayDiscard(){
+		this.setState({
+            open3: false
+        });
+		this.state.offersAll.map(p=>{
+			var Category = p.Category
+			var SubCategory1 = p.SubCategory1
+			var SubCategory2 = p.SubCategory2
+			var SubCategory3 = p.SubCategory3
+			var Model = p.Model
+			var Description = p.Description
+			var Name = p.Name
+			var Offer = p.Offer
+			var Expiry = p.Expiry
+			var Brand = p.Brand
+			var imageurl = p.imageurl
+			var producturl = p.producturl
+			var Price = p.Price
+			var discardTime = firebase.firestore.FieldValue.serverTimestamp()
+	  
+			firebase.firestore().collection("discardedOffers").add({
+				Model, Category, Description, Name, Offer, Expiry, Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price, producturl, discardTime
+			}).then(()=>{
+				console.log("Offers added to discard pile successfully!");
+			})
+			.catch((error)=>{
+				console.error("Error discarding all document:", error);
+			});
+	
+			firebase.firestore().collection('offerDetails').doc(p.key).delete().then(function(){
+				console.log("Offers discarded successfully!");
+			}).catch(function(error){
+				console.log("Error discarding all document: ", error);
+			});
+			return null;
+		})
+        alert('Offers discarded!');
+        this.setState({
+            open: false
+        });
+	}
+
+	discardAll(p){
+		var Offer = p.Offer
+		var Expiry = p.Expiry
+
+		this.setState({
+            open3: true
+        });
+		firebase.auth().onAuthStateChanged((productowner)=> {
+			if (productowner) {
+				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
+				.then((doc)=>{
+					this.ref=firebase.firestore().collection("offerDetails").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
+					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate4);
+				})
+				.catch(function(error){
+					console.log("Error getting document:", error);
+					console.log(productowner.uid)
+				})
+			}
+		})
 	}
 
 	discard(p){
@@ -407,12 +677,12 @@ class ManageOffers extends Component{
 
 												<button onClick={this.handleOpen} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
 												<i className="material-icons mr-1">Discard Offer</i> </button>
-
+												
 												<Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
 													<DialogTitle id="form-dialog-title">Discard Offer</DialogTitle>
 													<DialogContent>
 														<DialogContentText>
-															Are you sure you want to discard the offer? It will be added to a collection of discarded offers.
+															Do you want to discard all similar offers at the same level or just this one? And are you sure you want to discard? They will be added to a collection of discarded offers.
 														</DialogContentText>
 													</DialogContent>
 													<DialogActions>
@@ -421,6 +691,26 @@ class ManageOffers extends Component{
 														</Button>
 														<Button style={{ color: '#08c' }} onClick={()=>this.discard(offer)} color="primary">
 															Discard
+														</Button>
+														<Button style={{ color: '#08c' }} onClick={()=>this.discardAll(offer)} color="primary">
+															Discard All
+														</Button>
+													</DialogActions>
+												</Dialog>
+
+												<Dialog open={this.state.open3} onClose={this.handleClose3} aria-labelledby="form-dialog-title">
+													<DialogTitle id="form-dialog-title">Discard Offer</DialogTitle>
+													<DialogContent>
+														<DialogContentText>
+															Are you sure?
+														</DialogContentText>
+													</DialogContent>
+													<DialogActions>
+														<Button style={{ color: '#08c' }} onClick={this.handleClose3} color="primary">
+															Cancel
+														</Button>
+														<Button style={{ color: '#08c' }} onClick={this.okayDiscard} color="primary">
+															Discard All
 														</Button>
 													</DialogActions>
 												</Dialog>
@@ -474,6 +764,26 @@ class ManageOffers extends Component{
 														<Button style={{ color: '#08c' }} onClick={()=>this.delete(offer)} color="primary">
 															Delete
 														</Button>
+														<Button style={{ color: '#08c' }} onClick={()=>this.deleteAll(offer)} color="primary">
+															Delete All
+														</Button>
+													</DialogActions>
+												</Dialog>
+
+												<Dialog open={this.state.open5} onClose={this.handleClose5} aria-labelledby="form-dialog-title">
+													<DialogTitle id="form-dialog-title">Delete Offer</DialogTitle>
+													<DialogContent>
+														<DialogContentText>
+															Are you sure?
+														</DialogContentText>
+													</DialogContent>
+													<DialogActions>
+														<Button style={{ color: '#08c' }} onClick={this.handleClose5} color="primary">
+															Cancel
+														</Button>
+														<Button style={{ color: '#08c' }} onClick={this.okayDelete} color="primary">
+															Delete All
+														</Button>
 													</DialogActions>
 												</Dialog>
 
@@ -481,7 +791,7 @@ class ManageOffers extends Component{
 													<DialogTitle id="form-dialog-title">Restore Offer</DialogTitle>
 													<DialogContent>
 														<DialogContentText>
-															Are you sure you want to restore the offer? It will be available to users.
+															Do you want to restore all similar offers at the same level or just this one? And are you sure you want to restore? It will then be available to users.
 															Note: Reset its expiry if needed.
 														</DialogContentText>
 													</DialogContent>
@@ -491,6 +801,26 @@ class ManageOffers extends Component{
 														</Button>
 														<Button style={{ color: '#08c' }} onClick={()=>this.restore(offer)} color="primary">
 															Restore
+														</Button>
+														<Button style={{ color: '#08c' }} onClick={()=>this.restoreAll(offer)} color="primary">
+															Restore All
+														</Button>
+													</DialogActions>
+												</Dialog>
+
+												<Dialog open={this.state.open4} onClose={this.handleClose4} aria-labelledby="form-dialog-title">
+													<DialogTitle id="form-dialog-title">Restore Offer</DialogTitle>
+													<DialogContent>
+														<DialogContentText>
+															Are you sure?
+														</DialogContentText>
+													</DialogContent>
+													<DialogActions>
+														<Button style={{ color: '#08c' }} onClick={this.handleClose4} color="primary">
+															Cancel
+														</Button>
+														<Button style={{ color: '#08c' }} onClick={this.okayRestore} color="primary">
+															Restore All
 														</Button>
 													</DialogActions>
 												</Dialog>
