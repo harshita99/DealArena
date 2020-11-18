@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import ClassAllBrands from "./classAllBrand";
 import ClassSub1 from "./classSub1";
 import ClassSub2 from "./classSub2";
-import ClassSub3 from "./classSub3";
+// import ClassSub3 from "./classSub3";
 // import history from './../history';
 import SortableTree from "react-sortable-tree";
 import "react-sortable-tree/style.css"
@@ -32,7 +32,6 @@ const seed = [];
 
 function Tree() {
   const [treeData, setTreeData] = useState(seed);
-
   // const [open, setOpen] = React.useState(false);
   // const [open1, setOpen1] = React.useState(false);
   // const [open2, setOpen2] = React.useState(false);
@@ -363,6 +362,7 @@ function Tree() {
 
   function createNode() {
     setTreeData(d["treeData"]);
+    console.log(treeData);
   }
 
   function updateTreeData(treeData) {
@@ -377,10 +377,12 @@ function Tree() {
           treeData={treeData}
           canDrag={({ node }) => node.dragDisabled}
           onChange={treeData => updateTreeData(treeData)}
+          
           generateNodeProps={rowInfo => ({
             buttons: [
               <div>
-                {( (rowInfo["node"] !== null) &&(rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
+                {console.log("length of: ", rowInfo["node"].title, "is: ", Object.keys(rowInfo["node"]).length)}
+                {( (rowInfo["node"] !== null) && (rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
                     <ClassAllBrands node={rowInfo}/>
                 )}
 
@@ -422,143 +424,30 @@ function Tree() {
                 </DialogActions>
                 </Dialog> */}
 
-                {( (rowInfo!==null) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) ) && (
+                {/* {( (rowInfo!==null) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) ) && (
                   <span>
-                    {/* <Tooltip title="Add offer at Level 3"> */}
-                      {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen1} /> {" "} */}
                       <ClassSub1 node={rowInfo}/>
-                    {/* </Tooltip> */}
+                  </span>
+                )} */}
 
-                    {/* <Dialog open={open1} onClose={handleClose1} aria-labelledby="form-dialog-title">
-                      <DialogTitle id="form-dialog-title">Add Offer at Level 3</DialogTitle>
-                      <DialogContent>
-                        <DialogContentText>
-                          Fill the details.
-                        </DialogContentText>
-                        <TextField
-                          autoFocus
-                          value={offerD}
-                          margin="dense"
-                          name="OfferDetails"
-                          id="OfferDetails"
-                          label="Offer Details"
-                          type="text"
-                          onChange={e => setOffer(e.target.value)}
-                          fullWidth
-                        />
-                        <TextField
-                          margin="dense"
-                          value={expiry}
-                          name="ExpiryDate"
-                          id="ExpiryDate"
-                          label="Expiry Date"
-                          type="text"
-                          onChange={e => setExpiry(e.target.value)}
-                          fullWidth
-                        />
-                      </DialogContent>
-                      <DialogActions>
-                        <MButton style={{ color: '#08c' }} onClick={handleClose1} color="primary">
-                          Cancel
-                        </MButton>
-                        <MButton style={{ color: '#08c' }} onClick={event => addofferatsubcat1(rowInfo)} color="primary">
-                          Add Offer
-                        </MButton>
-                      </DialogActions>
-                    </Dialog>  */}
+                {( (Object.keys(rowInfo["node"]).length === 3) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
+                  <span>
+                      <ClassSub1 node={rowInfo}/>
                   </span>
                 )}
 
-                {( (Object.keys(rowInfo["node"]).length !== 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
+                {( (Object.keys(rowInfo["node"]).length === 3) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
-                    {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen2} /> {" "} */}
                       <ClassSub2 node={rowInfo}/>
-
-                   {/* <Dialog open={open2} onClose={handleClose2} aria-labelledby="form-dialog-title">
-                      <DialogTitle id="form-dialog-title">Add Offer at Level 4</DialogTitle>
-                      <DialogContent>
-                        <DialogContentText>
-                          Fill the details.
-                        </DialogContentText>
-                        <TextField
-                          autoFocus
-                          value={offerD}
-                          margin="dense"
-                          name="OfferDetails"
-                          id="OfferDetails"
-                          label="Offer Details"
-                          type="text"
-                          onChange={e => setOffer(e.target.value)}
-                          fullWidth
-                        />
-                        <TextField
-                          margin="dense"
-                          value={expiry}
-                          name="ExpiryDate"
-                          id="ExpiryDate"
-                          label="Expiry Date"
-                          type="text"
-                          onChange={e => setExpiry(e.target.value)}
-                          fullWidth
-                        />
-                      </DialogContent>
-                      <DialogActions>
-                        <MButton style={{ color: '#08c' }} onClick={handleClose2} color="primary">
-                          Cancel
-                        </MButton>
-                        <MButton style={{ color: '#08c' }} onClick={event => addofferatsubcat2(rowInfo)} color="primary">
-                          Add Offer
-                        </MButton>
-                      </DialogActions>
-                    </Dialog> */}
                   </span>
-                )}   
+                )}      
 
                 {( (Object.keys(rowInfo["node"]).length === 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
-                    
-                    {/* <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} label="Add" onClick={handleOpen3} /> {" "} */}
-                      <ClassSub3 node={rowInfo}/>
-
-                   {/* <Dialog open={open3} onClose={handleClose3} aria-labelledby="form-dialog-title">
-                      <DialogTitle id="form-dialog-title">Add Offer at Level 5</DialogTitle>
-                      <DialogContent>
-                        <DialogContentText>
-                          Fill the details.
-                        </DialogContentText>
-                        <TextField
-                          autoFocus
-                          value={offerD}
-                          margin="dense"
-                          name="OfferDetails"
-                          id="OfferDetails"
-                          label="Offer Details"
-                          type="text"
-                          onChange={e => setOffer(e.target.value)}
-                          fullWidth
-                        />
-                        <TextField
-                          margin="dense"
-                          value={expiry}
-                          name="ExpiryDate"
-                          id="ExpiryDate"
-                          label="Expiry Date"
-                          type="text"
-                          onChange={e => setExpiry(e.target.value)}
-                          fullWidth
-                        />
-                      </DialogContent>
-                      <DialogActions>
-                        <MButton style={{ color: '#08c' }} onClick={handleClose3} color="primary">
-                          Cancel
-                        </MButton>
-                        <MButton style={{ color: '#08c' }} onClick={event => addofferatsubcat3(rowInfo)} color="primary">
-                          Add Offer
-                        </MButton>
-                      </DialogActions>
-                    </Dialog> */}
+          
                   </span>
                 )} 
+                {console.log(treeData)}
                  </div>
             ],
             style: {

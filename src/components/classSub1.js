@@ -161,7 +161,7 @@ class ClassSub1 extends React.Component {
     render() {
         return(
             <span>
-                <Tooltip title="Add offer at Level 4">
+                <Tooltip title="Add offer at Level 3">
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} 
                         label="Add" onClick={this.handleOpen} 
                     /> {" "}

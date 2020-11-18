@@ -153,44 +153,44 @@ class ManageOffers extends Component{
 		this.setState({products});
 	}
 
-	onInput=(e)=>{
-		const state=this.state;
-		state[e.target.name]=e.target.value;
-		this.setState(state);
-		console.log(this.state.Expiry);
-		console.log(this.state.Offer);
-		E = this.state.Expiry;
-		O = this.state.Offer;
-	}
+	// onInput=(e)=>{
+	// 	const state=this.state;
+	// 	state[e.target.name]=e.target.value;
+	// 	this.setState(state);
+	// 	console.log(this.state.Expiry);
+	// 	console.log(this.state.Offer);
+	// 	E = this.state.Expiry;
+	// 	O = this.state.Offer;
+	// }
 
-	addoffer(){
-		products.map(p=>{
-			var Category = p.Category
-			var SubCategory1 = p.SubCategory1
-			var SubCategory2 = p.SubCategory2
-			var SubCategory3 = p.SubCategory3
-			var Model = p.Model
-			var Description = p.Description
-			var Name = p.Name
-			var Offer = O
-			var Expiry = E
-			var Brand = p.Brand
-			var imageurl = p.imageurl
-			var producturl = p.producturl
-			var Price = p.Price
+	// addoffer(){
+	// 	products.map(p=>{
+	// 		var Category = p.Category
+	// 		var SubCategory1 = p.SubCategory1
+	// 		var SubCategory2 = p.SubCategory2
+	// 		var SubCategory3 = p.SubCategory3
+	// 		var Model = p.Model
+	// 		var Description = p.Description
+	// 		var Name = p.Name
+	// 		var Offer = O
+	// 		var Expiry = E
+	// 		var Brand = p.Brand
+	// 		var imageurl = p.imageurl
+	// 		var producturl = p.producturl
+	// 		var Price = p.Price
 	  
-			firebase.firestore().collection("offerDetails").add({
-			  Model, Category, Description, Name, Offer, Expiry, Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price, producturl
-			})
-			.catch((error)=>{
-			  console.error("Error adding document:",error);
-			});
-			return null;
-		})
-		console.log("Products: ", products);
-		alert('Offers added');
-		history.push("/manageoffers");
-	}
+	// 		firebase.firestore().collection("offerDetails").add({
+	// 		  Model, Category, Description, Name, Offer, Expiry, Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price, producturl
+	// 		})
+	// 		.catch((error)=>{
+	// 		  console.error("Error adding document:",error);
+	// 		});
+	// 		return null;
+	// 	})
+	// 	console.log("Products: ", products);
+	// 	alert('Offers added');
+	// 	history.push("/manageoffers");
+	// }
 
 	checkAuth(){
 		var produser = firebase.auth().currentUser;
@@ -226,12 +226,38 @@ class ManageOffers extends Component{
 		history.push("/updateoffer");
 	}
 
-	delete(u){
-		firebase.firestore().collection('offerDetails').doc(u).delete().then(function(){
-			alert("Offer deleted successfully!");
-			console.log("Document deleted successfully!");
+	delete(p){
+		var Category = p.Category
+		var SubCategory1 = p.SubCategory1
+		var SubCategory2 = p.SubCategory2
+		var SubCategory3 = p.SubCategory3
+		var Model = p.Model
+		var Description = p.Description
+		var Name = p.Name
+		var Offer = O
+		var Expiry = E
+		var Brand = p.Brand
+		var imageurl = p.imageurl
+		var producturl = p.producturl
+		var Price = p.Price
+		// var time = p.time
+		var time = firebase.firestore.FieldValue.serverTimestamp()
+	
+		console.log(p.Category)
+		console.log(p.Model)
+		console.log(time)
+		firebase.firestore().collection("discardedOffers").add({
+			Model, Category, Description, Name, Offer, Expiry, Brand, SubCategory1, SubCategory2, SubCategory3, imageurl, Price, producturl, time
+		})
+		.catch((error)=>{
+			console.error("Error discarding document:", error);
+		});
+
+		firebase.firestore().collection('offerDetails').doc(p.key).delete().then(function(){
+			alert("Offer discarded successfully!");
+			console.log("Offer discarded successfully!");
 		}).catch(function(error){
-			console.log("Error deleting document: ", error);
+			console.log("Error discarding document: ", error);
 		});
 
 		this.setState({
@@ -303,21 +329,21 @@ class ManageOffers extends Component{
 												<i className="material-icons mr-1">Update Offer</i> </button>
 
 												<button onClick={this.handleOpen} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
-												<i className="material-icons mr-1">Delete Offer</i> </button>
+												<i className="material-icons mr-1">Discard Offer</i> </button>
 
 												<Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-													<DialogTitle id="form-dialog-title">Delete Offer</DialogTitle>
+													<DialogTitle id="form-dialog-title">Discard Offer</DialogTitle>
 													<DialogContent>
 														<DialogContentText>
-															Are you sure you want to delete the offer?
+															Are you sure you want to discard the offer? It will be added to a collection of discarded offers.
 														</DialogContentText>
 													</DialogContent>
 													<DialogActions>
 														<Button style={{ color: '#08c' }} onClick={this.handleClose} color="primary">
 															Cancel
 														</Button>
-														<Button style={{ color: '#08c' }} onClick={()=>this.delete(offer.key)} color="primary">
-															Delete
+														<Button style={{ color: '#08c' }} onClick={()=>this.delete(offer)} color="primary">
+															Discard
 														</Button>
 													</DialogActions>
 												</Dialog>

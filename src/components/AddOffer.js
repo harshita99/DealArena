@@ -141,29 +141,31 @@ class AddOffer extends Component{
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
-                            <input type="text" className="form-control" name="Name" value ={Name} onChange={this.onChange} placeholder="Name"></input>
+                            <textArea className="form-control" name="Name" onChange={this.onChange} placeholder="Name">{Name}</textArea>
                         </div>
-                        <div className="col-sm-9">
-                      
-                        <input type="text" className="form-control" name="Brand" value ={Brand} onChange={this.onChange} placeholder="Brand"></input>
-                    </div>
                     </div>
                     <div>
-                        <div className="form-group row"></div>
+                    <div className="form-group row"></div>
                         <div className="col-sm-9">
-                        <textArea className="form-control" name="Description"  onChange={this.onChange} placeholder="Description">{Description}</textArea>
+                            <textArea className="form-control" name="Brand" onChange={this.onChange} placeholder="Brand">{Brand}</textArea>
                         </div>
                     </div>
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
-                        <textArea className="form-control" name="Price" onChange={this.onChange} placeholder="Price">{Price}</textArea>
+                            <textArea className="form-control" name="Description" onChange={this.onChange} placeholder="Description">{Description}</textArea>
                         </div>
                     </div>
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
-                        <textArea className="form-control" name="Expiry" onChange={this.onChange} placeholder="Expiry">{Expiry}</textArea>
+                            <textArea className="form-control" name="Price" onChange={this.onChange} placeholder="Price">{Price}</textArea>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="form-group row"></div>
+                        <div className="col-sm-9">
+                            <textArea className="form-control" name="Expiry" onChange={this.onChange} placeholder="Expiry">{Expiry}</textArea>
                         </div>
                     </div>
                     <div>
@@ -175,38 +177,38 @@ class AddOffer extends Component{
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
-                        <textArea className="form-control" name="SubCategory1" onChange={this.onChange} placeholder="SubCategory1">{SubCategory1}</textArea>
+                            <textArea className="form-control" name="SubCategory1" onChange={this.onChange} placeholder="SubCategory1">{SubCategory1}</textArea>
                         </div>
                     </div>
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
-                        <textArea className="form-control" name="SubCategory2" onChange={this.onChange} placeholder="SubCategory2">{SubCategory2}</textArea>
+                            <textArea className="form-control" name="SubCategory2" onChange={this.onChange} placeholder="SubCategory2">{SubCategory2}</textArea>
                         </div>
                     </div>
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
-                        <textArea className="form-control" name="SubCategory3" onChange={this.onChange} placeholder="SubCategory3">{SubCategory3}</textArea>
+                            <textArea className="form-control" name="SubCategory3" onChange={this.onChange} placeholder="SubCategory3">{SubCategory3}</textArea>
                         </div>
                     </div>
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
-                        <textArea className="form-control" name="Model" onChange={this.onChange} placeholder="Model">{Model}</textArea>
+                            <textArea className="form-control" name="Model" onChange={this.onChange} placeholder="Model">{Model}</textArea>
                         </div>
                     </div>
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
-                        <textArea className="form-control" name="Offer" onChange={this.onChange} placeholder="Offer">{Offer}</textArea>
+                            <textArea className="form-control" name="Offer" onChange={this.onChange} placeholder="Offer">{Offer}</textArea>
                         </div>
                     </div>
 
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
-                        <textArea className="form-control" name="producturl" onChange={this.onChange} placeholder="URL to buy this product">{producturl}</textArea>
+                            <textArea className="form-control" name="producturl" onChange={this.onChange} placeholder="URL to buy this product">{producturl}</textArea>
                         </div>
                     </div>
 
@@ -218,9 +220,9 @@ class AddOffer extends Component{
                 </div> 
 
                 <div id="formbutton" className="Buttons justify-content-between" style={bottomStyle}>
+                    <button type="submit" className="btn btn-primary" onClick={() => history.push('/manageoffers')}> Cancel </button>
                     <button type="submit" className="btn btn-primary" onClick={this.handleUpload}> Upload photo first </button>
                     <button type="submit" className="btn btn-primary" onClick={this.onSubmit}> Save all </button>
-
                 </div>
             </div>
         )
