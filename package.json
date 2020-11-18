@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.4.2",
     "bootstrap": "^4.3.1",
+    "caniuse-lite": "^1.0.30001158",
     "firebase": "^7.15.3",
     "mdbreact": "^4.27.0",
     "react": "^16.13.1",
