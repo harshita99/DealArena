@@ -14,14 +14,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { Tooltip } from 'antd';
 
 const products=[];
-// var E = [];
-// var O = [];
 
 class ClassSub3 extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.state = { open: false };
         this.handleOpen = this.handleOpen.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 		this.addoffer = this.addoffer.bind(this);
@@ -44,7 +41,6 @@ class ClassSub3 extends React.Component {
 
     componentDidMount(){
 		this.checkAuth();
-		console.log("Component in Offer Manager.");
 		firebase.auth().onAuthStateChanged((productowner)=> {
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
@@ -89,10 +85,6 @@ class ClassSub3 extends React.Component {
 		const state=this.state;
 		state[e.target.name]=e.target.value;
 		this.setState(state);
-		console.log(this.state.Expiry);
-		console.log(this.state.Offer);
-		// E = this.state.Expiry;
-		// O = this.state.Offer;
 	}
     
     handleOpen(e) {
@@ -166,7 +158,7 @@ class ClassSub3 extends React.Component {
                 </Tooltip>
 
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Add Offer on all Products</DialogTitle>
+                <DialogTitle id="form-dialog-title">Add Offer</DialogTitle>
                 <DialogContent>
                   <DialogContentText>
                     Fill the details.

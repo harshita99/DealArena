@@ -381,7 +381,7 @@ function Tree() {
           generateNodeProps={rowInfo => ({
             buttons: [
               <div>
-                {console.log("length of: ", rowInfo["node"].title, "is: ", Object.keys(rowInfo["node"]).length)}
+                {/* {console.log("length of: ", rowInfo["node"].title, "is: ", Object.keys(rowInfo["node"]).length)} */}
                 {( (rowInfo["node"] !== null) && (rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
                     <ClassAllBrands node={rowInfo}/>
                 )}
@@ -447,7 +447,8 @@ function Tree() {
           
                   </span>
                 )} 
-                {console.log(treeData)}
+                {/* 
+                {console.log(treeData)} */}
                  </div>
             ],
             style: {

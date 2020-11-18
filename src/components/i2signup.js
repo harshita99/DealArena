@@ -57,27 +57,9 @@ class i2signup extends Component{
     const email = this.state.Email;
     const password = this.state.Password;
 
-    // localStorage.setItem('brandname', this.state.BrandName);
-    // console.log("Type of Local Brand: ", typeof(localStorage.getItem('brandname')));
-    // console.log("Type of Const Brand: ", typeof(brand));
-    // console.log("Type of State Brand: ", typeof(this.state.BrandName));
-
-    // console.log("Local Brand: ", (localStorage.getItem('brandname')));
-    // console.log("Const Brand: ", (brand));
-    // console.log("State Brand: ", (this.state.BrandName));
-
-    // firebase.firestore().collection(localStorage.getItem('brandname')).doc("Parent").set({
-    //   title: localStorage.getItem('brandname'),
-    //   parent: null,
-    //   isOpen: false,
-    //   children: null
-    // });
-
     firebase.firestore().collection("productOwnerDetails").where("BrandName","==",this.state.BrandName)
     .get()
     .then(function(querySnapshot){ 
-        console.log("new");
-        console.log(temp);
         firebase.firestore().collection("productOwnerDetails").add({
           Name:name,
           Email:email,

@@ -32,7 +32,6 @@ class i1signup extends Component{
 
   
   onSubmit=(e)=>{
-    
     const x=document.getElementById("name").value
     const footwear=document.getElementById("checkbox1").value
     const elec=document.getElementById("checkbox2").value

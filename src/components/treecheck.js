@@ -143,9 +143,8 @@ class TreeCheck extends Component {
     window.location.reload(true);   
   }
 
-
   onChange = value => {
-    console.log('onChange ', value);
+    // console.log('onChange ', value);
     this.setState({ value });
 
     if (firebase.auth().currentUser){

@@ -31,7 +31,6 @@ class ShowProduct extends Component{
 
 	componentDidMount(){
 		// window.location.reload(false);
-		console.log("Component in Product Manager.");
 
 		this.checkAuth();
 		firebase.auth().onAuthStateChanged((productowner)=> {
@@ -59,10 +58,8 @@ class ShowProduct extends Component{
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid)
 				  .get()
 				  .then((doc)=>{
-					// console.log(this.state.brand);
 					this.ref=firebase.firestore().collection("tree")
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate1);
-					// console.log(this.ref.onSnapshot);
 				  })
 				  .catch(function(error){
 					console.log("Error getting particular document:", error);
@@ -147,8 +144,8 @@ class ShowProduct extends Component{
 		)
 	
 		this.setState({list2});
-		console.log(this.state.list2)
-			localStorage.setItem('list2', list2);
+		// console.log(this.state.list2)
+		localStorage.setItem('list2', list2);
 	}
 
 	checkAuth(){

@@ -61,8 +61,6 @@ class i3signup extends Component{
     firebase.firestore().collection("productOwnerDetails").where("BrandName","==",this.state.BrandName)
     .get()
     .then(function(querySnapshot){
-        console.log("new");
-        console.log(temp);
         firebase.firestore().collection("productOwnerDetails").add({
           Name:name,
           Email:email,

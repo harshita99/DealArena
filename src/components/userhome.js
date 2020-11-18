@@ -23,7 +23,6 @@ class userhome extends Component{
 	}
   
 	componentDidMount(){
-		console.log("Component in User.");
 		this.checkAuth();
 		firebase.auth().onAuthStateChanged((user)=> {
 			if (user) {
@@ -131,9 +130,9 @@ class userhome extends Component{
 		});
 
 		this.setState({offers});
-		console.log(this.state.offers);
+		// console.log(this.state.offers);
 		this.setState({notifs});
-		console.log(this.state.notifs);
+		// console.log(this.state.notifs);
 	}
 
 	checkAuth(){

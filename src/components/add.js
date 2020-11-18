@@ -105,7 +105,7 @@ class Add extends Component{
 	}
 
 	render() {
-		console.log(this.state.products);
+		// console.log(this.state.products);
 		return (
 			<div>
 					<div className="row" style={{margin:"0.25vw"}}>	

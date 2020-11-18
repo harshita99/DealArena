@@ -22,7 +22,6 @@ const seed = [];
 
 function Tree() {
   const [treeData, setTreeData] = useState(seed);
-  var  x=0;
   const inputEl = useRef();
   const [open, setOpen] = React.useState(false);
   
@@ -56,7 +55,6 @@ function Tree() {
 
   function createNode() {
     setTreeData(d["treeData"]);
-    console.log(x);
   }
 
   function updateNode(rowInfo) {
@@ -89,8 +87,8 @@ function Tree() {
 
   function addNodeChild(rowInfo) {
     let { path } = rowInfo;
-    console.log(rowInfo["node"].title);
-    console.log(rowInfo["node"].title,sessionStorage.getItem('category'));
+    // console.log(rowInfo["node"].title);
+    // console.log(rowInfo["node"].title,sessionStorage.getItem('category'));
 
     const value = inputEl.current.value;
 
@@ -136,7 +134,6 @@ function Tree() {
 
   function saveyo(){
     console.log(treeData);
-    console.log("y=", y)
     firebase.firestore().collection("tree").doc(sessionStorage.getItem('brandN')).set({ treeData: treeData });
     console.log("Saved to database");
     setSaveOpen(false);
@@ -144,8 +141,8 @@ function Tree() {
   }
 
   function release(){
-    console.log("Number of leaf nodes in the tree:",y/2);
-    console.log("numberofproducts:",(parseInt(sessionStorage.getItem('numberofproducts'))));
+    // console.log("Number of leaf nodes in the tree:",y/2);
+    // console.log("numberofproducts:",(parseInt(sessionStorage.getItem('numberofproducts'))));
     setReleaseOpen(false);
     if ((Math.trunc(y/2))<=(parseInt(sessionStorage.getItem('numberofproducts')))){
       saveyo()
@@ -160,7 +157,7 @@ function Tree() {
   
   var y=0;
   const getNodeKey = ({ treeIndex }) => treeIndex;
-  console.log("y=", y);
+  
   return (
     <div>  
      <span style={{visibility: "hidden" }}> {y=0} </span>
@@ -204,8 +201,7 @@ function Tree() {
                       <SomeButtons  node={rowInfo}  />
                     )}
                     { Object.keys(rowInfo["node"]).length === 1 && (
-                      y=y+1,
-                      console.log(rowInfo["node"].title)
+                      y=y+1
                     )}
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">Delete</DialogTitle>

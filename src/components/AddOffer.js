@@ -54,7 +54,6 @@ class AddOffer extends Component{
         this.setState(state);
     }
     onSubmit=(e)=>{
-        console.log("hogya submit re")
         e.preventDefault();
         const {Model, Name, Description, Expiry, Price, Category, SubCategory1, SubCategory2, SubCategory3, Brand,Offer,imageurl,producturl}=this.state;
         firebase.firestore().collection("offerDetails").add({
@@ -94,13 +93,11 @@ class AddOffer extends Component{
             console.error("Error adding document:",error);
         });
 
-        console.log("notif chala?")
         firebase.firestore().collection("notifications").add({
             content: 'A new offer added.',
             offerD: `${Brand} ${Category} ${Offer}`,
             time: firebase.firestore.Timestamp.fromDate(new Date()).toDate()
         });
-        console.log("check kro chala?")
     }   
 
     handleChange = (e) => {
