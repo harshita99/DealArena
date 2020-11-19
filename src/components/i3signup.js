@@ -74,6 +74,7 @@ class i3signup extends Component{
             firebase.firestore().collection("productOwnerDetails").doc(firebase.auth().currentUser.uid).set({
               name:name,
               brand:brand,
+              category: temp.Category,
             });
             history.push("/manageoffers");
           }

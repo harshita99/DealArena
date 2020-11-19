@@ -88,6 +88,7 @@ class i2signup extends Component{
             firebase.firestore().collection("productOwnerDetails").doc(firebase.auth().currentUser.uid).set({
               name:name,
               brand:brand,
+              category: temp.Category,
             });
             history.push("/");
             alert('Successfully signed up..... Proceed to LogIn!');
