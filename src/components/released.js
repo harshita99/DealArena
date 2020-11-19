@@ -1,8 +1,6 @@
-// import React, { useState } from "react";
-// import { PlusCircleOutlined} from '@ant-design/icons';
-import React, { useState } from "react";
-// import { PlusCircleOutlined} from '@ant-design/icons';
-// import { Tooltip } from 'antd';
+import React, { useState, useRef } from "react";
+import { PlusCircleOutlined} from '@ant-design/icons';
+import { Tooltip } from 'antd';
 // import MButton from '@material-ui/core/Button';
 // import TextField from '@material-ui/core/TextField';
 // import Dialog from '@material-ui/core/Dialog';
@@ -32,6 +30,10 @@ const seed = [];
 
 function Tree() {
   const [treeData, setTreeData] = useState(seed);
+  const classCompRef = useRef(null);
+  const classCompRef1 = useRef(null);
+  const classCompRef2 = useRef(null);
+
   // const [open, setOpen] = React.useState(false);
   // const [open1, setOpen1] = React.useState(false);
   // const [open2, setOpen2] = React.useState(false);
@@ -369,9 +371,29 @@ function Tree() {
     setTreeData(treeData);
     console.log(treeData);
   }
+
+  const onClickButton = (rowInfo)=> {
+    localStorage.setItem('titlee', rowInfo["node"].title);
+    classCompRef.current.handleOpen();
+  }
+
+  const onClickButton1 = (rowInfo)=> {
+    localStorage.setItem('titlee', rowInfo["node"].title);
+    classCompRef1.current.handleOpen();
+  }
+
+  const onClickButton2 = (rowInfo)=> {
+    localStorage.setItem('titlee', rowInfo["node"].title);
+    classCompRef2.current.handleOpen();
+  }
+
   return (
     
     <div>
+      <ClassAllBrands ref={classCompRef}/>
+      <ClassSub1 ref={classCompRef1}/>
+      <ClassSub2 ref={classCompRef2}/>
+
       <div style={{  flex: "0 0 auto", padding: "0 15px" , marginLeft:"10vw", height: "60vh", width:"60vw" }}>
         <SortableTree
           treeData={treeData}
@@ -383,7 +405,12 @@ function Tree() {
               <div>
                 {/* {console.log("length of: ", rowInfo["node"].title, "is: ", Object.keys(rowInfo["node"]).length)} */}
                 {( (rowInfo["node"] !== null) && (rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
-                    <ClassAllBrands node={rowInfo}/>
+                  <Tooltip title="Add offer at Level 2 (on all brand products)">
+                    <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} 
+                      label="Add" onClick={()=>onClickButton(rowInfo)} 
+                    />
+                  </Tooltip>
+                    // <ClassAllBrands node={rowInfo}/>
                 )}
 
                 {/* <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -432,13 +459,23 @@ function Tree() {
 
                 {( (Object.keys(rowInfo["node"]).length === 3) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
-                      <ClassSub1 node={rowInfo}/>
+                      <Tooltip title="Add offer at Level 3">
+                        <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} 
+                            label="Add" onClick={()=>onClickButton1(rowInfo)} 
+                        />
+                      </Tooltip>
+                      {/* <ClassSub1 node={rowInfo}/> */}
                   </span>
                 )}
 
                 {( (Object.keys(rowInfo["node"]).length === 3) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
-                      <ClassSub2 node={rowInfo}/>
+                    <Tooltip title="Add offer at Level 4">
+                      <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} 
+                          label="Add" onClick={()=>onClickButton2(rowInfo)} 
+                      />
+                    </Tooltip>
+                      {/* <ClassSub2 node={rowInfo}/> */}
                   </span>
                 )}      
 

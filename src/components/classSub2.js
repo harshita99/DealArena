@@ -3,7 +3,6 @@ import React from 'react';
 import firebase from "./Config";
 import history from './../history';
 import 'antd/dist/antd.css';
-import { PlusCircleOutlined } from '@ant-design/icons';
 import MButton from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,7 +10,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Tooltip } from 'antd';
 
 const products1=[];
 
@@ -40,22 +38,23 @@ class ClassSub2 extends React.Component {
     }
 
     componentDidMount(){
-		this.checkAuth();
-		firebase.auth().onAuthStateChanged((productowner)=> {
-			if (productowner) {
-				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
-				.then((doc)=> {
-					this.setState({brand : doc.data().brand})
-				}).then((doc)=>{
-					this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory2", "==", this.props.node["node"].title);
-					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-				})
-				.catch(function(error){
-					console.log("Error getting document:", error);
-					console.log(productowner.uid)
-				})
-			}
-		})
+		// this.checkAuth();
+		// firebase.auth().onAuthStateChanged((productowner)=> {
+		// 	if (productowner) {
+		// 		firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
+		// 		.then((doc)=> {
+		// 			this.setState({brand : doc.data().brand})
+		// 		}).then((doc)=>{
+		// 			console.log(localStorage.getItem('titlee'))
+		// 			this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory2", "==", localStorage.getItem('titlee'));
+		// 			this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
+		// 		})
+		// 		.catch(function(error){
+		// 			console.log("Error getting document:", error);
+		// 			console.log(productowner.uid)
+		// 		})
+		// 	}
+		// })
 	}
 
 	onCollectionUpdate=(querySnapshot)=>{
@@ -88,6 +87,25 @@ class ClassSub2 extends React.Component {
 	}
     
     handleOpen(e) {
+		products1.length = 0
+		this.checkAuth();
+		firebase.auth().onAuthStateChanged((productowner)=> {
+			if (productowner) {
+				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
+				.then((doc)=> {
+					this.setState({brand : doc.data().brand})
+				}).then((doc)=>{
+					// console.log(localStorage.getItem('titlee'))
+					this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand).where("SubCategory2", "==", localStorage.getItem('titlee'));
+					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
+				})
+				.catch(function(error){
+					console.log("Error getting document:", error);
+					console.log(productowner.uid)
+				})
+			}
+		})
+
         this.setState({
             open: true
         });
@@ -150,11 +168,11 @@ class ClassSub2 extends React.Component {
     render() {
         return(
             <span>
-                <Tooltip title="Add offer at Level 4">
+                {/* <Tooltip title="Add offer at Level 4">
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} 
                         label="Add" onClick={this.handleOpen} 
                     /> {" "}
-                </Tooltip>
+                </Tooltip> */}
 
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Add Offer</DialogTitle>

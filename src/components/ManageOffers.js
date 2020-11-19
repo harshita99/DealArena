@@ -299,11 +299,10 @@ class ManageOffers extends Component{
 
 	onCollectionUpdate5=(querySnapshot)=>{
 		const discardsAll=[];
+		console.log(discardsAll);
 		querySnapshot.forEach((doc)=>{
 			const {Model, Name, Description, Brand, Price, Expiry, Category, Offer, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			discardsAll.push({
-				key:doc.id,
-				doc,
 				Name,
 				Brand,
 				Description,
@@ -407,17 +406,30 @@ class ManageOffers extends Component{
             open4: true
         });
 		firebase.auth().onAuthStateChanged((productowner)=> {
-			if (productowner) {
-				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
-				.then((doc)=>{
-					this.ref=firebase.firestore().collection("disardedOffers").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
-					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate5);
-				})
-				.catch(function(error){
-					console.log("Error getting document:", error);
-					console.log(productowner.uid)
-				})
-			}
+
+			var firestore = firebase.firestore();
+			firestore
+			.collection("magazines").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry)
+			.get()
+			.then((querySnapshot) => {
+				const data = querySnapshot.docs.map((doc) => doc.data());
+				this.setState({ discardsAll: data });
+				console.log(this.state.discardsAll)
+			})
+			.catch((err) => console.log(err));
+
+			// if (productowner) {
+			// 	firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
+			// 	.then((doc)=>{
+			// 		this.ref=firebase.firestore().collection("disardedOffers").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
+			// 		console.log(this.ref)
+			// 		this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate5);
+			// 	})
+			// 	.catch(function(error){
+			// 		console.log("Error getting document:", error);
+			// 		console.log(productowner.uid)
+			// 	})
+			// }
 		})
 	}
 
@@ -565,6 +577,7 @@ class ManageOffers extends Component{
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
 				.then((doc)=>{
 					this.ref=firebase.firestore().collection("offerDetails").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
+					console.log(this.ref)
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate4);
 				})
 				.catch(function(error){
