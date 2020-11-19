@@ -50,7 +50,8 @@ class ManageOffers extends Component{
 		this.okayDelete = this.okayDelete.bind(this);
 	}
 
-	handleOpen(e) {
+	handleOpen(offer) {
+		sessionStorage.setItem('offer', offer);
         this.setState({
             open: true
         });
@@ -594,6 +595,8 @@ class ManageOffers extends Component{
 	}
 
 	discard(p){
+		console.log(p)
+		console.log(sessionStorage.getItem('offer'))
 		var Category = p.Category
 		var SubCategory1 = p.SubCategory1
 		var SubCategory2 = p.SubCategory2
@@ -693,7 +696,7 @@ class ManageOffers extends Component{
 												<button onClick={()=>this.update(offer.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
 												<i className="material-icons mr-1">Update Offer</i> </button>
 
-												<button onClick={this.handleOpen} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
+												<button onClick={()=>this.handleOpen(offer)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
 												<i className="material-icons mr-1">Discard Offer</i> </button>
 												
 												<Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">

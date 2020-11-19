@@ -15,7 +15,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 var d = [];
 const t = JSON.parse(localStorage.getItem('treeValue'));
 
-if(t!=null){
+if(t!=null) {
   d = t[0];
 }
 
@@ -26,7 +26,8 @@ function Tree() {
   const inputEl = useRef();
   const [open, setOpen] = React.useState(false);
   
-  const handleClickOpen = () => {
+  const handleClickOpen = (rowInfo) => {
+    sessionStorage.setItem('rowInfo', (rowInfo));
     setOpen(true);
   };
 
@@ -113,7 +114,6 @@ function Tree() {
   }
 
   function removeNode(rowInfo) {
-
     const { path } = rowInfo;
     setTreeData(
       removeNodeAtPath({
@@ -193,14 +193,14 @@ function Tree() {
                       <EditOutlined style={{ fontSize: '22px', color: '#08c' }} label="Update" onClick={event => updateNode(rowInfo)} /> {" "}
                     </Tooltip>
                     <Tooltip title="Delete Node">
-                      <DeleteOutlined style={{ fontSize: '22px', color: '#08c' }} label="Delete" onClick={handleClickOpen} /> {" "}
+                      <DeleteOutlined style={{ fontSize: '22px', color: '#08c' }} label="Delete" onClick={event => handleClickOpen(rowInfo)} /> {" "}
                     </Tooltip>
                     { Object.keys(rowInfo["node"]).length === 1 && (
                       <SomeButtons  node={rowInfo}  />
                     )}
-                    { Object.keys(rowInfo["node"]).length === 1 && (
+                    {/* { Object.keys(rowInfo["node"]).length === 1 && (
                       y=y+1
-                    )}
+                    )} */}
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                       <DialogTitle id="form-dialog-title">Delete</DialogTitle>
                       <DialogContent>

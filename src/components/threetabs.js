@@ -19,8 +19,7 @@ class ThreeTabs extends React.Component {
                 // console.log ("Elapsed time is "+ elapsedTime)
                 return (
                   // (notif.logTime <= (notif.time).valueOf()) ? 
-                  ((sessionStorage.getItem('logTime')) <= (notif.time).toDate()) ? 
-
+                  ((sessionStorage.getItem('logTime')) <= (notif.time).toDate()) ?
                   (	
                     <div className="card-post mb-4 card card-small">
                       <div className="card-body">
@@ -56,7 +55,6 @@ class ThreeTabs extends React.Component {
                 return (
                   // (notif.logTime > (notif.time).valueOf()) ? 
                   ((sessionStorage.getItem('logTime')) > (notif.time).toDate()) ? 
-
                   (	
                     <div className="card-post mb-4 card card-small">
                       <div className="card-body">
@@ -83,7 +81,7 @@ class ThreeTabs extends React.Component {
             </div>
           </TabPane>
           
-          <TabPane tab="Other offers" key="3">
+          <TabPane tab="All offers" key="3">
           <div className="col-sm-12">
               <h6> Here are all other offers: </h6>
                 { this.props.all.map(off=> 
