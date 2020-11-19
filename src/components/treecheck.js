@@ -21,96 +21,98 @@ const treeData = [
             title: "Laptops", 
             value: "Laptops", 
             parent: "EA", 
-            id: "EAL" 
+            id: "EAL",
+            children: [
+              { 
+                title: "Macbook Air", 
+                value: "Macbook Air", 
+                parent: "EAL", 
+                id: "EALMA" ,
+                children: [
+                  { 
+                    title: "Model 100", 
+                    value: "Model 100", 
+                    parent: "EALMA", 
+                    id: "EALMAM100" 
+                  }]
+              },
+              { 
+                title: "Macbook Pro", 
+                value: "Macbook Pro", 
+                parent: "EAL", 
+                id: "EALPA" ,
+                children: [
+                  { 
+                    title: "Model 200", 
+                    value: "Model 200", 
+                    parent: "EALPA", 
+                    id: "EALPAM200" 
+                  }]
+              }
+            ]
           },
           { 
             title: "Earphones", 
             value: "Earphones", 
             parent: "EA", 
-            id: "EAE" 
-          }
-        ]
-      },
-      {
-        title: "Samsung",
-        value: "Samsung",
-        id: "ES",
-        parent: "E",
-        children: [
-          { 
-            title: "Mobiles", 
-            value: "Mobiles",
-            id: "ESM",
-            parent: "ES",
+            id: "EAE" ,
+            children: [
+              { 
+                title: "Model 108", 
+                value: "Model 108", 
+                parent: "EA", 
+                id: "EALM108" 
+              }]
           },
-          { 
-            title: "AirConditioner", 
-            value: "AirConditioner",
-            id: "ESA",
-            parent: "ES",
+          {
+            title: "Model 400", 
+            value: "Model 400", 
+            parent: "EA", 
+            id: "EAM400" 
           }
         ]
-      },
-    ]
-  },
-  {
-    title: "Flights",
-    value: "Flights",
-    id: "F",
-    children: [
-      {
-        title: "Indigo",
-        value: "Indigo",
-        id: "FI",
-        parent: "F",
-        children: [
-          { 
-            title: "DEL-BLR Flights", 
-            value: "DEL-BLR Flights",
-            id: "FIDB",
-            parent: "FI",
-          },
-          { 
-            title: "DEL-MUM Flights", 
-            value: "DEL-MUM Flights",
-            id: "FIDM",
-            parent: "FI",
-          }
-        ]
-      },
-      {
-        title: "Spicejet",
-        value: "Spicejet",
-        id: "FS",
-        parent: "F",
       }
+   
     ]
   },
+  // {
+  //   title: "Flights",
+  //   value: "Flights",
+  //   id: "F",
+  //   children: [
+  //     {
+  //       title: "Indigo",
+  //       value: "Indigo",
+  //       id: "FI",
+  //       parent: "F",
+  //       children: [
+  //         { 
+  //           title: "DEL-BLR Flights", 
+  //           value: "DEL-BLR Flights",
+  //           id: "FIDB",
+  //           parent: "FI",
+  //         },
+  //         { 
+  //           title: "DEL-MUM Flights", 
+  //           value: "DEL-MUM Flights",
+  //           id: "FIDM",
+  //           parent: "FI",
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       title: "Spicejet",
+  //       value: "Spicejet",
+  //       id: "FS",
+  //       parent: "F",
+  //     }
+  //   ]
+  // },
   {
     title: "Footwear",
     value: "Footwear",
     id: "I",
     children: [
-      {
-        title: "Bata",
-        value: "Bata",
-        id: "IB",
-        parent: "I",
-        children: [
-          {
-            title: "FormalFootwear",
-            value: "FormalFootwear",
-            id: "IBF",
-            parent: "IB",
-          },
-          {
-            title: "CasualFootwear",
-            value: "CasualFootwear",
-            id: "IBC",
-            parent: "IB",
-          }
-        ]
-      },
       {
         title: "Adidas",
         value: "Adidas",
@@ -118,10 +120,39 @@ const treeData = [
         parent: "I",
         children: [
           {
-            title: "SportsFootwear",
-            value: "SportsFootwear",
+            title: "Sports",
+            value: "Sports",
             id: "IAS",
             parent: "IA",
+            children: [
+              { 
+                title: "SportsWomen", 
+                value: "SportsWomen", 
+                parent: "IAS", 
+                id: "IASSW" ,
+                children: [
+                  { 
+                    title: "Model 204", 
+                    value: "Model 204", 
+                    parent: "IASSWM204", 
+                    id: "IASSWM204" 
+                  }]
+              },
+              { 
+                title: "SportsMen", 
+                value: "SportsMen", 
+                parent: "IAS", 
+                id: "IASSM" ,
+                children: [
+                  { 
+                    title: "Model 101", 
+                    value: "Model 101", 
+                    parent: "IASSM", 
+                    id: "IASSMM101" 
+                  }]
+              }
+            ]
+           
           }
         ]
       }

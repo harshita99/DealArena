@@ -47,7 +47,7 @@ class ThreeTabs extends React.Component {
           </TabPane>
 
           <TabPane tab="Old offers" key="2">
-            <div className="col-sm-6">
+          <div className="col-sm-12">
 							<h6>Here are old offers from your interests: </h6>
               { this.props.propnotifs.map(notif=> {
                 return (
@@ -78,7 +78,7 @@ class ThreeTabs extends React.Component {
           </TabPane>
           
           <TabPane tab="Other offers" key="3">
-            <div className="col-sm-6">
+          <div className="col-sm-12">
               <h6> Here are all other offers: </h6>
                 { this.props.all.map(off=> 
                     <div className="card-post mb-4 card card-small">
