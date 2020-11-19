@@ -240,20 +240,14 @@ class userhome extends Component{
 								<h6> New Offers From Your Interests</h6>
 								<ul className="notifications">
 									{ this.state.notifs.map(notif=> {
-									console.log((notif.time).toDate())
-									console.log(sessionStorage.getItem('logTime'))
-
+										console.log((notif.time).toDate())
+										console.log(sessionStorage.getItem('logTime'))
 
 										return (
-
 											((sessionStorage.getItem('logTime')) <= (notif.time).toDate()) ? 
 											(
-
 												<li key={notif.id}>
-											 		{/* <span> {notif.content } </span> */}   
-													  {/* //         	offerD: `${Brand} ${Name} (${Offer})`, */}
-
-											<span className="pink-text">{notif.Brand} {notif.Name} {notif.Offer} </span>
+													<span className="pink-text">{notif.Brand} {notif.Name} {notif.Offer} </span>
 													<div className="grey-text note-date">
 														{moment((notif.time).toDate()).fromNow()}
 													</div>

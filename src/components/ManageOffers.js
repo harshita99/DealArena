@@ -30,7 +30,8 @@ class ManageOffers extends Component{
 			open4: false,
 			open5: false,
 			discards: [],
-			discardsAll: []
+			discardsAll: [],
+			brand: ""
 		};
         this.handleOpen = this.handleOpen.bind(this);
 		this.handleClose = this.handleClose.bind(this);
@@ -130,8 +131,9 @@ class ManageOffers extends Component{
 					this.setState({brand : doc.data().brand})
 					sessionStorage.setItem('brandN', (doc.data().brand))
 					sessionStorage.setItem('category', (doc.data().category))
+					console.log(doc.data().brand)
 				}).then((doc)=>{
-					this.ref=firebase.firestore().collection("offerDetails").where("Brand","==",this.state.brand);
+					this.ref=firebase.firestore().collection("offerDetails").where("Brand","==",sessionStorage.getItem('brandN'));
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
 				})
 				.catch(function(error){
@@ -159,7 +161,7 @@ class ManageOffers extends Component{
 					sessionStorage.setItem('brandN', (doc.data().brand))
 					sessionStorage.setItem('category', (doc.data().category))
 				}).then((doc)=>{
-					this.ref=firebase.firestore().collection("discardedOffers").where("Brand","==",this.state.brand);
+					this.ref=firebase.firestore().collection("discardedOffers").where("Brand","==",sessionStorage.getItem('brandN'));
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate3);
 				})
 				.catch(function(error){
@@ -172,8 +174,10 @@ class ManageOffers extends Component{
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
 				.then((doc)=> {
 					this.setState({brand : doc.data().brand})
+					sessionStorage.setItem('brandN', (doc.data().brand))
+					sessionStorage.setItem('category', (doc.data().category))
 				}).then((doc)=>{
-					this.ref=firebase.firestore().collection("productDetails").where("Brand","==",this.state.brand);
+					this.ref=firebase.firestore().collection("productDetails").where("Brand","==",sessionStorage.getItem('brandN'));
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate2);
 				})
 				.catch(function(error){
@@ -181,6 +185,7 @@ class ManageOffers extends Component{
 					console.log(productowner.uid)
 				})
 			}
+			console.log(this.state.brand)
 		})
 	}
 
@@ -407,29 +412,29 @@ class ManageOffers extends Component{
         });
 		firebase.auth().onAuthStateChanged((productowner)=> {
 
-			var firestore = firebase.firestore();
-			firestore
-			.collection("magazines").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry)
-			.get()
-			.then((querySnapshot) => {
-				const data = querySnapshot.docs.map((doc) => doc.data());
-				this.setState({ discardsAll: data });
-				console.log(this.state.discardsAll)
-			})
-			.catch((err) => console.log(err));
+			// var firestore = firebase.firestore();
+			// firestore
+			// .collection("magazines").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry)
+			// .get()
+			// .then((querySnapshot) => {
+			// 	const data = querySnapshot.docs.map((doc) => doc.data());
+			// 	this.setState({ discardsAll: data });
+			// 	console.log(this.state.discardsAll)
+			// })
+			// .catch((err) => console.log(err));
 
-			// if (productowner) {
-			// 	firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
-			// 	.then((doc)=>{
-			// 		this.ref=firebase.firestore().collection("disardedOffers").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
-			// 		console.log(this.ref)
-			// 		this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate5);
-			// 	})
-			// 	.catch(function(error){
-			// 		console.log("Error getting document:", error);
-			// 		console.log(productowner.uid)
-			// 	})
-			// }
+			if (productowner) {
+				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
+				.then((doc)=>{
+					this.ref=firebase.firestore().collection("disardedOffers").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
+					console.log(this.ref)
+					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate5);
+				})
+				.catch(function(error){
+					console.log("Error getting document:", error);
+					console.log(productowner.uid)
+				})
+			}
 		})
 	}
 

@@ -393,7 +393,8 @@ function Tree() {
       <ClassAllBrands ref={classCompRef}/>
       <ClassSub1 ref={classCompRef1}/>
       <ClassSub2 ref={classCompRef2}/>
-
+      {console.log(sessionStorage.getItem('category'))}
+      {console.log(sessionStorage.getItem('brandN'))}
       <div style={{  flex: "0 0 auto", padding: "0 15px" , marginLeft:"10vw", height: "60vh", width:"60vw" }}>
         <SortableTree
           treeData={treeData}
@@ -403,15 +404,14 @@ function Tree() {
           generateNodeProps={rowInfo => ({
             buttons: [
               <div>
-                {/* {console.log("length of: ", rowInfo["node"].title, "is: ", Object.keys(rowInfo["node"]).length)} */}
-                {( (rowInfo["node"] !== null) && (rowInfo["node"].title===sessionStorage.getItem('brandN'))) && (
+                {( (rowInfo["node"] !== null) ? ((rowInfo["node"].title===sessionStorage.getItem('brandN')) && (
                   <Tooltip title="Add offer at Level 2 (on all brand products)">
                     <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} 
                       label="Add" onClick={()=>onClickButton(rowInfo)} 
                     />
                   </Tooltip>
                     // <ClassAllBrands node={rowInfo}/>
-                )}
+                )) : (<span>{''}</span>) )}
 
                 {/* <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Add Offer on all Products</DialogTitle>
@@ -457,7 +457,7 @@ function Tree() {
                   </span>
                 )} */}
 
-                {( (Object.keys(rowInfo["node"]).length === 3) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
+                {( (rowInfo["node"] !== null) ? ((Object.keys(rowInfo["node"]).length === 3) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title===sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
                       <Tooltip title="Add offer at Level 3">
                         <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} 
@@ -466,9 +466,9 @@ function Tree() {
                       </Tooltip>
                       {/* <ClassSub1 node={rowInfo}/> */}
                   </span>
-                )}
+                ) : (<span>{''}</span>) )}
 
-                {( (Object.keys(rowInfo["node"]).length === 3) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
+                {( (rowInfo["node"] !== null) ? ((Object.keys(rowInfo["node"]).length === 3) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
                     <Tooltip title="Add offer at Level 4">
                       <PlusCircleOutlined style={{ fontSize: '22px', color: '#08c' }} 
@@ -476,14 +476,14 @@ function Tree() {
                       />
                     </Tooltip>
                       {/* <ClassSub2 node={rowInfo}/> */}
-                  </span>
+                  </span> ) : (<span>{''}</span>)
                 )}      
 
-                {( (Object.keys(rowInfo["node"]).length === 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
+                {( (rowInfo["node"] !== null) ? ((Object.keys(rowInfo["node"]).length === 1) && (rowInfo["node"].title!==sessionStorage.getItem('category')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('brandN')) && (rowInfo["parentNode"].title!==sessionStorage.getItem('category')) ) && (
                   <span>
           
-                  </span>
-                )} 
+                  </span>) : (<span>{''}</span>)
+                )}
                 {/* 
                 {console.log(treeData)} */}
                  </div>
