@@ -18,7 +18,9 @@ class ThreeTabs extends React.Component {
                 // console.log("OfferTime is "+ (notif.time).valueOf() + " and LogTime is "+notif.logTime)
                 // console.log ("Elapsed time is "+ elapsedTime)
                 return (
-                  (notif.logTime <= (notif.time).valueOf()) ? 
+                  // (notif.logTime <= (notif.time).valueOf()) ? 
+                  ((sessionStorage.getItem('logTime')) <= (notif.time).toDate()) ? 
+
                   (	
                     <div className="card-post mb-4 card card-small">
                       <div className="card-body">
@@ -38,7 +40,8 @@ class ThreeTabs extends React.Component {
                           Offer: {notif.Offer} </a>
                       <div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{notif.Price}</span><small className="text-muted"> Offer expires:{notif.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={notif.producturl}> BUY NOW</a></div></div>
                     </div>
-                  ) : ( 
+                  )
+                   : ( 
                     <span> { "" } </span>
                   )	
                 )
@@ -51,7 +54,9 @@ class ThreeTabs extends React.Component {
 							<h6>Here are old offers from your interests: </h6>
               { this.props.propnotifs.map(notif=> {
                 return (
-                  (notif.logTime > (notif.time).valueOf()) ? 
+                  // (notif.logTime > (notif.time).valueOf()) ? 
+                  ((sessionStorage.getItem('logTime')) > (notif.time).toDate()) ? 
+
                   (	
                     <div className="card-post mb-4 card card-small">
                       <div className="card-body">
@@ -69,7 +74,8 @@ class ThreeTabs extends React.Component {
                           Offer: {notif.Offer} </a>
                       <div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{notif.Price}</span><small className="text-muted"> Offer expires:{notif.Expiry}</small></div></div><div className="my-auto ml-auto"><a href={notif.producturl}> BUY NOW</a></div></div>
                     </div>
-                  ) : ( 
+                  )
+                   : ( 
                     <span> { "" } </span>
                   )	
                 )

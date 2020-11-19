@@ -1,4 +1,3 @@
-
 import React,{Component} from 'react';
 import firebase from "./Config";
 import history from './../history';
@@ -6,8 +5,8 @@ import TreeCheck from './treecheck';
 import moment from 'moment';
 import ThreeTabs from './threetabs';
 
-const offers=[];
-const notifs=[];
+// const offers=[];
+// const notifs=[];
 const all=[];
 
 class userhome extends Component{
@@ -26,38 +25,77 @@ class userhome extends Component{
 		this.checkAuth();
 		firebase.auth().onAuthStateChanged((user)=> {
 			if (user) {
-			  	console.log(user.uid);
+				  console.log(user.uid);
+		
+				  var x=[];
+
 			  	firebase.firestore().collection("userDetails").doc(user.uid)
 				.get()
 				.then((doc)=> {
-				
 					this.setState({name : doc.data().name})
 					this.setState({interests : doc.data().interests})
 					sessionStorage.setItem('logTime', (doc.data().lastLogTime.toDate()).valueOf())
-			
 				}).then(()=>{
+
 					this.refall=firebase.firestore().collection("offerDetails");
 					this.refall.onSnapshot(this.onCollectionUpdate2);
-
-					this.ref1=firebase.firestore().collection("offerDetails").where("Brand","in",this.state.interests);
-					this.ref1.onSnapshot(this.onCollectionUpdate);
-
-					this.ref2=firebase.firestore().collection("offerDetails").where("SubCategory1","in",this.state.interests);
-					this.ref2.onSnapshot(this.onCollectionUpdate);
-
-					this.ref=firebase.firestore().collection("offerDetails").where("Category","in",this.state.interests);
-					console.log(this.state.interests);
+					var y=this.state.interests;
 					
-					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
-				
+					this.refall
+					.get()
+					.then(function(querySnapshot) {
+						querySnapshot.forEach(function(doc) {
+					
+							if (y.includes(doc.data().Brand) || y.includes(doc.data().Category)|| y.includes(doc.data().SubCategory1) || y.includes(doc.data().SubCategory2) || y.includes(doc.data().Model)    ){
+								// var logTime = (sessionStorage.getItem('logTime'));
+								// z=doc.data()
+								// z.push(logTime)
+
+								x.push(doc.data())
+							}
+
+						});
+						console.log(x);
+				}).then(()=>{
+						console.log(x);
+
+						
+						this.setState({notifs : x})
+						console.log(this.state.notifs)
+
+						})
+					.catch(function(error) {
+						console.log("Error getting documents: ", error);
+					});
+					console.log(x);
+					console.log(this.state.notifs)
+
+
+
+					// this.ref1=firebase.firestore().collection("offerDetails").where("Brand","in",this.state.interests);
+					// this.ref1=this.state.notifs
+					// this.ref1.onSnapshot(this.onCollectionUpdate);
+
+					// this.ref2=firebase.firestore().collection("offerDetails").where("SubCategory1","in",this.state.interests);
+					// this.ref2.onSnapshot(this.onCollectionUpdate);
+
+					// this.ref=firebase.firestore().collection("offerDetails").where("Category","in",this.state.interests);
+					
+					// this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate);
+
 				})
 				.catch(function(error) {
 					history.push("/userhome");
 					console.log("Error getting document:", error);
 					console.log(user.uid)
 				})
+
+
 			}
+
 		})
+
+		
 	}
 
 	onCollectionUpdate2=(querySnapshot)=>{
@@ -84,56 +122,54 @@ class userhome extends Component{
 		this.setState({all});
 	}
 
-	onCollectionUpdate=(querySnapshot)=>{
-		querySnapshot.forEach((doc)=>{
-			const {Model, Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time,SubCategory1, SubCategory2, SubCategory3}=doc.data();
-			var logTime = (sessionStorage.getItem('logTime'));
-			offers.push({
-				key:doc.id,
-				doc,
-				Brand,
-				Name,
-				Description,
-				Price,
-				Category,
-				Expiry,
-				Model,
-				SubCategory1,
-				SubCategory2,
-				SubCategory3,
-				Offer,
-				imageurl,
-				producturl
-			});
+	// onCollectionUpdate=(querySnapshot)=>{
+	// 	querySnapshot.forEach((doc)=>{
+	// 		const {Model, Name, Brand, Description, Price, Expiry, Category, Offer,imageurl, producturl, time,SubCategory1, SubCategory2, SubCategory3}=doc.data();
+	// 		var logTime = (sessionStorage.getItem('logTime'));
+	// 		offers.push({
+	// 			key:doc.id,
+	// 			doc,
+	// 			Brand,
+	// 			Name,
+	// 			Description,
+	// 			Price,
+	// 			Category,
+	// 			Expiry,
+	// 			Model,
+	// 			SubCategory1,
+	// 			SubCategory2,
+	// 			SubCategory3,
+	// 			Offer,
+	// 			imageurl,
+	// 			producturl
+	// 		});
 
-			notifs.push({
-				key:doc.id,
-				doc,
-				Brand,
-				Name,
-				Description,
-				Price,
-				Category,
-				Model,
-				SubCategory1,
-				SubCategory2,
-				SubCategory3,
-				Expiry,
-				Offer,
-				imageurl,
-				producturl,
-				content: 'New Offer: ',
-            	offerD: `${Brand} ${Name} (${Offer})`,
-            	time: time.toDate(),
-				logTime,
-			});
-		});
+	// 		notifs.push({
+	// 			key:doc.id,
+	// 			doc,
+	// 			Brand,
+	// 			Name,
+	// 			Description,
+	// 			Price,
+	// 			Category,
+	// 			Model,
+	// 			SubCategory1,
+	// 			SubCategory2,
+	// 			SubCategory3,
+	// 			Expiry,
+	// 			Offer,
+	// 			imageurl,
+	// 			producturl,
+	// 			content: 'New Offer: ',
+    //         	offerD: `${Brand} ${Name} (${Offer})`,
+    //         	time: time.toDate(),
+	// 			logTime,
+	// 		});
+	// 	});
 
-		this.setState({offers});
-		// console.log(this.state.offers);
-		this.setState({notifs});
-		// console.log(this.state.notifs);
-	}
+	// 	this.setState({offers});
+	// 	this.setState({notifs});
+	// }
 
 	checkAuth(){
 		var user = firebase.auth().currentUser;
@@ -177,6 +213,7 @@ class userhome extends Component{
 
     render(){
   		return (
+
     		<div className="App body">
       			<div><br></br></div>
        			<div className="row">
@@ -203,19 +240,27 @@ class userhome extends Component{
 								<h6> New Offers From Your Interests</h6>
 								<ul className="notifications">
 									{ this.state.notifs.map(notif=> {
+									console.log((notif.time).toDate())
+									console.log(sessionStorage.getItem('logTime'))
+
 
 										return (
-											(notif.logTime <= (notif.time).valueOf()) ? 
-											(	
+
+											((sessionStorage.getItem('logTime')) <= (notif.time).toDate()) ? 
+											(
+
 												<li key={notif.id}>
-													<span> {notif.content } </span>
-													<span className="pink-text">{notif.offerD} </span>
+											 		{/* <span> {notif.content } </span> */}   
+													  {/* //         	offerD: `${Brand} ${Name} (${Offer})`, */}
+
+											<span className="pink-text">{notif.Brand} {notif.Name} {notif.Offer} </span>
 													<div className="grey-text note-date">
-														{moment(notif.time).fromNow()}
+														{moment((notif.time).toDate()).fromNow()}
 													</div>
 													<a href={notif.producturl}> BUY NOW</a>	
-												</li>
-											) : ( 
+												 </li>
+											)
+											 : ( 
 												<span> { "" } </span>
 											)	
 										)

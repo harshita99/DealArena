@@ -75,39 +75,7 @@ const treeData = [
    
     ]
   },
-  // {
-  //   title: "Flights",
-  //   value: "Flights",
-  //   id: "F",
-  //   children: [
-  //     {
-  //       title: "Indigo",
-  //       value: "Indigo",
-  //       id: "FI",
-  //       parent: "F",
-  //       children: [
-  //         { 
-  //           title: "DEL-BLR Flights", 
-  //           value: "DEL-BLR Flights",
-  //           id: "FIDB",
-  //           parent: "FI",
-  //         },
-  //         { 
-  //           title: "DEL-MUM Flights", 
-  //           value: "DEL-MUM Flights",
-  //           id: "FIDM",
-  //           parent: "FI",
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       title: "Spicejet",
-  //       value: "Spicejet",
-  //       id: "FS",
-  //       parent: "F",
-  //     }
-  //   ]
-  // },
+ 
   {
     title: "Footwear",
     value: "Footwear",
@@ -203,6 +171,7 @@ class TreeCheck extends Component {
         width: "80%"
       }    
     };
+
     return( 
       <div>
         <TreeSelect {...tProps} />
