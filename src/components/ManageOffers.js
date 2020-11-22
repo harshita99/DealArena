@@ -53,7 +53,6 @@ class ManageOffers extends Component{
 	}
 
 	handleOpen(offer) {
-		sessionStorage.setItem('offer', offer);
 		this.setState({
             offerobj: offer
         });
@@ -321,10 +320,11 @@ class ManageOffers extends Component{
 	onCollectionUpdate5=(querySnapshot)=>{
 		const discardsAll=[];
 		discardsAll.length = 0;
-		console.log(discardsAll);
 		querySnapshot.forEach((doc)=>{
 			const {Model, Name, Description, Brand, Price, Expiry, Category, Offer, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			discardsAll.push({
+				key:doc.id,
+				doc,
 				Name,
 				Brand,
 				Description,
@@ -443,8 +443,7 @@ class ManageOffers extends Component{
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
 				.then((doc)=>{
-					this.ref=firebase.firestore().collection("disardedOffers").where("Brand","==",doc.data().brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
-					console.log(this.ref)
+					this.ref=firebase.firestore().collection("discardedOffers").where("Brand","==",doc.data().brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate5);
 				})
 				.catch(function(error){
@@ -521,8 +520,7 @@ class ManageOffers extends Component{
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
 				.then((doc)=>{
-					this.ref=firebase.firestore().collection("disardedOffers").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
-					console.log(this.ref)
+					this.ref=firebase.firestore().collection("discardedOffers").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate5);
 				})
 				.catch(function(error){
@@ -612,9 +610,6 @@ class ManageOffers extends Component{
 	}
 
 	discard(p){
-		// console.log(p)
-		// console.log(this.state.offerobj)
-		// console.log(sessionStorage.getItem('offer'))
 		var Category = this.state.offerobj.Category
 		var SubCategory1 = this.state.offerobj.SubCategory1
 		var SubCategory2 = this.state.offerobj.SubCategory2

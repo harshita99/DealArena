@@ -26,7 +26,6 @@ class Home extends Component{
   }
 
   componentDidMount(){
-    console.log("Component in Home.");
     // window.location.reload(false);
   }
   
