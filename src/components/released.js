@@ -393,8 +393,8 @@ function Tree() {
       <ClassAllBrands ref={classCompRef}/>
       <ClassSub1 ref={classCompRef1}/>
       <ClassSub2 ref={classCompRef2}/>
-      {console.log(sessionStorage.getItem('category'))}
-      {console.log(sessionStorage.getItem('brandN'))}
+      {/* {console.log(sessionStorage.getItem('category'))}
+      {console.log(sessionStorage.getItem('brandN'))} */}
       <div style={{  flex: "0 0 auto", padding: "0 15px" , marginLeft:"10vw", height: "60vh", width:"60vw" }}>
         <SortableTree
           treeData={treeData}

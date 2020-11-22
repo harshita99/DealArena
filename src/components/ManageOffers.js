@@ -31,7 +31,8 @@ class ManageOffers extends Component{
 			open5: false,
 			discards: [],
 			discardsAll: [],
-			brand: ""
+			brand: "",
+			offerobj: []
 		};
         this.handleOpen = this.handleOpen.bind(this);
 		this.handleClose = this.handleClose.bind(this);
@@ -48,10 +49,14 @@ class ManageOffers extends Component{
 		this.okayDiscard = this.okayDiscard.bind(this);
 		this.okayRestore = this.okayRestore.bind(this);
 		this.okayDelete = this.okayDelete.bind(this);
+		this.onCollectionUpdate5 = this.onCollectionUpdate5.bind(this)
 	}
 
 	handleOpen(offer) {
 		sessionStorage.setItem('offer', offer);
+		this.setState({
+            offerobj: offer
+        });
         this.setState({
             open: true
         });
@@ -63,7 +68,10 @@ class ManageOffers extends Component{
         });
 	}
 	
-	handleOpen1(e) {
+	handleOpen1(offer) {
+		this.setState({
+            offerobj: offer
+        });
         this.setState({
             open1: true
         });
@@ -75,7 +83,10 @@ class ManageOffers extends Component{
         });
     }
 
-	handleOpen2(e) {
+	handleOpen2(offer) {
+		this.setState({
+            offerobj: offer
+        });
         this.setState({
             open2: true
         });
@@ -192,6 +203,7 @@ class ManageOffers extends Component{
 
 	onCollectionUpdate1=(querySnapshot)=>{
 		const tree1=[];
+		tree1.length = 0;
 		querySnapshot.forEach((doc)=>{
 			const {treeData}=doc.data();
 			if(doc.id === this.state.brand){
@@ -206,6 +218,7 @@ class ManageOffers extends Component{
 
 	onCollectionUpdate=(querySnapshot)=>{
 		const offers=[];
+		offers.length = 0;
 		querySnapshot.forEach((doc)=>{
 			const {Model, Name, Description, Brand, Price, Expiry, Category, Offer, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			offers.push({
@@ -231,6 +244,7 @@ class ManageOffers extends Component{
 
 	onCollectionUpdate3=(querySnapshot)=>{
 		const discards=[];
+		discards.length = 0;
 		querySnapshot.forEach((doc)=>{
 			const {Model, Name, Description, Brand, Price, Expiry, Category, Offer, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			discards.push({
@@ -279,6 +293,7 @@ class ManageOffers extends Component{
 
 	onCollectionUpdate4=(querySnapshot)=>{
 		const offersAll=[];
+		offersAll.length = 0;
 		querySnapshot.forEach((doc)=>{
 			const {Model, Name, Description, Brand, Price, Expiry, Category, Offer, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
 			offersAll.push({
@@ -305,6 +320,7 @@ class ManageOffers extends Component{
 
 	onCollectionUpdate5=(querySnapshot)=>{
 		const discardsAll=[];
+		discardsAll.length = 0;
 		console.log(discardsAll);
 		querySnapshot.forEach((doc)=>{
 			const {Model, Name, Description, Brand, Price, Expiry, Category, Offer, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}=doc.data();
@@ -405,8 +421,8 @@ class ManageOffers extends Component{
 	}
 
 	restoreAll(p){
-		var Offer = p.Offer
-		var Expiry = p.Expiry
+		var Offer = this.state.offerobj.Offer
+		var Expiry = this.state.offerobj.Expiry
 
 		this.setState({
             open4: true
@@ -415,7 +431,7 @@ class ManageOffers extends Component{
 
 			// var firestore = firebase.firestore();
 			// firestore
-			// .collection("magazines").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry)
+			// .collection("magazines").where("Brand","==",sessionStorage.getItem('brandN')).where("Offer","==",Offer).where("Expiry","==",Expiry)
 			// .get()
 			// .then((querySnapshot) => {
 			// 	const data = querySnapshot.docs.map((doc) => doc.data());
@@ -427,7 +443,7 @@ class ManageOffers extends Component{
 			if (productowner) {
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
 				.then((doc)=>{
-					this.ref=firebase.firestore().collection("disardedOffers").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
+					this.ref=firebase.firestore().collection("disardedOffers").where("Brand","==",doc.data().brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
 					console.log(this.ref)
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate5);
 				})
@@ -440,19 +456,19 @@ class ManageOffers extends Component{
 	}
 
 	restore(p) {
-		var Category = p.Category
-		var SubCategory1 = p.SubCategory1
-		var SubCategory2 = p.SubCategory2
-		var SubCategory3 = p.SubCategory3
-		var Model = p.Model
-		var Description = p.Description
-		var Name = p.Name
-		var Offer = p.Offer
-		var Expiry = p.Expiry
-		var Brand = p.Brand
-		var imageurl = p.imageurl
-		var producturl = p.producturl
-		var Price = p.Price
+		var Category = this.state.offerobj.Category
+		var SubCategory1 = this.state.offerobj.SubCategory1
+		var SubCategory2 = this.state.offerobj.SubCategory2
+		var SubCategory3 = this.state.offerobj.SubCategory3
+		var Model = this.state.offerobj.Model
+		var Description = this.state.offerobj.Description
+		var Name = this.state.offerobj.Name
+		var Offer = this.state.offerobj.Offer
+		var Expiry = this.state.offerobj.Expiry
+		var Brand = this.state.offerobj.Brand
+		var imageurl = this.state.offerobj.imageurl
+		var producturl = this.state.offerobj.producturl
+		var Price = this.state.offerobj.Price
 		var time = firebase.firestore.FieldValue.serverTimestamp()
 	
 		firebase.firestore().collection("offerDetails").add({
@@ -464,7 +480,7 @@ class ManageOffers extends Component{
 			console.error("Error restoring document:", error);
 		});
 
-		firebase.firestore().collection('discardedOffers').doc(p.key).delete().then(function(){
+		firebase.firestore().collection('discardedOffers').doc(this.state.offerobj.key).delete().then(function(){
 			alert("Offer restored successfully!");
 			console.log("Offer deleted successfully!");
 		}).catch(function(error){
@@ -495,8 +511,8 @@ class ManageOffers extends Component{
 	}
 
 	deleteAll(p){
-		var Offer = p.Offer
-		var Expiry = p.Expiry
+		var Offer = this.state.offerobj.Offer
+		var Expiry = this.state.offerobj.Expiry
 
 		this.setState({
             open5: true
@@ -506,6 +522,7 @@ class ManageOffers extends Component{
 				firebase.firestore().collection("productOwnerDetails").doc(productowner.uid).get()
 				.then((doc)=>{
 					this.ref=firebase.firestore().collection("disardedOffers").where("Brand","==",this.state.brand).where("Offer","==",Offer).where("Expiry","==",Expiry);
+					console.log(this.ref)
 					this.unsubscribe=this.ref.onSnapshot(this.onCollectionUpdate5);
 				})
 				.catch(function(error){
@@ -517,7 +534,7 @@ class ManageOffers extends Component{
 	}
 	
 	delete(p){
-		firebase.firestore().collection('discardedOffers').doc(p.key).delete().then(function(){
+		firebase.firestore().collection('discardedOffers').doc(this.state.offerobj.key).delete().then(function(){
 			alert("Offer deleted successfully!");
 			console.log("Offer deleted successfully!");
 		}).catch(function(error){
@@ -572,8 +589,8 @@ class ManageOffers extends Component{
 	}
 
 	discardAll(p){
-		var Offer = p.Offer
-		var Expiry = p.Expiry
+		var Offer = this.state.offerobj.Offer
+		var Expiry = this.state.offerobj.Expiry
 
 		this.setState({
             open3: true
@@ -595,21 +612,22 @@ class ManageOffers extends Component{
 	}
 
 	discard(p){
-		console.log(p)
-		console.log(sessionStorage.getItem('offer'))
-		var Category = p.Category
-		var SubCategory1 = p.SubCategory1
-		var SubCategory2 = p.SubCategory2
-		var SubCategory3 = p.SubCategory3
-		var Model = p.Model
-		var Description = p.Description
-		var Name = p.Name
-		var Offer = p.Offer
-		var Expiry = p.Expiry
-		var Brand = p.Brand
-		var imageurl = p.imageurl
-		var producturl = p.producturl
-		var Price = p.Price
+		// console.log(p)
+		// console.log(this.state.offerobj)
+		// console.log(sessionStorage.getItem('offer'))
+		var Category = this.state.offerobj.Category
+		var SubCategory1 = this.state.offerobj.SubCategory1
+		var SubCategory2 = this.state.offerobj.SubCategory2
+		var SubCategory3 = this.state.offerobj.SubCategory3
+		var Model = this.state.offerobj.Model
+		var Description = this.state.offerobj.Description
+		var Name = this.state.offerobj.Name
+		var Offer = this.state.offerobj.Offer
+		var Expiry = this.state.offerobj.Expiry
+		var Brand = this.state.offerobj.Brand
+		var imageurl = this.state.offerobj.imageurl
+		var producturl = this.state.offerobj.producturl
+		var Price = this.state.offerobj.Price
 		var discardTime = firebase.firestore.FieldValue.serverTimestamp()
 	
 		firebase.firestore().collection("discardedOffers").add({
@@ -621,7 +639,7 @@ class ManageOffers extends Component{
 			console.error("Error discarding document:", error);
 		});
 
-		firebase.firestore().collection('offerDetails').doc(p.key).delete().then(function(){
+		firebase.firestore().collection('offerDetails').doc(this.state.offerobj.key).delete().then(function(){
 			alert("Offer discarded successfully!");
 			console.log("Offer discarded successfully!");
 		}).catch(function(error){
@@ -765,10 +783,10 @@ class ManageOffers extends Component{
 											<div className="d-flex flex-column justify-content-center ml-3"><span className="card-post__author-name">Rs.{offer.Price}</span></div></div><div className="my-auto ml-auto"><a href={offer.producturl}> URL</a></div></div>
 									
 											<div>
-												<button onClick={this.handleOpen2} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
+												<button onClick={()=>this.handleOpen2(offer)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
 												<i className="material-icons mr-1">Restore Offer</i> </button>
 
-												<button onClick={this.handleOpen1} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
+												<button onClick={()=>this.handleOpen1(offer)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
 												<i className="material-icons mr-1">Delete Offer</i> </button>
 
 												<Dialog open={this.state.open1} onClose={this.handleClose1} aria-labelledby="form-dialog-title">

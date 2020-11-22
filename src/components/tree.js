@@ -25,9 +25,11 @@ function Tree() {
   const [treeData, setTreeData] = useState(seed);
   const inputEl = useRef();
   const [open, setOpen] = React.useState(false);
+  const [row, setRow] = React.useState([]);
   
   const handleClickOpen = (rowInfo) => {
     sessionStorage.setItem('rowInfo', (rowInfo));
+    setRow(rowInfo)
     setOpen(true);
   };
 
@@ -114,7 +116,9 @@ function Tree() {
   }
 
   function removeNode(rowInfo) {
-    const { path } = rowInfo;
+    // console.log(rowInfo);
+    // console.log(row);
+    const { path } = row;
     setTreeData(
       removeNodeAtPath({
         treeData,
