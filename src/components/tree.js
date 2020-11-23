@@ -252,9 +252,9 @@ function Tree() {
                       </Button>
                       </DialogActions>
                     </Dialog> 
-                    {/* <span style={{visibility: "hidden" }}>
+                    <span style={{visibility: "hidden" }}>
                       {y= ((rowInfo["node"].title === sessionStorage.getItem('brandN')) || (rowInfo["node"].title===sessionStorage.getItem('category')) || (Object.keys(rowInfo["node"]).length !== 1)) ? y:y+1}
-                    </span> */}
+                    </span>
                   </span>
                 )}
               </div>
