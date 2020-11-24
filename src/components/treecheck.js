@@ -24,8 +24,8 @@ const treeData = [
             id: "EAL",
             children: [
               { 
-                title: "Macbook Air", 
-                value: "Macbook Air", 
+                title: "LaptopMacBookAir", 
+                value: "LaptopMacBookAir", 
                 parent: "EAL", 
                 id: "EALMA" ,
                 children: [
@@ -37,8 +37,8 @@ const treeData = [
                   }]
               },
               { 
-                title: "Macbook Pro", 
-                value: "Macbook Pro", 
+                title: "LaptopMacBookPro", 
+                value: "LaptopMacBookPro", 
                 parent: "EAL", 
                 id: "EALPA" ,
                 children: [
@@ -62,13 +62,13 @@ const treeData = [
                 value: "Model 108", 
                 parent: "EA", 
                 id: "EALM108" 
+              },
+              {
+                title: "Model 400", 
+                value: "Model 400", 
+                parent: "EA", 
+                id: "EAM400" 
               }]
-          },
-          {
-            title: "Model 400", 
-            value: "Model 400", 
-            parent: "EA", 
-            id: "EAM400" 
           }
         ]
       }
@@ -121,7 +121,28 @@ const treeData = [
               }
             ]
            
-          }
+          },
+          {title: "Casual",
+          value: "Casual",
+          id: "IASC",
+          parent: "IA",
+          children: [
+            { 
+              title: "CasualMen", 
+              value: "CasualMen", 
+              parent: "IASCM", 
+              id: "IASSCMCMW" ,
+              children: [
+                { 
+                  title: "Model 450", 
+                  value: "Model 450", 
+                  parent: "IASSWM204DD", 
+                  id: "IASSWM204" 
+                }]
+            }
+
+
+        ]}
         ]
       }
     ]

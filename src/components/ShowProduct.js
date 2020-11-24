@@ -253,7 +253,8 @@ class ShowProduct extends Component{
 							
 							<TabPane tab="All Products" key="2">
 								<div className="row" style={{margin:"0.25vw"}}>	  
-								<div className="col-sm-10">
+								<div className="col-sm-16">
+
 								<span style={{visibility: "hidden" }}> {z=0}</span>
 									<h5>Your Products:</h5>			  
 									{this.state.products.map(product=>
