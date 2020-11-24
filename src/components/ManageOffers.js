@@ -677,6 +677,9 @@ class ManageOffers extends Component{
 						<Tabs tabPosition="top" >			
 							<TabPane tab="Product Tree " key="1" >
 								<h4 style= {{marginLeft:"-30vw"}} >Product Tree</h4>
+								<br />
+								<h5 style= {{marginLeft:"-30vw"}}> Add Offers to Intermediate Levels: </h5>
+								<br />
 								<Released isleaf={false}/>
 							</TabPane>
 
