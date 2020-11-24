@@ -21,9 +21,10 @@ class ShowProduct extends Component{
 		this.logout = this.logout.bind(this);
 		this.unsubscribe=null;
 		this.state={
-			numberofproducts:0,
-			products:[],
-			openn: false
+			numberofproducts: 0,
+			products: [],
+			openn: false,
+			productobj: []
 		};
         this.handleOpenn = this.handleOpenn.bind(this);
 		this.handleClosee = this.handleClosee.bind(this);
@@ -176,7 +177,10 @@ class ShowProduct extends Component{
 		});
 	}
 
-	handleOpenn(e) {
+	handleOpenn(product) {
+		this.setState({
+            productobj: product
+        });
         this.setState({
             openn: true
         });
@@ -201,7 +205,7 @@ class ShowProduct extends Component{
 	}
 
 	delete(u){
-		firebase.firestore().collection('productDetails').doc(u).delete().then(function(){
+		firebase.firestore().collection('productDetails').doc(this.state.productobj.key).delete().then(function(){
 			alert("Product deleted successfully!");
 			console.log("Product deleted successfully!");
 		}).catch(function(error){
@@ -281,10 +285,10 @@ class ShowProduct extends Component{
 
 											<div>
 												<button onClick={()=>this.update(product.key)} className="mb-2 btn btn-outline-warning btn-sm btn-pill">
-													<i className="material-icons mr-1">Edit product</i>
+													<i className="material-icons mr-1">Edit Product</i>
 												</button>
-												<button onClick={this.handleOpenn} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
-													<i className="material-icons mr-1">Delete product</i>
+												<button onClick={()=>this.handleOpenn(product)} className="mb-2 btn btn-outline-danger btn-sm btn-pill">
+													<i className="material-icons mr-1">Delete Product</i>
 												</button>
 											</div>
 
