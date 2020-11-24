@@ -162,7 +162,7 @@ class AddOffer extends Component{
                     <div>
                         <div className="form-group row"></div>
                         <div className="col-sm-9">
-                            <textArea className="form-control" name="Expiry" onChange={this.onChange} placeholder="Expiry">{Expiry}</textArea>
+                            <textArea className="form-control" name="Expiry" onChange={this.onChange} placeholder="Expiry (DD/MM/YYYY)">{Expiry}</textArea>
                         </div>
                     </div>
                     <div>

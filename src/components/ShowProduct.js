@@ -230,10 +230,6 @@ class ShowProduct extends Component{
 								<br></br>
 
 								<div>
-									<button onClick={() => history.push('/addproduct')} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
-										<i className="material-icons mr-1">Add product</i>
-									</button>
-
 									<button onClick={this.logout} className="mb-2 btn btn-outline-primary btn-sm btn-pill">
 										<i className="material-icons mr-1">LogOut</i>
 									</button>				

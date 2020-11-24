@@ -194,7 +194,7 @@ class ClassSub2 extends React.Component {
                     margin="dense"
                     name="Expiry"
                     id="Expiry"
-                    label="Expiry Date"
+                    label="Expiry Date (DD/MM/YYYY)"
                     type="text"
                     onChange={this.onInput}
                     fullWidth
