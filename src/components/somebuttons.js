@@ -2,7 +2,7 @@ import React from 'react';
 import firebase from "./Config";
 import { Tooltip } from 'antd';
 import 'antd/dist/antd.css';
-// import history from './../history';
+import history from './../history';
 import { ShoppingTwoTone, SendOutlined,  } from '@ant-design/icons';
 import MButton from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -183,12 +183,12 @@ class SomeButtons extends React.Component {
             </MButton>
           </DialogActions>
         </Dialog>
-{/* 
+
         { this.state.isOpen && 
             <Tooltip title="View Product">
               <SendOutlined style={{ fontSize: '22px', color: '#000000' }} label="View" onClick={() => history.push('/addproduct')} />
             </Tooltip>
-        } */}
+        }
 
         <Dialog open={this.state.formOpen} onClose={this.handleFormClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Add Product</DialogTitle>
