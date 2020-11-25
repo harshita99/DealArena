@@ -31,7 +31,8 @@ class SomeButtons extends React.Component {
   // const {Model, Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = { 
+      issOpen: true,
       open: false,
       formOpen: false,
       viewOpen: false,
@@ -138,10 +139,10 @@ class SomeButtons extends React.Component {
   
   toggle(e) {
     this.setState(prevState => ({
-      isOpen: !prevState.isOpen
+      issOpen: !prevState.issOpen
     }));
 
-    if (!this.state.isOpen)
+    if (!this.state.issOpen)
     {
       this.handleClickOpen();
       // setTwoToneColor("black");
@@ -309,7 +310,7 @@ class SomeButtons extends React.Component {
           </DialogActions>
         </Dialog>
 
-        {/* { this.state.isOpen && 
+        {/* { this.state.issOpen && 
             <Tooltip title="View Product">
               <SendOutlined style={{ fontSize: '22px', color: '#000000' }} label="View" onClick={() => history.push('/addproduct')} />
             </Tooltip>
