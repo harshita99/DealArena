@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import firebase from "./Config";
+import history from './../history';
 
 class UpdateOffer extends Component{
     constructor(props){
@@ -209,6 +210,7 @@ class UpdateOffer extends Component{
                 <div id="formbutton" className="Buttons justify-content-between" style={bottomStyle}>
                     <button type="submit" className="btn btn-primary" onClick={this.handleUpload}> Upload photo first </button>
                     <button type="submit" className="btn btn-primary" onClick={this.onSubmit}> Save all </button>
+                    <button type="submit" className="btn btn-primary" onClick={() => history.push('/manageoffers')}> Cancel </button>
                 </div>
             </div>
         )

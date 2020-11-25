@@ -130,10 +130,6 @@ class AddOffer extends Component{
         };
         return(
             <div style={divStyle}>
-                <div id="formbutton" className="Buttons" style={bottomStyle}>
-                    <button type="submit" className="btn btn-primary" onClick={() => history.push('/manageoffers')}> Show Offers </button>
-                </div>
-
                 <div>
                     <div>
                         <div className="form-group row"></div>

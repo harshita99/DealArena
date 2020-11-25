@@ -31,8 +31,7 @@ class SomeButtons extends React.Component {
   // const {Model, Name, Description, Brand, Price, Category, imageurl, producturl, SubCategory1, SubCategory2, SubCategory3}
   constructor(props) {
     super(props);
-    this.state = { 
-      isOpen: true,
+    this.state = {
       open: false,
       formOpen: false,
       viewOpen: false,
