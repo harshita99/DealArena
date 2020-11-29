@@ -9,17 +9,17 @@ const Styles = styled.div`
     &:hover { color: black; }
   }
   .nav-link {
-    color: #f5f5f5;
-    &:hover { color: black; }
+    color: #f5f5f5 !important;
+    &:hover { color: black !important; }
   }
   .nav-item {
-    color: #f5f5f5;
-    &:hover { color: black; }
+    color: #f5f5f5 !important; 
+    &:hover { color: black !important; }
   }
   .navbar-brand {
     font-size: 1.4em;
-    color: white;
-    &:hover { color: black; }
+    color: white !important;
+    &:hover { color: black !important; }
   }
   .form-center {
     position: absolute !important;
